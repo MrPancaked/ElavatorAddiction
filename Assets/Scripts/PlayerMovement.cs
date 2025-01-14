@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
         //jumping
         if (grounded && Input.GetAxisRaw("Jump") == 1)
-        {
+        { 
             rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
 
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         float VAcceleration = (Input.GetAxisRaw("Vertical") * MovementSpeed) - (Drag * VVelocity);
         HVelocity += HAcceleration;
         VVelocity += VAcceleration;
-        rb.velocity = new Vector3(HVelocity, rb.velocity.y, VVelocity);
+        rb.velocity = new Vector3(HVelocity , rb.velocity.y, VVelocity);
     }
 
     public bool IsGrounded()
