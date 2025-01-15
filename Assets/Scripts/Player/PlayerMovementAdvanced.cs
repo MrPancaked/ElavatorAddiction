@@ -172,18 +172,16 @@ public class PlayerMovementAdvanced : MonoBehaviour
         // On slope
         if (OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force); /// Move player on slope
-            if (rb.velocity.y > 0)
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force); /// Apply force down on the slope
+            rb.AddForce(GetSlopeMoveDirection() * moveSpeed, ForceMode.Force); /// Move player on slope
         }
 
         // On ground
         else if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force); /// Move the player when on the ground
+            rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Force); /// Move the player when on the ground
 
         // In air
         else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force); /// Move the player in the air
+            rb.AddForce(moveDirection.normalized * moveSpeed * airMultiplier, ForceMode.Force); /// Move the player in the air
 
         // Turn gravity off while on slope
         rb.useGravity = !OnSlope();
