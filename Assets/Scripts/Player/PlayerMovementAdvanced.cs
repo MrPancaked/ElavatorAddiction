@@ -12,15 +12,15 @@ public class PlayerMovementAdvanced : MonoBehaviour
     #region Variables
 
     [Header("Movement")]
-    public float walkSpeed; 
-    public float sprintSpeed; 
-    public float groundDrag; 
+    public float walkSpeed;
+    public float sprintSpeed;
+    public float groundDrag;
     private float moveSpeed; /// Current move speed of the player
     public float maxSlopeAngle; /// Maximum angle of a slope the player can walk up
 
     [Header("Jumping")]
-    public float jumpForce; 
-    public float jumpCooldown; 
+    public float jumpForce;
+    public float jumpCooldown;
     public float airMultiplier; /// Multiplier to movement speed when in the air
     bool readyToJump; /// Flag to indicate if the player can jump
 
@@ -33,13 +33,13 @@ public class PlayerMovementAdvanced : MonoBehaviour
     [Header("Setup")]
     public Transform orientation; /// The orientation of the player
     public LayerMask whatIsGround; /// Layers that are considered ground
-    public KeyCode jumpKey = KeyCode.Space; 
-    public KeyCode sprintKey = KeyCode.LeftShift; 
+    public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.LeftControl;
     public MovementState state; /// Current movement state of the player
 
     private RaycastHit slopeHit; /// Stores the information about a slope
-    private bool exitingSlope; /// Flag to indicate if the player is exiting a slope   
+    private bool exitingSlope; /// Flag to indicate if the player is exiting a slope
     Vector3 moveDirection; /// Direction of movement
     float horizontalInput; /// Input of horizontal axis
     float verticalInput; /// Input of vertical axis
@@ -48,10 +48,10 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     public enum MovementState
     {
-        walking, 
-        sprinting, 
-        crouching, 
-        air 
+        walking,
+        sprinting,
+        crouching,
+        air
     }
 
     #endregion
@@ -72,6 +72,12 @@ public class PlayerMovementAdvanced : MonoBehaviour
     {
         // Ground check using a raycast
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+
+        // Reset readyToJump when grounded
+        if (grounded)
+        {
+            readyToJump = true;
+        }
 
         MyInput(); /// Process player input
         SpeedControl(); /// Limit player speed
@@ -222,7 +228,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void ResetJump() /// Resets jump state
     {
-        readyToJump = true; /// Sets flag that the player can jump again
+        readyToJump = false; /// Sets flag that the player cannot jump again until grounded
 
         exitingSlope = false; /// Sets flag that the player is not exiting a slope
     }
