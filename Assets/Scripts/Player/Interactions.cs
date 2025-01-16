@@ -18,7 +18,7 @@ public class Interactions : MonoBehaviour
     public SlotMachine slotMachine;
     public float interactionDistance = 3f; // Maximum distance to interact with objects.
     string SlotMachineTag = "SlotMachine"; // Tag for the slot machine.
-    private InputAction interactAction; //Input action for interact
+
 
     [Header("Crosshair Settings")]
     public Texture2D crosshairTexture; // Texture for crosshair display.
@@ -44,7 +44,7 @@ public class Interactions : MonoBehaviour
     /// Handles interaction on update when the input is triggered.
     void Update()
     {
-        if (interactAction != null && interactAction.triggered)
+        if (interact != null && interact.triggered)
         {
             Interact();
         }
@@ -68,9 +68,9 @@ public class Interactions : MonoBehaviour
     /// Disables the input action to prevent memory leaks on destroy.
     void OnDestroy()
     {
-        if (interactAction != null)
+        if (interact != null)
         {
-            interactAction.Disable(); // Important: Disable to avoid memory leaks.
+            interact.Disable(); // Important: Disable to avoid memory leaks.
         }
     }
     #endregion
