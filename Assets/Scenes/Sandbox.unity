@@ -2903,7 +2903,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f938f8ef267cdf2409ea8b2f16af88f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 0}
+  controls: {fileID: -944628639613478452, guid: f6a9db52f2aaedc4a837e25a4bab5c83,
+    type: 3}
   playerCamera: {fileID: 330585545}
   slotMachine: {fileID: 1337931094}
   interactionDistance: 3
@@ -2925,7 +2926,8 @@ MonoBehaviour:
   sprintSpeed: 10
   groundDrag: 9
   maxSlopeAngle: 30
-  controls: {fileID: 0}
+  controls: {fileID: -944628639613478452, guid: f6a9db52f2aaedc4a837e25a4bab5c83,
+    type: 3}
   jumpForce: 5
   jumpCooldown: 0.2
   airMultiplier: 0.2
