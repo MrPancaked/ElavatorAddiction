@@ -87,7 +87,6 @@ public class Interactions : MonoBehaviour
             if (hit.collider.CompareTag(SlotMachineTag))
             {
                 slotMachine.UseCoinForUpgrade(); // Use the slot machine if raycast hit it
-
             }
         }
         else

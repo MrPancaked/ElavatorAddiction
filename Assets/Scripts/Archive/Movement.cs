@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     private float HVelocity;
     private float VVelocity;
     private Rigidbody rb;
-    private float groundCheckDistance = 0.2f;
+    //private float groundCheckDistance = 0.2f;
     private LayerMask groundLayer;
     public Vector3 boxSize;
 
