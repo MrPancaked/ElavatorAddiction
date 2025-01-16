@@ -30,7 +30,7 @@ public class Interactions : MonoBehaviour
     /// Initializes the input action and displays an error message if action isn't assigned.
     void Start()
     {
-        interact = controls.FindActionMap("PlayerControls").FindAction("Interact"); // Enable the action map
+        interact = controls.FindActionMap("Player").FindAction("Interact"); // Enable the action map
 
     }
     private void OnEnable()
