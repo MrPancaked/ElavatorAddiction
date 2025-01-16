@@ -22,20 +22,18 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "bfc73eac-c405-4b61-8e1f-ae0e6426e123",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "3ff3a976-0013-42a2-9c96-b5a625faebb5",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "2D Vector",
                     "id": "52f95cb6-6b43-48ef-9eee-fb30a64169e4",
@@ -104,12 +102,12 @@
                 },
                 {
                     "name": "",
-                    "id": "0e25fecb-768f-4212-894c-8f862348d719",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "e6fc78eb-e578-47a3-9933-81c538011f3c",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

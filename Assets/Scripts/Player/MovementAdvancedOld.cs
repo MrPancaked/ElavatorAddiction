@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerMovementAdvanced : MonoBehaviour
+public class MovementAdvancedOld : MonoBehaviour
 {
     #region Variables
 
@@ -72,12 +72,6 @@ public class PlayerMovementAdvanced : MonoBehaviour
     {
         // Ground check using a raycast
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
-        // Reset readyToJump when grounded
-        if (grounded)
-        {
-            readyToJump = true;
-        }
 
         MyInput(); /// Process player input
         SpeedControl(); /// Limit player speed
@@ -172,16 +166,18 @@ public class PlayerMovementAdvanced : MonoBehaviour
         // On slope
         if (OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection() * moveSpeed, ForceMode.Force); /// Move player on slope
+            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+            if (rb.velocity.y > 0)
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
 
         // On ground
         else if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Force); /// Move the player when on the ground
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         // In air
         else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * airMultiplier, ForceMode.Force); /// Move the player in the air
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 
         // Turn gravity off while on slope
         rb.useGravity = !OnSlope();
@@ -226,7 +222,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void ResetJump() /// Resets jump state
     {
-        readyToJump = false; /// Sets flag that the player cannot jump again until grounded
+        readyToJump = true; /// Sets flag that the player can jump again
 
         exitingSlope = false; /// Sets flag that the player is not exiting a slope
     }

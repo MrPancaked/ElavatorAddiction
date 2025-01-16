@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     public float Drag;
     public float MovementSpeed;

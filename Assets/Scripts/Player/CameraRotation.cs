@@ -8,6 +8,7 @@ public class CameraRotation : MonoBehaviour
 {
     #region Variables
 
+    [Header("Player Setup")]
     public Camera mainCamera; /// The main camera used for rotation
     public Rigidbody rb; /// The player's rigidbody to rotate
 
