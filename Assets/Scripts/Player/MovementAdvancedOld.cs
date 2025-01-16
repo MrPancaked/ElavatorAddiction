@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class MovementAdvancedOld : MonoBehaviour
@@ -17,6 +18,12 @@ public class MovementAdvancedOld : MonoBehaviour
     public float groundDrag;
     private float moveSpeed; /// Current move speed of the player
     public float maxSlopeAngle; /// Maximum angle of a slope the player can walk up
+
+    [Header("Controls")]
+    [SerializeField] private InputActionAsset controls; /// Input controls
+    private InputAction movement; /// Input of the player
+    private InputAction jump; /// Input of the player
+
 
     [Header("Jumping")]
     public float jumpForce;
@@ -58,6 +65,21 @@ public class MovementAdvancedOld : MonoBehaviour
 
     #region Unity Methods
 
+    private void Awake()
+    {
+        movement = controls.FindActionMap("Player").FindAction("Move");
+        jump = controls.FindActionMap("Player").FindAction("Jump");
+    }
+    private void OnEnable()
+    {
+        movement.Enable();
+        jump.Enable();
+    }
+    private void OnDisable()
+    {
+        movement.Disable();
+        jump.Disable();
+    }
     private void Start() /// Called once at the beginning of the game. Initializes the Rigidbody and set the ready to jump flag
     {
         rb = GetComponent<Rigidbody>();  /// Get the Rigidbody component
@@ -95,11 +117,11 @@ public class MovementAdvancedOld : MonoBehaviour
 
     private void MyInput() /// Gets input from the player
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal"); /// Get horizontal input
-        verticalInput = Input.GetAxisRaw("Vertical"); /// Get vertical input
+        horizontalInput = movement.ReadValue<Vector2>().x; /// Get horizontal input
+        verticalInput = movement.ReadValue<Vector2>().y; /// Get vertical input
 
         // When the player jumps
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (jump.triggered && readyToJump && grounded)
         {
             readyToJump = false; /// Set the jump flag to false
             Jump(); /// Jump

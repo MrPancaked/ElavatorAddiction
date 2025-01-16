@@ -5,12 +5,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Xml.Serialization;
+using Unity.VisualScripting;
 public class Interactions : MonoBehaviour
 {
     #region Variables
 
     [Header("Interaction Settings")]
-    public InputActionReference interactActionReference; //Reference to the interact input action
+    [SerializeField] private InputActionAsset controls; //Reference to the interact input action
+    private InputAction interact; //Reference to the interact input action
     public Camera playerCamera; // Reference to the player's camera.
     public SlotMachine slotMachine;
     public float interactionDistance = 3f; // Maximum distance to interact with objects.
@@ -27,18 +30,17 @@ public class Interactions : MonoBehaviour
     /// Initializes the input action and displays an error message if action isn't assigned.
     void Start()
     {
-        if (interactActionReference != null)
-        {
-            interactAction = interactActionReference.action;
-            interactAction.Enable();  // Important: Enable the action.
-        }
-        else
-        {
-            Debug.LogError("Interact Action Reference not assigned in the Inspector!");
-        }
+        interact = controls.FindActionMap("PlayerControls").FindAction("Interact"); // Enable the action map
 
     }
-
+    private void OnEnable()
+    {
+        interact.Enable(); // Enable the action
+    }
+    private void OnDisable()
+    {
+        interact.Disable(); // Disable the action
+    }
     /// Handles interaction on update when the input is triggered.
     void Update()
     {
