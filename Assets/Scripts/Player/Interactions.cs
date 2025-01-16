@@ -28,7 +28,7 @@ public class Interactions : MonoBehaviour
 
     #region Unity Methods
     /// Initializes the input action and displays an error message if action isn't assigned.
-    void Start()
+    void Awake()
     {
         interact = controls.FindActionMap("Player").FindAction("Interact"); // Enable the action map
 
