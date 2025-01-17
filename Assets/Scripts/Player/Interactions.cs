@@ -19,11 +19,10 @@ public class Interactions : MonoBehaviour
     public float interactionDistance = 3f; // Maximum distance to interact with objects.
     string SlotMachineTag = "SlotMachine"; // Tag for the slot machine.
 
-
     [Header("Crosshair Settings")]
     public Texture2D crosshairTexture; // Texture for crosshair display.
     public float crosshairScale = 0.6f; // Scale of the crosshair.
- 
+
     #endregion
 
     #region Unity Methods
@@ -31,15 +30,19 @@ public class Interactions : MonoBehaviour
     void Awake()
     {
         interact = controls.FindActionMap("Player").FindAction("Interact"); // Enable the action map
-
+    }
+    void Start()
+    {
+        Cursor.visible = false; // Hide the cursor at start
+        Cursor.lockState = CursorLockMode.Locked; // Locks to the center of the screen
     }
     private void OnEnable()
     {
-        interact.Enable(); // Enable the action
+        Cursor.visible = false;
     }
     private void OnDisable()
     {
-        interact.Disable(); // Disable the action
+        Cursor.visible = true;
     }
     /// Handles interaction on update when the input is triggered.
     void Update()
@@ -72,6 +75,8 @@ public class Interactions : MonoBehaviour
         {
             interact.Disable(); // Important: Disable to avoid memory leaks.
         }
+        Cursor.visible = true; // Ensure the cursor is visible when script gets destroyed
+        Cursor.lockState = CursorLockMode.None; // Unlock cursor when game ends
     }
     #endregion
 
