@@ -1,0 +1,31 @@
+//--------------------------------------------------------------------------------------------------
+//  Description: Stores all the gun stats
+//--------------------------------------------------------------------------------------------------
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "Gun", menuName = "Items/Gun")]
+public class GunSettings : ScriptableObject
+{
+    #region Variables
+
+    [Header("Base")]
+    public new string name; // Name of the gun
+    public int damagePerBullet; // Damage inflicted by each bullet
+    public float fireRate; // Time in seconds between individual shots
+    public float reloadTime; // Time in seconds for a reload
+    public bool allowContinuesFire; // Allows holding fire button for automatic fire
+
+    [Header("Magazine")]
+    public int magazineSize; // Maximum number of bullets in the magazine
+    public int bulletsPerShot; // Number of bullets fired per single shot or burst
+
+    [Header("Other")]
+    public float spread; // Maximum deviation of bullet direction
+    public float range; // Maximum range of the gun
+    public float enemyPushbackForce; // How much the enemy is pushed back with the bullets
+    public float screenShakeStrength; // Amount of screen shake when you shoot
+    public float timeBetweenBursts; // Time in seconds between bursts of fire if using burst fire
+    #endregion
+}
