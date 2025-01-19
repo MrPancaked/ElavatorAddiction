@@ -12,15 +12,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f461fbe6db0e9489f4d392d76c6284, type: 3}
   m_Name: UZI
   m_EditorClassIdentifier: 
-  name: SPAS
-  damagePerBullet: 7
-  fireRate: 0.06
-  reloadTime: 1.5
-  allowContinuesFire: 1
-  magazineSize: 60
+  name: UZI
+  damagePerBullet: 14
+  fireRate: 0.07
+  reloadTime: 1.6
+  magazineSize: 30
   bulletsPerShot: 1
+  timeBetweenBulletsInBursts: 0
+  allowContinuesFire: 1
   spread: 0.2
   range: 40
   enemyPushbackForce: 0.7
   screenShakeStrength: 0.1
-  timeBetweenBursts: 0
+  isDualGun: 1
+  gunShotSound:
+    Guid:
+      Data1: 572333754
+      Data2: 1129299429
+      Data3: -1923802710
+      Data4: 1827957015
+    Path: event:/UZIshot
+  reloadSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  blankSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  equipSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  bulletHit:
+    Guid:
+      Data1: -687276964
+      Data2: 1180492366
+      Data3: 1682853018
+      Data4: 2027399506
+    Path: event:/BulletHit

@@ -14980,8 +14980,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightSource:
     light: {fileID: -7802941511630707265}
-    minIntensity: 10
-    maxIntensity: 20
+    minIntensity: 1
+    maxIntensity: 10
     flashDuration: 0.03
 --- !u!1 &7595982788971838101
 GameObject:

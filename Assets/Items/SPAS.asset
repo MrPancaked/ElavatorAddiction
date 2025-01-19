@@ -14,13 +14,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: SPAS
   damagePerBullet: 25
-  fireRate: 0.55
+  fireRate: 0.8
   reloadTime: 1
+  magazineSize: 49
+  bulletsPerShot: 7
+  timeBetweenBulletsInBursts: 0
   allowContinuesFire: 0
-  magazineSize: 42
-  bulletsPerShot: 6
   spread: 0.17
   range: 20
   enemyPushbackForce: 2
   screenShakeStrength: 0.5
-  timeBetweenBursts: 0
+  isDualGun: 0
+  gunShotSound:
+    Guid:
+      Data1: -1863835502
+      Data2: 1188382138
+      Data3: -1279550804
+      Data4: 688965105
+    Path: event:/SPASshot
+  reloadSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  blankSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  equipSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  bulletHit:
+    Guid:
+      Data1: -687276964
+      Data2: 1180492366
+      Data3: 1682853018
+      Data4: 2027399506
+    Path: event:/BulletHit

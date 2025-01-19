@@ -3,10 +3,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public GameObject enemyModel;
-    public Health health;
+    private Health health;
 
     private void Awake()
     {
+        health = GetComponent<Health>();
         health.Die += Die; //Subscribing to death events so that enemy object can perform death logic.
     }
     private void OnDisable()

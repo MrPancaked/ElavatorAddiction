@@ -439,6 +439,7 @@ MonoBehaviour:
   MuzzleFlashPoint: {fileID: 316050230044639161}
   fpsCam: {fileID: 356771900034798577}
   gunSettings: {fileID: 11400000, guid: e7f423ba1ee092547ab1e97f6453440d, type: 2}
+  dualGuns: []
   particlesParent: {fileID: 0}
   muzzleFlash: {fileID: 7548889807513906146, guid: 935e1d2f61ec7404d8fc056f0fca803e,
     type: 3}
@@ -524,9 +525,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4655439236767218671}
   - component: {fileID: 356771900034798577}
-  - component: {fileID: 315455059830245460}
   - component: {fileID: 518550783936593404}
   - component: {fileID: 5417506000435143320}
+  - component: {fileID: -2023841461998931599}
   m_Layer: 6
   m_Name: CameraMain
   m_TagString: MainCamera
@@ -543,7 +544,7 @@ Transform:
   m_GameObject: {fileID: 1544067631284132747}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12331268, y: 0.14575478, z: -0.01831341, w: 0.9814347}
-  m_LocalPosition: {x: 0, y: 0.4000001, z: 0}
+  m_LocalPosition: {x: 0, y: 0.40000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -602,14 +603,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &315455059830245460
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544067631284132747}
-  m_Enabled: 1
 --- !u!114 &518550783936593404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,6 +679,20 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &-2023841461998931599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544067631284132747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 9196382933833572558}
 --- !u!1 &1855367646006390628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1147,7 @@ MonoBehaviour:
   MuzzleFlashPoint: {fileID: 4617241612719545096}
   fpsCam: {fileID: 356771900034798577}
   gunSettings: {fileID: 11400000, guid: 8d45b0b20a6a6f241a9c9710603aa7a6, type: 2}
+  dualGuns: []
   particlesParent: {fileID: 0}
   muzzleFlash: {fileID: 7548889807513906146, guid: 935e1d2f61ec7404d8fc056f0fca803e,
     type: 3}
@@ -3104,6 +3112,7 @@ MonoBehaviour:
   MuzzleFlashPoint: {fileID: 8341597470190507252}
   fpsCam: {fileID: 356771900034798577}
   gunSettings: {fileID: 11400000, guid: 8d45b0b20a6a6f241a9c9710603aa7a6, type: 2}
+  dualGuns: []
   particlesParent: {fileID: 0}
   muzzleFlash: {fileID: 7548889807513906146, guid: 935e1d2f61ec7404d8fc056f0fca803e,
     type: 3}
