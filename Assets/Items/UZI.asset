@@ -27,11 +27,11 @@ MonoBehaviour:
   isDualGun: 1
   gunShotSound:
     Guid:
-      Data1: 572333754
-      Data2: 1129299429
-      Data3: -1923802710
-      Data4: 1827957015
-    Path: event:/UZIshot
+      Data1: 1883641859
+      Data2: 1286603648
+      Data3: 203141811
+      Data4: 189602916
+    Path: event:/Weapon/UZIshot2D
   reloadSound:
     Guid:
       Data1: 0
@@ -59,4 +59,4 @@ MonoBehaviour:
       Data2: 1180492366
       Data3: 1682853018
       Data4: 2027399506
-    Path: event:/BulletHit
+    Path: event:/Weapon/BulletHit

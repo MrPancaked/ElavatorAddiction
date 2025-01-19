@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{4594be67-0d55-4f98-9d53-e43cd365f3fa}">
 		<property name="name">
-			<value>LiftRide</value>
+			<value>RideStart</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -23,7 +23,7 @@
 			<destination>{1bd8a929-8e33-48f0-81b6-594cfca4a7f5}</destination>
 		</relationship>
 		<relationship name="markerTracks">
-			<destination>{e953442d-2ee2-4390-b28e-55b36e29fc2e}</destination>
+			<destination>{8717e370-d890-40ce-9d7a-de7b46ab73b4}</destination>
 		</relationship>
 		<relationship name="groupTracks">
 			<destination>{527aeb67-6540-4c58-a385-cfb89d8bd106}</destination>
@@ -61,12 +61,12 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{1bd8a929-8e33-48f0-81b6-594cfca4a7f5}" />
-	<object class="MarkerTrack" id="{e953442d-2ee2-4390-b28e-55b36e29fc2e}" />
+	<object class="MarkerTrack" id="{8717e370-d890-40ce-9d7a-de7b46ab73b4}" />
 	<object class="GroupTrack" id="{527aeb67-6540-4c58-a385-cfb89d8bd106}">
 		<relationship name="modules">
-			<destination>{f366b086-64f9-4af2-8f61-52387ab80bbc}</destination>
 			<destination>{100aeccd-f3c3-4b3f-99e5-77571c830a19}</destination>
 			<destination>{b130b2bb-0893-491b-9fb9-fd8834453908}</destination>
+			<destination>{41525996-0dba-45f3-8245-47c4f07124f8}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{30400fd5-99b5-49ca-ac1e-40ce57e64745}</destination>
@@ -74,7 +74,7 @@
 	</object>
 	<object class="Timeline" id="{98de0ff7-9bf8-4768-a82d-c43289c00b20}">
 		<relationship name="modules">
-			<destination>{f366b086-64f9-4af2-8f61-52387ab80bbc}</destination>
+			<destination>{41525996-0dba-45f3-8245-47c4f07124f8}</destination>
 		</relationship>
 		<relationship name="markers">
 			<destination>{d1673d23-f5b1-4cce-9d86-28e24725453d}</destination>
@@ -110,14 +110,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{c36801ae-4fca-4a9d-94a9-9e6d923ecb49}" />
-	<object class="SingleSound" id="{f366b086-64f9-4af2-8f61-52387ab80bbc}">
-		<property name="length">
-			<value>8.5714285714285712</value>
-		</property>
-		<relationship name="audioFile">
-			<destination>{c5cbd1e8-75da-4b97-b51a-277efc646083}</destination>
-		</relationship>
-	</object>
 	<object class="TransitionSourceSound" id="{100aeccd-f3c3-4b3f-99e5-77571c830a19}">
 		<property name="length">
 			<value>2</value>
@@ -132,6 +124,14 @@
 		</property>
 		<relationship name="fadeInCurve">
 			<destination>{4c91b924-285a-43b4-8daa-a91644da22fa}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{41525996-0dba-45f3-8245-47c4f07124f8}">
+		<property name="length">
+			<value>11.464285714285714</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{46f3a1ba-e6f1-43c5-b70a-ace629ea4d15}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{30400fd5-99b5-49ca-ac1e-40ce57e64745}">
@@ -150,16 +150,16 @@
 	</object>
 	<object class="LoopRegion" id="{d1673d23-f5b1-4cce-9d86-28e24725453d}">
 		<property name="position">
-			<value>0</value>
+			<value>2.4000000000000004</value>
 		</property>
 		<property name="length">
-			<value>6.5</value>
+			<value>7.2000000000000002</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{98de0ff7-9bf8-4768-a82d-c43289c00b20}</destination>
 		</relationship>
 		<relationship name="markerTrack">
-			<destination>{e953442d-2ee2-4390-b28e-55b36e29fc2e}</destination>
+			<destination>{8717e370-d890-40ce-9d7a-de7b46ab73b4}</destination>
 		</relationship>
 		<relationship name="transitionTimeline">
 			<destination>{aa8516c9-d56b-4f22-9b93-ea88d3633841}</destination>
@@ -213,7 +213,14 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{abe5e98e-431e-4a33-81d8-633fb0a19462}" />
-	<object class="SpatialiserEffect" id="{21ba149a-8816-44e6-954f-d4654eef816d}" />
+	<object class="SpatialiserEffect" id="{21ba149a-8816-44e6-954f-d4654eef816d}">
+		<property name="maximumDistance">
+			<value>50</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{69ae3d15-dc89-48ad-ab83-0782d7bd0d45}">
 		<property name="position">
 			<value>0</value>

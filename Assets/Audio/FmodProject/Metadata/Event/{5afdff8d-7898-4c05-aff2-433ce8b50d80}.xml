@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{5afdff8d-7898-4c05-aff2-433ce8b50d80}">
 		<property name="name">
-			<value>LiftEnd</value>
+			<value>RideEnd</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -110,7 +110,14 @@
 	</object>
 	<object class="MixerBusFader" id="{69b73050-3602-43b5-be40-ecea984f3801}" />
 	<object class="MixerBusFader" id="{87026eab-2039-415d-8c9a-4f495e3023b1}" />
-	<object class="SpatialiserEffect" id="{29594581-7784-49b3-8906-f3d599beec7d}" />
+	<object class="SpatialiserEffect" id="{29594581-7784-49b3-8906-f3d599beec7d}">
+		<property name="maximumDistance">
+			<value>50</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="RandomizerModulator" id="{7dbbb36f-faf7-4d3c-98f8-93ca79c0a861}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>pitch</value>

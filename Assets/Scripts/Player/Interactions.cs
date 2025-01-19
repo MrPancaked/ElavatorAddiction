@@ -11,18 +11,21 @@ public class Interactions : MonoBehaviour
 {
     #region Variables
 
-    [Header("Interaction Settings")]
+    [Header("References")]
     [SerializeField] private InputActionAsset controls; //Reference to the interact input action
     private InputAction interact; //Reference to the interact input action
     public Camera playerCamera; // Reference to the player's camera.
-    public SlotMachine slotMachine;
-    public float interactionDistance = 3f; // Maximum distance to interact with objects.
-    string SlotMachineTag = "SlotMachine"; // Tag for the slot machine.
+    public SlotMachine slotMachine; // Reference to the slot machine.
+    public ElevatorManager elevatorManager; // Reference to the elevator button.
 
-    [Header("Crosshair Settings")]
+    [Header("Interactions")]
     public Texture2D crosshairTexture; // Texture for crosshair display.
     public float crosshairScale = 0.6f; // Scale of the crosshair.
+    public float interactionDistance = 3f; // Maximum distance to interact with objects.
 
+    // Private Variables
+    string SlotMachineTag = "SlotMachine"; // Tag for the slot machine.
+    string ElevatorButtonTag = "ElevatorButton"; // Tag for the button in the elevator.
     #endregion
 
     #region Unity Methods
@@ -92,6 +95,14 @@ public class Interactions : MonoBehaviour
             if (hit.collider.CompareTag(SlotMachineTag))
             {
                 slotMachine.UseCoinForUpgrade(); // Use the slot machine if raycast hit it
+            }
+        }
+        if (Physics.Raycast(ray, out hit, interactionDistance))
+        {
+            if (hit.collider.CompareTag(ElevatorButtonTag))
+            {
+                elevatorManager.ButtonPressed(hit.point); // Press the button if raycast hit it, and send the hit position
+                return;
             }
         }
         else
