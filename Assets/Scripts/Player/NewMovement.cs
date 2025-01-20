@@ -13,75 +13,45 @@ public class NewMovement : MonoBehaviour
     public float jumpForce;
     public float groundDrag;
     public float airDrag;
+    public Vector3 moveDirection;
 
     [Header("sliding")]
     private float normalYScale;
     public float slideYScale;
     public float slideSpeed;
+    public float slideDragIncrease;
+    public float downForce;
     private bool sliding;
+    
 
     [Header("ground detection")]
     public Vector3 boxSize;
 
     private LayerMask groundLayer;
-
     private bool grounded;
 
-    private enum MovementState
-    {
-        walking,
-        sliding,
-        air
-    }
-    private MovementState state; /// Current movement state of the player
-
-    [SerializeField] private InputActionAsset controls; /// Input controls
-    private InputAction movement; /// Input of the player
-    private InputAction jump; /// Input of the player
-    private InputAction slide; /// Input of the player
-
-
-    private void Awake()
-    {
-        movement = controls.FindActionMap("Player").FindAction("Move");
-        jump = controls.FindActionMap("Player").FindAction("Jump");
-        slide = controls.FindActionMap("Player").FindAction("Slide");
-    }
-    private void OnEnable()
-    {
-        movement.Enable();
-        jump.Enable();
-        slide.Enable();
-    }
-    private void OnDisable()
-    {
-        movement.Disable();
-        jump.Disable();
-        slide.Disable();
-    }
+    private Inputs inputs;
 
     void Start()
     {
+        inputs = GetComponent<Inputs>();
         rb = GetComponent<Rigidbody>();
         groundLayer = LayerMask.GetMask("Ground");
         normalYScale = transform.localScale.y;
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         grounded = IsGrounded();
+        Debug.Log(grounded);
 
         //jumping
-        if (grounded && jump.triggered)
-        { 
+        if (grounded && inputs.jumpPressed)
+        {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-
         //movement
-        Vector2 GlobalmoveDirection = movement.ReadValue<Vector2>().normalized;
-        Vector3 moveDirection = transform.right * GlobalmoveDirection.x + transform.forward * GlobalmoveDirection.y;
+        moveDirection = transform.right * inputs.moveMentInput.x + transform.forward * inputs.moveMentInput.y;
 
         if (grounded && !sliding)
         {
@@ -96,48 +66,39 @@ public class NewMovement : MonoBehaviour
         {
             rb.drag = groundDrag;
         }
-        else
+        else if (!sliding || !grounded)
         {
             rb.drag = airDrag;
         }
 
         //sliding
-        if (slide.WasPressedThisFrame() && !sliding)
+        if (inputs.slidePressed && !sliding)
         {
             transform.localScale = new Vector3(transform.localScale.x, slideYScale, transform.localScale.z); /// Set crouch scale
             sliding = true;
             rb.drag = 0; /// Remove drag when sliding
-            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse); /// Move the player down
+            rb.AddForce(Vector3.down * downForce, ForceMode.Impulse); /// Move the player down
             rb.AddForce(moveDirection * slideSpeed);
         }
 
-        if (sliding && slide.WasReleasedThisFrame())
+        if (sliding && grounded && (rb.drag < groundDrag))
+        {
+            rb.drag += slideDragIncrease * groundDrag; /// Increase drag when sliding
+        }
+
+        if (sliding && inputs.slideReleased)
         {
             sliding = false;
             transform.localScale = new Vector3(transform.localScale.x, normalYScale, transform.localScale.z);
             rb.drag = groundDrag;
         }
-    }
 
-    private void StateHandler() /// Sets the current player movement state
-    {
-        // Mode - Crouching
-        if (slide.triggered)
-        {
-            state = MovementState.sliding; /// Set crouching state
-        }
-
-        // Mode - Walking
-        else if (grounded)
-        {
-            state = MovementState.walking; /// Set walking state
-        }
-
-        // Mode - Air
-        else
-        {
-            state = MovementState.air; /// Set air state
-        }
+        //end of fixedupdate
+        inputs.jumpPressed = false;
+        inputs.jumpReleased = false;
+        inputs.slidePressed = false;
+        inputs.slideReleased = false;
+        
     }
 
     public bool IsGrounded()
@@ -150,6 +111,6 @@ public class NewMovement : MonoBehaviour
     {
         // Draw the ray in the Scene view for debugging
         Gizmos.color = Color.green;
-        Gizmos.DrawCube(transform.position + Vector3.down * transform.localScale.y, boxSize);
+        Gizmos.DrawCube(transform.position + (Vector3.down * transform.localScale.y), boxSize);
     }
 }
