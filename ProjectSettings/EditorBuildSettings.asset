@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sandbox.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/RaveClub.unity
+    guid: 4db7257ae8cc41d44afd30cde83bff36
   m_configObjects: {}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{46f3a1ba-e6f1-43c5-b70a-ace629ea4d15}">
+		<property name="assetPath">
+			<value>LiftStart.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>11.464285714285714</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d06376f8-c45d-49d8-a83b-daf9e9f7f6e7}</destination>
+		</relationship>
+	</object>
+</objects>
