@@ -2720,12 +2720,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb2612c8dfc4104c96091c2bee2c418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 220
+  speed: 250
   airMultiplier: 0.01
-  jumpForce: 13
   groundDrag: 17.5
-  airDrag: 1.4
+  airDrag: 0.2
   moveDirection: {x: 0, y: 0, z: 0}
+  jumpForce: 10
+  jumpTiming: 0.1
   slideYScale: 0.5
   slideSpeed: 20
   slideDragIncrease: 0.005

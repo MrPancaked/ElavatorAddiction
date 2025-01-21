@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995efd817add64744802e21eacdb5a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 5
+  attackSpeed: 10
   attackDrag: 1
   attackPointOffset: 1.5
   minAttackCooldown: 1
@@ -190,7 +190,7 @@ MonoBehaviour:
   idleDrag: 4
   idleHeight: 2
   idleRadius: 12
-  detectionRange: 15
+  detectionRange: 25
   enemyModel: {fileID: 1336654257063423728}
   rb: {fileID: 1749662963217194090}
   triggerCollider: {fileID: 3670819129652143735}
