@@ -15,29 +15,29 @@ public class Gun : MonoBehaviour
     #region Variables
 
     [Header("References")]
-    public LayerMask whatIsEnemy;          // Layer mask to identify enemies
-    public TextMeshProUGUI ammoCounter;    // UI text element for ammo display
-    public GameObject reloadFeedbackText;  // UI text element for reload feedback (for now lololo hehehe rene im going crazy bithc it is 3 am)
+    public LayerMask whatIsEnemy; // Layer mask to identify enemies
+    public TextMeshProUGUI ammoCounter; // UI text element for ammo display
+    public GameObject reloadFeedbackText; // UI text element for reload feedback (for now lololo hehehe rene im going crazy bithc it is 3 am)
     public CinemachineImpulseSource impulseSource; //Reference to our impulse source for camera shake
-    public Transform MuzzleFlashPoint;      // Transform for the muzzle flash spawn point
-    public Camera fpsCam;                  // Reference to the FPS camera
+    public Transform MuzzleFlashPoint; // Transform for the muzzle flash spawn point
+    public Camera fpsCam; // Reference to the FPS camera
     [SerializeField] GunSettings gunSettings; // Gun settings with all statistics and variables
     public List<Gun> dualGuns = new List<Gun>(); // If this is a dual gun set, this is the other gun (and this gun)
 
     [Header("Particles")]
     public Transform particlesParent; //The parent that we will be instantiating all of our particle effects into.
-    public GameObject muzzleFlash;          // Prefab for the muzzle flash effect
-    public GameObject bulletHole;          // Prefab for the bullet hole effect
-    public GameObject bloodBurst;          // Prefab for blood burst effect
+    public GameObject muzzleFlash; // Prefab for the muzzle flash effect
+    public GameObject bulletHole; // Prefab for the bullet hole effect
+    public GameObject bloodBurst; // Prefab for blood burst effect
 
     // Private Variables
-    private bool shooting;                // Flag to check if the player is currently shooting
-    private bool readyToShoot;            // Flag to check if the gun is ready to shoot
-    private bool reloading;                // Flag to check if the gun is currently reloading
-    private int shotsLeft;               // Number of shots (not bullets) in the magazine
-    private int bulletsShot;               // Number of bullets shot in a single shot or burst
-    private RaycastHit rayHit;             // Stores information about the raycast hit
-    private int currentGunIndex = 0;       // Index to track which gun to fire in a dual gun set
+    private bool shooting; // Flag to check if the player is currently shooting
+    private bool readyToShoot; // Flag to check if the gun is ready to shoot
+    private bool reloading; // Flag to check if the gun is currently reloading
+    private int shotsLeft; // Number of shots (not bullets) in the magazine
+    private int bulletsShot; // Number of bullets shot in a single shot or burst
+    private RaycastHit rayHit; // Stores information about the raycast hit
+    private int currentGunIndex = 0; // Index to track which gun to fire in a dual gun set
 
     #endregion
 
@@ -74,15 +74,13 @@ public class Gun : MonoBehaviour
         // Handle logic for normal (single) guns
         if (!gunSettings.isDualGun)
         {
-            // Check if we should allow continues fire (automatic fire) or single press fire
-            if (gunSettings.allowContinuesFire) shooting = Input.GetKey(KeyCode.Mouse0);
+           
+            if (gunSettings.allowContinuesFire) shooting = Input.GetKey(KeyCode.Mouse0); // Check if we should allow continues fire (automatic fire) or single press fire
             else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-            // Check if the player is trying to reload
-            if (Input.GetKeyDown(KeyCode.R) && shotsLeft < (gunSettings.magazineSize / gunSettings.bulletsPerShot) && !reloading) Reload();
+            if (Input.GetKeyDown(KeyCode.R) && shotsLeft < (gunSettings.magazineSize / gunSettings.bulletsPerShot) && !reloading) Reload(); // Check if the player is trying to reload
 
-            // Handle shooting logic if ready to shoot, the player is pressing to shoot, and if the gun is not reloading
-            if (readyToShoot && shooting && !reloading)
+            if (readyToShoot && shooting && !reloading) // Handle shooting logic if ready to shoot, the player is pressing to shoot, and if the gun is not reloading
             {
                 if (shotsLeft > 0) // Check if there is ammo in the magazine
                 {
@@ -96,20 +94,22 @@ public class Gun : MonoBehaviour
                 }
             }
         }
-        else // Handle logic for dual guns
+
+        // Handle logic for dual guns
+        else
         {
-            // Check if we should allow continues fire (automatic fire) or single press fire
-            if (gunSettings.allowContinuesFire) shooting = Input.GetKey(KeyCode.Mouse0);
+            if (gunSettings.allowContinuesFire) shooting = Input.GetKey(KeyCode.Mouse0); // Check if we should allow continues fire (automatic fire) or single press fire
             else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-            // Check if the player is trying to reload
-            if (Input.GetKeyDown(KeyCode.R) && (dualGuns[0].shotsLeft < (dualGuns[0].gunSettings.magazineSize / dualGuns[0].gunSettings.bulletsPerShot) || dualGuns[1].shotsLeft < (dualGuns[1].gunSettings.magazineSize / dualGuns[1].gunSettings.bulletsPerShot)) && !reloading) Reload();
+           
+            if (Input.GetKeyDown(KeyCode.R) && (dualGuns[0].shotsLeft < (dualGuns[0].gunSettings.magazineSize / dualGuns[0].gunSettings.bulletsPerShot) || 
+                                                                        dualGuns[1].shotsLeft < (dualGuns[1].gunSettings.magazineSize / dualGuns[1].gunSettings.bulletsPerShot)) 
+                                                                        && !reloading) Reload();  // Check if the player is trying to reload
 
-            // Handle shooting logic if the player is trying to shoot and the gun is not reloading
-            if (shooting && !reloading)
+            if (shooting && !reloading) // Handle shooting logic if the player is trying to shoot and the gun is not reloading
             {
-                // check if the current gun is ready to shoot
-                if (dualGuns[currentGunIndex].readyToShoot)
+               
+                if (dualGuns[currentGunIndex].readyToShoot) // check if the current gun is ready to shoot
                 {
                     if (dualGuns[currentGunIndex].shotsLeft > 0) // Check if the current gun has ammo
                     {
@@ -151,9 +151,9 @@ public class Gun : MonoBehaviour
 
         Invoke(nameof(ResetShot), gunSettings.fireRate); // Reset readyToShoot with fireRate
     }
-    private void SingleShot(Vector3 direction)
-    { //This method is to contain the logic of one single shot
 
+    private void SingleShot(Vector3 direction) // Logic of one single shot
+    {
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, gunSettings.range, whatIsEnemy)) // Shoot a raycast
         {
 
@@ -172,6 +172,7 @@ public class Gun : MonoBehaviour
         }
         BulletEffects(); // Call bullet effects
     }
+
     IEnumerator BurstShot(Vector3 direction)
     { //Burst fire logic with a coroutine for delay
 
@@ -241,7 +242,7 @@ public class Gun : MonoBehaviour
         }
 
         reloadFeedbackText.SetActive(false); // Disable reload text
-        reloading = false;           // End reload process
+        reloading = false; // End reload process
     }
 
     #endregion

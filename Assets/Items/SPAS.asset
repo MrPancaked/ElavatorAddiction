@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: SPAS
   damagePerBullet: 30
-  fireRate: 0.8
+  fireRate: 0.65
   reloadTime: 1
-  magazineSize: 49
+  magazineSize: 70
   bulletsPerShot: 7
   timeBetweenBulletsInBursts: 0
-  allowContinuesFire: 0
+  allowContinuesFire: 1
   spread: 0.17
   range: 15
   enemyPushbackForce: 2

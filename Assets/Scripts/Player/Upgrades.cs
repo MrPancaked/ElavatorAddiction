@@ -13,8 +13,7 @@ public class Upgrades : MonoBehaviour
 
     #region Upgrade Logic
 
-    /// Applies a random upgrade to the player.
-    public void ApplyRandomUpgrade()
+    public void ApplyRandomUpgrade() /// Applies a random upgrade to the player.
     {
         int upgradeIndex = Random.Range(0, 2);
 
@@ -29,14 +28,12 @@ public class Upgrades : MonoBehaviour
         }
     }
 
-    /// Applies a speed upgrade to the player and logs it.
-    private void SpeedUpgrade()
+    private void SpeedUpgrade() /// Applies a speed upgrade to the player and logs it.
     {
         Debug.Log("You got a Speed Buff!");
     }
-
-    /// Applies a strengh upgrade to the player and logs it.
-    private void StrenghUpgrade()
+  
+    private void StrenghUpgrade() /// Applies a strengh upgrade to the player and logs it.
     {
         Debug.Log("You got a Strengh Buff!");
     }

@@ -29,8 +29,8 @@ public class Interactions : MonoBehaviour
     #endregion
 
     #region Unity Methods
-    /// Initializes the input action and displays an error message if action isn't assigned.
-    void Awake()
+   
+    void Awake() /// Initializes the input action and displays an error message if action isn't assigned.
     {
         interact = controls.FindActionMap("Player").FindAction("Interact"); // Enable the action map
     }
@@ -39,16 +39,18 @@ public class Interactions : MonoBehaviour
         Cursor.visible = false; // Hide the cursor at start
         Cursor.lockState = CursorLockMode.Locked; // Locks to the center of the screen
     }
+
     private void OnEnable()
     {
         Cursor.visible = false;
     }
+
     private void OnDisable()
     {
         Cursor.visible = true;
     }
-    /// Handles interaction on update when the input is triggered.
-    void Update()
+   
+    void Update() /// Handles interaction on update when the input is triggered.
     {
         if (interact != null && interact.triggered)
         {
@@ -56,40 +58,36 @@ public class Interactions : MonoBehaviour
         }
     }
 
-    /// Handles drawing of the UI Crosshair.
-    void OnGUI()
-    {
-        // Screen dimensions
-        float scaledWidth = crosshairTexture.width * crosshairScale;
+    void OnGUI() /// Handles drawing of the UI Crosshair.
+    {      
+        float scaledWidth = crosshairTexture.width * crosshairScale; // Screen dimensions
         float scaledHeight = crosshairTexture.height * crosshairScale;
 
-        // The center of the screen
-        float x = (Screen.width - scaledWidth) / 2f;
+        float x = (Screen.width - scaledWidth) / 2f; // Find the center of the screen
         float y = (Screen.height - scaledHeight) / 2f;
 
-        // Draw crosshair
-        GUI.DrawTexture(new Rect(x, y, scaledWidth, scaledHeight), crosshairTexture);
+        GUI.DrawTexture(new Rect(x, y, scaledWidth, scaledHeight), crosshairTexture); // Draw crosshair
     }
 
-    /// Disables the input action to prevent memory leaks on destroy.
-    void OnDestroy()
+    void OnDestroy() /// Disables the input action to prevent memory leaks on destroy.
     {
         if (interact != null)
         {
             interact.Disable(); // Important: Disable to avoid memory leaks.
         }
+
         Cursor.visible = true; // Ensure the cursor is visible when script gets destroyed
         Cursor.lockState = CursorLockMode.None; // Unlock cursor when game ends
     }
     #endregion
 
     #region Interaction Logic
-    /// Performs the interaction, raycasting and checking for interactable objects.
-    void Interact()
+
+    void Interact() /// Performs the interaction, raycasting and checking for interactable objects.
     {
-        // Raycast from the center of the screen
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f)); // Raycast from the center of the screen
         RaycastHit hit;
+
         if (Physics.Raycast(ray, out hit, interactionDistance)) 
         {
             if (hit.collider.CompareTag(SlotMachineTag))
@@ -97,6 +95,7 @@ public class Interactions : MonoBehaviour
                 slotMachine.UseCoinForUpgrade(); // Use the slot machine if raycast hit it
             }
         }
+
         if (Physics.Raycast(ray, out hit, interactionDistance))
         {
             if (hit.collider.CompareTag(ElevatorButtonTag))
@@ -105,10 +104,12 @@ public class Interactions : MonoBehaviour
                 return;
             }
         }
+
         else
         {
             Debug.Log("Raycast didnt hit shit.");
         }
     }
+
     #endregion
 }

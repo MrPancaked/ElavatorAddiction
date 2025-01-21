@@ -1,7 +1,12 @@
+//--------------------------------------------------------------------------------------------------
+// Description: Handles muzzle flash effects, including light emission and its deactivation.
+//--------------------------------------------------------------------------------------------------
 using UnityEngine;
 
 public class MuzzleFlash : MonoBehaviour
 {
+    #region Variables
+
     [System.Serializable]
     public class LightSource
     {
@@ -11,7 +16,12 @@ public class MuzzleFlash : MonoBehaviour
         public float flashDuration;
     }
     public LightSource lightSource;
-    void Awake()
+
+    #endregion
+
+    #region Unity Methods
+
+    void Awake()  /// Initializes the light intensity of muzzle flash.
     {
         if (lightSource.light != null)
         {
@@ -23,11 +33,18 @@ public class MuzzleFlash : MonoBehaviour
             Debug.LogWarning($"Light source not set on muzzle flash {gameObject.name}");
         }
     }
-    private void DisableLight()
+
+    #endregion
+
+    #region MuzzleFlash Logic
+
+    private void DisableLight() /// Disables the light after the flash duration.
     {
         if (lightSource.light != null)
         {
             lightSource.light.enabled = false;
         }
     }
+
+    #endregion
 }

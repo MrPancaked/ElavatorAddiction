@@ -36,5 +36,6 @@ public class GunSettings : ScriptableObject
     public EventReference blankSound;
     public EventReference equipSound;
     public EventReference bulletHit;
+
     #endregion
 }

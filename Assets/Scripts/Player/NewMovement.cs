@@ -10,10 +10,17 @@ public class NewMovement : MonoBehaviour
     [Header("movement")]
     public float speed;
     public float airMultiplier;
-    public float jumpForce;
     public float groundDrag;
     public float airDrag;
     public Vector3 moveDirection;
+
+    [Header("jumping")]
+    public float jumpForce;
+    public float jumpTiming;
+    public float jumpTimer;
+    private bool jumping;
+    private bool jumpAvailable;
+
 
     [Header("sliding")]
     private float normalYScale;
@@ -22,7 +29,7 @@ public class NewMovement : MonoBehaviour
     public float slideDragIncrease;
     public float downForce;
     private bool sliding;
-    
+
 
     [Header("ground detection")]
     public Vector3 boxSize;
@@ -39,16 +46,57 @@ public class NewMovement : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
         normalYScale = transform.localScale.y;
     }
+
+    private void Update()
+    {
+
+    }
+
     void FixedUpdate()
     {
+        if (inputs.jumpPressed)
+        {
+            jumping = true;
+            ResetJumpTimer();
+        }
+
+        if (grounded != IsGrounded() && rb.velocity.y <= 0)
+        {
+            jumpAvailable = true;
+            ResetJumpTimer();
+        }
+
+        if (jumping || jumpAvailable)
+        {
+            jumpTimer -= Time.fixedDeltaTime;
+        }
+
+        if (jumpTimer <= 0)
+        {
+            JumpReset();
+            ResetJumpTimer();
+        }
+
         grounded = IsGrounded();
-        Debug.Log(grounded);
 
         //jumping
-        if (grounded && inputs.jumpPressed)
+        if (grounded && jumping)
         {
+            jumping = false;
+            jumpAvailable = false;
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+
+        //jumping
+        if (jumping && jumpAvailable)
+        {
+            jumping = false;
+            jumpAvailable = false;
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+
 
         //movement
         moveDirection = transform.right * inputs.moveMentInput.x + transform.forward * inputs.moveMentInput.y;
@@ -98,7 +146,19 @@ public class NewMovement : MonoBehaviour
         inputs.jumpReleased = false;
         inputs.slidePressed = false;
         inputs.slideReleased = false;
-        
+
+    }
+
+    private void JumpReset()
+    {
+        Debug.Log("Jump Reset");
+        jumping = false;
+        jumpAvailable = false;
+    }
+    private void ResetJumpTimer()
+    {
+        Debug.Log("Jump Timer Reset");
+        jumpTimer = jumpTiming;
     }
 
     public bool IsGrounded()

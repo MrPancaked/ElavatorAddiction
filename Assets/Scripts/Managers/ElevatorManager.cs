@@ -13,21 +13,21 @@ public class ElevatorManager : MonoBehaviour
     #region Variables
 
     [Header("Timing Settings")]
-    public float DelayBeforeNextState = 4f;   // Approximate duration of door close animation
-    public float DelayBeforeSceneTransition = 3f;     // Delay before loading the scene
-    public float DelayBeforeOpeningTheDoors = 3f;     // Delay before loading the scene
+    public float DelayBeforeNextState = 4f;   /// Approximate duration of door close animation
+    public float DelayBeforeSceneTransition = 3f;  /// Delay before loading the scene
+    public float DelayBeforeOpeningTheDoors = 3f;  /// Delay before loading the scene
 
     [Header("Scenes")]
-    public List<string> targetSceneNames; // List of scene names to transition to
+    public List<string> targetSceneNames;  /// List of scene names to transition to
 
     [Header("Elevator")]
-    public ElevatorSoundController elevatorSoundController; // Reference to the ElevatorSoundController
-    public CinemachineImpulseSource impulseSource; // Reference to the screen shake thingy
-    public Animator doorAnimator;          // Animation control for the elevator doors
-    public bool isButtonActive = true;       // Flag to check if the button can be pressed
+    public ElevatorSoundController elevatorSoundController;   /// Reference to the ElevatorSoundController
+    public CinemachineImpulseSource impulseSource; /// Reference to the screen shake thingy
+    public Animator doorAnimator;          /// Animation control for the elevator doors
+    public bool isButtonActive = true;      /// Flag to check if the button can be pressed
 
     [Header("Fog Settings")]
-    public float fogTransitionTime = 2f; // Duration of the fog transition.
+    public float fogTransitionTime = 2f;  /// Duration of the fog transition.
     public string initialFogColorHex = "#ADADAD";
     public float initialFogStartDistance = 10f;
     public float initialFogEndDistance = 60f;
@@ -35,20 +35,20 @@ public class ElevatorManager : MonoBehaviour
     public float destinationFogStartDistance = 3f;
     public float destinationFogEndDistance = 30f;
 
-
     // Private Variables
-    private bool isElevatorTraveling = false; // Flag to check if the elevator is currently traveling
-    private bool doorIsClosed = true; // Flag to keep track of the door state for correct triggering
-    private string currentTargetScene; // Private variable to store the selected scene
-    private Coroutine currentCoroutine; // Reference to the currently running coroutine, so you can spam the button and reset it
-    private string currentSceneName; // Variable to store the name of the current scene
-    private Color initialFogColor; // Initial fog color of the scene
-    private Color destinationFogColor; // Destination fog color of the scene
+    private bool isElevatorTraveling = false; /// Flag to check if the elevator is currently traveling
+    private bool doorIsClosed = true; /// Flag to keep track of the door state for correct triggering
+    private string currentTargetScene; /// Private variable to store the selected scene
+    private Coroutine currentCoroutine; /// Reference to the currently running coroutine, so you can spam the button and reset it
+    private string currentSceneName; /// Variable to store the name of the current scene
+    private Color initialFogColor;  /// Initial fog color of the scene
+    private Color destinationFogColor; /// Destination fog color of the scene
+
     #endregion
 
     #region Unity Methods
 
-    void Awake()
+    void Awake()  /// Gets the current scene name and Sets initial fog.
     {
         currentSceneName = SceneManager.GetActiveScene().name; // Get the name of the current scene
         SetInitialFog();
@@ -57,7 +57,8 @@ public class ElevatorManager : MonoBehaviour
     #endregion
 
     #region Button
-    public void ButtonPressed(Vector3 hitPosition) // Called when the button is pressed.
+
+    public void ButtonPressed(Vector3 hitPosition)  /// Called when the button is pressed.
     {
         elevatorSoundController.PlayButtonSound(hitPosition);
         if (!doorIsClosed) // Close Doors
@@ -70,10 +71,12 @@ public class ElevatorManager : MonoBehaviour
             }
             currentCoroutine = StartCoroutine(WaitBeforeStartingTheRide()); // Start new coroutine
         }
+
         else
         {
             OpenDoors();
         }
+
         if (!isButtonActive || isElevatorTraveling)
         {
             Debug.Log("Button press ignored: inactive or elevator is traveling.");
@@ -85,7 +88,7 @@ public class ElevatorManager : MonoBehaviour
 
     #region Doors
 
-    public void CloseDoors()
+    public void CloseDoors()  /// Closes the elevator doors.
     {
         if (!doorIsClosed)
         {
@@ -96,7 +99,7 @@ public class ElevatorManager : MonoBehaviour
         }
     }
 
-    public void OpenDoors()
+    public void OpenDoors()  /// Opens the elevator doors.
     {
         if (doorIsClosed)
         {
@@ -111,7 +114,7 @@ public class ElevatorManager : MonoBehaviour
 
     #region Elevator Ride
 
-    IEnumerator WaitBeforeStartingTheRide()
+    IEnumerator WaitBeforeStartingTheRide()  /// Waits before starting the elevator ride.
     {
         yield return new WaitForSeconds(DelayBeforeNextState); // Wait for animation and sound to play
 
@@ -122,7 +125,7 @@ public class ElevatorManager : MonoBehaviour
         }
     }
 
-    IEnumerator ElevatorRideStart()
+    IEnumerator ElevatorRideStart() /// Starts the elevator ride sequence.
     {
         isElevatorTraveling = true; // Start the loop and disable the button
         isButtonActive = false;
@@ -138,7 +141,7 @@ public class ElevatorManager : MonoBehaviour
         StartCoroutine(ElevatorRideEnd());
     }
 
-    IEnumerator ElevatorRideEnd() // Called in the new level when the elevator arrives.
+    IEnumerator ElevatorRideEnd()  /// Handles the elevator arrival in a new scene.
     {
         SceneManager.LoadScene(currentTargetScene);
         elevatorSoundController.PlayElevatorStop();
@@ -154,15 +157,17 @@ public class ElevatorManager : MonoBehaviour
         isButtonActive = true;
         Debug.Log("Button is active + Elevator not traveling + Scene loaded");
     }
+
     #endregion
 
     #region Scenes
-    public void SetActiveScene() // Get the name of the current scene
+
+    public void SetActiveScene()  /// Get the name of the current scene
     {
         currentSceneName = SceneManager.GetActiveScene().name;
     }
 
-    private string GetRandomSceneName()
+    private string GetRandomSceneName() /// Gets a random scene name from the list, avoiding the current scene.
     {
         string newSceneName;
         do
@@ -172,41 +177,42 @@ public class ElevatorManager : MonoBehaviour
         } while (newSceneName == currentSceneName);
         return newSceneName;
     }
+
     #endregion
 
     #region Fog
-
-    private void SetInitialFog()
-    {
-        if (!ColorUtility.TryParseHtmlString(initialFogColorHex, out initialFogColor))
+    private void SetInitialFog()  /// Sets the initial fog settings.
+    {  
+        if (!ColorUtility.TryParseHtmlString(initialFogColorHex, out initialFogColor)) // Attempts to parse the initial fog color from hex string, logs an error and sets default if invalid.
         {
             Debug.LogError("ElevatorManager: Invalid initial hex color, setting it to white.");
             initialFogColor = Color.white;
         }
 
-        if (!ColorUtility.TryParseHtmlString(destinationFogColorHex, out destinationFogColor))
+        if (!ColorUtility.TryParseHtmlString(destinationFogColorHex, out destinationFogColor)) // Attempts to parse the destination fog color from hex string, logs an error and sets default if invalid.
         {
             Debug.LogError("ElevatorManager: Invalid destination hex color, setting it to white.");
             destinationFogColor = Color.white;
         }
-        RenderSettings.fogColor = initialFogColor;
+       
+        RenderSettings.fogColor = initialFogColor; // Sets the render settings with the initial fog color, start distance, and end distance.
         RenderSettings.fogStartDistance = initialFogStartDistance;
         RenderSettings.fogEndDistance = initialFogEndDistance;
     }
 
-    IEnumerator FadeFog(Color targetColor, float targetStartDistance, float targetEndDistance)
+    IEnumerator FadeFog(Color targetColor, float targetStartDistance, float targetEndDistance) /// Animates the fog during elevator rides.
     {
-        float timer = 0.0f;
-        float initialStartDistance = RenderSettings.fogStartDistance;
-        float initialEndDistance = RenderSettings.fogEndDistance;
-        Color initialColor = RenderSettings.fogColor;
-        while (timer < fogTransitionTime)
+        float timer = 0.0f; // Timer for the fog transition.
+        float initialStartDistance = RenderSettings.fogStartDistance; // Caches initial fog start distance.
+        float initialEndDistance = RenderSettings.fogEndDistance; // Caches initial fog end distance.
+        Color initialColor = RenderSettings.fogColor; // Caches initial fog color.
+        while (timer < fogTransitionTime) // Continues until the transition time is reached.
         {
-            timer += Time.deltaTime;
-            RenderSettings.fogColor = Color.Lerp(initialColor, targetColor, timer / fogTransitionTime);
-            RenderSettings.fogStartDistance = Mathf.Lerp(initialStartDistance, targetStartDistance, timer / fogTransitionTime);
-            RenderSettings.fogEndDistance = Mathf.Lerp(initialEndDistance, targetEndDistance, timer / fogTransitionTime);
-            yield return null;
+            timer += Time.deltaTime; // Increases timer with each frame.      
+            RenderSettings.fogColor = Color.Lerp(initialColor, targetColor, timer / fogTransitionTime); // Lerps fog color from initial to target color based on timer.
+            RenderSettings.fogStartDistance = Mathf.Lerp(initialStartDistance, targetStartDistance, timer / fogTransitionTime); // Lerps fog start distance from initial to target distance based on timer.
+            RenderSettings.fogEndDistance = Mathf.Lerp(initialEndDistance, targetEndDistance, timer / fogTransitionTime); // Lerps fog end distance from initial to target distance based on timer.
+            yield return null; // Waits for the next frame.
         }
     }
     #endregion

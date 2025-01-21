@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8574607709477047739}
   - component: {fileID: 8843572718145435217}
   - component: {fileID: 2672444603113207417}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraCinemachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,8 +543,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544067631284132747}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12331268, y: 0.14575478, z: -0.01831341, w: 0.9814347}
-  m_LocalPosition: {x: 0, y: 0.4000001, z: 0}
+  m_LocalRotation: {x: 0.12331267, y: 0.1457548, z: -0.018313406, w: 0.98143476}
+  m_LocalPosition: {x: 0, y: 0.39999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -591,7 +591,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 191
+    m_Bits: 447
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1848,7 +1848,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5481533232153789727}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Double UZIs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2570,15 +2570,19 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3364382570679612324}
+  - component: {fileID: 6489364600403373051}
   - component: {fileID: 5240365597016641081}
   - component: {fileID: 4918400857203237434}
-  - component: {fileID: 5767844907936491356}
+  - component: {fileID: 6806652076021869073}
+  - component: {fileID: 7219539545731093851}
   - component: {fileID: 2363603075605729512}
   - component: {fileID: 7171003750088437121}
   - component: {fileID: 7472339462362982192}
-  - component: {fileID: 1055082443302515080}
-  - component: {fileID: 2747270054131780910}
+  - component: {fileID: 5561453025030643613}
+  - component: {fileID: 8606113254386454732}
   - component: {fileID: 5990084784110511554}
+  - component: {fileID: 2747270054131780910}
+  - component: {fileID: 1055082443302515080}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2604,6 +2608,29 @@ Transform:
   - {fileID: 517027159669905986}
   m_Father: {fileID: 2691225305413714647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &6489364600403373051
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784816484273663751}
+  m_Material: {fileID: 13400000, guid: f80b30d119a907c479877436198b4979, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5240365597016641081
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2662,7 +2689,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5767844907936491356
+--- !u!114 &6806652076021869073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2671,29 +2698,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 7784816484273663751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0f46b9b9736ce409eceacf71380370, type: 3}
+  m_Script: {fileID: 11500000, guid: 41575f1690f75834ab96bb24fa4c9bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 8
-  sprintSpeed: 8
-  groundDrag: 9
-  maxSlopeAngle: 30
   controls: {fileID: -944628639613478452, guid: f6a9db52f2aaedc4a837e25a4bab5c83,
     type: 3}
-  jumpForce: 14
-  jumpCooldown: 0.2
-  airMultiplier: 0.1
-  crouchSpeed: 4
-  playerHeight: 2
-  crouchYScale: 0.5
-  orientation: {fileID: 6873764375581662508}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
-  jumpKey: 32
-  sprintKey: 304
-  crouchKey: 306
-  state: 0
+  moveMentInput: {x: 0, y: 0}
+  jumpPressed: 0
+  jumpReleased: 0
+  slidePressed: 0
+  slideReleased: 0
+--- !u!114 &7219539545731093851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784816484273663751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb2612c8dfc4104c96091c2bee2c418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 220
+  airMultiplier: 0.01
+  jumpForce: 13
+  groundDrag: 17.5
+  airDrag: 1.4
+  moveDirection: {x: 0, y: 0, z: 0}
+  slideYScale: 0.5
+  slideSpeed: 20
+  slideDragIncrease: 0.005
+  downForce: 20
+  boxSize: {x: 0.5, y: 0.15, z: 0.5}
 --- !u!114 &2363603075605729512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2745,7 +2782,7 @@ MonoBehaviour:
   items:
   - {fileID: 1429938144713704009}
   - {fileID: 5515660878034737116}
---- !u!114 &1055082443302515080
+--- !u!114 &5561453025030643613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2754,10 +2791,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 7784816484273663751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 041a8bff46159cf418fe1a63865b4a7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 604930d0bdcf6cb46a9001d14fd514e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinsLogic: {fileID: 2747270054131780910}
+  health: {fileID: 8606113254386454732}
+  healthUI: {fileID: 0}
+  deathUI: {fileID: 0}
+--- !u!114 &8606113254386454732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784816484273663751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f728a00649949124f8d72d8238bc74a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+--- !u!114 &5990084784110511554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784816484273663751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3595b0592be7c7249ae9eab2a302ea73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2747270054131780910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2771,7 +2835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinsCounter: {fileID: 0}
---- !u!114 &5990084784110511554
+--- !u!114 &1055082443302515080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2780,9 +2844,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7784816484273663751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3595b0592be7c7249ae9eab2a302ea73, type: 3}
+  m_Script: {fileID: 11500000, guid: 041a8bff46159cf418fe1a63865b4a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinsLogic: {fileID: 2747270054131780910}
 --- !u!1 &7994626742668063708
 GameObject:
   m_ObjectHideFlags: 0
@@ -2961,10 +3026,9 @@ GameObject:
   - component: {fileID: 7804701040193481024}
   - component: {fileID: 584885347905521241}
   - component: {fileID: 1626317122678484469}
-  - component: {fileID: 1326698870642106893}
   m_Layer: 6
   m_Name: PlayerMesh
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3034,29 +3098,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1326698870642106893
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8608965023941225839}
-  m_Material: {fileID: 13400000, guid: f80b30d119a907c479877436198b4979, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8719918938952825371
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,7 +3514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2691225305413714647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

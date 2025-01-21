@@ -32,5 +32,4 @@ public class SlotMachine : MonoBehaviour
     }
 
     #endregion
-
 }

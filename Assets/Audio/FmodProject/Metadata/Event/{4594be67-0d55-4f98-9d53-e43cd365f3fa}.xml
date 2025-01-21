@@ -214,6 +214,9 @@
 	</object>
 	<object class="MixerBusFader" id="{abe5e98e-431e-4a33-81d8-633fb0a19462}" />
 	<object class="SpatialiserEffect" id="{21ba149a-8816-44e6-954f-d4654eef816d}">
+		<property name="bypass">
+			<value>true</value>
+		</property>
 		<property name="maximumDistance">
 			<value>50</value>
 		</property>

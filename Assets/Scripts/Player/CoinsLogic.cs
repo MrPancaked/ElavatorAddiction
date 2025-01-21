@@ -14,9 +14,8 @@ public class CoinsLogic : MonoBehaviour
     #endregion
 
     #region Coin Collection Logic
-
-    /// Collects the coin and destroys it.
-    public void CollectCoin(GameObject coinObject)
+   
+    public void CollectCoin(GameObject coinObject) /// Collects the coin and destroys it.
     {
         coins++;  // Increase the coin count
         UpdateCoinsDisplay();
@@ -24,8 +23,7 @@ public class CoinsLogic : MonoBehaviour
         Destroy(coinObject);  // Destroy the coin
     }
 
-    /// Decreases the coin count
-    public void DecreaseCoins()
+    public void DecreaseCoins() /// Decreases the coin count
     {
         coins--; // Decreases coin count
         UpdateCoinsDisplay();
