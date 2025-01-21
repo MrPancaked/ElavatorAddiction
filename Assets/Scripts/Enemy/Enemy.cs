@@ -95,12 +95,21 @@ public class Enemy : MonoBehaviour
 
     #region States Logic
 
-    private void IdleState()   /// Handles the idle state of the enemy, makes the enemy hover in a circular pattern.
+    private void IdleState()   /// Handles the idle state of the enemy, makes the enemy hover in a circular pattern and makes the enemy rotate with the movement
     {
         Vector3 circlePos = hoverStartPosition + new Vector3(Mathf.Cos(hoverTimer * idleSpeed) * currentOrbitRadius, Mathf.Sin(hoverTimer * idleSpeed) * idleHeight, Mathf.Sin(hoverTimer * idleSpeed) * currentOrbitRadius);
         rb.drag = idleDrag;
         rb.AddForce((circlePos - transform.position) * idleSpeed);
+
+        // Rotate the enemy to face the direction of movement
+        Vector3 direction = circlePos - transform.position;
+        if (direction != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1000 * Time.deltaTime);
+        }
     }
+
 
     private void DetectPlayer()   /// Detects the player within the detection range and transitions to the attack state if the player is visible.
     {
@@ -120,12 +129,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void AttackState()  /// Handles the attack state of the enemy, makes the enemy chase the player.
+    private void AttackState()  /// Handles the attack state of the enemy, makes the enemy chase the player, and face the forward
     {
         Vector3 chaseDirection = (playerTransform.position - transform.position).normalized;
         Vector3 randomDirection = new Vector3(Random.Range(-attackPointOffset, attackPointOffset), Random.Range(-attackPointOffset, attackPointOffset), Random.Range(-attackPointOffset, attackPointOffset));
         rb.drag = attackDrag;
         rb.AddForce((chaseDirection + randomDirection) * attackSpeed);
+
+        // Smoothly rotate the enemy to face the direction of movement
+        if (chaseDirection != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(chaseDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 5 * Time.deltaTime);
+        }
+
     }
 
     #endregion
