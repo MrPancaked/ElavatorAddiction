@@ -10,13 +10,17 @@ public class NewMovement : MonoBehaviour
     [Header("movement")]
     public float speed;
     public float airMultiplier;
-    public float jumpForce;
-    public float jumpTiming;
-    private bool jumping;
-    private bool jumpAvailable;
     public float groundDrag;
     public float airDrag;
     public Vector3 moveDirection;
+
+    [Header("jumping")]
+    public float jumpForce;
+    public float jumpTiming;
+    private float jumpTimer;
+    private bool jumping;
+    private bool jumpAvailable;
+
 
     [Header("sliding")]
     private float normalYScale;
@@ -45,25 +49,38 @@ public class NewMovement : MonoBehaviour
 
     private void Update()
     {
-        if (inputs.jumpPressed)
-        {
-            jumping = true;
-            Invoke("ResetJump", jumpTiming);
-        }
+        
     }
 
     void FixedUpdate()
     {
+        if (inputs.jumpPressed)
+        {
+            jumping = true;
+            ResetJumpTimer();
+        }
+
         if (grounded != IsGrounded() && rb.velocity.y <= 0)
         {
             jumpAvailable = true;
-            Invoke("ResetJump", jumpTiming);
+            ResetJumpTimer();
+        }
+
+        if (jumping || jumpAvailable)
+        {
+            jumpTimer -= Time.fixedDeltaTime;
+        }
+
+        if (jumpTimer <= 0)
+        {
+            JumpReset();
+            ResetJumpTimer();
         }
 
         grounded = IsGrounded();
 
         //jumping
-        if ((grounded) && jumping)
+        if (grounded && jumping)
         {
             jumping = false;
             jumpAvailable = false;
@@ -132,10 +149,16 @@ public class NewMovement : MonoBehaviour
         
     }
 
-    public void ResetJump()
+    private void JumpReset()
     {
+        Debug.Log("Jump Reset");
         jumping = false;
         jumpAvailable = false;
+    }
+    private void ResetJumpTimer()
+    { 
+        Debug.Log("Jump Timer Reset");
+        jumpTimer = jumpTiming;
     }
 
     public bool IsGrounded()
