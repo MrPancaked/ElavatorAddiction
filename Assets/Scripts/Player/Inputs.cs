@@ -55,9 +55,4 @@ public class Inputs : MonoBehaviour
             slideReleased = true;
         }
     }
-
-    private void LateUpdate()
-    {
-        
-    }
 }

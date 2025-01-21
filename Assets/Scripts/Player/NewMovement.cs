@@ -11,6 +11,9 @@ public class NewMovement : MonoBehaviour
     public float speed;
     public float airMultiplier;
     public float jumpForce;
+    public float jumpTiming;
+    private bool jumping;
+    private bool jumpAvailable;
     public float groundDrag;
     public float airDrag;
     public Vector3 moveDirection;
@@ -39,16 +42,44 @@ public class NewMovement : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
         normalYScale = transform.localScale.y;
     }
+
+    private void Update()
+    {
+        if (inputs.jumpPressed)
+        {
+            jumping = true;
+            Invoke("ResetJump", jumpTiming);
+        }
+    }
+
     void FixedUpdate()
     {
+        if (grounded != IsGrounded() && rb.velocity.y <= 0)
+        {
+            jumpAvailable = true;
+            Invoke("ResetJump", jumpTiming);
+        }
+
         grounded = IsGrounded();
-        Debug.Log(grounded);
 
         //jumping
-        if (grounded && inputs.jumpPressed)
+        if ((grounded) && jumping)
         {
+            jumping = false;
+            jumpAvailable = false;
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+
+        //jumping
+        if (jumping && jumpAvailable)
+        {
+            jumping = false;
+            jumpAvailable = false;
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+
 
         //movement
         moveDirection = transform.right * inputs.moveMentInput.x + transform.forward * inputs.moveMentInput.y;
@@ -99,6 +130,12 @@ public class NewMovement : MonoBehaviour
         inputs.slidePressed = false;
         inputs.slideReleased = false;
         
+    }
+
+    public void ResetJump()
+    {
+        jumping = false;
+        jumpAvailable = false;
     }
 
     public bool IsGrounded()
