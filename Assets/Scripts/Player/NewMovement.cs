@@ -17,7 +17,7 @@ public class NewMovement : MonoBehaviour
     [Header("jumping")]
     public float jumpForce;
     public float jumpTiming;
-    public float jumpTimer;
+    private float jumpTimer;
     private bool jumping;
     private bool jumpAvailable;
 
@@ -29,7 +29,7 @@ public class NewMovement : MonoBehaviour
     public float slideDragIncrease;
     public float downForce;
     private bool sliding;
-
+    
 
     [Header("ground detection")]
     public Vector3 boxSize;
@@ -49,7 +49,7 @@ public class NewMovement : MonoBehaviour
 
     private void Update()
     {
-
+        
     }
 
     void FixedUpdate()
@@ -146,7 +146,7 @@ public class NewMovement : MonoBehaviour
         inputs.jumpReleased = false;
         inputs.slidePressed = false;
         inputs.slideReleased = false;
-
+        
     }
 
     private void JumpReset()
@@ -156,7 +156,7 @@ public class NewMovement : MonoBehaviour
         jumpAvailable = false;
     }
     private void ResetJumpTimer()
-    {
+    { 
         Debug.Log("Jump Timer Reset");
         jumpTimer = jumpTiming;
     }

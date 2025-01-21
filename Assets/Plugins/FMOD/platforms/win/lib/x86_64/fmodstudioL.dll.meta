@@ -14,11 +14,15 @@ PluginImporter:
   - first:
       Any: 
     second:
+      enabled: 1
       enabled: 0
       settings: {}
   - first:
       Editor: Editor
     second:
+      enabled: 0
+      settings:
+        DefaultValueInitialized: true
       enabled: 1
       settings:
         CPU: x86_64
