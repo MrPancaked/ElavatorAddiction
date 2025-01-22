@@ -6057,7 +6057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &389096597
 Transform:
   m_ObjectHideFlags: 0
@@ -19027,6 +19027,21 @@ PrefabInstance:
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 677448229}
+    - target: {fileID: 7219539545731093851, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: downForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219539545731093851, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: slideSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219539545731093851, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: slideYScale
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8921157221110998851, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: ammoCounter

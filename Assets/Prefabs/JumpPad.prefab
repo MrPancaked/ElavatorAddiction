@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c301d93d2d3b79f47b59b7e17acea5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpPadForce: 20
+  JumpPadForce: 30
 --- !u!65 &1212278476846563397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -171,5 +171,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 0.5, z: 2}
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Size: {x: 2, y: 0.2, z: 2}
+  m_Center: {x: 0, y: 0.19, z: 0}
