@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a334cb5776c222e4a8df1a04146b0a94
+guid: 9230e7e95faabdd409f8f71011ef237b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -12,8 +12,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: slots
-    second: {fileID: 2100000, guid: 58be2be92ef19374ea79535c8fd7fec9, type: 2}
+      name: slot1mat
+    second: {fileID: 2100000, guid: 14db19efdcc687f4bbccaf406918613f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: slot2mat
+    second: {fileID: 2100000, guid: c3a4b3d56ec8d5344b9fed2a3817260e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: slot3mat
+    second: {fileID: 2100000, guid: 70f1a6ee7b0ce764a9dd22e019fca11a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
