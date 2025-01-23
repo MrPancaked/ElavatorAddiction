@@ -35,11 +35,26 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
+    public EventInstance CreateEventInstance(EventReference sound) /// Creates an instance of a FMOD sound event.
+    {
+        EventInstance instance = RuntimeManager.CreateInstance(sound);
+        return instance;
+    }
+
     public EventInstance CreateInstance(EventReference sound, Vector3 worldPos) /// Creates an instance of a FMOD sound event.
     {
         EventInstance instance = RuntimeManager.CreateInstance(sound);
         instance.set3DAttributes(RuntimeUtils.To3DAttributes(worldPos));
         return instance;
+    }
+
+    public void Set3DAttributes(EventInstance eventInstance, Transform transform)
+    {
+        if (eventInstance.isValid())
+        {
+            FMOD.ATTRIBUTES_3D attributes = FMODUnity.RuntimeUtils.To3DAttributes(transform.gameObject); //Convert the 3D position and rotation into FMOD attributes
+            eventInstance.set3DAttributes(attributes);
+        }
     }
 
     #endregion

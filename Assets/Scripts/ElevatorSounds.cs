@@ -7,7 +7,7 @@ using FMODUnity;
 using FMOD.Studio;
 using System.Collections;
 
-public class ElevatorSoundController : MonoBehaviour
+public class ElevatorSounds : MonoBehaviour
 {
     #region Variables
 
@@ -27,6 +27,26 @@ public class ElevatorSoundController : MonoBehaviour
     private EventInstance elevatorRideInstance; /// Variable to hold the created event instance
     private EventInstance roomToneInstance;  /// Variable to hold the created event instance
     private bool hasStarted = false; // Check if the sound has been started
+    private static ElevatorSounds instance;
+    public static ElevatorSounds Instance { get { return instance; } }
+
+    #endregion
+
+    #region Unity Methods
+
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
+
     #endregion
 
     #region Unity Methods

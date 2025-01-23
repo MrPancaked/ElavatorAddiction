@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7791486788655378091, guid: 607a5223bdd163a4f910247e889baf00, type: 3}
+  - {fileID: 2100000, guid: 91b33007b90ed1741a1ec85d031f4c0d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -246,16 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995efd817add64744802e21eacdb5a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 8
-  attackDrag: 0.4
-  attackPointOffset: 2
-  minAttackCooldown: 2
-  maxAttackCooldown: 5
-  idleSpeed: 2
-  idleDrag: 5
-  idleHeight: 2
-  idleRadius: 12
-  detectionRange: 25
+  enemySettings: {fileID: 11400000, guid: eea33707b68420746aee9d61181b1d60, type: 2}
   enemyModel: {fileID: 1336654257063423728}
   rb: {fileID: 1749662963217194090}
   triggerCollider: {fileID: 3670819129652143735}
@@ -390,7 +381,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7791486788655378091, guid: 607a5223bdd163a4f910247e889baf00, type: 3}
+  - {fileID: 2100000, guid: 91b33007b90ed1741a1ec85d031f4c0d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -473,7 +464,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6664358993437552698, guid: 607a5223bdd163a4f910247e889baf00, type: 3}
+  - {fileID: 2100000, guid: 5d02b62addc8dcd409012be20c1a512f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

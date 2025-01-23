@@ -27,6 +27,7 @@ public class GunSettings : ScriptableObject
     public float spread; // Maximum deviation of bullet direction
     public float range; // Maximum range of the gun
     public float enemyPushbackForce; // How much the enemy is pushed back with the bullets
+    public float playerPushbackForce; // How much the play is pushed back when shooting
     public float screenShakeStrength; // Amount of screen shake when you shoot
     public bool isDualGun = false; // Flag to determine if this is a dual gun set
 

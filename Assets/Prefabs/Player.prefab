@@ -400,7 +400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1283560640783170651
 Transform:
   m_ObjectHideFlags: 0
@@ -433,12 +433,13 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
-  ammoCounter: {fileID: 0}
-  reloadFeedbackText: {fileID: 0}
+  gunSettings: {fileID: 11400000, guid: e7f423ba1ee092547ab1e97f6453440d, type: 2}
+  fpsCam: {fileID: 356771900034798577}
+  playerRb: {fileID: 5240365597016641081}
   impulseSource: {fileID: 8414776170324597222}
   MuzzleFlashPoint: {fileID: 316050230044639161}
-  fpsCam: {fileID: 356771900034798577}
-  gunSettings: {fileID: 11400000, guid: e7f423ba1ee092547ab1e97f6453440d, type: 2}
+  ammoCounter: {fileID: 0}
+  reloadFeedbackText: {fileID: 0}
   dualGuns: []
   particlesParent: {fileID: 0}
   muzzleFlash: {fileID: 7548889807513906146, guid: 935e1d2f61ec7404d8fc056f0fca803e,
@@ -562,7 +563,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1141,12 +1142,13 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
-  ammoCounter: {fileID: 0}
-  reloadFeedbackText: {fileID: 0}
+  gunSettings: {fileID: 11400000, guid: 8d45b0b20a6a6f241a9c9710603aa7a6, type: 2}
+  fpsCam: {fileID: 356771900034798577}
+  playerRb: {fileID: 5240365597016641081}
   impulseSource: {fileID: 3410898089214030899}
   MuzzleFlashPoint: {fileID: 4617241612719545096}
-  fpsCam: {fileID: 356771900034798577}
-  gunSettings: {fileID: 11400000, guid: 8d45b0b20a6a6f241a9c9710603aa7a6, type: 2}
+  ammoCounter: {fileID: 0}
+  reloadFeedbackText: {fileID: 0}
   dualGuns:
   - {fileID: 3182379711684261704}
   - {fileID: 2651699426800838452}
@@ -2708,6 +2710,51 @@ MonoBehaviour:
   jumpReleased: 0
   slidePressed: 0
   slideReleased: 0
+  interaction:
+    m_Name: Interaction
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: bdb20f91-047c-475b-82a8-966c9185f5c3
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  reload:
+    m_Name: Reload
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9926fb71-2a25-42b8-a7a2-e99c9d8c6d15
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  shoot:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ab4a61a6-8516-4121-bc42-b28125110531
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  selectItem1:
+    m_Name: Select Item 1
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 72d568e2-2c5e-473e-8b27-100ce91768cf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  selectItem2:
+    m_Name: Select Item 2
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 46ba6b6c-cda6-4737-b7d8-e89097e8a67a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &7219539545731093851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2744,8 +2791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f938f8ef267cdf2409ea8b2f16af88f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: -944628639613478452, guid: f6a9db52f2aaedc4a837e25a4bab5c83,
-    type: 3}
   playerCamera: {fileID: 356771900034798577}
   slotMachine: {fileID: 0}
   elevatorManager: {fileID: 0}
@@ -2778,8 +2823,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3465183e761f7ad4ea4d5433f054f794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: -944628639613478452, guid: f6a9db52f2aaedc4a837e25a4bab5c83,
-    type: 3}
   items:
   - {fileID: 1429938144713704009}
   - {fileID: 5515660878034737116}
@@ -3151,12 +3194,13 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
-  ammoCounter: {fileID: 0}
-  reloadFeedbackText: {fileID: 0}
+  gunSettings: {fileID: 11400000, guid: 8d45b0b20a6a6f241a9c9710603aa7a6, type: 2}
+  fpsCam: {fileID: 356771900034798577}
+  playerRb: {fileID: 5240365597016641081}
   impulseSource: {fileID: 351015113327911498}
   MuzzleFlashPoint: {fileID: 8341597470190507252}
-  fpsCam: {fileID: 356771900034798577}
-  gunSettings: {fileID: 11400000, guid: 8d45b0b20a6a6f241a9c9710603aa7a6, type: 2}
+  ammoCounter: {fileID: 0}
+  reloadFeedbackText: {fileID: 0}
   dualGuns:
   - {fileID: 3182379711684261704}
   - {fileID: 2651699426800838452}

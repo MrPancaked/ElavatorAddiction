@@ -9,6 +9,7 @@ using TMPro;
 using Unity.Cinemachine;
 using FMODUnity;
 using System.Runtime;
+using UnityEngine.Windows;
 
 public class Gun : MonoBehaviour
 {
@@ -16,28 +17,29 @@ public class Gun : MonoBehaviour
 
     [Header("References")]
     public LayerMask whatIsEnemy; // Layer mask to identify enemies
+    [SerializeField] GunSettings gunSettings; // Gun settings with all statistics and variables
+    public Camera fpsCam; // The FPS camera
+    public Rigidbody playerRb; // Player's Rigidbody
+    public CinemachineImpulseSource impulseSource; // Impulse source for camera shake
+    public Transform MuzzleFlashPoint; // Transform for the muzzle flash spawn point
     public TextMeshProUGUI ammoCounter; // UI text element for ammo display
     public GameObject reloadFeedbackText; // UI text element for reload feedback (for now lololo hehehe rene im going crazy bithc it is 3 am)
-    public CinemachineImpulseSource impulseSource; //Reference to our impulse source for camera shake
-    public Transform MuzzleFlashPoint; // Transform for the muzzle flash spawn point
-    public Camera fpsCam; // Reference to the FPS camera
-    [SerializeField] GunSettings gunSettings; // Gun settings with all statistics and variables
-    public List<Gun> dualGuns = new List<Gun>(); // If this is a dual gun set, this is the other gun (and this gun)
+    public List<Gun> dualGuns = new List<Gun>(); // If this is a dual gun PUT BOTH GUNS IN THE LIST
 
     [Header("Particles")]
-    public Transform particlesParent; //The parent that we will be instantiating all of our particle effects into.
-    public GameObject muzzleFlash; // Prefab for the muzzle flash effect
-    public GameObject bulletHole; // Prefab for the bullet hole effect
-    public GameObject bloodBurst; // Prefab for blood burst effect
+    public Transform particlesParent; // The parent that we will be instantiating all of our particle effects into
+    public GameObject muzzleFlash; // The muzzle flash effect
+    public GameObject bulletHole; // The bullet hole effect
+    public GameObject bloodBurst; // The blood burst effect
 
     // Private Variables
-    private bool shooting; // Flag to check if the player is currently shooting
-    private bool readyToShoot; // Flag to check if the gun is ready to shoot
-    private bool reloading; // Flag to check if the gun is currently reloading
-    private int shotsLeft; // Number of shots (not bullets) in the magazine
-    private int bulletsShot; // Number of bullets shot in a single shot or burst
-    private RaycastHit rayHit; // Stores information about the raycast hit
-    private int currentGunIndex = 0; // Index to track which gun to fire in a dual gun set
+    private bool shooting = false; // Check if the player is currently shooting
+    private bool readyToShoot; // Check if the gun is ready to shoot
+    private bool reloading; // Check if the gun is currently reloading
+    private int shotsLeft; // Ooverall shots (not bullets) in the magazine
+    private int bulletsShot; // Bullets shot in a single shot or burst
+    private RaycastHit rayHit; // Info about the raycast
+    private int currentGunIndex = 0; // Track which gun to fire in a dual gun set
 
     #endregion
 
@@ -49,6 +51,7 @@ public class Gun : MonoBehaviour
         readyToShoot = true; // Allow shooting initially
         reloadFeedbackText.SetActive(false); // Disable reload text at start
     }
+
     private void Start()
     {
         ammoCounter.SetText("");  // Disable ammo text when the gun is not being used
@@ -69,46 +72,66 @@ public class Gun : MonoBehaviour
 
     #region Input Logic
 
-    private void MyInput() /// Handles player input for shooting and reloading.
+    private void MyInput()
     {
+        if (gunSettings.allowContinuesFire)
+        {
+            if (Inputs.Instance.shoot.IsPressed())
+            {
+                shooting = true;
+            }
+            else
+            {
+                shooting = false;
+            }
+        }
+        else
+        {
+            if (Inputs.Instance.shoot.WasPressedThisFrame())
+            {
+                shooting = true;
+            }
+            if (Inputs.Instance.shoot.WasReleasedThisFrame())
+            {
+                shooting = false;//Make sure that we set to false once released so we can fire again
+            }
+        }
+
+
         // Handle logic for normal (single) guns
         if (!gunSettings.isDualGun)
         {
-           
-            if (gunSettings.allowContinuesFire) shooting = Input.GetKey(KeyCode.Mouse0); // Check if we should allow continues fire (automatic fire) or single press fire
-            else shooting = Input.GetKeyDown(KeyCode.Mouse0);
-
-            if (Input.GetKeyDown(KeyCode.R) && shotsLeft < (gunSettings.magazineSize / gunSettings.bulletsPerShot) && !reloading) Reload(); // Check if the player is trying to reload
+            if (Inputs.Instance.reload.WasPressedThisFrame() && shotsLeft < (gunSettings.magazineSize / gunSettings.bulletsPerShot) && !reloading) Reload(); // Check if the player is trying to reload
 
             if (readyToShoot && shooting && !reloading) // Handle shooting logic if ready to shoot, the player is pressing to shoot, and if the gun is not reloading
             {
                 if (shotsLeft > 0) // Check if there is ammo in the magazine
                 {
+
                     bulletsShot = gunSettings.bulletsPerShot; // Set the amount of bullets per shot
                     AudioManager.instance.PlayOneShot(gunSettings.gunShotSound, MuzzleFlashPoint.position); //Play the shot sound
                     Shoot(); // Fire the gun
+
                 }
                 else if (shotsLeft == 0) // if out of ammo, call reload
                 {
                     Reload();
                 }
             }
+
         }
 
         // Handle logic for dual guns
         else
         {
-            if (gunSettings.allowContinuesFire) shooting = Input.GetKey(KeyCode.Mouse0); // Check if we should allow continues fire (automatic fire) or single press fire
-            else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-           
-            if (Input.GetKeyDown(KeyCode.R) && (dualGuns[0].shotsLeft < (dualGuns[0].gunSettings.magazineSize / dualGuns[0].gunSettings.bulletsPerShot) || 
-                                                                        dualGuns[1].shotsLeft < (dualGuns[1].gunSettings.magazineSize / dualGuns[1].gunSettings.bulletsPerShot)) 
+            if (Inputs.Instance.reload.WasPressedThisFrame() && (dualGuns[0].shotsLeft < (dualGuns[0].gunSettings.magazineSize / dualGuns[0].gunSettings.bulletsPerShot) ||
+                                                                        dualGuns[1].shotsLeft < (dualGuns[1].gunSettings.magazineSize / dualGuns[1].gunSettings.bulletsPerShot))
                                                                         && !reloading) Reload();  // Check if the player is trying to reload
 
             if (shooting && !reloading) // Handle shooting logic if the player is trying to shoot and the gun is not reloading
             {
-               
+
                 if (dualGuns[currentGunIndex].readyToShoot) // check if the current gun is ready to shoot
                 {
                     if (dualGuns[currentGunIndex].shotsLeft > 0) // Check if the current gun has ammo
@@ -150,6 +173,7 @@ public class Gun : MonoBehaviour
         }
 
         Invoke(nameof(ResetShot), gunSettings.fireRate); // Reset readyToShoot with fireRate
+        ApplyPlayerPushback();
     }
 
     private void SingleShot(Vector3 direction) // Logic of one single shot
@@ -191,6 +215,7 @@ public class Gun : MonoBehaviour
     #endregion
 
     #region Bullet Effects
+
     private void BulletEffects()
     {
         GameObject muzzleFlashTemporary = Instantiate(muzzleFlash, MuzzleFlashPoint.position, Quaternion.identity, particlesParent); // Instantiate muzzleflash
@@ -214,6 +239,18 @@ public class Gun : MonoBehaviour
                 Destroy(bulletHoleTemporary, 1f); //Destroy after 1 sec
             }
         }
+    }
+
+    #endregion
+
+    #region Player Pushback
+
+    private void ApplyPlayerPushback()
+    {
+        if (playerRb == null) { return; } // If we have no reference, then we skip the pushback
+        // Calculate the pushback force in the opposite direction of the shot
+        Vector3 pushbackDirection = -fpsCam.transform.forward;
+        playerRb.AddForce(pushbackDirection * gunSettings.playerPushbackForce, ForceMode.Impulse);
     }
 
     #endregion
@@ -248,6 +285,7 @@ public class Gun : MonoBehaviour
     #endregion
 
     #region UI Logic
+
     private void UpdateAmmoDisplay()
     {
         if (!gunSettings.isDualGun) // If its a normal gun
@@ -266,5 +304,6 @@ public class Gun : MonoBehaviour
             ammoCounter.SetText(totalShotsLeft + " / " + totalMagazineSize); // Show combined ammo UI
         }
     }
+
     #endregion
 }

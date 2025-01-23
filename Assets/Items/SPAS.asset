@@ -23,6 +23,7 @@ MonoBehaviour:
   spread: 0.17
   range: 15
   enemyPushbackForce: 2
+  playerPushbackForce: 8
   screenShakeStrength: 0.5
   isDualGun: 0
   gunShotSound:
