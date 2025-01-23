@@ -79,7 +79,9 @@ public class ElevatorController : MonoBehaviour
         }
         else
         {
-            OpenDoors(); // If the door is closed, Open the doors
+            //this should spin the slots first and then open the doors after
+            //also the handle should get an animation in the tree
+            doorAnimator.SetTrigger("Open"); // Trigger door open animation
         }
 
         if (!isButtonActive || isElevatorTraveling)
@@ -109,7 +111,6 @@ public class ElevatorController : MonoBehaviour
         if (doorIsClosed)
         {
             doorIsClosed = false; //Set door as open
-            doorAnimator.SetTrigger("Open"); // Trigger door open animation
             ElevatorSounds.Instance.PlayDoorOpenSound(); // Play door open sound
             Debug.Log("Door is opened"); // Debug message
         }
@@ -161,6 +162,7 @@ public class ElevatorController : MonoBehaviour
 
         SetActiveScene(); // Set active scene variable
         OpenDoors(); // open the doors
+        doorAnimator.SetTrigger("Open"); // Trigger door open animation
         isElevatorTraveling = false; // Elevator is no longer traveling
         isButtonActive = true; // Enable the button
         Debug.Log("Button is active + Elevator not traveling + Scene loaded"); // Debug message

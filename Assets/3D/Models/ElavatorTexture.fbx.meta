@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 119c47509553c13478ae5c23a2f113b6
+guid: a334cb5776c222e4a8df1a04146b0a94
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: elavator1
+    second: {fileID: 2100000, guid: 24788a7c9bcfecf49b9e648d5e90e688, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: slots
+    second: {fileID: 2100000, guid: 58be2be92ef19374ea79535c8fd7fec9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
