@@ -15,8 +15,8 @@ MonoBehaviour:
   name: Deer Skull
   detectionRange: 25
   attackScreenShake: 1
-  attackSpeed: 5
-  attackDrag: 0.2
+  attackSpeed: 3.5
+  attackDrag: 0.1
   attackOffset: 2
   attackCooldownMin: 2
   attackCooldownMax: 5

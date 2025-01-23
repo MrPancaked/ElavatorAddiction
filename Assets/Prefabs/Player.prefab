@@ -2775,9 +2775,9 @@ MonoBehaviour:
   jumpForce: 10
   jumpTiming: 0.1
   slideYScale: 0.5
-  slideSpeed: 20
+  slideSpeed: 3
   slideDragIncrease: 0.005
-  downForce: 25
+  downForce: 27
   boxSize: {x: 0.5, y: 0.15, z: 0.5}
 --- !u!114 &2363603075605729512
 MonoBehaviour:
