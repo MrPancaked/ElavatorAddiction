@@ -79,6 +79,20 @@ public class NewMovement : MonoBehaviour
 
         grounded = IsGrounded();
 
+        //drag
+        if (grounded && !sliding)
+        {
+            rb.drag = groundDrag;
+        }
+        else if (!sliding || !grounded)
+        {
+            rb.drag = airDrag;
+        }
+        if (sliding && grounded && (rb.drag < groundDrag))
+        {
+            rb.drag += slideDragIncrease * groundDrag; /// Increase drag when sliding
+        }
+
         //jumping
         if (grounded && jumping)
         {
@@ -110,14 +124,7 @@ public class NewMovement : MonoBehaviour
             rb.AddForce(moveDirection * speed * airMultiplier);
         }
 
-        if (grounded && !sliding)
-        {
-            rb.drag = groundDrag;
-        }
-        else if (!sliding || !grounded)
-        {
-            rb.drag = airDrag;
-        }
+        
 
         //sliding
         if (inputs.slidePressed && !sliding)
@@ -126,13 +133,14 @@ public class NewMovement : MonoBehaviour
             sliding = true;
             rb.drag = 0; /// Remove drag when sliding
             rb.AddForce(Vector3.down * downForce, ForceMode.Impulse); /// Move the player down
-            rb.AddForce(moveDirection * slideSpeed);
+            if (grounded)
+            {
+                rb.AddForce(moveDirection * slideSpeed, ForceMode.Impulse);
+            }
+            
         }
 
-        if (sliding && grounded && (rb.drag < groundDrag))
-        {
-            rb.drag += slideDragIncrease * groundDrag; /// Increase drag when sliding
-        }
+        
 
         if (sliding && inputs.slideReleased)
         {
@@ -146,18 +154,18 @@ public class NewMovement : MonoBehaviour
         inputs.jumpReleased = false;
         inputs.slidePressed = false;
         inputs.slideReleased = false;
+
+        Debug.Log(rb.drag);
         
     }
 
     private void JumpReset()
     {
-        Debug.Log("Jump Reset");
         jumping = false;
         jumpAvailable = false;
     }
     private void ResetJumpTimer()
     { 
-        Debug.Log("Jump Timer Reset");
         jumpTimer = jumpTiming;
     }
 
