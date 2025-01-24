@@ -13,17 +13,18 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region Unity Methods
-
-    private void Awake() /// Sets up the AudioManager as a singleton.
+    private void Awake()  /// Makes sure this object survives the scene transition, and that there is only one.
     {
-        if (instance != null)
+        if (instance == null)
         {
-            Debug.LogError("You have 2 audio managers dumbass");
-            Destroy(gameObject); // Destroy duplicate if another exists
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
             return;
         }
-        instance = this;
-        DontDestroyOnLoad(gameObject); // Keep the singleton alive across scene loads
     }
 
     #endregion

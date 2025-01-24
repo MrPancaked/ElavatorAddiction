@@ -9,18 +9,16 @@ public class ElevatorController : MonoBehaviour
 
     [Header("Refences")]
     public Animator doorAnimator; // Reference to the door animator
+    public Animator leverAnimator; // Reference to the door animator
 
-    [Header("Timing Settings")]
-    public float DelayBeforeNextState = 4f;  // Time delay before moving to the next elevator state
-    public float DelayBeforeSceneTransition = 3f; // Time delay before scene transition
-    public float DelayBeforeOpeningTheDoors = 3f; // Time delay before doors open
 
     // Private stuff
     [HideInInspector]
     public bool isButtonActive = true; // Bool to determine if button can be used
-    private bool isElevatorTraveling = false; // Bool to determine if elevator is moving
-    private bool doorIsClosed = true; // Bool to determine if door is closed
-    private Coroutine currentCoroutine; // Reference to the current coroutine
+    [HideInInspector]
+    public bool doorIsClosed = true; // Bool to determine if door is closed
+    private bool leverAnimationPlaying = false; // Bool to determine if the lever is animating or na
+    private Coroutine closedDoorCoroutine; // Reference to the current coroutine
     private string currentSceneName; // String to store the current scene name
     private static ElevatorController instance;
     public static ElevatorController Instance { get { return instance; } }
@@ -39,6 +37,7 @@ public class ElevatorController : MonoBehaviour
         else
         {
             instance = this;
+            //ResetDoor();
             currentSceneName = SceneManager.GetActiveScene().name; // Set current scene name
         }
     }
@@ -61,33 +60,54 @@ public class ElevatorController : MonoBehaviour
 
     #endregion
 
-    #region Button Interaction
+    #region Button/Lever Interaction
 
-    public void ButtonPressed(Vector3 hitPosition)
+    public void ButtonPressed()
     {
-        ElevatorSounds.Instance.PlayButtonSound(hitPosition); // Play the sound of button press
+        
 
-        if (!doorIsClosed)
+        if (!isButtonActive) // Ignore the button if its deactivated (the elevator is traveling)
         {
-            CloseDoors(); // Close the doors
-            if (currentCoroutine != null)
-            {
-                StopCoroutine(currentCoroutine); // Stop coroutine if one is running
-                Debug.Log("Coroutine overriden"); // Debug message
-            }
-            currentCoroutine = StartCoroutine(WaitBeforeStartingTheRide()); //Start the wait before the ride coroutine
+            Debug.Log("Button press ignored"); // Button press ignored message
+            return;
         }
         else
         {
-            //this should spin the slots first and then open the doors after
-            //also the handle should get an animation in the tree
-            doorAnimator.SetTrigger("Open"); // Trigger door open animation
-        }
+            if (closedDoorCoroutine != null)
+            {
+                StopCoroutine(closedDoorCoroutine); // Stop coroutine if one is running
+                Debug.Log("Coroutine stopped"); // Debug message
+            }
 
-        if (!isButtonActive || isElevatorTraveling)
+            if (!doorIsClosed)
+            {
+                closedDoorCoroutine = StartCoroutine(CloseDoors()); //Start the wait before the ride coroutine
+            }
+            else OpenDoors();
+        }
+    }
+
+    public void LeverPressed() // I HAD TO ADD THIS BECAUSE I CAN NOT CALL THE COROUTINE DIRECTLY FROM THE INTERACTIONS SCRIPT
+    {
+        StartCoroutine(LeverCoroutine());
+    }
+
+    public IEnumerator LeverCoroutine()
+    {
+        if (!leverAnimationPlaying)
         {
-            Debug.Log("Button press ignored: inactive or elevator is traveling."); // Button press ignored message
-            return;
+            leverAnimationPlaying = true; 
+            leverAnimator.SetTrigger("Start");
+            ElevatorSounds.Instance.PlayLeverDownSound();
+            yield return new WaitForSeconds(0.8f); // Time delay before elevator start
+
+            ButtonPressed();
+            yield return new WaitForSeconds(0.3f); // Time delay before elevator start
+
+            ElevatorSounds.Instance.PlayLeverUpSound();
+            yield return new WaitForSeconds(1f); // Time delay before elevator start
+
+            leverAnimationPlaying = false;
         }
     }
 
@@ -95,86 +115,53 @@ public class ElevatorController : MonoBehaviour
 
     #region Door Control
 
-    public void CloseDoors()
-    {
-        if (!doorIsClosed)
-        {
-            doorIsClosed = true; // Set door as closed
-            doorAnimator.SetTrigger("Close"); // Trigger door close animation
-            ElevatorSounds.Instance.PlayDoorCloseSound(); // Play door close sound
-            Debug.Log("Door is closed"); // Debug message
-        }
-    }
-
     public void OpenDoors()
     {
-        if (doorIsClosed)
-        {
-            doorIsClosed = false; //Set door as open
-            ElevatorSounds.Instance.PlayDoorOpenSound(); // Play door open sound
-            Debug.Log("Door is opened"); // Debug message
-        }
-    }
-
-    #endregion
-
-    #region Coroutines
-
-    IEnumerator WaitBeforeStartingTheRide()
-    {
-        yield return new WaitForSeconds(DelayBeforeNextState); // Wait for delay
-
-        // ADDED: Check if the player is in the elevator
-        if (doorIsClosed && playerInElevator)
-        {
-            StartCoroutine(ElevatorRideStart()); // Start elevator ride
-            currentCoroutine = null; //Reset current coroutine
-        }
-    }
-
-    IEnumerator ElevatorRideStart()
-    {
-        isElevatorTraveling = true; // Set elevator as travelling
-        isButtonActive = false; // Disable the button
-
-        ElevatorSounds.Instance.PlayElevatorStart(); //play elevator start sound
-        Debug.Log("Button disabled + Elevator is traveling + Started the ride sound"); // Debug message
-        yield return new WaitForSeconds(0.5f);
-
-        SceneSettings destinationSettings = TransitionManager.Instance.GetSceneSettings(currentSceneName); // get next scene settings
-
-        TransitionManager.Instance.ScreenShake(1.5f); // Trigger screen shake
-        TransitionManager.Instance.StartFogTransition(destinationSettings, 5f); //Start fog transition
-        yield return new WaitForSeconds(DelayBeforeSceneTransition); // Wait before loading next scene
-
-        StartCoroutine(ElevatorRideEnd(destinationSettings)); // start elevator end coroutine
-    }
-
-    IEnumerator ElevatorRideEnd(SceneSettings destinationSettings)
-    {
-        TransitionManager.Instance.LoadNewScene(destinationSettings.sceneName); //load the next scene
-        ElevatorSounds.Instance.PlayElevatorStop(); //Play the elevator stop sound
-        Debug.Log("Transitioning to the other sound"); // Debug message
-        yield return new WaitForSeconds(0.3f);
-
-        TransitionManager.Instance.ScreenShake(0.7f); // Trigger screen shake
-        yield return new WaitForSeconds(DelayBeforeOpeningTheDoors); // wait for the delay before opening the doors
-
-        SetActiveScene(); // Set active scene variable
-        OpenDoors(); // open the doors
+        ElevatorSounds.Instance.PlayDoorOpenSound(); // Play door open sound
         doorAnimator.SetTrigger("Open"); // Trigger door open animation
-        isElevatorTraveling = false; // Elevator is no longer traveling
-        isButtonActive = true; // Enable the button
-        Debug.Log("Button is active + Elevator not traveling + Scene loaded"); // Debug message
+        doorIsClosed = false; //Set door as open
     }
 
-    #endregion
-
-    #region Scene Control
-
-    public void SetActiveScene()
+    public IEnumerator CloseDoors()
     {
-        currentSceneName = SceneManager.GetActiveScene().name; //Set active scene variable
+        Debug.Log("Door close / Sound / Animation");
+        doorIsClosed = true; // Set door as closed
+        ElevatorSounds.Instance.PlayDoorCloseSound(); // Play door close sound
+        doorAnimator.SetTrigger("Close"); // Trigger door close animation
+        yield return new WaitForSeconds(3f); // Time delay before elevator start
+
+        if (doorIsClosed && playerInElevator)// If the player is in the elevator START THE FUCKING MACHINE
+        {
+            Debug.Log("Ride started / Button disabled / Start sound");
+            isButtonActive = false; // Disable the button
+            ElevatorSounds.Instance.PlayElevatorStart(); //play elevator start sound
+            yield return new WaitForSeconds(0.5f); // Makes the screenshake match the sound, otherwise its useless
+
+            Debug.Log("Screen shake / Fog transition");
+            SceneSettings destinationSettings = TransitionManager.Instance.GetSceneSettings(currentSceneName); // get next scene settings
+            TransitionManager.Instance.ScreenShake(1.5f); // Trigger screen shake
+            TransitionManager.Instance.StartFogTransition(destinationSettings, 5f); //Start fog transition
+            yield return new WaitForSeconds(6f); // Time delay before scene transition
+
+            Debug.Log("Screen shake / Scene load / Stop sound");
+            TransitionManager.Instance.LoadNewScene(destinationSettings.sceneName); //load the next scene
+            ElevatorSounds.Instance.PlayElevatorStop(); //Play the elevator stop sound
+            yield return new WaitForSeconds(0.3f); // Makes the screenshake match the sound, otherwise its useless
+            TransitionManager.Instance.ScreenShake(0.7f); // Trigger screen shake
+            yield return new WaitForSeconds(2f); // wait for the delay before opening the doors
+
+            Debug.Log("Scene set / Door open / Button is active / Coroutine stop"); // Debug message
+            currentSceneName = SceneManager.GetActiveScene().name; //Set active scene variable
+            OpenDoors(); // open the doors
+            isButtonActive = true; // Enable the button
+            closedDoorCoroutine = null; //Reset current coroutine
+        }
+    }
+
+    public void ResetDoor()
+    {
+        doorAnimator.SetTrigger("Reset"); // Trigger door reset
+        doorIsClosed = true;
     }
 
     #endregion

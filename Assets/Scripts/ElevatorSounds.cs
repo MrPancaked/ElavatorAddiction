@@ -11,17 +11,20 @@ public class ElevatorSounds : MonoBehaviour
 {
     #region Variables
 
-    [Header("References")]
-    public Transform elevatorSoundSource;  /// Transform where the sound should play from
-    public Transform doorsSoundSource;  /// Transform where the sound should play from
-    public Transform roomtoneSoundSource;   /// Transform where the sound should play from
+    [Header("References")] /// Positions where the sound should play from
+    public Transform elevatorSoundSource; 
+    public Transform doorsSoundSource;  
+    public Transform roomtoneSoundSource; 
+    public Transform leverSoundSource; 
 
-    [Header("Sounds")]
-    public EventReference rideSound;  /// FMOD event reference for elevator start sound (changed to the ride sound)
-    public EventReference doorCloseSound;   /// FMOD event reference for door close sound
-    public EventReference doorOpenSound;  /// FMOD event reference for door open sound
-    public EventReference buttonSound;  /// FMOD event reference for button sound
-    public EventReference roomToneSound;   /// FMOD event reference for the room tone sound
+    [Header("Sounds")] /// FMOD event references
+    public EventReference rideSound;  
+    public EventReference doorCloseSound;   
+    public EventReference doorOpenSound;  
+    public EventReference buttonSound;  
+    public EventReference roomToneSound;   
+    public EventReference leverDownSound;   
+    public EventReference leverUpSound;   
 
     // Private Variables
     private EventInstance elevatorRideInstance; /// Variable to hold the created event instance
@@ -39,13 +42,14 @@ public class ElevatorSounds : MonoBehaviour
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
+            return;
         }
         else
         {
             instance = this;
+            DontDestroyOnLoad(gameObject); // IMPORTANT!
         }
     }
-
 
     #endregion
 
@@ -71,28 +75,7 @@ public class ElevatorSounds : MonoBehaviour
 
     #endregion
 
-    #region Doors
-    public void PlayDoorCloseSound() /// Plays the door close sound.
-    {
-        AudioManager.instance.PlayOneShot(doorCloseSound, doorsSoundSource.position); // Play close sound with FMOD
-    }
-
-    public void PlayDoorOpenSound()  /// Plays the door open sound.
-    {
-        AudioManager.instance.PlayOneShot(doorOpenSound, doorsSoundSource.position); // Play open sound with FMOD
-    }
-    #endregion
-
-    #region Buttons
-
-    public void PlayButtonSound(Vector3 position)  /// Plays the button sound.
-    {
-        AudioManager.instance.PlayOneShot(buttonSound, position); // Play button sound with FMOD
-    }
-
-    #endregion
-
-    #region Ride
+    #region Play Sounds
 
     public void PlayElevatorStart()  /// Starts the elevator ride sound.
     {
@@ -115,6 +98,32 @@ public class ElevatorSounds : MonoBehaviour
         elevatorRideInstance.set3DAttributes(RuntimeUtils.To3DAttributes(elevatorSoundSource.position));
         elevatorRideInstance.setParameterByName("State", parameterValue);
     }
+
+    public void PlayLeverDownSound()  /// Plays the lever down sound.
+    {
+        AudioManager.instance.PlayOneShot(leverDownSound, leverSoundSource.position);
+    }
+
+    public void PlayLeverUpSound()  /// Plays the lever down sound.
+    {
+        AudioManager.instance.PlayOneShot(leverUpSound, leverSoundSource.position);
+    }
+
+    public void PlayDoorCloseSound() /// Plays the door close sound.
+    {
+        AudioManager.instance.PlayOneShot(doorCloseSound, doorsSoundSource.position); 
+    }
+
+    public void PlayDoorOpenSound()  /// Plays the door open sound.
+    {
+        AudioManager.instance.PlayOneShot(doorOpenSound, doorsSoundSource.position); 
+    }
+
+    public void PlayButtonSound(Vector3 position)  /// Plays the button sound.
+    {
+        AudioManager.instance.PlayOneShot(buttonSound, position); 
+    }
+
 
     #endregion
 }

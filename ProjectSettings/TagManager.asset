@@ -8,6 +8,7 @@ TagManager:
   - SlotMachine
   - Damageable
   - ElevatorButton
+  - ElevatorLever
   layers:
   - Default
   - TransparentFX

@@ -3,6 +3,7 @@
 //--------------------------------------------------------------------------------------------------
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HealthUI : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class HealthUI : MonoBehaviour
 
     public Health health;    /// Reference to the Health component.
     public TextMeshProUGUI healthUI; /// Text element for the health display.
-    public GameObject deathUI; /// Death UI that will be displayed on death
     private float initialHealth; /// Initial health of the object.
 
     #endregion
@@ -22,16 +22,12 @@ public class HealthUI : MonoBehaviour
         initialHealth = health.hp; // set the initial health of the object
     }
 
-    #endregion
-
-    #region UI Logic
-
     void Update()  /// Updates the health UI display.
     {
         healthUI.text = health.hp + " / " + initialHealth; // Update the UI
-        if (health.hp <= 0 && !deathUI.activeSelf)
+        if (health.hp <= 0)
         {
-            deathUI.SetActive(true);
+            DeathManager.Instance.PlayerDied();
         }
     }
 

@@ -5,11 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DontDestroyOnLoad : MonoBehaviour
+public class DontDestroyBetweenScenes : MonoBehaviour
 {
     #region Variables
 
-    public static DontDestroyOnLoad instance;
+    public static DontDestroyBetweenScenes instance;
+    public static DontDestroyBetweenScenes Instance { get { return instance; } }
 
     #endregion
 
@@ -20,11 +21,12 @@ public class DontDestroyOnLoad : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); // IMPORTANT!
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
     }
 

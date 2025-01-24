@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 4396258171488562666}
   m_Layer: 8
   m_Name: DamageCollider
-  m_TagString: Damageable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -320,6 +320,7 @@ MonoBehaviour:
   enemy: {fileID: 3110485430757542645}
   damagePerHit: 10
   damageCooldown: 0.5
+  needsAnEnemy: 1
 --- !u!1 &2217827874702122966
 GameObject:
   m_ObjectHideFlags: 0

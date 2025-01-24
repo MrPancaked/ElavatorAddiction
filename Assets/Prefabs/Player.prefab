@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 91489145338851501}
   serializedVersion: 2
   m_LocalRotation: {x: 0.123312674, y: 0.14575481, z: -0.018313404, w: 0.98143476}
-  m_LocalPosition: {x: 0, y: 0.4000001, z: 0}
+  m_LocalPosition: {x: 0, y: 0.39999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -545,7 +545,7 @@ Transform:
   m_GameObject: {fileID: 1544067631284132747}
   serializedVersion: 2
   m_LocalRotation: {x: 0.123312674, y: 0.1457548, z: -0.018313408, w: 0.98143476}
-  m_LocalPosition: {x: 0, y: 0.4000001, z: 0}
+  m_LocalPosition: {x: 0, y: 0.39999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2582,6 +2582,7 @@ GameObject:
   - component: {fileID: 7472339462362982192}
   - component: {fileID: 5561453025030643613}
   - component: {fileID: 8606113254386454732}
+  - component: {fileID: 1150033077220795576}
   - component: {fileID: 5990084784110511554}
   - component: {fileID: 2747270054131780910}
   - component: {fileID: 1055082443302515080}
@@ -2706,10 +2707,6 @@ MonoBehaviour:
   controls: {fileID: -944628639613478452, guid: f6a9db52f2aaedc4a837e25a4bab5c83,
     type: 3}
   moveMentInput: {x: 0, y: 0}
-  jumpPressed: 0
-  jumpReleased: 0
-  slidePressed: 0
-  slideReleased: 0
   interaction:
     m_Name: Interaction
     m_Type: 0
@@ -2729,7 +2726,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   shoot:
-    m_Name: 
+    m_Name: Shoot
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: ab4a61a6-8516-4121-bc42-b28125110531
@@ -2751,6 +2748,33 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 46ba6b6c-cda6-4737-b7d8-e89097e8a67a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  movement:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: aa1bdf12-17e7-4fdc-a897-f5443f9d89c1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jump:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1960b2d7-9fc7-486c-8d70-b0f1e04a8fce
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  slide:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ce1d4e7d-23dd-4b23-ab0c-8a5196049148
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -2778,6 +2802,10 @@ MonoBehaviour:
   slideSpeed: 3
   slideDragIncrease: 0.005
   downForce: 27
+  jumpPressed: 0
+  jumpReleased: 0
+  slidePressed: 0
+  slideReleased: 0
   boxSize: {x: 0.5, y: 0.15, z: 0.5}
 --- !u!114 &2363603075605729512
 MonoBehaviour:
@@ -2793,10 +2821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 356771900034798577}
   slotMachine: {fileID: 0}
-  elevatorManager: {fileID: 0}
-  crosshairTexture: {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
-  crosshairScale: 0.6
-  interactionDistance: 3
+  elevatorController: {fileID: 0}
 --- !u!114 &7171003750088437121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2840,7 +2865,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 8606113254386454732}
   healthUI: {fileID: 0}
-  deathUI: {fileID: 0}
 --- !u!114 &8606113254386454732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2854,6 +2878,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+--- !u!114 &1150033077220795576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784816484273663751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d195a885f76f2d478ccf6fbe128a072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7784816484273663751}
+  playerCamera: {fileID: 1544067631284132747}
+  respawnPoint: {fileID: 0}
+  deathUI: {fileID: 0}
+  health: {fileID: 8606113254386454732}
 --- !u!114 &5990084784110511554
 MonoBehaviour:
   m_ObjectHideFlags: 0

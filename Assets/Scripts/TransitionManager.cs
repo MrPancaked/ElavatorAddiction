@@ -40,12 +40,15 @@ public class TransitionManager : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        instance = this;
-        DontDestroyOnLoad(this.gameObject); // Prevent the game object from being destroyed in different scenes.
-        SceneManager.sceneLoaded += OnSceneLoaded; //Add listener to scene loaded
-        // Find the Main Camera in Awake so it's available before the first scene is loaded.
-        mainCamera = Camera.main;
-        SceneLoaded(); //Load initial scene
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject); // Prevent the game object from being destroyed in different scenes.
+            SceneManager.sceneLoaded += OnSceneLoaded; //Add listener to scene loaded
+                                                       // Find the Main Camera in Awake so it's available before the first scene is loaded.
+            mainCamera = Camera.main;
+            SceneLoaded(); //Load initial scene
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) //Method for when scene is loaded
