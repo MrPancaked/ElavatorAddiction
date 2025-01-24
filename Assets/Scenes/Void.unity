@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000004, guid: 6fd9a194deee7c643847a9ab35456a13,
+  m_LightingDataAsset: {fileID: 112000004, guid: ed87ddc48d434564783205165356016e,
     type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
@@ -3086,11 +3086,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VoidLevel
       objectReference: {fileID: 0}
-    - target: {fileID: 7389934587455762708, guid: 132cfd5dbb0195342abebe8236bfece3,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 23a020745856c5b4b9e5a74c93df2d1b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
