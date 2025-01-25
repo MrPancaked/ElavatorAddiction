@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: elavator1
+  m_Name: OldElavator
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,16 +38,16 @@ Material:
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _BumpMap _BumpScale
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: a563be73f630ebf4c9dfe8d7d1cd55aa, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7506097e778cd60468b13023ee155f67, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 1e88f932311ca004785e491d7c90ce58, type: 3}
+        m_Texture: {fileID: 2800000, guid: c53f15a729ad8404585c0eb229d61c1d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -63,15 +63,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: bcca7c5f03f90794ab408905dc8138d3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9ecd33f294c8269448553d3bde05d7ec, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a563be73f630ebf4c9dfe8d7d1cd55aa, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7506097e778cd60468b13023ee155f67, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 19f9472559841e84ba169ef5154cb6e2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 94486b4d296b20647b6120c52e358ef0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
