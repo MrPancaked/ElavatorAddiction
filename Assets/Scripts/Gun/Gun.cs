@@ -22,7 +22,7 @@ public class Gun : MonoBehaviour
     public Rigidbody playerRb; // Player's Rigidbody
     public CinemachineImpulseSource impulseSource; // Impulse source for camera shake
     public Transform MuzzleFlashPoint; // Transform for the muzzle flash spawn point
-    public TextMeshProUGUI ammoCounter; // UI text element for ammo display
+    public TextMeshPro ammoCounter; // UI text element for ammo display
     public GameObject reloadFeedbackText; // UI text element for reload feedback (for now lololo hehehe rene im going crazy bithc it is 3 am)
     public List<Gun> dualGuns = new List<Gun>(); // If this is a dual gun PUT BOTH GUNS IN THE LIST
 
@@ -290,7 +290,7 @@ public class Gun : MonoBehaviour
     {
         if (!gunSettings.isDualGun) // If its a normal gun
         {
-            ammoCounter.SetText(shotsLeft + " / " + gunSettings.magazineSize / gunSettings.bulletsPerShot); // show normal ammo UI
+            ammoCounter.SetText($"{shotsLeft}"); ; // Show combined ammo UI
         }
         else // If its a dual gun
         {
@@ -301,7 +301,7 @@ public class Gun : MonoBehaviour
                 totalShotsLeft += gun.shotsLeft;
                 totalMagazineSize += gun.gunSettings.magazineSize / gun.gunSettings.bulletsPerShot;
             }
-            ammoCounter.SetText(totalShotsLeft + " / " + totalMagazineSize); // Show combined ammo UI
+            ammoCounter.SetText($"{totalShotsLeft}"); ; // Show combined ammo UI
         }
     }
 

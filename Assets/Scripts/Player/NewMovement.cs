@@ -7,40 +7,42 @@ public class NewMovement : MonoBehaviour
 {
     private Rigidbody rb;
 
-    [Header("movement")]
+    [Header("Movement")]
     public float speed;
     public float airMultiplier;
     public float groundDrag;
     public float airDrag;
     public Vector3 moveDirection;
 
-    [Header("jumping")]
+    [Header("Jumping")]
     public float jumpForce;
     public float jumpTiming;
-    private float jumpTimer;
-    private bool jumping;
-    private bool jumpAvailable;
 
-    [Header("sliding")]
-    private float normalYScale;
+    [Header("Sliding")]
     public float slideYScale;
     public float slideSpeed;
     public float slideDragIncrease;
     public float downForce;
-    private bool sliding;
 
-    [Header("Input")]
-    public bool jumpPressed = false;
-    public bool jumpReleased = false;
-    public bool slidePressed = false;
-    public bool slideReleased = false;
-
-    [Header("ground detection")]
+    [Header("Ground Detection")]
     public Vector3 boxSize;
 
     //private shit    
-    private LayerMask groundLayer;
+    [HideInInspector]
+    public bool jumpPressed = false;
+    [HideInInspector]
+    public bool jumpReleased = false;
+    [HideInInspector]
+    public bool slidePressed = false;
+    [HideInInspector]
+    public bool slideReleased = false;
+    private float normalYScale;
+    private float jumpTimer;
+    private bool jumping;
+    private bool jumpAvailable;
     private bool grounded;
+    private bool sliding;
+    private LayerMask groundLayer;
     private Inputs inputs;
     public static NewMovement instance;
     public static NewMovement Instance { get { return instance; } }
