@@ -37,7 +37,6 @@ public class ElevatorController : MonoBehaviour
         else
         {
             instance = this;
-            //ResetDoor();
             currentSceneName = SceneManager.GetActiveScene().name; // Set current scene name
         }
     }
@@ -156,12 +155,6 @@ public class ElevatorController : MonoBehaviour
             isButtonActive = true; // Enable the button
             closedDoorCoroutine = null; //Reset current coroutine
         }
-    }
-
-    public void ResetDoor()
-    {
-        doorAnimator.SetTrigger("Reset"); // Trigger door reset
-        doorIsClosed = true;
     }
 
     #endregion

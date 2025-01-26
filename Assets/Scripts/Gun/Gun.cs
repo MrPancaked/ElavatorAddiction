@@ -33,9 +33,10 @@ public class Gun : MonoBehaviour
     public GameObject bloodBurst; // The blood burst effect
 
     // Private Variables
+    [HideInInspector]
+    public bool reloading; // Check if the gun is currently reloading
     private bool shooting = false; // Check if the player is currently shooting
     private bool readyToShoot; // Check if the gun is ready to shoot
-    private bool reloading; // Check if the gun is currently reloading
     private int shotsLeft; // Ooverall shots (not bullets) in the magazine
     private int bulletsShot; // Bullets shot in a single shot or burst
     private RaycastHit rayHit; // Info about the raycast
@@ -176,24 +177,49 @@ public class Gun : MonoBehaviour
         ApplyPlayerPushback();
     }
 
+    //private void SingleShot(Vector3 direction) // Logic of one single shot
+    //{
+    //    if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, gunSettings.range, whatIsEnemy)) // Shoot a raycast
+    //    {
+    //
+    //        if (rayHit.collider.CompareTag("Damageable")) // Check if the hit object is an enemy
+    //        {
+    //            Rigidbody enemyRigidbody = rayHit.collider.GetComponent<Rigidbody>(); // push the enemy back
+    //            enemyRigidbody.AddForce(direction * gunSettings.enemyPushbackForce, ForceMode.Impulse);
+    //            Damageable damageable = rayHit.transform.GetComponent<Damageable>();
+    //            damageable?.TakeDamage(gunSettings.damagePerBullet); // Damage the enemy
+    //        }
+    //
+    //    }
+    //    impulseSource.GenerateImpulseWithForce(gunSettings.screenShakeStrength);
+    //    BulletEffects(); // Call bullet effects
+    //}
+
     private void SingleShot(Vector3 direction) // Logic of one single shot
     {
-        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, gunSettings.range, whatIsEnemy)) // Shoot a raycast
+        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, gunSettings.range, whatIsEnemy))
         {
+            Transform targetTransform = rayHit.transform;
+            Damageable damageable = targetTransform.GetComponent<Damageable>();
 
-            if (rayHit.collider.CompareTag("Damageable")) // Check if the hit object is an enemy
+            if (damageable == null)
             {
-                Rigidbody enemyRigidbody = rayHit.collider.GetComponent<Rigidbody>(); // push the enemy back
-                enemyRigidbody.AddForce(direction * gunSettings.enemyPushbackForce, ForceMode.Impulse);
-                Damageable damageable = rayHit.transform.GetComponent<Damageable>(); // Damage the enemy
-                damageable?.TakeDamage(gunSettings.damagePerBullet);
+                damageable = targetTransform.GetComponentInParent<Damageable>(); //try to find parent
             }
 
+            if (damageable != null)
+            {
+                Rigidbody enemyRigidbody = targetTransform.GetComponent<Rigidbody>(); // push the enemy back
+                if (enemyRigidbody != null)
+                {
+                    enemyRigidbody.AddForce(direction * gunSettings.enemyPushbackForce, ForceMode.Impulse);
+                }
+                damageable?.TakeDamage(gunSettings.damagePerBullet); //Damage the enemy
+            }
+
+
         }
-        if (impulseSource != null) //Camera shake if we have a impulse source
-        {
-            impulseSource.GenerateImpulseWithForce(gunSettings.screenShakeStrength);
-        }
+        impulseSource.GenerateImpulseWithForce(gunSettings.screenShakeStrength);
         BulletEffects(); // Call bullet effects
     }
 
@@ -264,7 +290,7 @@ public class Gun : MonoBehaviour
         Invoke(nameof(ReloadFinished), gunSettings.reloadTime);  // Complete reload after delay
     }
 
-    private void ReloadFinished() /// Completes the reload by filling magazine and resetting the reload flag.
+    public void ReloadFinished() /// Completes the reload by filling magazine and resetting the reload flag.
     {
         if (gunSettings.isDualGun) // If its a dual gun, refill all magazines
         {

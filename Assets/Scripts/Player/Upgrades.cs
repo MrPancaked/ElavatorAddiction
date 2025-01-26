@@ -7,7 +7,27 @@ public class Upgrades : MonoBehaviour
 {
     #region Variables
 
-    //[Header("Settings")]
+    //private shit
+    public static Upgrades instance;
+    public static Upgrades Instance { get { return instance; } }
+
+    #endregion
+
+    #region Unity Methods
+
+    private void Awake() // Makes sure this object survives the scene transition, and that there is only one.
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // IMPORTANT!
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     #endregion
 

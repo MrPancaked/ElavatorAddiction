@@ -10,16 +10,15 @@ public class Enemy : MonoBehaviour
 
     [Header("References")]
     [SerializeField] EnemySettings enemySettings;
-    public GameObject enemyModel;   // Visual model of the enemy.
-    public Rigidbody rb;           // Rigidbody for physics-based movement.
-    public Collider triggerCollider; // Reference to the trigger collider
 
     // Private Variables
+    [HideInInspector]
     public bool canDamage = true;    // Flag to control if the enemy can deal damage.
     private bool canAttack = true;     // Flag to control if the enemy can attack.
     private bool isSoundOnCooldown = false; // flag for the cooldown
     private float currentOrbitRadius; // Radius for orbit movement.
     private float hoverTimer = 0.0f;  // Timer for hover movement.
+    private Rigidbody rb; // Rigidbody for physics-based movement.
     private GameObject playerObject; // Reference to the player game object.
     private Transform playerTransform;  // Reference to the player transform.
     private Collider playerCollider; // Reference to the player collider.
@@ -40,6 +39,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()  /// Called when the script instance is being loaded. Initializes references to health, player objects, and the starting position
     {
+        rb = GetComponent<Rigidbody>(); // Find the Rigidbody
         health = GetComponent<Health>();
         health.HandleDeathMethod += Die;
         health.TakeDamageMethod += TakeDamage;
@@ -152,7 +152,7 @@ public class Enemy : MonoBehaviour
     {
         GetComponent<DropLoot>().SpawnLoot(transform.position); // Drop the loot
         AudioManager.instance.PlayOneShot(enemySettings.deathSound, this.transform.position); // Play enemy damage sound
-        enemyModel.SetActive(false); // Disables the enemy model
+        gameObject.SetActive(false); // Disables the enemy model
     }
 
     public void TakeDamage(float damage)

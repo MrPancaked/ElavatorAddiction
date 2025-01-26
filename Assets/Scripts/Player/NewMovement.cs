@@ -12,7 +12,6 @@ public class NewMovement : MonoBehaviour
     public float airMultiplier;
     public float groundDrag;
     public float airDrag;
-    public Vector3 moveDirection;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -36,6 +35,8 @@ public class NewMovement : MonoBehaviour
     public bool slidePressed = false;
     [HideInInspector]
     public bool slideReleased = false;
+    [HideInInspector]
+    public Vector3 moveDirection;
     private float normalYScale;
     private float jumpTimer;
     private bool jumping;

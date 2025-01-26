@@ -12,15 +12,12 @@ public class Interactions : MonoBehaviour
 {
     #region Variables
 
-    [Header("References")]
-    public Camera playerCamera; // Reference to the player's camera.
-    public SlotMachine slotMachine; // Reference to the slot machine.
-    public ElevatorController elevatorController; // Reference to the elevator button.
-
     // Private Variables
-    string SlotMachineTag = "SlotMachine"; // Tag for the slot machine.
-    string ElevatorButtonTag = "ElevatorButton"; // Tag for the button in the elevator.
-    string ElevatorLeverTag = "ElevatorLever"; // Tag for the lever outside the elevator.
+    private Camera playerCamera; // Reference to the player's camera.
+    private string coinTag = "Coin"; // Tag for coin objects
+    private string SlotMachineTag = "SlotMachine"; // Tag for the slot machine.
+    private string ElevatorButtonTag = "ElevatorButton"; // Tag for the button in the elevator.
+    private string ElevatorLeverTag = "ElevatorLever"; // Tag for the lever outside the elevator.
     public static Interactions instance;
     public static Interactions Instance { get { return instance; } }
 
@@ -34,6 +31,7 @@ public class Interactions : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject); // IMPORTANT!
+            playerCamera = Camera.main; // Find the main camera
         }
         else
         {
@@ -74,6 +72,18 @@ public class Interactions : MonoBehaviour
 
     #endregion
 
+    #region Collecting Items Logic
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(coinTag)) // If the object has a coin tag
+        {
+            CoinsLogic.Instance.CollectCoin(collision.gameObject); // Collect the coin
+        }
+    }
+
+    #endregion
+
     #region Interaction Logic
 
     void Interact() /// Performs the interaction, raycasting and checking for interactable objects.
@@ -85,17 +95,17 @@ public class Interactions : MonoBehaviour
         {
             if (hit.collider.CompareTag(SlotMachineTag))
             {
-                slotMachine.UseCoinForUpgrade();
+                SlotMachine.Instance.UseCoinForUpgrade();
             }
             else if (hit.collider.CompareTag(ElevatorButtonTag))
             {
                 ElevatorSounds.Instance.PlayButtonSound(hit.point);
-                elevatorController.ButtonPressed();
+                ElevatorController.Instance.ButtonPressed();
             }
             else if (hit.collider.CompareTag(ElevatorLeverTag))
             {
                 //ElevatorSounds.Instance.PlayButtonSound(hit.point);
-                elevatorController.LeverPressed();
+                ElevatorController.Instance.LeverPressed();
                 Debug.Log("Raycast hit lever");
             }
             else

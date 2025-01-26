@@ -1,13 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotsAnimation : MonoBehaviour
+public class ScrollingTexture : MonoBehaviour
 {
-    public float AnimationSpeed;
-    // Update is called once per frame
-    void Update()
-    {
-        GetComponent<Renderer>().material.mainTextureOffset += new Vector2(0, AnimationSpeed * Time.deltaTime);
-    }
+    // SORRY TRIED TO FIX IT BUT NOT WORKY :(((( BWOMP
+    // ISSUE IS THE NEW MATERIAL THINGY BTW
+
+    ///public float AnimationSpeed = 0.1f;
+    ///
+    ///private Renderer renderer;
+    ///private Material material;
+    ///private int mainTexOffsetID;
+    ///
+    ///void Awake()
+    ///{
+    ///    renderer = GetComponent<Renderer>();
+    ///    material = renderer.sharedMaterial;
+    ///    material = new Material(material);
+    ///    renderer.material = material;
+    ///    mainTexOffsetID = Shader.PropertyToID("_MainTex_ST"); // Or "_MainTexOffset"
+    ///}
+    ///
+    ///void Update()
+    ///{
+    ///    material.mainTextureOffset += new Vector2(0, AnimationSpeed * Time.deltaTime);
+    ///}
 }

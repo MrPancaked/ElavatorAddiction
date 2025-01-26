@@ -16,5 +16,5 @@ MonoBehaviour:
   backgroundColor: '#FFFFFF'
   fogColorHex: '#000000'
   fogStartDistance: 3
-  fogEndDistance: 20
+  fogEndDistance: 15
   lightIntensity: 0
