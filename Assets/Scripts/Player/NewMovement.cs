@@ -16,6 +16,7 @@ public class NewMovement : MonoBehaviour
     [Header("Jumping")]
     public float jumpForce;
     public float jumpTiming;
+    public float bhopBoost;
 
     [Header("Sliding")]
     public float slideYScale;
@@ -145,6 +146,7 @@ public class NewMovement : MonoBehaviour
             jumpAvailable = false;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(moveDirection * bhopBoost, ForceMode.Impulse);
         }
 
         //jumping
@@ -154,6 +156,7 @@ public class NewMovement : MonoBehaviour
             jumpAvailable = false;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            
         }
 
         //movement

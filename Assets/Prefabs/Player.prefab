@@ -141,8 +141,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
   PivotOffset: {x: 0, y: 0, z: 0}
-  AmplitudeGain: 0.4
-  FrequencyGain: 0.6
+  AmplitudeGain: 0.81
+  FrequencyGain: 0.48
   m_NoiseOffsets: {x: 755.50555, y: 765.67456, z: 777.41504}
 --- !u!114 &8843572718145435217
 MonoBehaviour:
@@ -815,13 +815,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 250
-  airMultiplier: 0.01
+  airMultiplier: 0.1
   groundDrag: 17.5
-  airDrag: 0.2
+  airDrag: 1
   jumpForce: 10
   jumpTiming: 0.1
+  bhopBoost: 3
   slideYScale: 0.5
-  slideSpeed: 3
+  slideSpeed: 2
   slideDragIncrease: 0.005
   downForce: 27
   boxSize: {x: 0.5, y: 0.15, z: 0.5}
@@ -843,12 +844,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7784816484273663751}
-  deathUI: {fileID: 0}
   respawnPoint: {fileID: 0}
-  healthImage: {fileID: 0}
   health: {fileID: 8606113254386454732}
   guns:
   - {fileID: 8921157221110998851}
+  deathUI: {fileID: 0}
+  healthImage: {fileID: 0}
 --- !u!114 &8606113254386454732
 MonoBehaviour:
   m_ObjectHideFlags: 0

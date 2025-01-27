@@ -1425,6 +1425,16 @@ PrefabInstance:
       propertyPath: coinsCounter
       value: 
       objectReference: {fileID: 1965889679}
+    - target: {fileID: 5240365597016641081, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219539545731093851, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: jumpForce
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7247584656866811980, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: deathUI
@@ -1440,16 +1450,6 @@ PrefabInstance:
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 226261853}
-    - target: {fileID: 8574607709477047739, guid: 544ad5ce464c99349a930f1951b09c36,
-        type: 3}
-      propertyPath: AmplitudeGain
-      value: 0.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 8574607709477047739, guid: 544ad5ce464c99349a930f1951b09c36,
-        type: 3}
-      propertyPath: FrequencyGain
-      value: 0.48
-      objectReference: {fileID: 0}
     - target: {fileID: 8921157221110998851, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: particlesParent
