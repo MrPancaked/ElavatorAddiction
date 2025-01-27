@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
 
     #endregion
 
-    #region Playback Logic
+    #region Playsound Logic
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos) /// Plays a sound effect once at the given position
     {

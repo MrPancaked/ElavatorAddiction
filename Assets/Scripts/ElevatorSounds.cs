@@ -15,7 +15,8 @@ public class ElevatorSounds : MonoBehaviour
     public Transform elevatorSoundSource; 
     public Transform doorsSoundSource;  
     public Transform roomtoneSoundSource; 
-    public Transform leverSoundSource; 
+    public Transform leverSoundSource;
+    public Transform buttonSoundSource;
 
     [Header("Sounds")] /// FMOD event references
     public EventReference rideSound;  
@@ -119,9 +120,9 @@ public class ElevatorSounds : MonoBehaviour
         AudioManager.instance.PlayOneShot(doorOpenSound, doorsSoundSource.position); 
     }
 
-    public void PlayButtonSound(Vector3 position)  /// Plays the button sound.
+    public void PlayButtonSound()  /// Plays the button sound.
     {
-        AudioManager.instance.PlayOneShot(buttonSound, position); 
+        AudioManager.instance.PlayOneShot(buttonSound, buttonSoundSource.position); 
     }
 
 

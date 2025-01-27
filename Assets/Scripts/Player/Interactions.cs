@@ -18,6 +18,7 @@ public class Interactions : MonoBehaviour
     private string SlotMachineTag = "SlotMachine"; // Tag for the slot machine.
     private string ElevatorButtonTag = "ElevatorButton"; // Tag for the button in the elevator.
     private string ElevatorLeverTag = "ElevatorLever"; // Tag for the lever outside the elevator.
+    private Animator buttonAnimator;
     public static Interactions instance;
     public static Interactions Instance { get { return instance; } }
 
@@ -99,21 +100,18 @@ public class Interactions : MonoBehaviour
             }
             else if (hit.collider.CompareTag(ElevatorButtonTag))
             {
-                ElevatorSounds.Instance.PlayButtonSound(hit.point);
+
                 ElevatorController.Instance.ButtonPressed();
             }
             else if (hit.collider.CompareTag(ElevatorLeverTag))
             {
-                //ElevatorSounds.Instance.PlayButtonSound(hit.point);
                 ElevatorController.Instance.LeverPressed();
-                Debug.Log("Raycast hit lever");
             }
             else
             {
                 Debug.Log("Uninteractable");
             }
         }
-
     }
 
     #endregion

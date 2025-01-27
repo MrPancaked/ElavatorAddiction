@@ -14892,8 +14892,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.5615011, b: 0, a: 1}
-  m_Intensity: 24.42
+  m_Color: {r: 1, g: 0.35822767, b: 0, a: 1}
+  m_Intensity: 400
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -14980,9 +14980,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightSource:
     light: {fileID: -7802941511630707265}
-    minIntensity: 1
-    maxIntensity: 10
-    flashDuration: 0.03
+    minIntensity: 200
+    maxIntensity: 400
+    flashDuration: 0.05
 --- !u!1 &7595982788971838101
 GameObject:
   m_ObjectHideFlags: 0

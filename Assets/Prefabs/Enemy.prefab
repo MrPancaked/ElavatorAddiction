@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a4508f995e6e94f93a96c0e369fa65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 3110485430757542645}
+  damageController: {fileID: 1336654257063423728}
   damagePerHit: 20
   damageCooldown: 0.3
   needsAnEnemy: 1
