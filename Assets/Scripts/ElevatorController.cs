@@ -87,10 +87,7 @@ public class ElevatorController : MonoBehaviour
             }
             else
             {
-                Debug.Log("upgrade time: " + upgrades);
-                upgrades.ApplyRandomUpgrade(); // Apply a random upgrade to the player
                 OpenDoors();
-
             }
         }
     }
@@ -109,7 +106,8 @@ public class ElevatorController : MonoBehaviour
             ElevatorSounds.Instance.PlayLeverDownSound();
             yield return new WaitForSeconds(0.8f); // Time delay before elevator start
 
-            ButtonPressed();
+            upgrades.ApplyRandomUpgrade(); // Apply a random upgrade to the player
+
             yield return new WaitForSeconds(0.3f); // Time delay before elevator start
 
             ElevatorSounds.Instance.PlayLeverUpSound();
