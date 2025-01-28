@@ -9,12 +9,14 @@ public class Upgrades : MonoBehaviour
     public float damageIncrease;
     public float speedIncrease;
     public float healthIncrease;
-    public float HealAmount;
-    public float FireRateMultiplier;
+    public float healAmount;
+    public float fireRateMultiplier;
+    public float dropchanceMultiplier;
 
     private NewMovement playerMovement; // Reference to the player script
     private Gun Shotgun; // Reference to the player's gun script
     private HealthManager healthManager; // Reference to the health manager script
+    private CoinsLogic coinsLogic; // Reference to the coins logic script
 
 
     //private shit
@@ -41,10 +43,13 @@ public class Upgrades : MonoBehaviour
 
     private void Start()
     {
-        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<NewMovement>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerMovement = player.GetComponent<NewMovement>();
+        coinsLogic = player.GetComponent<CoinsLogic>();
+        healthManager = player.GetComponent<HealthManager>();
+
         Shotgun = GameObject.FindGameObjectWithTag("Shotgun").GetComponent<Gun>();
-        Debug.Log(playerMovement);
-        Debug.Log(Shotgun);
+        
     }
 
     #endregion
@@ -53,7 +58,7 @@ public class Upgrades : MonoBehaviour
 
     public void ApplyRandomUpgrade() /// Applies a random upgrade to the player.
     {
-        int upgradeIndex = Random.Range(0, 2);
+        int upgradeIndex = Random.Range(0, 5);
 
         switch (upgradeIndex) // Upgrade player based on the random number
         {
@@ -63,6 +68,16 @@ public class Upgrades : MonoBehaviour
             case 1:
                 DamageUpgrade(damageIncrease);  // Apply strengh upgrade
                 break;
+            case 2:
+                healthUpgrade(healthIncrease, healAmount); // Apply health upgrade
+                break;
+            case 3:
+                FireRateUpgrade(fireRateMultiplier); // Apply fire rate upgrade
+                break;
+            case 4:
+                DropChanceUpgrade(dropchanceMultiplier); // Apply drop chance upgrade
+                break;
+
         }
     }
 
@@ -78,10 +93,12 @@ public class Upgrades : MonoBehaviour
         Debug.Log("Damage upgrade: " + Shotgun.damageMultiplier);
     }
 
-    private void healthUpgrade() /// Applies a strengh upgrade to the player and logs it.
+    private void healthUpgrade(float healthIncrease, float healAmount) /// Applies a strengh upgrade to the player and logs it.
     {
-        healthManager.HealthUpgrade(healthIncrease, HealAmount);
-        Debug.Log("Healed by: " + HealAmount);
+        healthManager.initialHealth += healthIncrease;
+        healthManager.health.hp += healAmount;
+        healthManager.UpdateHealthUI();
+        Debug.Log("Healed by: " + healAmount);
         Debug.Log("Health increased: " + healthIncrease);
     }
 
@@ -89,6 +106,11 @@ public class Upgrades : MonoBehaviour
     {
         Shotgun.gunSettings.fireRate *= fireRateMultiplier;
         Debug.Log("Fire rate upgrade: " + Shotgun.gunSettings.fireRate);
+    }
+
+    private void DropChanceUpgrade(float dropchanceMultiplier)
+    { 
+        coinsLogic.dropChance += dropchanceMultiplier;
     }
 
     #endregion

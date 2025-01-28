@@ -24,7 +24,7 @@ public class HealthManager : MonoBehaviour
     public Image healthImage;      // Reference to the Image component.
 
     //private shit
-    private float initialHealth;   // Initial health of the object.
+    public float initialHealth;   // Initial health of the object.
     private bool playerIsDead = false;  // Flag to track player's death state
     private static HealthManager instance;
     public static HealthManager Instance
@@ -107,13 +107,13 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-    public void HealthUpgrade(float healthIncrease, float healAmount) /// Applies a health upgrade to the player and logs it.
+    /*public void HealthUpgrade(float healthIncrease, float healAmount) /// Applies a health upgrade to the player and logs it.
     {
         initialHealth += healthIncrease;
         health.hp += healAmount;
         Debug.Log("Health Upgrade: " + health.hp);
         UpdateHealthUI();
-    }
+    }*/
 
     #endregion
 
@@ -168,7 +168,7 @@ public class HealthManager : MonoBehaviour
 
     #region UI
 
-    private void UpdateHealthUI()
+    public void UpdateHealthUI()
     {
         healthImage.fillAmount = health.hp / initialHealth;
     }

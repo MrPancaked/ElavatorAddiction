@@ -79,7 +79,7 @@ public class Interactions : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(coinTag)) // If the object has a coin tag
         {
-            CoinsLogic.Instance.CollectCoin(collision.gameObject); // Collect the coin
+            CoinsLogic.Instance.CollectCoin(); // Collect the coin
         }
     }
 

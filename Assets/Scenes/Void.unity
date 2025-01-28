@@ -3130,6 +3130,7 @@ GameObject:
   - component: {fileID: 2053076238}
   - component: {fileID: 2053076240}
   - component: {fileID: 2053076241}
+  - component: {fileID: 2053076242}
   - component: {fileID: 2053076239}
   - component: {fileID: 2053076235}
   - component: {fileID: 2053076237}
@@ -3296,6 +3297,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2053076242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053076234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3595b0592be7c7249ae9eab2a302ea73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageIncrease: 10
+  speedIncrease: 20
+  healthIncrease: 10
+  healAmount: 20
+  fireRateMultiplier: 2
+  dropchanceMultiplier: 1.5
 --- !u!4 &543450652182265853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9090908046091861474, guid: 17c857a8dd5a526479e0031f32d3011d,

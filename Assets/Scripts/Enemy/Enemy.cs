@@ -156,7 +156,10 @@ public class Enemy : MonoBehaviour
     public void Die() /// Handles the death of the enemy, disables the model, drops loot, and destroys itself.
     {
         //GetComponent<DropLoot>().SpawnLoot(transform.position); // Drop the loot
-        coinsLogic.CollectCoin();
+        if (Random.Range(0, 1f) <= coinsLogic.dropChance)
+        {
+            coinsLogic.CollectCoin();
+        }
         AudioManager.instance.PlayOneShot(enemySettings.deathSound, this.transform.position); // Play enemy damage sound
         enemyCounter.UpdateEnemyCounter(); // Update the enemy counter
         gameObject.SetActive(false); // Disables the enemy model

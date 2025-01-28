@@ -13,6 +13,7 @@ public class CoinsLogic : MonoBehaviour
     public static CoinsLogic instance;
     public static CoinsLogic Instance { get { return instance; } }
     public int coins { get; private set; } // Current number of coins collected by the player
+    public float dropChance = 0.5f; // Drop chance for coins
 
     #endregion
 
