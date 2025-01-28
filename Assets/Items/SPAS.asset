@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: SPAS
   damagePerBullet: 30
-  fireRate: 0.65
+  fireRate: 0.125
   reloadTime: 0.8
   magazineSize: 70
   bulletsPerShot: 7

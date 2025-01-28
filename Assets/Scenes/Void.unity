@@ -2081,6 +2081,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.018313408
       objectReference: {fileID: 0}
+    - target: {fileID: 7219539545731093851, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: jumpForce
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7247584656866811980, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: healthImage
@@ -2930,7 +2935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1965889678
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2947,7 +2952,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 290, y: -117}
+  m_AnchoredPosition: {x: 341, y: -340}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1965889679
@@ -3034,7 +3039,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -186.92169, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3126,6 +3131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916e311391a1b7d4faa0cce5dec80f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spinCost: 10
   doorAnimator: {fileID: 2053076241}
   leverAnimator: {fileID: 86526867}
   isButtonActive: 1
