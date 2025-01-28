@@ -152,7 +152,7 @@ public class Upgrades : MonoBehaviour
         Debug.Log("LOSER!");
     }
 
-    private void UpdateUpgradeUI()
+    public void UpdateUpgradeUI()
     { 
         damageText.text = (Shotgun.gunSettings.damagePerBullet + Shotgun.damageMultiplier).ToString();
         fireRateText.text = 1/Shotgun.gunSettings.fireRate * 100 + "%";
