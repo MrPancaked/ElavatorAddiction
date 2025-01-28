@@ -15,7 +15,6 @@ public class Interactions : MonoBehaviour
     // Private Variables
     private Camera playerCamera; // Reference to the player's camera.
     private string coinTag = "Coin"; // Tag for coin objects
-    private string SlotMachineTag = "SlotMachine"; // Tag for the slot machine.
     private string ElevatorButtonTag = "ElevatorButton"; // Tag for the button in the elevator.
     private string ElevatorLeverTag = "ElevatorLever"; // Tag for the lever outside the elevator.
     private Animator buttonAnimator;
@@ -94,18 +93,13 @@ public class Interactions : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 3f))
         {
-            if (hit.collider.CompareTag(SlotMachineTag))
+            if (hit.collider.CompareTag(ElevatorButtonTag))
             {
-                SlotMachine.Instance.UseCoinForUpgrade();
-            }
-            else if (hit.collider.CompareTag(ElevatorButtonTag))
-            {
-
                 ElevatorController.Instance.ButtonPressed();
             }
             else if (hit.collider.CompareTag(ElevatorLeverTag))
             {
-                ElevatorController.Instance.LeverPressed();
+                ElevatorController.Instance.LeverPressed(); // ApplyRandomUpgrade IS LINKED THERE
             }
             else
             {

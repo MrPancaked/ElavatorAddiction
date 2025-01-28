@@ -9,11 +9,17 @@ public class CoinsLogic : MonoBehaviour
 {
     #region Variables
 
+    [Header("References")]
     public TextMeshProUGUI coinsCounter; // UI text element for coins display
+
+    [Header("Settings")]
+    public int initialPlayerCoins = 0; // Set this in the Inspector
+    public float coinDropChance = 0.5f; // Drop chance for coins
+    public int spinCost = 10; // Cost of the upgrade
+    public int playerCoins
+    { get; private set; } // Current number of coins collected by the player
     public static CoinsLogic instance;
     public static CoinsLogic Instance { get { return instance; } }
-    public int coins { get; private set; } // Current number of coins collected by the player
-    public float dropChance = 0.5f; // Drop chance for coins
 
     #endregion
 
@@ -25,6 +31,7 @@ public class CoinsLogic : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject); // IMPORTANT!
+            ResetCoins();
         }
         else
         {
@@ -39,20 +46,38 @@ public class CoinsLogic : MonoBehaviour
 
     public void CollectCoin() /// Collects the coin
     {
-        coins += Random.Range(1, 6);
-        UpdateCoinsDisplay();
-        Debug.Log("Coins: " + coins); // Log the collected coins
+        if (Random.Range(0, 1f) <= coinDropChance)
+        {
+            playerCoins += Random.Range(0, 6);
+            UpdateCoinsDisplay();
+            Debug.Log("Collected coins: " + playerCoins); // Log the collected coins
+        }
     }
 
-    public void DecreaseCoins(int amount) /// Decreases the coin count
+    public void ResetCoins() /// Reset on death
     {
-        coins -= amount; // Decreases coin count
+        playerCoins = initialPlayerCoins;
         UpdateCoinsDisplay();
+    }
+
+    public void UseCoinForUpgrade() /// Uses a coin for the upgrade and tells the UpgradeApplicator to apply a new buff
+    {
+        if (playerCoins >= spinCost) // Checks if the player has coins
+        {
+            playerCoins -= spinCost; // Decreases coin count
+            UpdateCoinsDisplay();
+            Upgrades.Instance.ApplyRandomUpgrade(); // Apply a random upgrade to the player
+            Debug.Log("Spent coins: " + playerCoins); // Log the decreased coins
+        }
+        else
+        {
+            Debug.Log("Not enough coins.");  // Log if there are no coins available
+        }
     }
 
     private void UpdateCoinsDisplay() /// Updates the coins display on the screen.
     {
-        coinsCounter.SetText("Coins: " + coins);  // Update coins text
+        coinsCounter.SetText("$ " + playerCoins);  // Update coins text
     }
 
     #endregion

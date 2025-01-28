@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32f461fbe6db0e9489f4d392d76c6284, type: 3}
-  m_Name: SPAS
+  m_Name: Shotgun
   m_EditorClassIdentifier: 
-  name: SPAS
+  name: Shotgun
   damagePerBullet: 30
-  fireRate: 0.125
+  fireRate: 1
   reloadTime: 0.8
   magazineSize: 70
   bulletsPerShot: 7
@@ -22,7 +22,7 @@ MonoBehaviour:
   allowContinuesFire: 0
   spread: 0.08
   range: 40
-  enemyPushbackForce: 6
+  enemyPushbackForce: 3
   playerPushbackForce: 8
   screenShakeStrength: 0.5
   isDualGun: 0

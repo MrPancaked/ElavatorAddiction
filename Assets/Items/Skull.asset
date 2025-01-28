@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26ff69af1f65616469574a0a15cd349e, type: 3}
-  m_Name: Skull1
+  m_Name: Skull
   m_EditorClassIdentifier: 
   name: Deer Skull
   detectionRange: 25

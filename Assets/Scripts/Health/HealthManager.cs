@@ -46,6 +46,7 @@ public class HealthManager : MonoBehaviour
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject); // Enforce singleton pattern
+            return;
         }
         else
         {
@@ -153,6 +154,7 @@ public class HealthManager : MonoBehaviour
         player.transform.position = respawnPoint.position;
         playerIsDead = false; // Reset death state
         health.hp = 100f;
+        CoinsLogic.Instance.ResetCoins();
         UpdateHealthUI();
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor

@@ -8,11 +8,9 @@ public class ElevatorController : MonoBehaviour
     #region Header Variables
 
     [Header("Refences")]
-    public int spinCost = 10; // Cost of the upgrade
 
     public Animator doorAnimator; // Reference to the door animator
     public Animator leverAnimator; // Reference to the door animator
-
 
     // Private stuff
     [HideInInspector]
@@ -20,13 +18,11 @@ public class ElevatorController : MonoBehaviour
     [HideInInspector]
     public bool doorIsClosed = true; // Bool to determine if door is closed
     private bool leverAnimationPlaying = false; // Bool to determine if the lever is animating or na
+    private bool playerInElevator = false; // Track if player is in elevator
     private Coroutine closedDoorCoroutine; // Reference to the current coroutine
     private string currentSceneName; // String to store the current scene name
     private static ElevatorController instance;
     public static ElevatorController Instance { get { return instance; } }
-    private bool playerInElevator = false; // Track if player is in elevator
-    private Upgrades upgrades; // Reference to the upgrades script
-    private CoinsLogic coinsLogic; // Reference to the coins logic script
 
     #endregion
 
@@ -43,9 +39,6 @@ public class ElevatorController : MonoBehaviour
             instance = this;
             currentSceneName = SceneManager.GetActiveScene().name; // Set current scene name
         }
-
-        upgrades = GameObject.FindGameObjectWithTag("ElavatorManager").GetComponent<Upgrades>(); // Get the upgrades script
-        coinsLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<CoinsLogic>(); // Get the coins logic script
     }
 
     void OnTriggerEnter(Collider other) // Handle player entering/exiting the elevator collider
@@ -70,8 +63,6 @@ public class ElevatorController : MonoBehaviour
 
     public void ButtonPressed()
     {
-
-
         if (!isButtonActive) // Ignore the button if its deactivated (the elevator is traveling)
         {
             Debug.Log("Button press ignored"); // Button press ignored message
@@ -98,16 +89,7 @@ public class ElevatorController : MonoBehaviour
 
     public void LeverPressed() // I HAD TO ADD THIS BECAUSE I CAN NOT CALL THE COROUTINE DIRECTLY FROM THE INTERACTIONS SCRIPT
     {
-        if (coinsLogic.coins >= spinCost)
-        {
-            StartCoroutine(LeverCoroutine());
-            coinsLogic.DecreaseCoins(spinCost);
-        }
-        else
-        {
-            Debug.Log("Not enough coins"); // Debug message
-        }
-        
+        StartCoroutine(LeverCoroutine());
     }
 
     public IEnumerator LeverCoroutine()
@@ -117,14 +99,11 @@ public class ElevatorController : MonoBehaviour
             leverAnimationPlaying = true;
             leverAnimator.SetTrigger("Start");
             ElevatorSounds.Instance.PlayLeverDownSound();
-            yield return new WaitForSeconds(0.8f); // Time delay before elevator start
+            yield return new WaitForSeconds(0.8f); // Time delay
 
-            upgrades.ApplyRandomUpgrade(); // Apply a random upgrade to the player
-
-            yield return new WaitForSeconds(0.3f); // Time delay before elevator start
-
+            CoinsLogic.Instance.UseCoinForUpgrade();
             ElevatorSounds.Instance.PlayLeverUpSound();
-            yield return new WaitForSeconds(1f); // Time delay before elevator start
+            yield return new WaitForSeconds(1.8f); // Time delay
 
             leverAnimationPlaying = false;
         }

@@ -603,9 +603,10 @@ GameObject:
   - component: {fileID: 4918400857203237434}
   - component: {fileID: 6806652076021869073}
   - component: {fileID: 7219539545731093851}
-  - component: {fileID: 7247584656866811980}
-  - component: {fileID: 8606113254386454732}
   - component: {fileID: 2747270054131780910}
+  - component: {fileID: 3553973524824693643}
+  - component: {fileID: 8606113254386454732}
+  - component: {fileID: 7247584656866811980}
   - component: {fileID: 7472339462362982192}
   - component: {fileID: 2363603075605729512}
   - component: {fileID: 7171003750088437121}
@@ -813,23 +814,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb2612c8dfc4104c96091c2bee2c418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 250
-  airMultiplier: 0.1
+  speed: 200
+  airMultiplier: 0.08
   groundDrag: 17.5
   airDrag: 1
   jumpForce: 10
-  jumpTiming: 0.1
+  jumpTiming: 0.15
   bhopBoost: 3
-  slideYScale: 0.5
+  slideYScale: 0.6
   slideSpeed: 2
-  slideDragIncrease: 0.005
-  downForce: 27
+  slideDragIncrease: 0.004
+  downForce: 40
   boxSize: {x: 0.5, y: 0.15, z: 0.5}
   jumpPressed: 0
   jumpReleased: 0
   slidePressed: 0
   slideReleased: 0
   moveDirection: {x: 0, y: 0, z: 0}
+--- !u!114 &2747270054131780910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784816484273663751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d24f879d21fd2408d09e24ab281314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsCounter: {fileID: 0}
+  initialPlayerCoins: 200
+  coinDropChance: 0.5
+  spinCost: 10
+--- !u!114 &3553973524824693643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784816484273663751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3595b0592be7c7249ae9eab2a302ea73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageIncrease: 10
+  speedIncrease: 15
+  healthIncrease: 10
+  healAmount: 20
+  fireRateMultiplier: 0.9
+  dropchanceMultiplier: 1.1
+--- !u!114 &8606113254386454732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784816484273663751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f728a00649949124f8d72d8238bc74a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
 --- !u!114 &7247584656866811980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,32 +898,7 @@ MonoBehaviour:
   deathScreenAnimator: {fileID: 0}
   hudAnimator: {fileID: 0}
   healthImage: {fileID: 0}
---- !u!114 &8606113254386454732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7784816484273663751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f728a00649949124f8d72d8238bc74a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
---- !u!114 &2747270054131780910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7784816484273663751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d24f879d21fd2408d09e24ab281314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinsCounter: {fileID: 0}
+  initialHealth: 0
 --- !u!114 &7472339462362982192
 MonoBehaviour:
   m_ObjectHideFlags: 0

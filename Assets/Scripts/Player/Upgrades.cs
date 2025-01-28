@@ -6,6 +6,8 @@ using UnityEngine;
 public class Upgrades : MonoBehaviour
 {
     #region Variables
+
+    [Header("Settings")]
     public float damageIncrease;
     public float speedIncrease;
     public float healthIncrease;
@@ -13,13 +15,8 @@ public class Upgrades : MonoBehaviour
     public float fireRateMultiplier;
     public float dropchanceMultiplier;
 
-    private NewMovement playerMovement; // Reference to the player script
-    private Gun Shotgun; // Reference to the player's gun script
-    private HealthManager healthManager; // Reference to the health manager script
-    private CoinsLogic coinsLogic; // Reference to the coins logic script
-
-
     //private shit
+    private Gun Shotgun; // Reference to the player's gun script
     public static Upgrades instance;
     public static Upgrades Instance { get { return instance; } }
 
@@ -33,6 +30,8 @@ public class Upgrades : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject); // IMPORTANT!
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Shotgun = GameObject.FindGameObjectWithTag("Shotgun").GetComponent<Gun>();
         }
         else
         {
@@ -41,24 +40,13 @@ public class Upgrades : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerMovement = player.GetComponent<NewMovement>();
-        coinsLogic = player.GetComponent<CoinsLogic>();
-        healthManager = player.GetComponent<HealthManager>();
-
-        Shotgun = GameObject.FindGameObjectWithTag("Shotgun").GetComponent<Gun>();
-        
-    }
-
     #endregion
 
     #region Upgrade Logic
 
     public void ApplyRandomUpgrade() /// Applies a random upgrade to the player.
     {
-        int upgradeIndex = Random.Range(0, 5);
+        int upgradeIndex = Random.Range(0, 6);
 
         switch (upgradeIndex) // Upgrade player based on the random number
         {
@@ -77,14 +65,16 @@ public class Upgrades : MonoBehaviour
             case 4:
                 DropChanceUpgrade(dropchanceMultiplier); // Apply drop chance upgrade
                 break;
-
+            case 5:
+                Lose(); // Lose
+                break;
         }
     }
 
     private void SpeedUpgrade(float speedIncrease) /// Applies a speed upgrade to the player and logs it.
     {
-        playerMovement.speed += speedIncrease;
-        Debug.Log("Speed upgrade: " + playerMovement.speed);
+        NewMovement.Instance.speed += speedIncrease;
+        Debug.Log("Speed upgrade: " + NewMovement.Instance.speed);
     }
 
     private void DamageUpgrade(float damageIncrease) /// Applies a strengh upgrade to the player and logs it.
@@ -95,9 +85,9 @@ public class Upgrades : MonoBehaviour
 
     private void healthUpgrade(float healthIncrease, float healAmount) /// Applies a strengh upgrade to the player and logs it.
     {
-        healthManager.initialHealth += healthIncrease;
-        healthManager.health.hp += healAmount;
-        healthManager.UpdateHealthUI();
+        HealthManager.Instance.initialHealth += healthIncrease;
+        HealthManager.Instance.health.hp += healAmount;
+        HealthManager.Instance.UpdateHealthUI();
         Debug.Log("Healed by: " + healAmount);
         Debug.Log("Health increased: " + healthIncrease);
     }
@@ -110,7 +100,12 @@ public class Upgrades : MonoBehaviour
 
     private void DropChanceUpgrade(float dropchanceMultiplier)
     { 
-        coinsLogic.dropChance += dropchanceMultiplier;
+        CoinsLogic.Instance.coinDropChance += dropchanceMultiplier;
+    }
+
+    private void Lose()
+    {
+        Debug.Log("LOSER!");
     }
 
     #endregion
