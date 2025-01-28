@@ -43,7 +43,7 @@ public class SlotMachine : MonoBehaviour
     {
         if (coinsLogic.coins > 0) // Checks if the player has coins
         {
-            coinsLogic.DecreaseCoins(); // Decrease the coin count
+            coinsLogic.DecreaseCoins(10); // Decrease the coin count
             upgrades.ApplyRandomUpgrade(); // Apply a random upgrade
             Debug.Log("Coins: " + coinsLogic.coins); // Log the new coin amount
         }

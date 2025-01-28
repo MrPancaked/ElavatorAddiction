@@ -44,9 +44,9 @@ public class CoinsLogic : MonoBehaviour
         Debug.Log("Coins: " + coins); // Log the collected coins
     }
 
-    public void DecreaseCoins() /// Decreases the coin count
+    public void DecreaseCoins(int amount) /// Decreases the coin count
     {
-        coins--; // Decreases coin count
+        coins -= amount; // Decreases coin count
         UpdateCoinsDisplay();
     }
 

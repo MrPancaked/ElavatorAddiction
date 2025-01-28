@@ -8,6 +8,8 @@ public class ElevatorController : MonoBehaviour
     #region Header Variables
 
     [Header("Refences")]
+    public int spinCost = 10; // Cost of the upgrade
+
     public Animator doorAnimator; // Reference to the door animator
     public Animator leverAnimator; // Reference to the door animator
 
@@ -24,6 +26,7 @@ public class ElevatorController : MonoBehaviour
     public static ElevatorController Instance { get { return instance; } }
     private bool playerInElevator = false; // Track if player is in elevator
     private Upgrades upgrades; // Reference to the upgrades script
+    private CoinsLogic coinsLogic; // Reference to the coins logic script
 
     #endregion
 
@@ -42,6 +45,7 @@ public class ElevatorController : MonoBehaviour
         }
 
         upgrades = GameObject.FindGameObjectWithTag("ElavatorManager").GetComponent<Upgrades>(); // Get the upgrades script
+        coinsLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<CoinsLogic>(); // Get the coins logic script
     }
 
     void OnTriggerEnter(Collider other) // Handle player entering/exiting the elevator collider
@@ -94,7 +98,16 @@ public class ElevatorController : MonoBehaviour
 
     public void LeverPressed() // I HAD TO ADD THIS BECAUSE I CAN NOT CALL THE COROUTINE DIRECTLY FROM THE INTERACTIONS SCRIPT
     {
-        StartCoroutine(LeverCoroutine());
+        if (coinsLogic.coins >= spinCost)
+        {
+            StartCoroutine(LeverCoroutine());
+            coinsLogic.DecreaseCoins(spinCost);
+        }
+        else
+        {
+            Debug.Log("Not enough coins"); // Debug message
+        }
+        
     }
 
     public IEnumerator LeverCoroutine()
