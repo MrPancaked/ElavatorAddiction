@@ -17,9 +17,10 @@ public class Gun : MonoBehaviour
 
     [Header("References")]
     public LayerMask whatIsEnemy; // Layer mask to identify enemies
-    [SerializeField] GunSettings gunSettings; // Gun settings with all statistics and variables
+    [SerializeField] public GunSettings gunSettings; // Gun settings with all statistics and variables
     public Camera fpsCam; // The FPS camera
     public Rigidbody playerRb; // Player's Rigidbody
+    public CinemachineImpulseSource impulseSource; // Impulse source for camera shake
     public Transform MuzzleFlashPoint; // Transform for the muzzle flash spawn point
     public TextMeshPro ammoCounter; // UI text element for ammo display
     public GameObject reloadFeedbackText; // UI text element for reload feedback (for now lololo hehehe rene im going crazy bithc it is 3 am)
@@ -40,6 +41,7 @@ public class Gun : MonoBehaviour
     private int bulletsShot; // Bullets shot in a single shot or burst
     private RaycastHit rayHit; // Info about the raycast
     private int currentGunIndex = 0; // Track which gun to fire in a dual gun set
+    public float damageMultiplier = 1f; // Damage multiplier for upgrades
 
     #endregion
 
@@ -176,6 +178,24 @@ public class Gun : MonoBehaviour
         ApplyPlayerPushback();
     }
 
+    //private void SingleShot(Vector3 direction) // Logic of one single shot
+    //{
+    //    if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, gunSettings.range, whatIsEnemy)) // Shoot a raycast
+    //    {
+    //
+    //        if (rayHit.collider.CompareTag("Damageable")) // Check if the hit object is an enemy
+    //        {
+    //            Rigidbody enemyRigidbody = rayHit.collider.GetComponent<Rigidbody>(); // push the enemy back
+    //            enemyRigidbody.AddForce(direction * gunSettings.enemyPushbackForce, ForceMode.Impulse);
+    //            Damageable damageable = rayHit.transform.GetComponent<Damageable>();
+    //            damageable?.TakeDamage(gunSettings.damagePerBullet); // Damage the enemy
+    //        }
+    //
+    //    }
+    //    impulseSource.GenerateImpulseWithForce(gunSettings.screenShakeStrength);
+    //    BulletEffects(); // Call bullet effects
+    //}
+
     private void SingleShot(Vector3 direction) // Logic of one single shot
     {
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, gunSettings.range, whatIsEnemy))
@@ -195,12 +215,12 @@ public class Gun : MonoBehaviour
                 {
                     enemyRigidbody.AddForce(direction * gunSettings.enemyPushbackForce, ForceMode.Impulse);
                 }
-                damageable?.TakeDamage(gunSettings.damagePerBullet); //Damage the enemy
+                damageable?.TakeDamage(gunSettings.damagePerBullet * damageMultiplier); //Damage the enemy
             }
 
 
         }
-        ScreenshakeManager.Instance.TriggerShake("gunshot", overrideForce: gunSettings.screenShakeStrength, overrideDuration: 0.1f);
+        impulseSource.GenerateImpulseWithForce(gunSettings.screenShakeStrength);
         BulletEffects(); // Call bullet effects
     }
 

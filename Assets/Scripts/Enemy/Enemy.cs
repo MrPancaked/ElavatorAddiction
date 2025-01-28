@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     private Coroutine soundCooldown; // Cooldown for the damage sound.
     private FMOD.Studio.EventInstance idleSoundInstance; // FMOD Instance for loop
     private Health health;          // Reference to the health script on this game object.
+    private CoinsLogic coinsLogic; // Reference to the coins logic script.
     private EnemyState currentState = EnemyState.Idle;  // Current state of the enemy.
     private enum EnemyState
     {
@@ -49,6 +50,7 @@ public class Enemy : MonoBehaviour
         playerCollider = playerObject.GetComponent<Collider>();
         enemyCounter = GameObject.FindGameObjectWithTag("EnemyCounter").GetComponent<EnemyCounter>();
         enemyCounter.UpdateEnemyCounter();
+        coinsLogic = GameObject.FindGameObjectWithTag("Player").GetComponent<CoinsLogic>();
     }
 
     private void Start()  /// Called before the first frame update. Initializes the hover start position and orbit radius.
@@ -153,7 +155,8 @@ public class Enemy : MonoBehaviour
 
     public void Die() /// Handles the death of the enemy, disables the model, drops loot, and destroys itself.
     {
-        GetComponent<DropLoot>().SpawnLoot(transform.position); // Drop the loot
+        //GetComponent<DropLoot>().SpawnLoot(transform.position); // Drop the loot
+        coinsLogic.CollectCoin();
         AudioManager.instance.PlayOneShot(enemySettings.deathSound, this.transform.position); // Play enemy damage sound
         enemyCounter.UpdateEnemyCounter(); // Update the enemy counter
         gameObject.SetActive(false); // Disables the enemy model

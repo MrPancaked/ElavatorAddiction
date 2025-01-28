@@ -78,7 +78,7 @@ public class HealthManager : MonoBehaviour
 
     #endregion
 
-    #region Taking Damage / Dying Methods
+    #region Taking Damage / Dying Methods / Health Upgrade
 
     private void OnPlayerTakeDamage(float damage) // Updates the health UI display.
     {
@@ -105,6 +105,14 @@ public class HealthManager : MonoBehaviour
                 gunInstance.reloading = true;
             }
         }
+    }
+
+    public void HealthUpgrade(float healthIncrease, float healAmount) /// Applies a health upgrade to the player and logs it.
+    {
+        initialHealth += healthIncrease;
+        health.hp += healAmount;
+        Debug.Log("Health Upgrade: " + health.hp);
+        UpdateHealthUI();
     }
 
     #endregion

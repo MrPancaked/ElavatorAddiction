@@ -10,7 +10,7 @@ public class ElevatorController : MonoBehaviour
     [Header("Refences")]
     public Animator doorAnimator; // Reference to the door animator
     public Animator leverAnimator; // Reference to the door animator
-    public Animator buttonAnimator; // Reference to the door animator
+
 
     // Private stuff
     [HideInInspector]
@@ -18,12 +18,12 @@ public class ElevatorController : MonoBehaviour
     [HideInInspector]
     public bool doorIsClosed = true; // Bool to determine if door is closed
     private bool leverAnimationPlaying = false; // Bool to determine if the lever is animating or na
-    private float lastButtonPressTime = -Mathf.Infinity;
     private Coroutine closedDoorCoroutine; // Reference to the current coroutine
     private string currentSceneName; // String to store the current scene name
     private static ElevatorController instance;
     public static ElevatorController Instance { get { return instance; } }
     private bool playerInElevator = false; // Track if player is in elevator
+    private Upgrades upgrades; // Reference to the upgrades script
 
     #endregion
 
@@ -40,6 +40,8 @@ public class ElevatorController : MonoBehaviour
             instance = this;
             currentSceneName = SceneManager.GetActiveScene().name; // Set current scene name
         }
+
+        upgrades = GameObject.FindGameObjectWithTag("ElavatorManager").GetComponent<Upgrades>(); // Get the upgrades script
     }
 
     void OnTriggerEnter(Collider other) // Handle player entering/exiting the elevator collider
@@ -64,45 +66,8 @@ public class ElevatorController : MonoBehaviour
 
     public void ButtonPressed()
     {
-        if (Time.time - lastButtonPressTime >= 1f)
-        {
-            lastButtonPressTime = Time.time; // Update the last press time
-            ElevatorSounds.Instance.PlayButtonSound();
-            buttonAnimator.SetTrigger("Press");
-            TriggerDoors();
-        }
-    }
 
-    public void LeverPressed() // I HAD TO ADD THIS BECAUSE I CAN NOT CALL THE COROUTINE DIRECTLY FROM THE INTERACTIONS SCRIPT
-    {
-        StartCoroutine(LeverCoroutine());
-    }
 
-    public IEnumerator LeverCoroutine()
-    {
-        if (!leverAnimationPlaying)
-        {
-            leverAnimationPlaying = true; 
-            leverAnimator.SetTrigger("Start");
-            ElevatorSounds.Instance.PlayLeverDownSound();
-            yield return new WaitForSeconds(0.8f); // Time delay before elevator start
-
-            TriggerDoors();
-            yield return new WaitForSeconds(0.3f); // Time delay before elevator start
-
-            ElevatorSounds.Instance.PlayLeverUpSound();
-            yield return new WaitForSeconds(1f); // Time delay before elevator start
-
-            leverAnimationPlaying = false;
-        }
-    }
-
-    #endregion
-
-    #region Door Control
-
-    public void TriggerDoors()
-    {
         if (!isButtonActive) // Ignore the button if its deactivated (the elevator is traveling)
         {
             Debug.Log("Button press ignored"); // Button press ignored message
@@ -120,9 +85,43 @@ public class ElevatorController : MonoBehaviour
             {
                 closedDoorCoroutine = StartCoroutine(CloseDoors()); //Start the wait before the ride coroutine
             }
-            else OpenDoors();
+            else
+            {
+                Debug.Log("upgrade time: " + upgrades);
+                upgrades.ApplyRandomUpgrade(); // Apply a random upgrade to the player
+                OpenDoors();
+
+            }
         }
     }
+
+    public void LeverPressed() // I HAD TO ADD THIS BECAUSE I CAN NOT CALL THE COROUTINE DIRECTLY FROM THE INTERACTIONS SCRIPT
+    {
+        StartCoroutine(LeverCoroutine());
+    }
+
+    public IEnumerator LeverCoroutine()
+    {
+        if (!leverAnimationPlaying)
+        {
+            leverAnimationPlaying = true;
+            leverAnimator.SetTrigger("Start");
+            ElevatorSounds.Instance.PlayLeverDownSound();
+            yield return new WaitForSeconds(0.8f); // Time delay before elevator start
+
+            ButtonPressed();
+            yield return new WaitForSeconds(0.3f); // Time delay before elevator start
+
+            ElevatorSounds.Instance.PlayLeverUpSound();
+            yield return new WaitForSeconds(1f); // Time delay before elevator start
+
+            leverAnimationPlaying = false;
+        }
+    }
+
+    #endregion
+
+    #region Door Control
 
     public void OpenDoors()
     {
@@ -148,7 +147,7 @@ public class ElevatorController : MonoBehaviour
 
             Debug.Log("Screen shake / Fog transition");
             SceneSettings destinationSettings = TransitionManager.Instance.GetSceneSettings(currentSceneName); // get next scene settings
-            ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 1.5f, overrideDuration: 0.8f); // Trigger screen shake
+            ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 1.5f, overrideDuration: 0.8f);
             TransitionManager.Instance.StartFogTransition(destinationSettings, 5f); //Start fog transition
             yield return new WaitForSeconds(6f); // Time delay before scene transition
 

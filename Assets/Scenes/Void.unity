@@ -2013,6 +2013,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 566020047}
     m_Modifications:
+    - target: {fileID: 1429938144713704009, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_TagString
+      value: Shotgun
+      objectReference: {fileID: 0}
     - target: {fileID: 2691225305413714647, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2068,6 +2073,41 @@ PrefabInstance:
       propertyPath: coinsCounter
       value: 
       objectReference: {fileID: 1965889679}
+    - target: {fileID: 4655439236767218671, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655439236767218671, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.39999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655439236767218671, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655439236767218671, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9814347
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655439236767218671, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.12331267
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655439236767218671, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.1457548
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655439236767218671, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.018313408
+      objectReference: {fileID: 0}
     - target: {fileID: 7247584656866811980, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: healthImage
@@ -2088,6 +2128,11 @@ PrefabInstance:
       propertyPath: deathScreenAnimator
       value: 
       objectReference: {fileID: 960955810}
+    - target: {fileID: 8921157221110998851, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: impulseSource
+      value: 
+      objectReference: {fileID: 821970048}
     - target: {fileID: 8921157221110998851, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: particlesParent
@@ -3090,7 +3135,7 @@ GameObject:
   - component: {fileID: 2053076237}
   m_Layer: 0
   m_Name: Elevator Manager
-  m_TagString: Untagged
+  m_TagString: ElavatorManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3109,7 +3154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorAnimator: {fileID: 2053076241}
   leverAnimator: {fileID: 86526867}
-  buttonAnimator: {fileID: 551744708}
   isButtonActive: 1
   doorIsClosed: 1
 --- !u!114 &2053076237

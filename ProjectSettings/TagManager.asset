@@ -10,6 +10,8 @@ TagManager:
   - ElevatorButton
   - ElevatorLever
   - EnemyCounter
+  - ElavatorManager
+  - Shotgun
   layers:
   - Default
   - TransparentFX

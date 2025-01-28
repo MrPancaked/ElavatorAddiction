@@ -36,12 +36,11 @@ public class CoinsLogic : MonoBehaviour
 
     #region Coin Collection Logic
 
-    public void CollectCoin(GameObject coinObject) /// Collects the coin and destroys it.
+    public void CollectCoin() /// Collects the coin
     {
-        coins++;  // Increase the coin count
+        coins += Random.Range(1, 6);
         UpdateCoinsDisplay();
         Debug.Log("Coins: " + coins); // Log the collected coins
-        Destroy(coinObject);  // Destroy the coin
     }
 
     public void DecreaseCoins() /// Decreases the coin count
