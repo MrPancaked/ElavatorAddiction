@@ -6443,6 +6443,11 @@ PrefabInstance:
       objectReference: {fileID: 1234939557}
     - target: {fileID: 3553973524824693643, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
+      propertyPath: slotSpinSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553973524824693643, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
       propertyPath: dropChanceText
       value: 
       objectReference: {fileID: 702091580}
