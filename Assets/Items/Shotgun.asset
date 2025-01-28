@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Shotgun
   damagePerBullet: 30
-  fireRate: 1
-  reloadTime: 0.8
-  magazineSize: 70
+  fireRate: 0.5
+  reloadTime: 0
+  magazineSize: 7
   bulletsPerShot: 7
   timeBetweenBulletsInBursts: 0
   allowContinuesFire: 0

@@ -196,7 +196,8 @@ Transform:
   m_LocalPosition: {x: -21.9, y: -4.9, z: -3.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4516067616490823798}
   m_Father: {fileID: 7755516416488308434}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1187001624381793222
@@ -428,7 +429,7 @@ GameObject:
   - component: {fileID: 6681186234846937800}
   m_Layer: 9
   m_Name: SPAS
-  m_TagString: Untagged
+  m_TagString: Shotgun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -448,7 +449,6 @@ Transform:
   m_Children:
   - {fileID: 4082771200217118823}
   - {fileID: 7755516416488308434}
-  - {fileID: 4516067616490823798}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -0.072, y: 9.537, z: 1.206}
 --- !u!114 &5117336013775315101
@@ -469,6 +469,7 @@ MonoBehaviour:
   gunSettings: {fileID: 11400000, guid: e7f423ba1ee092547ab1e97f6453440d, type: 2}
   fpsCam: {fileID: 0}
   playerRb: {fileID: 0}
+  impulseSource: {fileID: 0}
   MuzzleFlashPoint: {fileID: 4082771200217118823}
   ammoCounter: {fileID: 6797144894634387714}
   reloadFeedbackText: {fileID: 0}
@@ -481,6 +482,7 @@ MonoBehaviour:
   bloodBurst: {fileID: 1932917029013565841, guid: 0e870cf148aaedf47b215f81d9daec09,
     type: 3}
   reloading: 0
+  damageMultiplier: 1
 --- !u!114 &6681186234846937800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,6 +787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7755516416488308434}
+  - component: {fileID: 7332462047773541692}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -820,6 +823,27 @@ Transform:
   - {fileID: 7328884413492386421}
   m_Father: {fileID: 3249948968361327493}
   m_LocalEulerAnglesHint: {x: -0.058, y: -89.756, z: -0.491}
+--- !u!95 &7332462047773541692
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6598631143083372880}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 03488aa982e44a545981e1e64c1efc36, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6723454784697840265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,16 +1118,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7285481528391401255}
-  m_LocalRotation: {x: 0.000000020751026, y: 0.7113225, z: -0.000000008498317, w: 0.7028658}
-  m_LocalPosition: {x: 0, y: 0, z: -4.19}
-  m_LocalScale: {x: 0.18251896, y: 0.18251896, z: 0.18251896}
+  m_LocalRotation: {x: -0.0042830603, y: 0.9999833, z: 0.00048671267, w: -0.0038544834}
+  m_LocalPosition: {x: 0, y: 0, z: 4.7818274}
+  m_LocalScale: {x: 2.0840142, y: 2.0840147, z: 2.0840142}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 3249948968361327493}
+  m_Father: {fileID: 2722465803320377441}
   m_LocalEulerAnglesHint: {x: 0, y: 90.685, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.3, y: 0.39}
+  m_AnchoredPosition: {x: -11.301573, y: 0.96008384}
   m_SizeDelta: {x: 45.3, y: 29.66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1094877007481421242
@@ -1336,7 +1360,7 @@ GameObject:
   - component: {fileID: 4865598142538389667}
   - component: {fileID: 9033277254362417715}
   m_Layer: 0
-  m_Name: pCube26
+  m_Name: Cock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
