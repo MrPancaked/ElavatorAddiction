@@ -101,7 +101,7 @@ public class ElevatorController : MonoBehaviour
             ElevatorSounds.Instance.PlayLeverDownSound();
             yield return new WaitForSeconds(0.8f); // Time delay
 
-            CoinsLogic.Instance.UseCoinForUpgrade();
+            StartCoroutine(CoinsLogic.Instance.UseCoinForUpgrade());
             ElevatorSounds.Instance.PlayLeverUpSound();
             yield return new WaitForSeconds(1.8f); // Time delay
 

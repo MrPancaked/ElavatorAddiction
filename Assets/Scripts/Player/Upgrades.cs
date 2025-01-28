@@ -1,12 +1,15 @@
 //--------------------------------------------------------------------------------------------------
 //  Description: Applies upgrades to the player and handles the buff logic (debug logs only).
 //--------------------------------------------------------------------------------------------------
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class Upgrades : MonoBehaviour
 {
     #region Variables
+    [Header("SlotSettings")]
+    public float slotSpinSpeed = 0.5f;
 
     [Header("Settings")]
     public float damageIncrease;
@@ -25,6 +28,7 @@ public class Upgrades : MonoBehaviour
 
     //private shit
     private Gun Shotgun; // Reference to the player's gun script
+    private GameObject[] slots;
     public static Upgrades instance;
     public static Upgrades Instance { get { return instance; } }
 
@@ -40,6 +44,7 @@ public class Upgrades : MonoBehaviour
             DontDestroyOnLoad(gameObject); // IMPORTANT!
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Shotgun = GameObject.FindGameObjectWithTag("Shotgun").GetComponent<Gun>();
+            slots = GameObject.FindGameObjectsWithTag("Slots");
         }
         else
         {
@@ -52,29 +57,54 @@ public class Upgrades : MonoBehaviour
 
     #region Upgrade Logic
 
-    public void ApplyRandomUpgrade() /// Applies a random upgrade to the player.
+    public IEnumerator SlotSpinCoroutine(int slotIndex)
     {
         int upgradeIndex = Random.Range(0, 6);
 
         switch (upgradeIndex) // Upgrade player based on the random number
         {
             case 0:
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = slotSpinSpeed;
+                yield return new WaitForSeconds(1f); // Time delay
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 SpeedUpgrade(speedIncrease); // Apply speed upgrade
+                slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.06f);
                 break;
             case 1:
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = slotSpinSpeed;
+                yield return new WaitForSeconds(1f); // Time delay
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 DamageUpgrade(damageIncrease);  // Apply strengh upgrade
+                slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.73f);
                 break;
             case 2:
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = slotSpinSpeed;
+                yield return new WaitForSeconds(1f); // Time delay
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 healthUpgrade(healthIncrease, healAmount); // Apply health upgrade
+                slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.41f);
                 break;
             case 3:
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = slotSpinSpeed;
+                yield return new WaitForSeconds(1f); // Time delay
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 FireRateUpgrade(fireRateMultiplier); // Apply fire rate upgrade
+                slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.9f);
                 break;
             case 4:
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = slotSpinSpeed;
+                yield return new WaitForSeconds(1f); // Time delay
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 DropChanceUpgrade(dropchanceMultiplier); // Apply drop chance upgrade
+                slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.23f);
                 break;
             case 5:
+
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = slotSpinSpeed;
+                yield return new WaitForSeconds(1f); // Time delay
+                slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 Lose(); // Lose
+                slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.57f);
                 break;
         }
     }

@@ -1233,7 +1233,7 @@ GameObject:
   - component: {fileID: 8267161585244035321}
   m_Layer: 0
   m_Name: Slot (1)
-  m_TagString: Untagged
+  m_TagString: Slots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1281,7 +1281,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c3a4b3d56ec8d5344b9fed2a3817260e, type: 2}
+  - {fileID: 2100000, guid: 8fb062fba1b8c014a8a7af705e7ce4a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1315,6 +1315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e506e813d76ef4fbab368fbb28f162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnimationSpeed: 0
 --- !u!1 &2087541127232642883
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,7 +2031,7 @@ GameObject:
   - component: {fileID: 6126380741734975886}
   m_Layer: 0
   m_Name: Slot (3)
-  m_TagString: Untagged
+  m_TagString: Slots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2078,7 +2079,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c3a4b3d56ec8d5344b9fed2a3817260e, type: 2}
+  - {fileID: 2100000, guid: 89ef3aadfcaca6248a4fa732b90cd654, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2112,6 +2113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e506e813d76ef4fbab368fbb28f162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnimationSpeed: 0
 --- !u!1 &3597525914814173927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3965,7 +3967,7 @@ GameObject:
   - component: {fileID: 164595678946293221}
   m_Layer: 0
   m_Name: Slot (2)
-  m_TagString: Untagged
+  m_TagString: Slots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4013,7 +4015,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c3a4b3d56ec8d5344b9fed2a3817260e, type: 2}
+  - {fileID: 2100000, guid: de4c90755dd568c429b07ba264ae6745, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4047,6 +4049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e506e813d76ef4fbab368fbb28f162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnimationSpeed: 0
 --- !u!1 &6868764870294621584
 GameObject:
   m_ObjectHideFlags: 0

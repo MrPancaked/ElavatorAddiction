@@ -6796,7 +6796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1458618832
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6907,6 +6907,11 @@ PrefabInstance:
       objectReference: {fileID: 1234939557}
     - target: {fileID: 3553973524824693643, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
+      propertyPath: slotSpinSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553973524824693643, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
       propertyPath: dropChanceText
       value: 
       objectReference: {fileID: 702091580}
@@ -6930,6 +6935,11 @@ PrefabInstance:
       propertyPath: deathScreenAnimator
       value: 
       objectReference: {fileID: 960955810}
+    - target: {fileID: 8921157221110998851, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: gunAnimator
+      value: 
+      objectReference: {fileID: 1967398667}
     - target: {fileID: 8921157221110998851, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: impulseSource
@@ -6984,7 +6994,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1460853176
 RectTransform:
   m_ObjectHideFlags: 0

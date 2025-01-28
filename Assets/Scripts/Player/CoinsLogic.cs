@@ -4,6 +4,7 @@
 using UnityEngine;
 using TMPro;
 using System.Runtime;
+using System.Collections;
 
 public class CoinsLogic : MonoBehaviour
 {
@@ -60,13 +61,17 @@ public class CoinsLogic : MonoBehaviour
         UpdateCoinsDisplay();
     }
 
-    public void UseCoinForUpgrade() /// Uses a coin for the upgrade and tells the UpgradeApplicator to apply a new buff
+    public IEnumerator UseCoinForUpgrade() /// Uses a coin for the upgrade and tells the UpgradeApplicator to apply a new buff
     {
         if (playerCoins >= spinCost) // Checks if the player has coins
         {
             playerCoins -= spinCost; // Decreases coin count
             UpdateCoinsDisplay();
-            Upgrades.Instance.ApplyRandomUpgrade(); // Apply a random upgrade to the player
+            StartCoroutine(Upgrades.Instance.SlotSpinCoroutine(2));
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(Upgrades.Instance.SlotSpinCoroutine(1));
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(Upgrades.Instance.SlotSpinCoroutine(0));
             Debug.Log("Spent coins: " + playerCoins); // Log the decreased coins
         }
         else
