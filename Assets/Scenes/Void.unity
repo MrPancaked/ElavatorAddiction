@@ -675,6 +675,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 256.5}
   m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &547775854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7447037147192702606, guid: 544ad5ce464c99349a930f1951b09c36,
+    type: 3}
+  m_PrefabInstance: {fileID: 1458671441}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &547775856
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547775854}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 03488aa982e44a545981e1e64c1efc36, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &551744703 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3787619092322726445, guid: 17c857a8dd5a526479e0031f32d3011d,
@@ -2068,6 +2095,16 @@ PrefabInstance:
       propertyPath: coinsCounter
       value: 
       objectReference: {fileID: 1965889679}
+    - target: {fileID: 5363605910827521524, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_Name
+      value: Cock
+      objectReference: {fileID: 0}
+    - target: {fileID: 6188399997350763094, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 33.8
+      objectReference: {fileID: 0}
     - target: {fileID: 7247584656866811980, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: healthImage
@@ -2107,6 +2144,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7447037147192702606, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 547775856}
     - targetCorrespondingSourceObject: {fileID: 6471960863710329081, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       insertIndex: -1
