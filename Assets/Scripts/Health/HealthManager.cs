@@ -14,13 +14,13 @@ public class HealthManager : MonoBehaviour
 
     [Header("Player")]
     public GameObject player;      // Reference to the player game object
-    public GameObject cinemachineBrain;
     public Transform respawnPoint;     // Reference to the respawn point Transform
     public Health health;          // Reference to the Health component.
     public List<Gun> guns = new List<Gun>(); // List of guns to reset after death
 
     [Header("UI")]
     public Animator deathScreenAnimator; // Reference to the Animator on death screen
+    public Animator hudAnimator; // Reference to the Animator on death screen
     public Image healthImage;      // Reference to the Image component.
 
     //private shit
@@ -52,20 +52,45 @@ public class HealthManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject); // IMPORTANT!
             playerIsDead = false; // Reset death state
-            initialHealth = health.hp; // set the initial health of the object
+            initialHealth = health.hp; //set the initial health of the object
+            UpdateHealthUI();
         }
     }
 
-    void Update()
+    private void OnEnable()
     {
-        UpdateHealthUI();
+        if (health != null)
+        {
+            health.HandleDeathMethod += OnPlayerDied;
+            health.TakeDamageMethod += OnPlayerTakeDamage;
+        }
+
+    }
+
+    private void OnDisable()
+    {
+        if (health != null)
+        {
+            health.HandleDeathMethod -= OnPlayerDied;
+            health.TakeDamageMethod -= OnPlayerTakeDamage;
+        }
     }
 
     #endregion
 
-    #region Death Handling Methods
+    #region Taking Damage / Dying Methods
 
-    public void PlayerDied()
+    private void OnPlayerTakeDamage(float damage) // Updates the health UI display.
+    {
+        hudAnimator.SetTrigger("Hit"); // Trigger animation
+        UpdateHealthUI();
+        if (health.hp > 0)
+        {
+            ScreenshakeManager.Instance.TriggerShake("playerhit", overrideForce: 0.8f, overrideDuration: 0.08f); // Trigger screen shake but not when the player takes its final hit
+        }
+    }
+
+    private void OnPlayerDied() // Handle death through the event
     {
         if (!playerIsDead)
         {
@@ -74,7 +99,6 @@ public class HealthManager : MonoBehaviour
             Debug.Log("Player died");
             Cursor.visible = true; // Show the cursor
             Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-            cinemachineBrain.SetActive(false);
             deathScreenAnimator.SetTrigger("Die"); // Trigger animation
             foreach (Gun gunInstance in guns)
             {
@@ -83,6 +107,9 @@ public class HealthManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Restarting
 
     public void RestartGame()
     {
@@ -115,10 +142,10 @@ public class HealthManager : MonoBehaviour
 
         deathScreenAnimator.SetTrigger("Respawn"); // trigger Reset animation
         yield return null; // Wait one frame 
-        cinemachineBrain.SetActive(true);
         player.transform.position = respawnPoint.position;
         playerIsDead = false; // Reset death state
         health.hp = 100f;
+        UpdateHealthUI();
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         ElevatorController.Instance.OpenDoors();
@@ -133,17 +160,9 @@ public class HealthManager : MonoBehaviour
 
     #region UI
 
-    private void UpdateHealthUI() // Updates the health UI display.
+    private void UpdateHealthUI()
     {
-        if (healthImage != null)
-        {
-            healthImage.fillAmount = health.hp / initialHealth; // Update the fill amount
-        }
-
-        if (health.hp <= 0 && !playerIsDead)
-        {
-            PlayerDied();
-        }
+        healthImage.fillAmount = health.hp / initialHealth;
     }
 
     #endregion

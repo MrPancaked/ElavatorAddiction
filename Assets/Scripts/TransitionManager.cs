@@ -9,10 +9,7 @@ public class TransitionManager : MonoBehaviour
     #region Header Variables
 
     [Header("References")]
-    public CinemachineImpulseSource impulseSource; // Reference to the Cinemachine impulse source
     public Light sceneLight; // Reference to the scene light
-
-    [Header("Scenes list")]
     public List<SceneSettings> targetSceneSettings; // List of all scene settings
 
     // Private stuff
@@ -204,15 +201,6 @@ public class TransitionManager : MonoBehaviour
             }
         }
         return settings; //return the settings
-    }
-
-    #endregion
-
-    #region Screen Shake
-
-    public void ScreenShake(float strength)
-    {
-        impulseSource.GenerateImpulseWithForce(strength); // trigger impulse with given strength
     }
 
     #endregion

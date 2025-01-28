@@ -148,7 +148,7 @@ public class ElevatorController : MonoBehaviour
 
             Debug.Log("Screen shake / Fog transition");
             SceneSettings destinationSettings = TransitionManager.Instance.GetSceneSettings(currentSceneName); // get next scene settings
-            TransitionManager.Instance.ScreenShake(1.5f); // Trigger screen shake
+            ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 1.5f, overrideDuration: 0.8f); // Trigger screen shake
             TransitionManager.Instance.StartFogTransition(destinationSettings, 5f); //Start fog transition
             yield return new WaitForSeconds(6f); // Time delay before scene transition
 
@@ -156,7 +156,7 @@ public class ElevatorController : MonoBehaviour
             TransitionManager.Instance.LoadNewScene(destinationSettings.sceneName); //load the next scene
             ElevatorSounds.Instance.PlayElevatorStop(); //Play the elevator stop sound
             yield return new WaitForSeconds(0.3f); // Makes the screenshake match the sound, otherwise its useless
-            TransitionManager.Instance.ScreenShake(0.7f); // Trigger screen shake
+            ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 0.7f, overrideDuration: 0.8f); // Trigger screen shake
             yield return new WaitForSeconds(2f); // wait for the delay before opening the doors
 
             Debug.Log("Scene set / Door open / Button is active / Coroutine stop"); // Debug message

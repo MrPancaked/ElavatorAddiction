@@ -43,11 +43,9 @@ GameObject:
   - component: {fileID: 3042107370917282275}
   - component: {fileID: 1749662963217194090}
   - component: {fileID: 2760140412076791736}
-  - component: {fileID: 8523207666224624589}
   - component: {fileID: 1668235875852130479}
   - component: {fileID: 3859998941968442945}
   - component: {fileID: 3110485430757542645}
-  - component: {fileID: 2642484384466510410}
   m_Layer: 7
   m_Name: Brain
   m_TagString: Damageable
@@ -121,29 +119,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0267199, y: 0.6742944, z: 0.99801105}
-  m_Center: {x: 0.8117325, y: 0.7048284, z: -0.13708243}
---- !u!65 &8523207666224624589
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336654257063423728}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.65145296, y: 1.0505149, z: 1.1364049}
-  m_Center: {x: 0.14901733, y: -0.12123466, z: -0.11366127}
+  m_Size: {x: 0.86418045, y: 1.5795234, z: 0.99801004}
+  m_Center: {x: 0.14020196, y: 0.09899047, z: -0.13708301}
 --- !u!114 &1668235875852130479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f728a00649949124f8d72d8238bc74a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  hp: 90
 --- !u!114 &3859998941968442945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,27 +166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySettings: {fileID: 11400000, guid: eea33707b68420746aee9d61181b1d60, type: 2}
   canDamage: 1
---- !u!65 &2642484384466510410
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336654257063423728}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0253019, y: 0.65650386, z: 0.9950101}
-  m_Center: {x: -0.5783401, y: 0.70215136, z: -0.12379033}
 --- !u!1 &2057096916278121609
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,8 +220,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7154597, y: 0.9469684, z: 1.0806963}
-  m_Center: {x: 0.14567384, y: -0.0883471, z: -0.15505883}
+  m_Size: {x: 0.83758235, y: 0.82891005, z: 1.0806963}
+  m_Center: {x: 0.13345808, y: -0.08224044, z: -0.15505885}
 --- !u!65 &4361279547575332210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -285,8 +241,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.99566096, y: 0.8698692, z: 0.9652965}
-  m_Center: {x: -0.5877654, y: 0.64632314, z: -0.14314626}
+  m_Size: {x: 0.87351036, y: 0.74772733, z: 0.9652965}
+  m_Center: {x: -0.52669036, y: 0.5852522, z: -0.1431464}
 --- !u!65 &5330378566957172002
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -306,8 +262,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0129861, y: 0.8698692, z: 0.9696338}
-  m_Center: {x: 0.8176544, y: 0.64632314, z: -0.14097817}
+  m_Size: {x: 0.91121763, y: 0.7355359, z: 0.96963334}
+  m_Center: {x: 0.76677054, y: 0.5791565, z: -0.14097837}
 --- !u!114 &4396258171488562666
 MonoBehaviour:
   m_ObjectHideFlags: 0

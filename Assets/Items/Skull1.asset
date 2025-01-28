@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skull1
   m_EditorClassIdentifier: 
   name: Deer Skull
-  detectionRange: 20
+  detectionRange: 25
   attackScreenShake: 1
   attackSpeed: 5.5
   attackDrag: 0.2
