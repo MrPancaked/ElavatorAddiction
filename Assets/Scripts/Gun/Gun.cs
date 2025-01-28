@@ -20,9 +20,8 @@ public class Gun : MonoBehaviour
     [SerializeField] GunSettings gunSettings; // Gun settings with all statistics and variables
     public Camera fpsCam; // The FPS camera
     public Rigidbody playerRb; // Player's Rigidbody
-    public CinemachineImpulseSource impulseSource; // Impulse source for camera shake
     public Transform MuzzleFlashPoint; // Transform for the muzzle flash spawn point
-    public TextMeshProUGUI ammoCounter; // UI text element for ammo display
+    public TextMeshPro ammoCounter; // UI text element for ammo display
     public GameObject reloadFeedbackText; // UI text element for reload feedback (for now lololo hehehe rene im going crazy bithc it is 3 am)
     public List<Gun> dualGuns = new List<Gun>(); // If this is a dual gun PUT BOTH GUNS IN THE LIST
 
@@ -33,9 +32,10 @@ public class Gun : MonoBehaviour
     public GameObject bloodBurst; // The blood burst effect
 
     // Private Variables
+    [HideInInspector]
+    public bool reloading; // Check if the gun is currently reloading
     private bool shooting = false; // Check if the player is currently shooting
     private bool readyToShoot; // Check if the gun is ready to shoot
-    private bool reloading; // Check if the gun is currently reloading
     private int shotsLeft; // Ooverall shots (not bullets) in the magazine
     private int bulletsShot; // Bullets shot in a single shot or burst
     private RaycastHit rayHit; // Info about the raycast
@@ -178,22 +178,29 @@ public class Gun : MonoBehaviour
 
     private void SingleShot(Vector3 direction) // Logic of one single shot
     {
-        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, gunSettings.range, whatIsEnemy)) // Shoot a raycast
+        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, gunSettings.range, whatIsEnemy))
         {
+            Transform targetTransform = rayHit.transform;
+            Damageable damageable = targetTransform.GetComponent<Damageable>();
 
-            if (rayHit.collider.CompareTag("Damageable")) // Check if the hit object is an enemy
+            if (damageable == null)
             {
-                Rigidbody enemyRigidbody = rayHit.collider.GetComponent<Rigidbody>(); // push the enemy back
-                enemyRigidbody.AddForce(direction * gunSettings.enemyPushbackForce, ForceMode.Impulse);
-                Damageable damageable = rayHit.transform.GetComponent<Damageable>(); // Damage the enemy
-                damageable?.TakeDamage(gunSettings.damagePerBullet);
+                damageable = targetTransform.GetComponentInParent<Damageable>(); //try to find parent
             }
 
+            if (damageable != null)
+            {
+                Rigidbody enemyRigidbody = targetTransform.GetComponent<Rigidbody>(); // push the enemy back
+                if (enemyRigidbody != null)
+                {
+                    enemyRigidbody.AddForce(direction * gunSettings.enemyPushbackForce, ForceMode.Impulse);
+                }
+                damageable?.TakeDamage(gunSettings.damagePerBullet); //Damage the enemy
+            }
+
+
         }
-        if (impulseSource != null) //Camera shake if we have a impulse source
-        {
-            impulseSource.GenerateImpulseWithForce(gunSettings.screenShakeStrength);
-        }
+        ScreenshakeManager.Instance.TriggerShake("gunshot", overrideForce: gunSettings.screenShakeStrength, overrideDuration: 0.1f);
         BulletEffects(); // Call bullet effects
     }
 
@@ -264,7 +271,7 @@ public class Gun : MonoBehaviour
         Invoke(nameof(ReloadFinished), gunSettings.reloadTime);  // Complete reload after delay
     }
 
-    private void ReloadFinished() /// Completes the reload by filling magazine and resetting the reload flag.
+    public void ReloadFinished() /// Completes the reload by filling magazine and resetting the reload flag.
     {
         if (gunSettings.isDualGun) // If its a dual gun, refill all magazines
         {
@@ -290,7 +297,7 @@ public class Gun : MonoBehaviour
     {
         if (!gunSettings.isDualGun) // If its a normal gun
         {
-            ammoCounter.SetText(shotsLeft + " / " + gunSettings.magazineSize / gunSettings.bulletsPerShot); // show normal ammo UI
+            ammoCounter.SetText($"{shotsLeft}"); ; // Show combined ammo UI
         }
         else // If its a dual gun
         {
@@ -301,7 +308,7 @@ public class Gun : MonoBehaviour
                 totalShotsLeft += gun.shotsLeft;
                 totalMagazineSize += gun.gunSettings.magazineSize / gun.gunSettings.bulletsPerShot;
             }
-            ammoCounter.SetText(totalShotsLeft + " / " + totalMagazineSize); // Show combined ammo UI
+            ammoCounter.SetText($"{totalShotsLeft}"); ; // Show combined ammo UI
         }
     }
 

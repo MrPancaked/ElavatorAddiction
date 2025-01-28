@@ -9,12 +9,33 @@ public class CoinsLogic : MonoBehaviour
 {
     #region Variables
 
-    public int coins { get; private set; } // Current number of coins collected by the player
     public TextMeshProUGUI coinsCounter; // UI text element for coins display
+    public static CoinsLogic instance;
+    public static CoinsLogic Instance { get { return instance; } }
+    public int coins { get; private set; } // Current number of coins collected by the player
+
+    #endregion
+
+    #region Unity Methods
+
+    private void Awake()  /// Makes sure this object survives the scene transition, and that there is only one.
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // IMPORTANT!
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     #endregion
 
     #region Coin Collection Logic
-   
+
     public void CollectCoin(GameObject coinObject) /// Collects the coin and destroys it.
     {
         coins++;  // Increase the coin count
@@ -28,6 +49,7 @@ public class CoinsLogic : MonoBehaviour
         coins--; // Decreases coin count
         UpdateCoinsDisplay();
     }
+
     private void UpdateCoinsDisplay() /// Updates the coins display on the screen.
     {
         coinsCounter.SetText("Coins: " + coins);  // Update coins text

@@ -67,7 +67,7 @@
 	<object class="MarkerTrack" id="{a82caacd-2c9a-4782-82f2-8f7278fabc77}" />
 	<object class="GroupTrack" id="{2e65df9f-9d06-4374-b418-ec8ea4fb100b}">
 		<relationship name="automationTracks">
-			<destination>{2b774a43-7ee9-4c0b-815f-5bba177fc37f}</destination>
+			<destination>{781a45e7-ad39-443c-a2c2-3a59c73af516}</destination>
 		</relationship>
 		<relationship name="modules">
 			<destination>{e60bcdc8-c108-422b-ad10-a0c61f2be4b3}</destination>
@@ -121,7 +121,7 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{c9c828f3-f96a-41f0-ae36-68ee536d63b2}" />
-	<object class="AutomationTrack" id="{2b774a43-7ee9-4c0b-815f-5bba177fc37f}">
+	<object class="AutomationTrack" id="{781a45e7-ad39-443c-a2c2-3a59c73af516}">
 		<relationship name="automator">
 			<destination>{dad41d7a-38b2-4dff-9438-5cb0759cbda9}</destination>
 		</relationship>
@@ -240,13 +240,16 @@
 	<object class="MixerBusFader" id="{91e4be9b-4524-4a59-aabd-587f44144192}" />
 	<object class="SpatialiserEffect" id="{faacc7da-e261-4b90-925a-de2b5736459a}">
 		<property name="distanceRolloffType">
-			<value>2</value>
+			<value>3</value>
 		</property>
 		<property name="maximumDistance">
-			<value>15</value>
+			<value>25</value>
 		</property>
 		<property name="overrideRange">
 			<value>true</value>
+		</property>
+		<property name="extentMode">
+			<value>1</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{2ebebba4-1a1b-4e15-98e1-771d223fb334}">
@@ -324,7 +327,7 @@
 	</object>
 	<object class="AutomationPoint" id="{f32b20b8-4f92-4913-86c0-247bf238ba5d}">
 		<property name="position">
-			<value>34</value>
+			<value>20</value>
 		</property>
 		<property name="value">
 			<value>10</value>
@@ -332,7 +335,7 @@
 	</object>
 	<object class="AutomationPoint" id="{2d3dff1a-2d65-43c8-975f-b2179d065997}">
 		<property name="position">
-			<value>46</value>
+			<value>30</value>
 		</property>
 		<property name="value">
 			<value>-80</value>

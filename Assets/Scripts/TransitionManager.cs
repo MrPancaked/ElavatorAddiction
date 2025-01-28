@@ -9,10 +9,7 @@ public class TransitionManager : MonoBehaviour
     #region Header Variables
 
     [Header("References")]
-    public CinemachineImpulseSource impulseSource; // Reference to the Cinemachine impulse source
     public Light sceneLight; // Reference to the scene light
-
-    [Header("Scenes list")]
     public List<SceneSettings> targetSceneSettings; // List of all scene settings
 
     // Private stuff
@@ -40,12 +37,15 @@ public class TransitionManager : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        instance = this;
-        DontDestroyOnLoad(this.gameObject); // Prevent the game object from being destroyed in different scenes.
-        SceneManager.sceneLoaded += OnSceneLoaded; //Add listener to scene loaded
-        // Find the Main Camera in Awake so it's available before the first scene is loaded.
-        mainCamera = Camera.main;
-        SceneLoaded(); //Load initial scene
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject); // Prevent the game object from being destroyed in different scenes.
+            SceneManager.sceneLoaded += OnSceneLoaded; //Add listener to scene loaded
+                                                       // Find the Main Camera in Awake so it's available before the first scene is loaded.
+            mainCamera = Camera.main;
+            SceneLoaded(); //Load initial scene
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) //Method for when scene is loaded
@@ -201,15 +201,6 @@ public class TransitionManager : MonoBehaviour
             }
         }
         return settings; //return the settings
-    }
-
-    #endregion
-
-    #region Screen Shake
-
-    public void ScreenShake(float strength)
-    {
-        impulseSource.GenerateImpulseWithForce(strength); // trigger impulse with given strength
     }
 
     #endregion

@@ -7,37 +7,86 @@ public class NewMovement : MonoBehaviour
 {
     private Rigidbody rb;
 
-    [Header("movement")]
+    [Header("Movement")]
     public float speed;
     public float airMultiplier;
     public float groundDrag;
     public float airDrag;
-    public Vector3 moveDirection;
 
-    [Header("jumping")]
+    [Header("Jumping")]
     public float jumpForce;
     public float jumpTiming;
-    private float jumpTimer;
-    private bool jumping;
-    private bool jumpAvailable;
+    public float bhopBoost;
 
-
-    [Header("sliding")]
-    private float normalYScale;
+    [Header("Sliding")]
     public float slideYScale;
     public float slideSpeed;
     public float slideDragIncrease;
     public float downForce;
-    private bool sliding;
-    
 
-    [Header("ground detection")]
+    [Header("Ground Detection")]
     public Vector3 boxSize;
 
-    private LayerMask groundLayer;
+    //private shit    
+    [HideInInspector]
+    public bool jumpPressed = false;
+    [HideInInspector]
+    public bool jumpReleased = false;
+    [HideInInspector]
+    public bool slidePressed = false;
+    [HideInInspector]
+    public bool slideReleased = false;
+    [HideInInspector]
+    public Vector3 moveDirection;
+    private float normalYScale;
+    private float jumpTimer;
+    private bool jumping;
+    private bool jumpAvailable;
     private bool grounded;
-
+    private bool sliding;
+    private LayerMask groundLayer;
     private Inputs inputs;
+    public static NewMovement instance;
+    public static NewMovement Instance { get { return instance; } }
+
+    private void Awake()  /// Makes sure this object survives the scene transition, and that there is only one.
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // IMPORTANT!
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    void Update() // I HAD TO MOVE THIS HERE BECAUSE THE INPUTS HAVE TO NOT HAVE AN UPDATE METHOD BECAUSE OF SINGLETONES AND SHIT PLEASE RENE ITS 5 AM!!!!!
+    {
+        inputs.moveMentInput = inputs.movement.ReadValue<Vector2>().normalized; // Read and normalize the movement input
+
+        if (inputs.jump.WasPressedThisFrame()) // Check for jump press
+        {
+            jumpPressed = true;
+        }
+
+        if (inputs.jump.WasReleasedThisFrame()) // Check for jump release
+        {
+            jumpReleased = true;
+        }
+
+        if (inputs.slide.WasPressedThisFrame()) // Check for slide press
+        {
+            slidePressed = true;
+        }
+
+        if (inputs.slide.WasReleasedThisFrame()) // Check for slide release
+        {
+            slideReleased = true;
+        }
+    }
 
     void Start()
     {
@@ -47,14 +96,9 @@ public class NewMovement : MonoBehaviour
         normalYScale = transform.localScale.y;
     }
 
-    private void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
-        if (inputs.jumpPressed)
+        if (jumpPressed)
         {
             jumping = true;
             ResetJumpTimer();
@@ -84,10 +128,12 @@ public class NewMovement : MonoBehaviour
         {
             rb.drag = groundDrag;
         }
+
         else if (!sliding || !grounded)
         {
             rb.drag = airDrag;
         }
+
         if (sliding && grounded && (rb.drag < groundDrag))
         {
             rb.drag += slideDragIncrease * groundDrag; /// Increase drag when sliding
@@ -100,6 +146,7 @@ public class NewMovement : MonoBehaviour
             jumpAvailable = false;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(moveDirection * bhopBoost, ForceMode.Impulse);
         }
 
         //jumping
@@ -109,8 +156,8 @@ public class NewMovement : MonoBehaviour
             jumpAvailable = false;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            
         }
-
 
         //movement
         moveDirection = transform.right * inputs.moveMentInput.x + transform.forward * inputs.moveMentInput.y;
@@ -124,10 +171,8 @@ public class NewMovement : MonoBehaviour
             rb.AddForce(moveDirection * speed * airMultiplier);
         }
 
-        
-
         //sliding
-        if (inputs.slidePressed && !sliding)
+        if (slidePressed && !sliding)
         {
             transform.localScale = new Vector3(transform.localScale.x, slideYScale, transform.localScale.z); /// Set crouch scale
             sliding = true;
@@ -140,9 +185,7 @@ public class NewMovement : MonoBehaviour
             
         }
 
-        
-
-        if (sliding && inputs.slideReleased)
+        if (sliding && slideReleased)
         {
             sliding = false;
             transform.localScale = new Vector3(transform.localScale.x, normalYScale, transform.localScale.z);
@@ -150,13 +193,12 @@ public class NewMovement : MonoBehaviour
         }
 
         //end of fixedupdate
-        inputs.jumpPressed = false;
-        inputs.jumpReleased = false;
-        inputs.slidePressed = false;
-        inputs.slideReleased = false;
+        jumpPressed = false;
+        jumpReleased = false;
+        slidePressed = false;
+        slideReleased = false;
 
-        Debug.Log(rb.drag);
-        
+        //Debug.Log(rb.drag); THIS SHIT IS ANNOYINGGGG!!!!!!      oh hi Rene:3
     }
 
     private void JumpReset()
@@ -169,15 +211,13 @@ public class NewMovement : MonoBehaviour
         jumpTimer = jumpTiming;
     }
 
-    public bool IsGrounded()
+    public bool IsGrounded() // Cast a ray downward from the player's position
     {
-        // Cast a ray downward from the player's position
         return Physics.OverlapBox(transform.position + (Vector3.down * transform.localScale.y), boxSize / 2, Quaternion.identity, groundLayer).Length > 0;
     }
 
-    public void OnDrawGizmos()
+    public void OnDrawGizmos() // Draw the ray in the Scene view for debugging
     {
-        // Draw the ray in the Scene view for debugging
         Gizmos.color = Color.green;
         Gizmos.DrawCube(transform.position + (Vector3.down * transform.localScale.y), boxSize);
     }

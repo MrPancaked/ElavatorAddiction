@@ -14,25 +14,27 @@ public class Inputs : MonoBehaviour
     [Header("References")]
     [SerializeField] private InputActionAsset controls; // Reference to the Input Action Asset
 
-    [Header("Input")]
-    public Vector2 moveMentInput; // Normalized movement input vector
-    public bool jumpPressed = false; 
-    public bool jumpReleased = false; 
-    public bool slidePressed = false; 
-    public bool slideReleased = false; 
-
     // private shit
+    [HideInInspector]
+    public Vector2 moveMentInput; // Normalized movement input vector
+    [HideInInspector]
     public InputAction interaction; // Action for player slide
+    [HideInInspector]
     public InputAction reload; // Action for player slide
+    [HideInInspector]
     public InputAction shoot; // Action for player slide
+    [HideInInspector]
     public InputAction selectItem1; /// Input action to switch to item 1
+    [HideInInspector]
     public InputAction selectItem2; /// Input action to switch to item 2
-    private InputAction movement; // Action for player movement
-    private InputAction jump; // Action for player jump
-    private InputAction slide; // Action for player slide
+    [HideInInspector]
+    public InputAction movement; // Action for player movement
+    [HideInInspector]
+    public InputAction jump; // Action for player jump
+    [HideInInspector]
+    public InputAction slide; // Action for player slide
 
     static Inputs instance;
-
     public static Inputs Instance
     {
         get { return instance; }   
@@ -47,10 +49,12 @@ public class Inputs : MonoBehaviour
         if (instance == null) // Singleton
         {
             instance = this;
+            DontDestroyOnLoad(gameObject); // IMPORTANT!
         }
         else if (instance != this)
         {
             Destroy(this.gameObject);
+            return;
         }
 
         movement = controls.FindActionMap("Player").FindAction("Move");
@@ -87,30 +91,30 @@ public class Inputs : MonoBehaviour
         selectItem2.Disable();
     }
 
-    void Update()
-    {   
-        moveMentInput = movement.ReadValue<Vector2>().normalized; // Read and normalize the movement input
-
-        if (jump.WasPressedThisFrame()) // Check for jump press
-        {
-            jumpPressed = true;
-        }
-       
-        if (jump.WasReleasedThisFrame()) // Check for jump release
-        {
-            jumpReleased = true;
-        }
-       
-        if (slide.WasPressedThisFrame()) // Check for slide press
-        {
-            slidePressed = true;
-        }
-       
-        if (slide.WasReleasedThisFrame()) // Check for slide release
-        {
-            slideReleased = true;
-        }
-    }
+    //void Update()
+    //{   
+    //    moveMentInput = movement.ReadValue<Vector2>().normalized; // Read and normalize the movement input
+    //
+    //    if (jump.WasPressedThisFrame()) // Check for jump press
+    //    {
+    //        jumpPressed = true;
+    //    }
+    //   
+    //    if (jump.WasReleasedThisFrame()) // Check for jump release
+    //    {
+    //        jumpReleased = true;
+    //    }
+    //   
+    //    if (slide.WasPressedThisFrame()) // Check for slide press
+    //    {
+    //        slidePressed = true;
+    //    }
+    //   
+    //    if (slide.WasReleasedThisFrame()) // Check for slide release
+    //    {
+    //        slideReleased = true;
+    //    }
+    //}
 
     #endregion
 }
