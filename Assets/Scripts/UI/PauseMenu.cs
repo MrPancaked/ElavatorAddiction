@@ -49,7 +49,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         isPaused = false;
         Time.timeScale = 1f; 
-        SceneManager.LoadScene("Main Menu"); 
+        SceneManager.LoadScene("MainMenuNew"); 
     }
 }
 

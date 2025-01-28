@@ -1,6 +1,7 @@
 //--------------------------------------------------------------------------------------------------
 //  Description: Applies upgrades to the player and handles the buff logic (debug logs only).
 //--------------------------------------------------------------------------------------------------
+using TMPro;
 using UnityEngine;
 
 public class Upgrades : MonoBehaviour
@@ -14,6 +15,13 @@ public class Upgrades : MonoBehaviour
     public float healAmount;
     public float fireRateMultiplier;
     public float dropchanceMultiplier;
+
+    [Header("Upgrade UI references")]
+    public TextMeshProUGUI damageText;
+    public TextMeshProUGUI fireRateText;
+    public TextMeshProUGUI speedText;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI dropChanceText;
 
     //private shit
     private Gun Shotgun; // Reference to the player's gun script
@@ -74,12 +82,14 @@ public class Upgrades : MonoBehaviour
     private void SpeedUpgrade(float speedIncrease) /// Applies a speed upgrade to the player and logs it.
     {
         NewMovement.Instance.speed += speedIncrease;
+        UpdateUpgradeUI();
         Debug.Log("Speed upgrade: " + NewMovement.Instance.speed);
     }
 
     private void DamageUpgrade(float damageIncrease) /// Applies a strengh upgrade to the player and logs it.
     {
         Shotgun.damageMultiplier += damageIncrease;
+        UpdateUpgradeUI();
         Debug.Log("Damage upgrade: " + Shotgun.damageMultiplier);
     }
 
@@ -88,6 +98,7 @@ public class Upgrades : MonoBehaviour
         HealthManager.Instance.initialHealth += healthIncrease;
         HealthManager.Instance.health.hp += healAmount;
         HealthManager.Instance.UpdateHealthUI();
+        UpdateUpgradeUI();
         Debug.Log("Healed by: " + healAmount);
         Debug.Log("Health increased: " + healthIncrease);
     }
@@ -95,17 +106,29 @@ public class Upgrades : MonoBehaviour
     private void FireRateUpgrade(float fireRateMultiplier) /// Applies a fire rate upgrade to the player and logs it.
     {
         Shotgun.gunSettings.fireRate *= fireRateMultiplier;
+        UpdateUpgradeUI();
         Debug.Log("Fire rate upgrade: " + Shotgun.gunSettings.fireRate);
     }
 
     private void DropChanceUpgrade(float dropchanceMultiplier)
     { 
         CoinsLogic.Instance.coinDropChance += dropchanceMultiplier;
+        UpdateUpgradeUI();
+        Debug.Log("Drop chance upgrade: " + CoinsLogic.Instance.coinDropChance);
     }
 
     private void Lose()
     {
         Debug.Log("LOSER!");
+    }
+
+    private void UpdateUpgradeUI()
+    { 
+        damageText.text = (Shotgun.gunSettings.damagePerBullet + Shotgun.damageMultiplier).ToString();
+        fireRateText.text = 1/Shotgun.gunSettings.fireRate * 100 + "%";
+        speedText.text = NewMovement.Instance.speed.ToString();
+        healthText.text = HealthManager.Instance.initialHealth.ToString();
+        dropChanceText.text = CoinsLogic.Instance.coinDropChance * 100 + "%";
     }
 
     #endregion
