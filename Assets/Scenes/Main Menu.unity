@@ -1439,7 +1439,7 @@ Transform:
   m_GameObject: {fileID: 777680697}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5.35, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2532,10 +2532,10 @@ MonoBehaviour:
   m_text: 'Movement: WASD
 
 
-    - Slide / Stomp (Shift)
+    - Slide / Stomp: Shift
 
 
-    - Jump (Space)
+    - Jump: Space
 
 
 
@@ -2543,14 +2543,19 @@ MonoBehaviour:
     LMB
 
 
-    - Equip the gun (1)
+    - Equip the gun: 1
 
 
-    - Reload (R)
+    - Reload: R
 
 
 
-    Shield: RMB'
+    Upgrades and stats: TAB
+
+
+
+    Shield:
+    RMB'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa35fb190cd6efe44bd07bebbf8a1333, type: 2}
   m_sharedMaterial: {fileID: 7265315094006122452, guid: aa35fb190cd6efe44bd07bebbf8a1333,
