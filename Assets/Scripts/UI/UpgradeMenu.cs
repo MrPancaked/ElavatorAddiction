@@ -6,14 +6,14 @@ public class UpgradeMenu : MonoBehaviour
 {
    [SerializeField] private GameObject upgradeMenu;
    
-
     void Update()
     {
-        if (Input.GetKey(KeyCode.Tab))
+        if (Inputs.Instance.stats.IsPressed() && !HealthManager.Instance.PlayerIsDead) // Check for press
         {
+            Upgrades.Instance.UpdateUpgradeUI();
             upgradeMenu.SetActive(true);
         }
-        else 
+        else
         {
             upgradeMenu.SetActive(false);
         }

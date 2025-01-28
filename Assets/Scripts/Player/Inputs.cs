@@ -33,6 +33,10 @@ public class Inputs : MonoBehaviour
     public InputAction jump; // Action for player jump
     [HideInInspector]
     public InputAction slide; // Action for player slide
+    [HideInInspector]
+    public InputAction pause; // Action for pause
+    [HideInInspector]
+    public InputAction stats; // Action for stats
 
     static Inputs instance;
     public static Inputs Instance
@@ -65,6 +69,9 @@ public class Inputs : MonoBehaviour
         shoot = controls.FindActionMap("Player").FindAction("Shoot");
         selectItem1 = controls.FindActionMap("Player").FindAction("SelectItem1");
         selectItem2 = controls.FindActionMap("Player").FindAction("SelectItem2");
+        selectItem2 = controls.FindActionMap("Player").FindAction("SelectItem2");
+        pause = controls.FindActionMap("Player").FindAction("Pause");
+        stats = controls.FindActionMap("Player").FindAction("Stats");
     }
 
     private void OnEnable() // Enable the input actions
@@ -77,6 +84,8 @@ public class Inputs : MonoBehaviour
         shoot.Enable();
         selectItem1.Enable();
         selectItem2.Enable();
+        pause.Enable();
+        stats.Enable();
     }
 
     private void OnDisable() // Disable the input actions
@@ -89,32 +98,9 @@ public class Inputs : MonoBehaviour
         shoot.Disable();
         selectItem1.Disable();
         selectItem2.Disable();
+        pause.Disable();
+        stats.Disable();
     }
-
-    //void Update()
-    //{   
-    //    moveMentInput = movement.ReadValue<Vector2>().normalized; // Read and normalize the movement input
-    //
-    //    if (jump.WasPressedThisFrame()) // Check for jump press
-    //    {
-    //        jumpPressed = true;
-    //    }
-    //   
-    //    if (jump.WasReleasedThisFrame()) // Check for jump release
-    //    {
-    //        jumpReleased = true;
-    //    }
-    //   
-    //    if (slide.WasPressedThisFrame()) // Check for slide press
-    //    {
-    //        slidePressed = true;
-    //    }
-    //   
-    //    if (slide.WasReleasedThisFrame()) // Check for slide release
-    //    {
-    //        slideReleased = true;
-    //    }
-    //}
 
     #endregion
 }

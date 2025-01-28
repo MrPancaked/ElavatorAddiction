@@ -10,17 +10,15 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (Inputs.Instance.pause.WasPressedThisFrame() && !HealthManager.Instance.PlayerIsDead) // Check for press
         {
             if (isPaused)
             {
-                Cursor.lockState = CursorLockMode.Confined;
                 Resume(); 
             }
             else
             {
-                Cursor.lockState = CursorLockMode.Locked;
                 Pause(); 
             }
         }
@@ -30,8 +28,8 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true); 
         Time.timeScale = 0f;      
-        isPaused = true;          
-        Cursor.lockState = CursorLockMode.None; 
+        isPaused = true;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = true; 
     }
 
@@ -39,8 +37,8 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false); 
         Time.timeScale = 1f;        
-        isPaused = false;           
-        Cursor.lockState = CursorLockMode.Locked; 
+        isPaused = false;
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false; 
     }
 
