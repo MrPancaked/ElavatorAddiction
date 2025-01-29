@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
 
 public class EnemyCounter : MonoBehaviour
 {
-    private GameObject[] enemies;
     public TextMeshProUGUI enemyCounter;
+    public int enemyCount;
 
     private static EnemyCounter instance;
     public static EnemyCounter Instance
@@ -27,19 +28,35 @@ public class EnemyCounter : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject); // IMPORTANT!
-            UpdateEnemyCounter();
+            InitiatlizeEnemyCount();
         }
     }
 
+    private void Start()
+    {
+        InitiatlizeEnemyCount();
+    }
     #endregion
 
     #region UI
 
+    public void InitiatlizeEnemyCount()
+    {
+        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemyArray)
+        {
+            Debug.Log("Enemy Count: " + enemyCount);
+            if (enemy.activeInHierarchy)  // Only count active enemies
+            {
+                enemyCount++;
+                
+            }
+        }
+        enemyCounter.text = "TO KILL: " + enemyCount.ToString(); // Ensure the enemy count doesn't go below 0 if there are no enemies
+    }
+
     public void UpdateEnemyCounter()
     {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy"); // Find all objects taged Damageable
-        int enemyCount = enemies.Length;
-        enemyCount = Mathf.Max(0, enemyCount); // Ensure the enemy count doesn't go below 0 if there are no enemies
         enemyCounter.text = "TO KILL: " + enemyCount.ToString(); // Ensure the enemy count doesn't go below 0 if there are no enemies
     }
 
