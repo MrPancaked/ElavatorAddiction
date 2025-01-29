@@ -71,6 +71,7 @@ public class Enemy : MonoBehaviour
         health.HandleDeathMethod -= Die;
         health.TakeDamageMethod -= TakeDamage;
         enemyCounter.enemyCount--; // Decrease the enemy counter
+        enemyCounter.UpdateEnemyCounter();
         StopIdleSound();
     }
 
