@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 91489145338851501}
   serializedVersion: 2
   m_LocalRotation: {x: 0.123312674, y: 0.14575481, z: -0.018313404, w: 0.98143476}
-  m_LocalPosition: {x: 0, y: 0.39999998, z: 0}
+  m_LocalPosition: {x: 0.5599983, y: 0.39999962, z: 0.32999378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -243,7 +243,7 @@ Transform:
   m_GameObject: {fileID: 1544067631284132747}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12331267, y: 0.1457548, z: -0.018313408, w: 0.9814347}
-  m_LocalPosition: {x: 0, y: 0.39999962, z: 0}
+  m_LocalPosition: {x: 0.5599983, y: 0.39999962, z: 0.32999378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -260,7 +260,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -626,7 +626,7 @@ Transform:
   m_GameObject: {fileID: 7784816484273663751}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.56, y: 0, z: 0.33}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -841,7 +841,7 @@ MonoBehaviour:
   bhopBoost: 3
   slideYScale: 0.6
   slideSpeed: 2
-  slideDragIncrease: 0.004
+  slideDragIncrease: 0.006
   downForce: 40
   boxSize: {x: 0.5, y: 0.15, z: 0.5}
   jumpPressed: 0
@@ -862,7 +862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinsCounter: {fileID: 0}
-  initialPlayerCoins: 200
+  initialPlayerCoins: 0
   coinDropChance: 0.5
   spinCost: 10
 --- !u!114 &3553973524824693643
@@ -914,8 +914,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09401d86fd8f7a48a74a6140dbc3d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7784816484273663751}
-  respawnPoint: {fileID: 0}
   health: {fileID: 8606113254386454732}
   guns:
   - {fileID: 8921157221110998851}
@@ -1078,17 +1076,17 @@ PrefabInstance:
     - target: {fileID: 3249948968361327493, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.50999945
+      value: 0.474
       objectReference: {fileID: 0}
     - target: {fileID: 3249948968361327493, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.28300005
+      value: -0.283
       objectReference: {fileID: 0}
     - target: {fileID: 3249948968361327493, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.81699973
+      value: 0.646
       objectReference: {fileID: 0}
     - target: {fileID: 3249948968361327493, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
         type: 3}

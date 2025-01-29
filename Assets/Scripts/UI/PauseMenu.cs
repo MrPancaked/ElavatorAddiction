@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gun;
+    [SerializeField] private GameObject theWholeFuckingGame;
     private bool isPaused = false; 
 
     void Update()
@@ -47,6 +48,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
+        Destroy(theWholeFuckingGame.gameObject);
         pauseMenu.SetActive(false);
         isPaused = false;
         Time.timeScale = 1f; 
