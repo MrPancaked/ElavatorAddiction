@@ -10739,7 +10739,7 @@ GameObject:
   - component: {fileID: 2879213533621133543}
   m_Layer: 3
   m_Name: Book
-  m_TagString: Obsctacle
+  m_TagString: Book
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
