@@ -96,6 +96,8 @@ public class Interactions : MonoBehaviour
             if (hit.collider.CompareTag(ElevatorButtonTag))
             {
                 ElevatorController.Instance.ButtonPressed();
+                ElevatorSounds.Instance.PlayButtonSound(hit.point); // Pass the hit point
+                hit.collider.GetComponent<Animator>().SetTrigger("Press");
             }
             else if (hit.collider.CompareTag(ElevatorLeverTag))
             {

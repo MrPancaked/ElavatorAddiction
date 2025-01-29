@@ -118,17 +118,19 @@ public class ElevatorController : MonoBehaviour
         ElevatorSounds.Instance.PlayDoorOpenSound(); // Play door open sound
         doorAnimator.SetTrigger("Open"); // Trigger door open animation
         doorIsClosed = false; //Set door as open
+        GameObject.FindGameObjectWithTag("EnemyCounter").GetComponent<EnemyCounter>().InitiatlizeEnemyCount(); // Update the enemy counter
     }
 
     public IEnumerator CloseDoors()
     {
+
         Debug.Log("Door close / Sound / Animation");
         doorIsClosed = true; // Set door as closed
         ElevatorSounds.Instance.PlayDoorCloseSound(); // Play door close sound
         doorAnimator.SetTrigger("Close"); // Trigger door close animation
         yield return new WaitForSeconds(3f); // Time delay before elevator start
 
-        if (doorIsClosed && playerInElevator)// If the player is in the elevator START THE FUCKING MACHINE
+        if (doorIsClosed && playerInElevator && EnemyCounter.Instance.enemyCount == 0)// If the player is in the elevator START THE FUCKING MACHINE
         {
             Debug.Log("Ride started / Button disabled / Start sound");
             isButtonActive = false; // Disable the button
@@ -142,7 +144,14 @@ public class ElevatorController : MonoBehaviour
             yield return new WaitForSeconds(6f); // Time delay before scene transition
 
             Debug.Log("Screen shake / Scene load / Stop sound");
-            TransitionManager.Instance.LoadNewScene(destinationSettings.sceneName); //load the next scene
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destinationSettings.sceneName); //load the scene async
+            while (!asyncLoad.isDone)
+            {
+                yield return null;
+            }
+
+            LevelGenerator.Instance.GenerateLevel(); // Call the GenerateLevel method
+            EnemySpawner.Instance.SpawnEnemies();
             ElevatorSounds.Instance.PlayElevatorStop(); //Play the elevator stop sound
             yield return new WaitForSeconds(0.3f); // Makes the screenshake match the sound, otherwise its useless
             ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 0.7f, overrideDuration: 0.8f); // Trigger screen shake

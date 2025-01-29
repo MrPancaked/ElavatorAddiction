@@ -151,10 +151,13 @@ public class HealthManager : MonoBehaviour
 
         deathScreenAnimator.SetTrigger("Respawn"); // trigger Reset animation
         yield return null; // Wait one frame 
+        LevelGenerator.Instance.GenerateLevel(); // Call the GenerateLevel method
+        EnemySpawner.Instance.SpawnEnemies();
         player.transform.position = respawnPoint.position;
         playerIsDead = false; // Reset death state
         health.hp = 100f;
         CoinsLogic.Instance.ResetCoins();
+        EnemyCounter.Instance.UpdateEnemyCounter();
         UpdateHealthUI();
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor

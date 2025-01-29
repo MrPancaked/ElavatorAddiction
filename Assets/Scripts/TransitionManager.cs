@@ -150,24 +150,6 @@ public class TransitionManager : MonoBehaviour
 
     #endregion
 
-    #region Scene Loading
-
-    public void LoadNewScene(string sceneName)
-    {
-        StartCoroutine(LoadSceneAsync(sceneName)); // load scene asyncronously
-    }
-
-    IEnumerator LoadSceneAsync(string sceneName)
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName); //load the scene async
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
-
-    #endregion
-
     #region Scene Settings
 
     private void SceneLoaded() // Loads the Scene Settings by name.
