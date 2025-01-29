@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
 
     [Header("References")]
     public LayerMask whatIsEnemy; // Layer mask to identify enemies
+    public LayerMask whatIsGround; // Layer mask to identify enemies
     public Animator gunAnimator;
     [SerializeField] public GunSettings gunSettings; // Gun settings with all statistics and variables
     public Camera fpsCam; // The FPS camera
@@ -257,7 +258,7 @@ public class Gun : MonoBehaviour
                 GameObject bloodBurstTemporary = Instantiate(bloodBurst, rayHit.point, Quaternion.Euler(0, 180, 0), particlesParent);
                 Destroy(bloodBurstTemporary, 1f); // Destroy after 1 sec
             }
-            else // Instantiate bullet hole for anything else
+            if ((whatIsGround & (1 << hitLayer)) != 0) // Instantiate bullet hole
             {
                 AudioManager.instance.PlayOneShot(gunSettings.bulletHit, this.transform.position); // Play bullet hit sound
                 GameObject bulletHoleTemporary = Instantiate(bulletHole, rayHit.point, Quaternion.Euler(0, 180, 0), particlesParent); // Instantiate bullet hole

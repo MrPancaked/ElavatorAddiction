@@ -142,7 +142,15 @@ public class ElevatorController : MonoBehaviour
             yield return new WaitForSeconds(6f); // Time delay before scene transition
 
             Debug.Log("Screen shake / Scene load / Stop sound");
-            TransitionManager.Instance.LoadNewScene(destinationSettings.sceneName); //load the next scene
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destinationSettings.sceneName); //load the scene async
+            while (!asyncLoad.isDone)
+            {
+                yield return null;
+            }
+
+
+            LevelGenerator.Instance.ClearLevel(); // Call the ClearLevel method
+            LevelGenerator.Instance.GenerateLevel(); // Call the GenerateLevel method
             ElevatorSounds.Instance.PlayElevatorStop(); //Play the elevator stop sound
             yield return new WaitForSeconds(0.3f); // Makes the screenshake match the sound, otherwise its useless
             ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 0.7f, overrideDuration: 0.8f); // Trigger screen shake
