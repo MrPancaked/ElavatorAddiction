@@ -31,7 +31,7 @@ public class PauseMenu : MonoBehaviour
         gun.SetActive(false);
         Time.timeScale = 0f;      
         isPaused = true;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true; 
     }
 
@@ -41,7 +41,7 @@ public class PauseMenu : MonoBehaviour
         gun.SetActive(true);
         Time.timeScale = 1f;        
         isPaused = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false; 
     }
 

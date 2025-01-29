@@ -42,13 +42,13 @@ public class EnemyCounter : MonoBehaviour
 
     public void InitiatlizeEnemyCount()
     {
-        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+        enemyCount = 0;
+        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Damageable");
         foreach (GameObject enemy in enemyArray)
         {
             if (enemy.activeInHierarchy)  // Only count active enemies
             {
                 enemyCount++;
-                
             }
         }
         enemyCounter.text = "TO KILL: " + enemyCount.ToString(); // Ensure the enemy count doesn't go below 0 if there are no enemies
