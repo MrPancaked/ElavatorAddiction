@@ -77,6 +77,11 @@ public class LevelGenerator : MonoBehaviour
 
     public void GenerateLevel() // Method to generate the level
     {
+        for (int i = transform.childCount - 1; i >= 0; i--) // Loop through the children of the transform
+        {
+            DestroyImmediate(transform.GetChild(i).gameObject); // Destroy each child object immediately
+        }
+
         spawnedHutPositions.Clear(); // Clear hut positions list at the start of every new level
         Vector3 churchPosition = SpawnChurch(); // Spawn the church and get its position
         SpawnGraveyard(churchPosition, 0f); // Spawn the first graveyard
@@ -106,14 +111,6 @@ public class LevelGenerator : MonoBehaviour
     #endregion
 
     #region Spawning
-
-    public void ClearLevel() // Method to clear the level
-    {
-        for (int i = transform.childCount - 1; i >= 0; i--) // Loop through the children of the transform
-        {
-            DestroyImmediate(transform.GetChild(i).gameObject); // Destroy each child object immediately
-        }
-    }
 
     Vector3 SpawnChurch() // Method to spawn the church
     {

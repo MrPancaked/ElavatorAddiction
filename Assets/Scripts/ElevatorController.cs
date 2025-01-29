@@ -123,13 +123,14 @@ public class ElevatorController : MonoBehaviour
 
     public IEnumerator CloseDoors()
     {
+
         Debug.Log("Door close / Sound / Animation");
         doorIsClosed = true; // Set door as closed
         ElevatorSounds.Instance.PlayDoorCloseSound(); // Play door close sound
         doorAnimator.SetTrigger("Close"); // Trigger door close animation
         yield return new WaitForSeconds(3f); // Time delay before elevator start
 
-        if (doorIsClosed && playerInElevator)// If the player is in the elevator START THE FUCKING MACHINE
+        if (doorIsClosed && playerInElevator && EnemyCounter.Instance.enemyCount == 0)// If the player is in the elevator START THE FUCKING MACHINE
         {
             Debug.Log("Ride started / Button disabled / Start sound");
             isButtonActive = false; // Disable the button
@@ -149,9 +150,8 @@ public class ElevatorController : MonoBehaviour
                 yield return null;
             }
 
-
-            LevelGenerator.Instance.ClearLevel(); // Call the ClearLevel method
             LevelGenerator.Instance.GenerateLevel(); // Call the GenerateLevel method
+            EnemySpawner.Instance.SpawnEnemies();
             ElevatorSounds.Instance.PlayElevatorStop(); //Play the elevator stop sound
             yield return new WaitForSeconds(0.3f); // Makes the screenshake match the sound, otherwise its useless
             ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 0.7f, overrideDuration: 0.8f); // Trigger screen shake

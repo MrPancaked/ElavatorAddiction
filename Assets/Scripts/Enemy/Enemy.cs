@@ -70,6 +70,7 @@ public class Enemy : MonoBehaviour
     {
         health.HandleDeathMethod -= Die;
         health.TakeDamageMethod -= TakeDamage;
+        enemyCounter.enemyCount--; // Decrease the enemy counter
         StopIdleSound();
     }
 
@@ -159,7 +160,6 @@ public class Enemy : MonoBehaviour
         //GetComponent<DropLoot>().SpawnLoot(transform.position); // Drop the loot
         CoinsLogic.Instance.CollectCoin();
         AudioManager.instance.PlayOneShot(enemySettings.deathSound, this.transform.position); // Play enemy damage sound
-        enemyCounter.enemyCount--; // Decrease the enemy counter
         enemyCounter.UpdateEnemyCounter(); // Update the enemy counter
         gameObject.SetActive(false); // Disables the enemy model
         
