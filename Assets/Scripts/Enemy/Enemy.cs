@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 
     [Header("References")]
     public GameObject CoinBurst;
+    public GameObject DeathBurst;
 
     [SerializeField] EnemySettings enemySettings;
 
@@ -165,7 +166,10 @@ public class Enemy : MonoBehaviour
             GameObject coins = Instantiate(CoinBurst, transform.position, Quaternion.identity); // Spawn the coin burst
             CoinsLogic.Instance.CollectCoin();
         }
-            
+        else
+        {
+            GameObject blood = Instantiate(DeathBurst, transform.position, Quaternion.identity); // Spawn the blood burst
+        }
         AudioManager.instance.PlayOneShot(enemySettings.deathSound, this.transform.position); // Play enemy damage sound
         enemyCounter.UpdateEnemyCounter(); // Update the enemy counter
 

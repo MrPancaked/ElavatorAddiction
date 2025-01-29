@@ -561,5 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoinBurst: {fileID: 1932917029013565841, guid: cb1911b3e0a9bc74a843794349421273,
     type: 3}
+  DeathBurst: {fileID: 1932917029013565841, guid: 02a14e6d6cff9d4498da8a423e7b5bd9,
+    type: 3}
   enemySettings: {fileID: 11400000, guid: eea33707b68420746aee9d61181b1d60, type: 2}
   canDamage: 1
