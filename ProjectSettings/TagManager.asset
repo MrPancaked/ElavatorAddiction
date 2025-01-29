@@ -13,8 +13,7 @@ TagManager:
   - ElavatorManager
   - Shotgun
   - Enemy
-  - Obsctacle
-  - Elevator
+  - Slots
   layers:
   - Default
   - TransparentFX
