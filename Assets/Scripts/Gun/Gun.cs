@@ -1,7 +1,3 @@
-//--------------------------------------------------------------------------------------------------
-//  Description: Handles gun firing mechanics including shooting, reloading, bullet effects, and UI updates.
-//               Supports both single shot and burst fire modes, and dual gun configurations.
-//--------------------------------------------------------------------------------------------------
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,9 +13,11 @@ public class Gun : MonoBehaviour
 
     [Header("References")]
     public LayerMask whatIsEnemy; // Layer mask to identify enemies
-    [SerializeField] GunSettings gunSettings; // Gun settings with all statistics and variables
+    public Animator gunAnimator;
+    [SerializeField] public GunSettings gunSettings; // Gun settings with all statistics and variables
     public Camera fpsCam; // The FPS camera
     public Rigidbody playerRb; // Player's Rigidbody
+    public CinemachineImpulseSource impulseSource; // Impulse source for camera shake
     public Transform MuzzleFlashPoint; // Transform for the muzzle flash spawn point
     public TextMeshPro ammoCounter; // UI text element for ammo display
     public GameObject reloadFeedbackText; // UI text element for reload feedback (for now lololo hehehe rene im going crazy bithc it is 3 am)
@@ -40,6 +38,8 @@ public class Gun : MonoBehaviour
     private int bulletsShot; // Bullets shot in a single shot or burst
     private RaycastHit rayHit; // Info about the raycast
     private int currentGunIndex = 0; // Track which gun to fire in a dual gun set
+    public float damageMultiplier = 1f; // Damage multiplier for upgrades
+    private bool isLastShotInProgress = false; // Flag to prevent auto-reload before the shot is finished
 
     #endregion
 
@@ -50,6 +50,7 @@ public class Gun : MonoBehaviour
         shotsLeft = gunSettings.magazineSize / gunSettings.bulletsPerShot; // Initialize shots left to max magazine size at start
         readyToShoot = true; // Allow shooting initially
         reloadFeedbackText.SetActive(false); // Disable reload text at start
+        gunSettings.fireRate = 1f; // Set the fire rate to 1 initially
     }
 
     private void Start()
@@ -101,6 +102,12 @@ public class Gun : MonoBehaviour
         // Handle logic for normal (single) guns
         if (!gunSettings.isDualGun)
         {
+            //Auto reload if bullets = 0 && not reloading and not finishing the last shot.
+            if (shotsLeft <= 0 && !reloading && !isLastShotInProgress)
+            {
+                Reload();
+            }
+
             if (Inputs.Instance.reload.WasPressedThisFrame() && shotsLeft < (gunSettings.magazineSize / gunSettings.bulletsPerShot) && !reloading) Reload(); // Check if the player is trying to reload
 
             if (readyToShoot && shooting && !reloading) // Handle shooting logic if ready to shoot, the player is pressing to shoot, and if the gun is not reloading
@@ -113,10 +120,7 @@ public class Gun : MonoBehaviour
                     Shoot(); // Fire the gun
 
                 }
-                else if (shotsLeft == 0) // if out of ammo, call reload
-                {
-                    Reload();
-                }
+
             }
 
         }
@@ -124,7 +128,20 @@ public class Gun : MonoBehaviour
         // Handle logic for dual guns
         else
         {
-
+            bool allGunsEmpty = true;
+            foreach (Gun gun in dualGuns)
+            {
+                if (gun.shotsLeft > 0)
+                {
+                    allGunsEmpty = false;
+                    break;
+                }
+            }
+            //Auto reload if both guns are empty && not reloading and not finishing the last shot
+            if (allGunsEmpty && !reloading && !isLastShotInProgress)
+            {
+                Reload();
+            }
             if (Inputs.Instance.reload.WasPressedThisFrame() && (dualGuns[0].shotsLeft < (dualGuns[0].gunSettings.magazineSize / dualGuns[0].gunSettings.bulletsPerShot) ||
                                                                         dualGuns[1].shotsLeft < (dualGuns[1].gunSettings.magazineSize / dualGuns[1].gunSettings.bulletsPerShot))
                                                                         && !reloading) Reload();  // Check if the player is trying to reload
@@ -141,10 +158,7 @@ public class Gun : MonoBehaviour
                         dualGuns[currentGunIndex].Shoot(); // Fire the current gun
                         currentGunIndex = (currentGunIndex + 1) % 2; // Switch to the next gun
                     }
-                    else // if the gun is empty, then reload
-                    {
-                        Reload();
-                    }
+
                 }
             }
         }
@@ -157,9 +171,12 @@ public class Gun : MonoBehaviour
     private void Shoot() /// Handles the shooting mechanics for a single gun.
     {
         readyToShoot = false; // Disable more shooting until reset
+        isLastShotInProgress = true; // Set the flag at the start of the shot
 
         Vector3 spreadDirection = Random.insideUnitSphere * gunSettings.spread;  // Calculate spread in world space (Generate a random point inside a sphere for spread)
         Vector3 direction = fpsCam.transform.forward + spreadDirection; // Calculate Direction with Spread
+
+        gunAnimator.SetTrigger("Shoot");
 
         if (gunSettings.bulletsPerShot > 1) //Only call the burst fire if needed
         {
@@ -195,12 +212,12 @@ public class Gun : MonoBehaviour
                 {
                     enemyRigidbody.AddForce(direction * gunSettings.enemyPushbackForce, ForceMode.Impulse);
                 }
-                damageable?.TakeDamage(gunSettings.damagePerBullet); //Damage the enemy
+                damageable?.TakeDamage(gunSettings.damagePerBullet * damageMultiplier); //Damage the enemy
             }
 
 
         }
-        ScreenshakeManager.Instance.TriggerShake("gunshot", overrideForce: gunSettings.screenShakeStrength, overrideDuration: 0.1f);
+        impulseSource.GenerateImpulseWithForce(gunSettings.screenShakeStrength);
         BulletEffects(); // Call bullet effects
     }
 
@@ -212,11 +229,13 @@ public class Gun : MonoBehaviour
             SingleShot(direction);
             yield return new WaitForSeconds(gunSettings.timeBetweenBulletsInBursts);
         }
+        isLastShotInProgress = false; // reset it here so that the coroutine finishes
     }
 
     private void ResetShot() /// Resets the ready to shoot flag after firing.
     {
         readyToShoot = true;  // Allow shooting again
+        isLastShotInProgress = false; // reset it when it is a single shot
     }
 
     #endregion
@@ -266,6 +285,7 @@ public class Gun : MonoBehaviour
 
     private void Reload() /// Starts the reload process.
     {
+        gunAnimator.SetTrigger("Reload");
         reloading = true;   // Start reload process
         reloadFeedbackText.SetActive(true); // Display reload text
         Invoke(nameof(ReloadFinished), gunSettings.reloadTime);  // Complete reload after delay

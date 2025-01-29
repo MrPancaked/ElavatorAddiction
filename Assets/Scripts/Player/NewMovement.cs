@@ -45,7 +45,6 @@ public class NewMovement : MonoBehaviour
     private bool grounded;
     private bool sliding;
     private LayerMask groundLayer;
-    private Inputs inputs;
     public static NewMovement instance;
     public static NewMovement Instance { get { return instance; } }
 
@@ -65,24 +64,24 @@ public class NewMovement : MonoBehaviour
 
     void Update() // I HAD TO MOVE THIS HERE BECAUSE THE INPUTS HAVE TO NOT HAVE AN UPDATE METHOD BECAUSE OF SINGLETONES AND SHIT PLEASE RENE ITS 5 AM!!!!!
     {
-        inputs.moveMentInput = inputs.movement.ReadValue<Vector2>().normalized; // Read and normalize the movement input
+        Inputs.Instance.moveMentInput = Inputs.Instance.movement.ReadValue<Vector2>().normalized; // Read and normalize the movement input
 
-        if (inputs.jump.WasPressedThisFrame()) // Check for jump press
+        if (Inputs.Instance.jump.WasPressedThisFrame()) // Check for jump press
         {
             jumpPressed = true;
         }
 
-        if (inputs.jump.WasReleasedThisFrame()) // Check for jump release
+        if (Inputs.Instance.jump.WasReleasedThisFrame()) // Check for jump release
         {
             jumpReleased = true;
         }
 
-        if (inputs.slide.WasPressedThisFrame()) // Check for slide press
+        if (Inputs.Instance.slide.WasPressedThisFrame()) // Check for slide press
         {
             slidePressed = true;
         }
 
-        if (inputs.slide.WasReleasedThisFrame()) // Check for slide release
+        if (Inputs.Instance.slide.WasReleasedThisFrame()) // Check for slide release
         {
             slideReleased = true;
         }
@@ -90,7 +89,6 @@ public class NewMovement : MonoBehaviour
 
     void Start()
     {
-        inputs = GetComponent<Inputs>();
         rb = GetComponent<Rigidbody>();
         groundLayer = LayerMask.GetMask("Ground");
         normalYScale = transform.localScale.y;
@@ -160,7 +158,7 @@ public class NewMovement : MonoBehaviour
         }
 
         //movement
-        moveDirection = transform.right * inputs.moveMentInput.x + transform.forward * inputs.moveMentInput.y;
+        moveDirection = transform.right * Inputs.Instance.moveMentInput.x + transform.forward * Inputs.Instance.moveMentInput.y;
 
         if (grounded && !sliding)
         {

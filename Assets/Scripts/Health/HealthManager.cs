@@ -24,7 +24,7 @@ public class HealthManager : MonoBehaviour
     public Image healthImage;      // Reference to the Image component.
 
     //private shit
-    private float initialHealth;   // Initial health of the object.
+    public float initialHealth;   // Initial health of the object.
     private bool playerIsDead = false;  // Flag to track player's death state
     private static HealthManager instance;
     public static HealthManager Instance
@@ -46,6 +46,7 @@ public class HealthManager : MonoBehaviour
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject); // Enforce singleton pattern
+            return;
         }
         else
         {
@@ -78,7 +79,7 @@ public class HealthManager : MonoBehaviour
 
     #endregion
 
-    #region Taking Damage / Dying Methods
+    #region Taking Damage / Dying Methods / Health Upgrade
 
     private void OnPlayerTakeDamage(float damage) // Updates the health UI display.
     {
@@ -106,6 +107,14 @@ public class HealthManager : MonoBehaviour
             }
         }
     }
+
+    /*public void HealthUpgrade(float healthIncrease, float healAmount) /// Applies a health upgrade to the player and logs it.
+    {
+        initialHealth += healthIncrease;
+        health.hp += healAmount;
+        Debug.Log("Health Upgrade: " + health.hp);
+        UpdateHealthUI();
+    }*/
 
     #endregion
 
@@ -145,6 +154,7 @@ public class HealthManager : MonoBehaviour
         player.transform.position = respawnPoint.position;
         playerIsDead = false; // Reset death state
         health.hp = 100f;
+        CoinsLogic.Instance.ResetCoins();
         UpdateHealthUI();
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
@@ -160,7 +170,7 @@ public class HealthManager : MonoBehaviour
 
     #region UI
 
-    private void UpdateHealthUI()
+    public void UpdateHealthUI()
     {
         healthImage.fillAmount = health.hp / initialHealth;
     }

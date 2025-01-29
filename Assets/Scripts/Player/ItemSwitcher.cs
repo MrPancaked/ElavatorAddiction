@@ -12,7 +12,7 @@ public class ItemSwitcher : MonoBehaviour
 
     [Header("Item Settings")]
     public List<GameObject> items; /// List of items to switch between
-    private int currentItemIndex = 0; /// Index of current item
+    private int currentItemIndex = -1; /// Index of current item
 
     #endregion
 

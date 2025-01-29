@@ -23,10 +23,10 @@ public class Enemy : MonoBehaviour
     private Transform playerTransform;  // Reference to the player transform.
     private Collider playerCollider; // Reference to the player collider.
     private Vector3 hoverStartPosition; // Starting position of the hover movement.
-    private EnemyCounter enemyCounter; // Reference to the enemy counter script.
     private Coroutine soundCooldown; // Cooldown for the damage sound.
     private FMOD.Studio.EventInstance idleSoundInstance; // FMOD Instance for loop
     private Health health;          // Reference to the health script on this game object.
+    private EnemyCounter enemyCounter; // Reference to the enemy counter script.
     private EnemyState currentState = EnemyState.Idle;  // Current state of the enemy.
     private enum EnemyState
     {
@@ -48,7 +48,10 @@ public class Enemy : MonoBehaviour
         playerObject = GameObject.FindGameObjectWithTag("Player");
         playerCollider = playerObject.GetComponent<Collider>();
         enemyCounter = GameObject.FindGameObjectWithTag("EnemyCounter").GetComponent<EnemyCounter>();
-        enemyCounter.UpdateEnemyCounter();
+        if (enemyCounter != null) // Check if enemyCounter is not null AND the count is greater than 0
+        {
+            enemyCounter.UpdateEnemyCounter();
+        }
     }
 
     private void Start()  /// Called before the first frame update. Initializes the hover start position and orbit radius.
@@ -153,10 +156,14 @@ public class Enemy : MonoBehaviour
 
     public void Die() /// Handles the death of the enemy, disables the model, drops loot, and destroys itself.
     {
-        GetComponent<DropLoot>().SpawnLoot(transform.position); // Drop the loot
+        //GetComponent<DropLoot>().SpawnLoot(transform.position); // Drop the loot
+        CoinsLogic.Instance.CollectCoin();
         AudioManager.instance.PlayOneShot(enemySettings.deathSound, this.transform.position); // Play enemy damage sound
-        enemyCounter.UpdateEnemyCounter(); // Update the enemy counter
         gameObject.SetActive(false); // Disables the enemy model
+        if (enemyCounter != null) // Check if enemyCounter is not null AND the count is greater than 0
+        {
+            enemyCounter.UpdateEnemyCounter();
+        }
     }
 
     public void TakeDamage(float damage)
