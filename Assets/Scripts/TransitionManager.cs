@@ -166,7 +166,7 @@ public class TransitionManager : MonoBehaviour
         {
             int randomIndex = Random.Range(0, targetSceneSettings.Count); // get a random index
             newSceneSettings = targetSceneSettings[randomIndex]; // get the settings from the random index
-        } while (newSceneSettings.sceneName == currentSceneName); //while the name matches, keep looping
+        } while (newSceneSettings.sceneName == "Void"); //while the name matches, keep looping
         return newSceneSettings; // return the new settings
     }
 
