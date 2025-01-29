@@ -155,7 +155,7 @@ public class Upgrades : MonoBehaviour
     public void UpdateUpgradeUI()
     { 
         damageText.text = (Shotgun.gunSettings.damagePerBullet + Shotgun.extraDamage).ToString();
-        fireRateText.text = 1/Shotgun.gunSettings.fireRate * 100 + "%";
+        fireRateText.text = Mathf.RoundToInt(1/Shotgun.gunSettings.fireRate * 100) + "%";
         speedText.text = NewMovement.Instance.speed.ToString();
         healthText.text = HealthManager.Instance.initialHealth.ToString();
         dropChanceText.text = CoinsLogic.Instance.coinDropChance * 100 + "%";
