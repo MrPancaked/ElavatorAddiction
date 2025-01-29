@@ -94,9 +94,10 @@ public class HealthManager : MonoBehaviour
 
     private void OnPlayerDied() // Handle death through the event
     {
-        Debug.Log("Player no died");
         if (!playerIsDead)
         {
+            player = gameObject; // Re-find Player
+            player.transform.position = new Vector3(player.transform.position.x, 18.69f, player.transform.position.z);
             playerIsDead = true;
             Time.timeScale = 0f; // Pause the game
             Debug.Log("Player died");
@@ -133,6 +134,22 @@ public class HealthManager : MonoBehaviour
     public IEnumerator Restarting()
     {
         Time.timeScale = 1f; // Restore time scale
+        playerIsDead = false; // Reset death state
+        HealthManager.Instance.initialHealth = 100f; // Reset health
+        health.hp = 100f;
+        UpdateHealthUI();
+        CoinsLogic.Instance.coinDropChance = 0.5f;
+        CoinsLogic.Instance.ResetCoins();
+        foreach (Gun gunInstance in guns)
+        {
+            gunInstance.gunSettings.fireRate = 1f;
+            gunInstance.extraDamage = 0f;
+        }
+        NewMovement.Instance.speed = 200f;
+        EnemyCounter.Instance.UpdateEnemyCounter();
+
+        Cursor.visible = false; // Hide the cursor
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         yield return null; // Wait one frame
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void");
         while (!asyncLoad.isDone)
@@ -163,22 +180,32 @@ public class HealthManager : MonoBehaviour
         //Debug.Log("player position: " + player.transform.position);
         //yield return null; // Wait one frame 
 
-        playerIsDead = false; // Reset death state
-        health.hp = 100f;
-        CoinsLogic.Instance.ResetCoins();
-        EnemyCounter.Instance.UpdateEnemyCounter();
-        UpdateHealthUI();
-        Cursor.visible = false; // Hide the cursor
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        Debug.Log("Player Respawned");
-        //ElevatorController.Instance.OpenDoors();
-        //yield return null; // Wait one frame 
         foreach (Gun gunInstance in guns)
         {
             gunInstance.ReloadFinished();
             yield return null; // Wait one frame 
         }
     }
+
+    public IEnumerator VoidTransition()
+    {
+        Time.timeScale = 1f; // Restore time scale
+        transform.position = new Vector3(transform.position.x, 18.47f, transform.position.z); // Move the player to the respawn point
+        Debug.Log("Player Position set");
+        Cursor.visible = false; // Hide the cursor
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        yield return null; // Wait one frame
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        yield return null; // Wait one frame
+        
+
+    }
+
+    
 
     #endregion
 
