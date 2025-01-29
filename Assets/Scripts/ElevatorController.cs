@@ -118,7 +118,7 @@ public class ElevatorController : MonoBehaviour
         ElevatorSounds.Instance.PlayDoorOpenSound(); // Play door open sound
         doorAnimator.SetTrigger("Open"); // Trigger door open animation
         doorIsClosed = false; //Set door as open
-        GameObject.FindGameObjectWithTag("EnemyCounter").GetComponent<EnemyCounter>().InitiatlizeEnemyCount(); // Update the enemy counter
+        EnemyCounter.Instance.InitiatlizeEnemyCount(); // Update the enemy counter
     }
 
     public IEnumerator CloseDoors()
