@@ -7,14 +7,15 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using System.Data.Common;
 
 public class HealthManager : MonoBehaviour
 {
     #region Variables
 
     [Header("Player")]
-    public GameObject player;      // Reference to the player game object
-    public Transform respawnPoint;     // Reference to the respawn point Transform
+    private GameObject player;      // Reference to the player game object
+    private Transform respawnPoint;     // Reference to the respawn point Transform
     public Health health;          // Reference to the Health component.
     public List<Gun> guns = new List<Gun>(); // List of guns to reset after death
 
@@ -132,39 +133,62 @@ public class HealthManager : MonoBehaviour
     {
         Time.timeScale = 1f; // Restore time scale
         yield return null; // Wait one frame
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        yield return null; // Wait one frame
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentSceneName);
+        //string currentSceneName = SceneManager.GetActiveScene().name;
+        //yield return null; // Wait one frame
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void");
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
         yield return null; // Wait one frame
         //yield return new WaitForSeconds(0.2f); // Time delay before elevator start
-        player = GameObject.FindGameObjectWithTag("Player"); // Re-find Player and wait for one frame
-        yield return null; // Wait one frame 
-        if (player == null)
-        {
-            Debug.LogError("Could not find player with Player tag after scene load, so the player probably stayed in the same position it died in and like wtf is this error i have no idea how to fix it bruh bruh");
-            yield break; //stop the coroutine
-        }
+
+        yield return null; // Wait one frame
+        //if (player == null)
+        //{
+        //    Debug.LogError("Could not find player with Player tag after scene load, so the player probably stayed in the same position it died in and like wtf is this error i have no idea how to fix it bruh bruh");
+        //    yield break; //stop the coroutine
+        //}
 
         deathScreenAnimator.SetTrigger("Respawn"); // trigger Reset animation
         yield return null; // Wait one frame 
-        LevelGenerator.Instance.GenerateLevel(); // Call the GenerateLevel method
-        EnemySpawner.Instance.SpawnEnemies();
-        player.transform.position = respawnPoint.position;
+        //LevelGenerator.Instance.GenerateLevel(); // Call the GenerateLevel method
+        //yield return null; // Wait one frame 
+        //EnemySpawner.Instance.SpawnEnemies();
+        //yield return null; // Wait one frame 
+
+        respawnPoint = GameObject.FindGameObjectWithTag("RespawnPoint").transform;
+        yield return null; // Wait one frame 
+        Debug.Log("respawn point: " + respawnPoint.position);
+        yield return null; // Wait one frame 
+        player = gameObject; // Re-find Player and wait for one frame
+        player.transform.position = new Vector3(1.97f, 18.47f, -22.59f); // Move the player to the respawn point
+        yield return null; // Wait one frame 
+        Debug.Log("player position: " + player.transform.position);
+        yield return null; // Wait one frame 
+
         playerIsDead = false; // Reset death state
+        yield return null; // Wait one frame 
         health.hp = 100f;
+        yield return null; // Wait one frame 
         CoinsLogic.Instance.ResetCoins();
+        yield return null; // Wait one frame 
         EnemyCounter.Instance.UpdateEnemyCounter();
+        yield return null; // Wait one frame 
         UpdateHealthUI();
+        yield return null; // Wait one frame 
         Cursor.visible = false; // Hide the cursor
+        yield return null; // Wait one frame 
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        ElevatorController.Instance.OpenDoors();
+        yield return null; // Wait one frame 
+        Debug.Log("Player Respawned");
+        yield return null; // Wait one frame 
+        //ElevatorController.Instance.OpenDoors();
+        //yield return null; // Wait one frame 
         foreach (Gun gunInstance in guns)
         {
             gunInstance.ReloadFinished();
+            yield return null; // Wait one frame 
         }
 
     }

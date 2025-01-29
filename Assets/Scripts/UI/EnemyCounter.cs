@@ -45,7 +45,6 @@ public class EnemyCounter : MonoBehaviour
         GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemyArray)
         {
-            Debug.Log("Enemy Count: " + enemyCount);
             if (enemy.activeInHierarchy)  // Only count active enemies
             {
                 enemyCount++;
