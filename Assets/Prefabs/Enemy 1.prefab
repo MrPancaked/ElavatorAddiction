@@ -559,5 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995efd817add64744802e21eacdb5a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoinBurst: {fileID: 1932917029013565841, guid: cb1911b3e0a9bc74a843794349421273,
+    type: 3}
   enemySettings: {fileID: 11400000, guid: eea33707b68420746aee9d61181b1d60, type: 2}
   canDamage: 1

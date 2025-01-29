@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     #region Variables
 
     [Header("References")]
+    public GameObject CoinBurst;
+
     [SerializeField] EnemySettings enemySettings;
 
     // Private Variables
@@ -158,10 +160,15 @@ public class Enemy : MonoBehaviour
 
     public void Die() /// Handles the death of the enemy, disables the model, drops loot, and destroys itself.
     {
-        //GetComponent<DropLoot>().SpawnLoot(transform.position); // Drop the loot
-        CoinsLogic.Instance.CollectCoin();
+        if (Random.Range(0, 1f) <= CoinsLogic.Instance.coinDropChance)
+        {
+            GameObject coins = Instantiate(CoinBurst, transform.position, Quaternion.identity); // Spawn the coin burst
+            CoinsLogic.Instance.CollectCoin();
+        }
+            
         AudioManager.instance.PlayOneShot(enemySettings.deathSound, this.transform.position); // Play enemy damage sound
         enemyCounter.UpdateEnemyCounter(); // Update the enemy counter
+
         gameObject.SetActive(false); // Disables the enemy model
         
     }

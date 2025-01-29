@@ -47,12 +47,10 @@ public class CoinsLogic : MonoBehaviour
 
     public void CollectCoin() /// Collects the coin
     {
-        if (Random.Range(0, 1f) <= coinDropChance)
-        {
-            playerCoins += Random.Range(0, 6);
-            UpdateCoinsDisplay();
-            Debug.Log("Collected coins: " + playerCoins); // Log the collected coins
-        }
+        
+        playerCoins += Random.Range(3, 6);
+        UpdateCoinsDisplay();
+        Debug.Log("Collected coins: " + playerCoins); // Log the collected coins
     }
 
     public void ResetCoins() /// Reset on death
