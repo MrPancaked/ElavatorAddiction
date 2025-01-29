@@ -161,6 +161,7 @@ public class HealthManager : MonoBehaviour
         UpdateHealthUI();
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        Debug.Log("Player Respawned");
         ElevatorController.Instance.OpenDoors();
         foreach (Gun gunInstance in guns)
         {
