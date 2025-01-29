@@ -67,7 +67,7 @@ public class LevelGenerator : MonoBehaviour
         playerSpawnPoint = GameObject.FindGameObjectWithTag("Elevator")?.transform; // Find the player's spawn point by tag
         if (playerSpawnPoint == null) // Check if the player spawn point was found
         {
-            Debug.LogError("Player spawn point with tag 'elevator' not found."); // Log an error if the spawn point is not found
+            Debug.LogError("Player spawn point with tag 'Elevator' not found."); // Log an error if the spawn point is not found
         }
     }
 

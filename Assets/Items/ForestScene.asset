@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ForestScene
   m_EditorClassIdentifier: 
   sceneName: Forest
-  backgroundColor: '#FFFFFF'
-  fogColorHex: '#FFFFFF'
-  fogStartDistance: 30
-  fogEndDistance: 50
+  backgroundColor: '#000000'
+  fogColorHex: '#000000'
+  fogStartDistance: 15
+  fogEndDistance: 30
   lightIntensity: 0

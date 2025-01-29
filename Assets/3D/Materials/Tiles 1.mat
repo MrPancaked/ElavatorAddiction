@@ -94,9 +94,9 @@ Material:
     - Boolean_8BBF99CD: 1
     - Boolean_D258FF8E: 1
     - DeformMagnitude: 0
-    - Vector1_21C41D02: 200
+    - Vector1_21C41D02: 150
     - Vector1_6F288C5B: 0.02
-    - Vector1_B2CC132F: 832.3
+    - Vector1_B2CC132F: 150
     - Vector1_B9994903: 11
     - Vector1_E8746023: 24.93
     - _AlphaClip: 0
@@ -132,7 +132,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_2E5415DE: {r: 1, g: 1, b: 1, a: 0}
-    - Vector2_8044833E: {r: 450, g: 450, b: 0, a: 0}
+    - Vector2_8044833E: {r: 600, g: 600, b: 0, a: 0}
     - _BaseColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
     - _Color: {r: 0.8113207, g: 0.8113207, b: 0.8113207, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
