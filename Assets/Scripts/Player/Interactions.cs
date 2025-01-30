@@ -1,13 +1,10 @@
-//--------------------------------------------------------------------------------------------------
-//  Description: Handles player interactions with objects using raycasting and UI display of
-//               a crosshair. Input actions trigger interaction with the slot machine.
-//--------------------------------------------------------------------------------------------------
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Xml.Serialization;
 using Unity.VisualScripting;
 using UnityEngine.Windows;
+
 public class Interactions : MonoBehaviour
 {
     #region Variables
@@ -20,6 +17,10 @@ public class Interactions : MonoBehaviour
     private Animator buttonAnimator;
     public static Interactions instance;
     public static Interactions Instance { get { return instance; } }
+
+    // Cooldown variables
+    private float buttonCooldown = 2.4f; // 2-second cooldown
+    private float nextButtonPressTime = 0f;  // The next time the button can be pressed
 
     #endregion
 
@@ -95,10 +96,21 @@ public class Interactions : MonoBehaviour
         {
             if (hit.collider.CompareTag(ElevatorButtonTag))
             {
-                ElevatorController.Instance.ButtonPressed();
-                ElevatorSounds.Instance.PlayButtonSound(hit.point); // Pass the hit point
-                hit.collider.GetComponent<Animator>().SetTrigger("Press");
+                if (Time.time >= nextButtonPressTime)
+                {
+
+                    ElevatorController.Instance.ButtonPressed();
+                    ElevatorSounds.Instance.PlayButtonSound(hit.point); // Pass the hit point
+                    hit.collider.GetComponent<Animator>().SetTrigger("Press");
+                    nextButtonPressTime = Time.time + buttonCooldown;
+
+                }
+                else
+                {
+                    Debug.Log("Button is on cooldown"); // Optional debug message
+                }
             }
+
             else if (hit.collider.CompareTag(ElevatorLeverTag))
             {
                 ElevatorController.Instance.LeverPressed(); // ApplyRandomUpgrade IS LINKED THERE

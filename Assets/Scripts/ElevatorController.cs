@@ -33,10 +33,12 @@ public class ElevatorController : MonoBehaviour
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
+            return;
         }
         else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject); // Prevent the game object from being destroyed in different scenes.
             currentSceneName = SceneManager.GetActiveScene().name; // Set current scene name
         }
     }
@@ -94,7 +96,7 @@ public class ElevatorController : MonoBehaviour
 
     public IEnumerator LeverCoroutine()
     {
-        if (!leverAnimationPlaying)
+        if (!leverAnimationPlaying && CoinsLogic.Instance.playerCoins >= CoinsLogic.Instance.spinCost)
         {
             leverAnimationPlaying = true;
             leverAnimator.SetTrigger("Start");
@@ -123,12 +125,13 @@ public class ElevatorController : MonoBehaviour
 
     public IEnumerator CloseDoors()
     {
-
+        isButtonActive = false; // Disable the button
         Debug.Log("Door close / Sound / Animation");
-        doorIsClosed = true; // Set door as closed
         ElevatorSounds.Instance.PlayDoorCloseSound(); // Play door close sound
         doorAnimator.SetTrigger("Close"); // Trigger door close animation
-        yield return new WaitForSeconds(2f); // Time delay before elevator start
+        yield return new WaitForSeconds(2.4f); // Time delay before elevator start
+        isButtonActive = true; // Enable the button
+        doorIsClosed = true; // Set door as closed
 
         if (doorIsClosed && playerInElevator && EnemyCounter.Instance.enemyCount == 0)// If the player is in the elevator START THE FUCKING MACHINE
         {

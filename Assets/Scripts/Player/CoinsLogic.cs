@@ -61,21 +61,14 @@ public class CoinsLogic : MonoBehaviour
 
     public IEnumerator UseCoinForUpgrade() /// Uses a coin for the upgrade and tells the UpgradeApplicator to apply a new buff
     {
-        if (playerCoins >= spinCost) // Checks if the player has coins
-        {
-            playerCoins -= spinCost; // Decreases coin count
-            UpdateCoinsDisplay();
-            StartCoroutine(Upgrades.Instance.SlotSpinCoroutine(2));
-            yield return new WaitForSeconds(0.5f);
-            StartCoroutine(Upgrades.Instance.SlotSpinCoroutine(1));
-            yield return new WaitForSeconds(0.5f);
-            StartCoroutine(Upgrades.Instance.SlotSpinCoroutine(0));
-            Debug.Log("Spent coins: " + playerCoins); // Log the decreased coins
-        }
-        else
-        {
-            Debug.Log("Not enough coins.");  // Log if there are no coins available
-        }
+        playerCoins -= spinCost; // Decreases coin count
+        UpdateCoinsDisplay();
+        StartCoroutine(Upgrades.Instance.SlotSpinCoroutine(2));
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(Upgrades.Instance.SlotSpinCoroutine(1));
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(Upgrades.Instance.SlotSpinCoroutine(0));
+        Debug.Log("Spent coins: " + playerCoins); // Log the decreased coins
     }
 
     private void UpdateCoinsDisplay() /// Updates the coins display on the screen.

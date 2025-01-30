@@ -1,21 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem; // Add the new input system namespace
+
 
 public class UpgradeMenu : MonoBehaviour
 {
-   [SerializeField] private GameObject upgradeMenu;
-   
+    [SerializeField] private Animator upgradeAnimator;
+    private bool isMenuOpen = false;
+
     void Update()
     {
-        if (Inputs.Instance.stats.IsPressed() && !HealthManager.Instance.PlayerIsDead) // Check for press
+        if (HealthManager.Instance.PlayerIsDead)
         {
-            Upgrades.Instance.UpdateUpgradeUI();
-            upgradeMenu.SetActive(true);
+            // Don't do anything if the player is dead
+            return;
         }
-        else
+
+        if (Inputs.Instance.stats.IsPressed())
         {
-            upgradeMenu.SetActive(false);
+            if (!isMenuOpen)
+            {
+                Upgrades.Instance.UpdateUpgradeUI();
+                upgradeAnimator.SetTrigger("Open");
+                isMenuOpen = true;
+            }
+        }
+        else if (isMenuOpen)
+        {
+            upgradeAnimator.SetTrigger("Close");
+            isMenuOpen = false;
         }
     }
 }
