@@ -142,7 +142,7 @@ public class Upgrades : MonoBehaviour
 
     private void DropChanceUpgrade(float dropchanceMultiplier)
     { 
-        CoinsLogic.Instance.coinDropChance += dropchanceMultiplier;
+        CoinsLogic.Instance.coinDropChance *= dropchanceMultiplier;
         UpdateUpgradeUI();
         Debug.Log("Drop chance upgrade: " + CoinsLogic.Instance.coinDropChance);
     }
@@ -158,7 +158,7 @@ public class Upgrades : MonoBehaviour
         fireRateText.text = Mathf.RoundToInt(1/Shotgun.gunSettings.fireRate * 100) + "%";
         speedText.text = NewMovement.Instance.speed.ToString();
         healthText.text = HealthManager.Instance.initialHealth.ToString();
-        dropChanceText.text = CoinsLogic.Instance.coinDropChance * 100 + "%";
+        dropChanceText.text = Mathf.RoundToInt(CoinsLogic.Instance.coinDropChance * 100) + "%";
     }
 
     #endregion

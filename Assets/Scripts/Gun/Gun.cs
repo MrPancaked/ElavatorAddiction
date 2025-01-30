@@ -51,7 +51,7 @@ public class Gun : MonoBehaviour
         shotsLeft = gunSettings.magazineSize / gunSettings.bulletsPerShot; // Initialize shots left to max magazine size at start
         readyToShoot = true; // Allow shooting initially
         reloadFeedbackText.SetActive(false); // Disable reload text at start
-        gunSettings.fireRate = 1f; // Set the fire rate to 1 initially
+        
     }
 
     private void Start()
@@ -70,6 +70,10 @@ public class Gun : MonoBehaviour
         ammoCounter.SetText("");  // Disable text when the gun is not being used
     }
 
+    //private void OnEnable()
+    //{
+    //    gunSettings.fireRate = 1f; // Set the fire rate to 1 initially
+    //}
     #endregion
 
     #region Input Logic

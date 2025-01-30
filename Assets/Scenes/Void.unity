@@ -5990,14 +5990,34 @@ PrefabInstance:
       objectReference: {fileID: 1234939557}
     - target: {fileID: 3553973524824693643, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
+      propertyPath: slotSpinSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553973524824693643, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
       propertyPath: speedIncrease
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553973524824693643, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: damageIncrease
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3553973524824693643, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: dropChanceText
       value: 
       objectReference: {fileID: 702091580}
+    - target: {fileID: 3553973524824693643, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: fireRateMultiplier
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553973524824693643, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: dropchanceMultiplier
+      value: 1.05
+      objectReference: {fileID: 0}
     - target: {fileID: 4655439236767218671, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: m_LocalPosition.x
