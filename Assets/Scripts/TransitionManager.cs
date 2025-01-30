@@ -17,7 +17,7 @@ public class TransitionManager : MonoBehaviour
     private float currentFogStartDistance; // Current fog start distance
     private float currentFogEndDistance; // Current fog end distance
     private Color destinationFogColor; // Target fog color
-    private Color currentBackgroundColor = Color.white; // Current background color, initialized to white as default
+    private Color currentBackgroundColor = Color.black; // Current background color, initialized to white as default
     private SceneSettings currentSceneSettings; // Current scene settings
     private Camera mainCamera; // Reference to the main camera
     private static TransitionManager instance;
@@ -75,7 +75,7 @@ public class TransitionManager : MonoBehaviour
         if (!ColorUtility.TryParseHtmlString(settings.backgroundColor, out currentBackgroundColor))
         {
             Debug.LogError("TransitionManager: Invalid background hex color, setting to white.");
-            currentBackgroundColor = Color.white;
+            currentBackgroundColor = Color.black;
         }
 
         currentSceneSettings = settings; // Set current scene settings

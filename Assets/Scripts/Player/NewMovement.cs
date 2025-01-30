@@ -196,7 +196,7 @@ public class NewMovement : MonoBehaviour
         slidePressed = false;
         slideReleased = false;
 
-        //Debug.Log(rb.drag); THIS SHIT IS ANNOYINGGGG!!!!!!      oh hi Rene:3
+        //Debug.Log(rb.drag); THIS SHIT IS ANNOYINGGGG!!!!!!      oh hi Rene:3 hi Misha :3
     }
 
     private void JumpReset()

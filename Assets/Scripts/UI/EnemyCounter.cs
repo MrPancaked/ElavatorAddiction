@@ -51,12 +51,12 @@ public class EnemyCounter : MonoBehaviour
                 enemyCount++;
             }
         }
-        enemyCounter.text = "TO KILL: " + enemyCount.ToString(); // Ensure the enemy count doesn't go below 0 if there are no enemies
+        enemyCounter.text = enemyCount.ToString(); // Ensure the enemy count doesn't go below 0 if there are no enemies
     }
 
     public void UpdateEnemyCounter()
     {
-        enemyCounter.text = "TO KILL: " + enemyCount.ToString(); // Ensure the enemy count doesn't go below 0 if there are no enemies
+        enemyCounter.text = enemyCount.ToString(); // Ensure the enemy count doesn't go below 0 if there are no enemies
     }
 
     #endregion

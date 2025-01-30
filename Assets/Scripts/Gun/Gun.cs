@@ -39,7 +39,7 @@ public class Gun : MonoBehaviour
     private int bulletsShot; // Bullets shot in a single shot or burst
     private RaycastHit rayHit; // Info about the raycast
     private int currentGunIndex = 0; // Track which gun to fire in a dual gun set
-    public float damageMultiplier = 1f; // Damage multiplier for upgrades
+    public float extraDamage = 0f; // Damage multiplier for upgrades
     private bool isLastShotInProgress = false; // Flag to prevent auto-reload before the shot is finished
 
     #endregion
@@ -213,7 +213,7 @@ public class Gun : MonoBehaviour
                 {
                     enemyRigidbody.AddForce(direction * gunSettings.enemyPushbackForce, ForceMode.Impulse);
                 }
-                damageable?.TakeDamage(gunSettings.damagePerBullet * damageMultiplier); //Damage the enemy
+                damageable?.TakeDamage(gunSettings.damagePerBullet + extraDamage); //Damage the enemy
             }
 
 

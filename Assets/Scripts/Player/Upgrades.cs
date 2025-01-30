@@ -118,9 +118,9 @@ public class Upgrades : MonoBehaviour
 
     private void DamageUpgrade(float damageIncrease) /// Applies a strengh upgrade to the player and logs it.
     {
-        Shotgun.damageMultiplier += damageIncrease;
+        Shotgun.extraDamage += damageIncrease;
         UpdateUpgradeUI();
-        Debug.Log("Damage upgrade: " + Shotgun.damageMultiplier);
+        Debug.Log("Damage upgrade: " + Shotgun.extraDamage);
     }
 
     private void healthUpgrade(float healthIncrease, float healAmount) /// Applies a strengh upgrade to the player and logs it.
@@ -154,8 +154,8 @@ public class Upgrades : MonoBehaviour
 
     public void UpdateUpgradeUI()
     { 
-        damageText.text = (Shotgun.gunSettings.damagePerBullet + Shotgun.damageMultiplier).ToString();
-        fireRateText.text = 1/Shotgun.gunSettings.fireRate * 100 + "%";
+        damageText.text = (Shotgun.gunSettings.damagePerBullet + Shotgun.extraDamage).ToString();
+        fireRateText.text = Mathf.RoundToInt(1/Shotgun.gunSettings.fireRate * 100) + "%";
         speedText.text = NewMovement.Instance.speed.ToString();
         healthText.text = HealthManager.Instance.initialHealth.ToString();
         dropChanceText.text = CoinsLogic.Instance.coinDropChance * 100 + "%";
