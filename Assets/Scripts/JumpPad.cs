@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
-    private Vector3 JumpPadDirection;
+
     public float JumpPadForce;
     public float cooldownTime = 1f;  // Cooldown time in seconds
 
+    private Vector3 JumpPadDirection;
     private bool isCoolingDown = false;  // Flag to indicate if the cooldown is active
-    private float cooldownTimer = 0f; // Timer for the cooldown
 
     public void Start()
     {
@@ -18,30 +18,30 @@ public class JumpPad : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Rigidbody>() != null && !isCoolingDown) // Check if a RigidBody exists, and if cooldown is active
+        Rigidbody rb = other.GetComponent<Rigidbody>(); // Get the Rigidbody once
+
+        if (rb != null && !isCoolingDown) // Check if a Rigidbody exists, and if cooldown is active
         {
-            other.GetComponent<Rigidbody>().AddForce(JumpPadDirection * JumpPadForce, ForceMode.Impulse);
+            float appliedForce = JumpPadForce; // By default, apply the full force
+
+            if (other.CompareTag("Damageable")) // Check if the colliding object is tagged "enemy"
+            {
+                appliedForce = JumpPadForce / 3f; // Reduce the force by half
+            }
+
+            rb.AddForce(JumpPadDirection * appliedForce, ForceMode.Impulse);
             StartCooldown(); // Begin the cooldown process
         }
     }
 
     private void StartCooldown()
     {
-        isCoolingDown = true; // Activates the cooldown
-        cooldownTimer = 0f; // Sets the cooldown time to 0
+        isCoolingDown = true;
+        Invoke(nameof(ResetCooldown), cooldownTime);
     }
 
-    private void Update()
+    private void ResetCooldown()
     {
-        if (isCoolingDown) // If the cooldown is active
-        {
-            cooldownTimer += Time.deltaTime; // Increment the timer
-
-            if (cooldownTimer >= cooldownTime) // Check if the cooldown is done
-            {
-                isCoolingDown = false; // Deactivate the cooldown
-                cooldownTimer = 0f; // reset the timer
-            }
-        }
+        isCoolingDown = false;
     }
 }
