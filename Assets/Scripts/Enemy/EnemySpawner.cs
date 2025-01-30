@@ -13,8 +13,14 @@ public class EnemySpawner : MonoBehaviour
     public int maxGroups = 5;
     public float groupSpacing = 15f; // Minimum distance between enemy groups
 
+    [Header("Map Settings")]
+    public float mapWidth = 100f; // width of the area
+    public float mapHeight = 100f; //height of the area
+    public float minHeight = 0f; // Minimum spawn height, relative to mapCenter.y
+    public float maxHeight = 1.5f; // Maximum spawn height, relative to mapCenter.y
+
+
     [Header("References")]
-    public Terrain terrain;
     public Transform mapCenter;
     public Transform enemiesParent;
 
@@ -36,10 +42,9 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // IMPORTANT!
+            //DontDestroyOnLoad(gameObject);  Removed this because it shouldn't persist
         }
     }
-
 
     public void SpawnEnemies()
     {
@@ -61,7 +66,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-
     private void SpawnEnemyGroup()
     {
         int numEnemies = Random.Range(minEnemiesPerGroup, maxEnemiesPerGroup + 1);
@@ -69,7 +73,7 @@ public class EnemySpawner : MonoBehaviour
 
         while (tries < 50)
         {
-            Vector3 groupSpawnPosition = GetRandomPositionOnTerrain();
+            Vector3 groupSpawnPosition = GetRandomPositionInArea();
             if (!CheckForObstacles(groupSpawnPosition, GetBoundingRadius(enemyPrefab) * 2f) && !IsTooCloseToOtherGroups(groupSpawnPosition))
             {
                 for (int i = 0; i < numEnemies; i++)
@@ -107,16 +111,14 @@ public class EnemySpawner : MonoBehaviour
 
     //------ LEVEL GENERATION LOGIC -------//
 
-    Vector3 GetRandomPositionOnTerrain()
+    Vector3 GetRandomPositionInArea()
     {
-        Vector3 terrainSize = terrain.terrainData.size;
-        float x = Random.Range(-terrainSize.x / 2, terrainSize.x / 2);
-        float z = Random.Range(-terrainSize.z / 2, terrainSize.z / 2);
-        Vector3 worldPosition = new Vector3(x + mapCenter.position.x, 0, z + mapCenter.position.z);
-        float terrainY = terrain.SampleHeight(worldPosition);
-        float finalY = terrainY + terrain.transform.position.y + 2.5f;
-        return new Vector3(worldPosition.x, finalY, worldPosition.z);
+        float x = Random.Range(-mapWidth / 2, mapWidth / 2);
+        float z = Random.Range(-mapHeight / 2, mapHeight / 2);
+        float y = Random.Range(minHeight, maxHeight);
+        return new Vector3(x + mapCenter.position.x, y + mapCenter.position.y, z + mapCenter.position.z);
     }
+
 
     bool CheckForObstacles(Vector3 position, float radius)
     {

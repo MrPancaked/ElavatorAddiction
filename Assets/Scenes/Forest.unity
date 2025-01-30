@@ -167,6 +167,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 2482954157688560478, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy Manager
+      objectReference: {fileID: 0}
     - target: {fileID: 3796622960456743319, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -218,7 +223,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2482954157688560478, guid: 861f3116620002a48898bdfa74a62b1b, type: 3}
+    - {fileID: 8136717220011320876, guid: 861f3116620002a48898bdfa74a62b1b, type: 3}
+    - {fileID: 5503936245307721480, guid: 861f3116620002a48898bdfa74a62b1b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 861f3116620002a48898bdfa74a62b1b, type: 3}

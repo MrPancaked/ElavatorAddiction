@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Shotgun
   damagePerBullet: 30
-  fireRate: 0.5
+  fireRate: 1
   reloadTime: 0
   magazineSize: 7
   bulletsPerShot: 7
@@ -26,38 +26,3 @@ MonoBehaviour:
   playerPushbackForce: 8
   screenShakeStrength: 0.5
   isDualGun: 0
-  gunShotSound:
-    Guid:
-      Data1: -1769683714
-      Data2: 1151950089
-      Data3: 578479275
-      Data4: 214737507
-    Path: event:/Weapon/SPASshot2D
-  reloadSound:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  blankSound:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  equipSound:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  bulletHit:
-    Guid:
-      Data1: -687276964
-      Data2: 1180492366
-      Data3: 1682853018
-      Data4: 2027399506
-    Path: event:/Weapon/BulletHit

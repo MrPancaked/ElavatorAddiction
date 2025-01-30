@@ -150,7 +150,6 @@ Transform:
   - {fileID: 8015554485509694759}
   - {fileID: 4246255717742743668}
   - {fileID: 4162266434077791728}
-  - {fileID: 6798911146209777924}
   - {fileID: 8509423573528240031}
   - {fileID: 2759686616367385794}
   - {fileID: 137190367860815854}
@@ -5106,7 +5105,7 @@ MonoBehaviour:
   maxGroups: 3
   groupSpacing: 25
   terrain: {fileID: 4000711238963715814}
-  mapCenter: {fileID: 8970261059358062125}
+  mapCenter: {fileID: 0}
   enemiesParent: {fileID: 4246255717742743668}
 --- !u!1 &2573095271107458238
 GameObject:
@@ -5140,7 +5139,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8970261059358062125}
   - {fileID: 2538041215431622126}
   - {fileID: 2491527538905296350}
   - {fileID: 8938093732613506241}
@@ -10176,37 +10174,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &4198938645099911529
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8970261059358062125}
-  m_Layer: 3
-  m_Name: MapCentre
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8970261059358062125
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4198938645099911529}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.26, y: 19.86, z: 50.49}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8509423573528240031}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4384736508959136167
 GameObject:
   m_ObjectHideFlags: 0
@@ -15090,80 +15057,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!1 &5518174812926678073
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6798911146209777924}
-  - component: {fileID: 5807504787035555887}
-  m_Layer: 0
-  m_Name: Obsctacles
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6798911146209777924
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518174812926678073}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.25, y: 3.09, z: -50.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3796622960456743319}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5807504787035555887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518174812926678073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba285312393cc66458221b65112a5bf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  terrain: {fileID: 4000711238963715814}
-  mapCenter: {fileID: 8970261059358062125}
-  hutsMin: 3
-  hutsMax: 7
-  treesMin: 20
-  treesMax: 50
-  rocksMin: 20
-  rocksMax: 30
-  jumpPadsMin: 3
-  jumpPadsMax: 6
-  obstacleCheckRadius: 5
-  playerSpawnClearRadius: 15
-  minHutDistance: 25
-  graveyardDistance: 35
-  churchPrefab: {fileID: 7777066242904687160, guid: b06d65b6c0d02c847bec8a5c08092feb,
-    type: 3}
-  graveyardPrefab: {fileID: 5020521612611141885, guid: 47339fc9fef670541b65b99cffe3abf6,
-    type: 3}
-  hutPrefab: {fileID: 8231753558058852094, guid: dd8e733da38cbcc438bb86aa873b7520,
-    type: 3}
-  jumpPadPrefab: {fileID: 4803669776189387453, guid: 29aa840b22ec5b34e86d99146837aa20,
-    type: 3}
-  treePrefabs:
-  - {fileID: 4565735418521650905, guid: e3eeb302b2dfd1b4ba67979c9216c3bf, type: 3}
-  - {fileID: 1832072077227761846, guid: e1e4c9e038ffc104496d49526623347b, type: 3}
-  - {fileID: 6898841542204163973, guid: 4f38fe6b91d2bed429da5726aab0b523, type: 3}
-  rockPrefabs:
-  - {fileID: 6799355551480527225, guid: 2af80abff1b79244aa339897a60fe09a, type: 3}
-  - {fileID: 162572054934710040, guid: 4e3b2688618ec3045b6f0af14556be8d, type: 3}
-  - {fileID: 1659242923825036181, guid: c19c663cb87dc57479775ff042d88ed5, type: 3}
 --- !u!1 &6101478039281839945
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,17 +1,17 @@
-//--------------------------------------------------------------------------------------------------
-//  Description: This script generates a level by instantiating prefabs on a terrain,
-//               handling object placement and avoiding collisions with each other and the player's spawn point.
-//--------------------------------------------------------------------------------------------------
+using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine; 
 
-public class LevelGenerator : MonoBehaviour 
+public class LevelGenerator : MonoBehaviour
 {
     #region Variables
 
-    [Header("References")] 
-    public Terrain terrain; // Reference to the Terrain object
+    [Header("References")]
     public Transform mapCenter; // Reference to the map center Transform
+
+    [Header("Level Dimensions")]
+    public float levelWidth = 200f;  // Total width of level
+    public float levelDepth = 200f;  // Total depth of level
+    public float levelHeight = 0f;   // Basic height of the terrain. (Not used anymore, height is based on mapCenter.y)
 
     [Header("Spawn Settings")]
     public int hutsMin = 2; // Minimum number of huts to spawn
@@ -46,13 +46,12 @@ public class LevelGenerator : MonoBehaviour
     #endregion
 
     #region Unity Methods
-
     private void Awake()  /// Makes sure this object survives the scene transition, and that there is only one.
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // IMPORTANT!
+            //DontDestroyOnLoad(gameObject); // Removed this because it shouldn't persist
         }
         else
         {
@@ -60,6 +59,7 @@ public class LevelGenerator : MonoBehaviour
             return;
         }
     }
+
 
     private void Start() // Start is called before the first frame update
     {
@@ -154,7 +154,7 @@ public class LevelGenerator : MonoBehaviour
         int tries = 0; // Initialize the tries variable to 0
         while (tries < MaxTries) // Loop while tries are less than the max tries variable
         {
-            Vector3 spawnPosition = GetRandomPositionOnTerrain(); // Get random position on the terrain
+            Vector3 spawnPosition = GetRandomPositionOnLevel(); // Get random position on the level
             if (!CheckForObstacles(spawnPosition, prefabRadii[hutPrefab]) && !IsTooCloseToPlayerSpawn(spawnPosition) && !IsTooCloseToOtherHuts(spawnPosition)) // Check for obstacles, player spawn, and proximity to other huts
             {
                 Quaternion rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0); // Generate a random rotation around the Y-axis
@@ -168,12 +168,13 @@ public class LevelGenerator : MonoBehaviour
         Debug.LogWarning("Could not find a suitable spot for hut after " + MaxTries + " tries"); // Output message in case of too many tries
     }
 
+
     void SpawnObject(GameObject prefab, bool shouldRotate, bool addYOffset = true) // Method to spawn objects
     {
         int tries = 0; // Initialize the tries variable to 0
         while (tries < MaxTries) // Loop while tries are less than the max tries variable
         {
-            Vector3 spawnPosition = GetRandomPositionOnTerrain(addYOffset); // Get random position on the terrain
+            Vector3 spawnPosition = GetRandomPositionOnLevel(addYOffset); // Get random position on the level
             if (!CheckForObstacles(spawnPosition, prefabRadii[prefab]) && !IsTooCloseToPlayerSpawn(spawnPosition)) // Check for obstacles and player spawn proximity
             {
                 Quaternion rotation = Quaternion.identity; // Set default rotation
@@ -189,7 +190,6 @@ public class LevelGenerator : MonoBehaviour
         }
         Debug.LogWarning("Could not find a suitable spot after " + MaxTries + " tries"); // Output message in case of too many tries
     }
-
 
     #endregion
 
@@ -229,28 +229,22 @@ public class LevelGenerator : MonoBehaviour
         return Vector3.Distance(position, playerSpawnPoint.position) < playerSpawnClearRadius; // Return true if distance is less than clear radius
     }
 
-    Vector3 GetRandomPositionOnTerrain(bool addYOffset = true) // Method to get a random position on the terrain
+    Vector3 GetRandomPositionOnLevel(bool addYOffset = true) // Method to get a random position on the level
     {
-        Vector3 terrainSize = terrain.terrainData.size; // Get the size of the terrain
-        float x = Random.Range(-terrainSize.x / 2, terrainSize.x / 2); // Get random X position relative to center of terrain
-        float z = Random.Range(-terrainSize.z / 2, terrainSize.z / 2); // Get random Z position relative to center of terrain
-        Vector3 worldPosition = new Vector3(x + mapCenter.position.x, 0, z + mapCenter.position.z); // Convert to world space with mapCenter
-        float terrainY = terrain.SampleHeight(worldPosition); // Sample the terrain height at the world position
-        float finalY = terrainY + terrain.transform.position.y; // Apply the terrain's Y position
+        float x = Random.Range(-levelWidth / 2f, levelWidth / 2f); // Get random X position relative to center of level
+        float z = Random.Range(-levelDepth / 2f, levelDepth / 2f); // Get random Z position relative to center of level
+        Vector3 worldPosition = new Vector3(x + mapCenter.position.x, mapCenter.position.y, z + mapCenter.position.z); // Convert to world space with mapCenter
         if (addYOffset) // Check if should add Y offset
         {
-            finalY += 2.5f; // Add an offset of 2.5f to the Y position
+            worldPosition.y += 2.5f; // Add an offset of 2.5f to the Y position
         }
-        return new Vector3(worldPosition.x, finalY, worldPosition.z); // Return the final world position
+        return worldPosition; // Return the final world position
     }
 
     Vector3 GetChurchSpawnPosition() // Method to get the spawn position for the church
     {
-        Vector3 terrainSize = terrain.terrainData.size; // Get the terrain size
-        Vector3 worldPosition = new Vector3(mapCenter.position.x, 0, mapCenter.position.z); // Calculate the center world position based on the map center
-        float terrainY = terrain.SampleHeight(worldPosition); // Sample the terrain height at the world position
-        float finalY = terrainY + terrain.transform.position.y + 2.5f; // Add terrain's Y and an offset of 2.5f
-        return new Vector3(worldPosition.x, finalY, worldPosition.z); // Return the final world position
+        Vector3 worldPosition = new Vector3(mapCenter.position.x, mapCenter.position.y, mapCenter.position.z); // Calculate the center world position based on the map center
+        return worldPosition; // Return the final world position
     }
 
     Vector3 GetGraveyardSpawnPosition(Vector3 churchPosition, float graveyardIndex) // Method to get the spawn position for the graveyard
@@ -259,12 +253,11 @@ public class LevelGenerator : MonoBehaviour
         angle += (graveyardIndex * Mathf.PI); //Offset the angle of one of the graveyard by 180 degrees
         float xOffset = Mathf.Cos(angle) * graveyardDistance; // Calculate the X position based on the angle and the graveyard distance
         float zOffset = Mathf.Sin(angle) * graveyardDistance; // Calculate the Z position based on the angle and the graveyard distance
-        Vector3 finalPosition = new Vector3(churchPosition.x + xOffset, 0, churchPosition.z + zOffset); // Get the terrain height
-        float terrainY = terrain.SampleHeight(finalPosition); // Get the terrain height
-        float finalY = terrainY + terrain.transform.position.y; // Apply an offset and the terrain height
-        finalPosition.y = finalY; // Apply the Y fix offset
+        Vector3 finalPosition = new Vector3(churchPosition.x + xOffset, mapCenter.position.y, churchPosition.z + zOffset); // Get the level height
+        finalPosition.y += 2.5f; // Apply an offset and the level height
         return finalPosition; // Return the final position
     }
+
 
     float GetBoundingRadius(GameObject prefab) // Method to calculate the bounding radius of a prefab
     {
@@ -327,5 +320,5 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    #endregion 
+    #endregion
 }

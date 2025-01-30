@@ -7,9 +7,24 @@ public class MainMenuUI : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        StartCoroutine(LoadAndStartGame());
     }
 
+    private IEnumerator LoadAndStartGame()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void"); // Load the scene asynchronously
+
+        while (!asyncLoad.isDone) // Wait until the scene is loaded
+        {
+            yield return null;
+        }
+        // After the scene is loaded, call restart game
+        if (HealthManager.Instance != null) // Ensure that the Health Manager actually exists
+        {
+            HealthManager.Instance.RestartGame();
+        }
+
+    }
 
     public void QuitGame()
     {

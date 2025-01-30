@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{999f0e58-2fc4-4bfa-905d-b88cd0db9150}">
 		<property name="name">
-			<value>Ambient</value>
+			<value>ForsetAmbience</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
 		</property>
 		<relationship name="folder">
-			<destination>{01807e9f-ed50-4438-8826-1bfed56b6d40}</destination>
+			<destination>{e401e503-f724-4e81-bb85-886601d80caf}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{c4b4c65e-19e4-449a-8b61-046451f5b76c}</destination>
@@ -141,6 +141,9 @@
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{c0b554a1-64de-45c9-9892-4e7043e62434}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{48c4db57-888e-4a21-a7b1-1bb3f4bad229}</destination>
 		</relationship>
@@ -197,6 +200,23 @@
 		<relationship name="relatedModule">
 			<destination>{7c66627f-a44b-4092-b3f3-6fae3aa3d3a5}</destination>
 		</relationship>
+	</object>
+	<object class="ADSRModulator" id="{c0b554a1-64de-45c9-9892-4e7043e62434}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>300</value>
+		</property>
+		<property name="releaseTime">
+			<value>700</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
 	</object>
 	<object class="MixerBusEffectChain" id="{48c4db57-888e-4a21-a7b1-1bb3f4bad229}">
 		<relationship name="effects">

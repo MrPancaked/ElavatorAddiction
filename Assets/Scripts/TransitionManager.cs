@@ -10,6 +10,7 @@ public class TransitionManager : MonoBehaviour
 
     [Header("References")]
     public Light sceneLight; // Reference to the scene light
+    public Camera cameraObject;
     public List<SceneSettings> targetSceneSettings; // List of all scene settings
 
     // Private stuff
@@ -42,8 +43,14 @@ public class TransitionManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject); // Prevent the game object from being destroyed in different scenes.
             SceneManager.sceneLoaded += OnSceneLoaded; //Add listener to scene loaded
-                                                       // Find the Main Camera in Awake so it's available before the first scene is loaded.
-            mainCamera = Camera.main;
+            if (!cameraObject)
+            {
+                mainCamera = Camera.main; // Find the Main Camera in Awake so it's available before the first scene is loaded.
+            }
+            else
+            {
+                cameraObject = mainCamera;
+            }
             SceneLoaded(); //Load initial scene
         }
     }
@@ -66,12 +73,19 @@ public class TransitionManager : MonoBehaviour
 
     public void SetInitialFog(SceneSettings settings)
     {
+        if (settings == null)
+        {
+            Debug.LogError("TransitionManager: No settings found for this scene. Make sure that the scene name matches one in your list.");
+            return;
+        }
+
         Color tempFogColor = currentFogColor;
         if (!ColorUtility.TryParseHtmlString(settings.fogColorHex, out tempFogColor))
         {
             Debug.LogError("TransitionManager: Invalid initial fog hex color, setting to white");
             tempFogColor = Color.white;
         }
+
         if (!ColorUtility.TryParseHtmlString(settings.backgroundColor, out currentBackgroundColor))
         {
             Debug.LogError("TransitionManager: Invalid background hex color, setting to white.");
@@ -79,24 +93,33 @@ public class TransitionManager : MonoBehaviour
         }
 
         currentSceneSettings = settings; // Set current scene settings
-        mainCamera.backgroundColor = currentBackgroundColor; // Set background color
+
+        if (mainCamera != null)
+        {
+            mainCamera.backgroundColor = currentBackgroundColor; // Set background color
+        }
+
+        else
+        {
+            Debug.LogError("Main Camera not found!");
+        }
+
         SetLightIntensity(settings); // Set light intensity
         SetFogFromSettings(settings, tempFogColor); // Set fog from the settings
     }
 
     public void SetLightIntensity(SceneSettings settings)
     {
-
         currentLightIntensity = sceneLight.intensity;
         destinationLightIntensity = settings.lightIntensity;
-
-
         sceneLight.intensity = settings.lightIntensity; // Set the light intensity if light is provided.
     }
+
     public void StartLightTransition(SceneSettings destinationSettings, float lightTransitionTime)
     {
         StartCoroutine(FadeLightIntensity(destinationLightIntensity, lightTransitionTime, destinationSettings));
     }
+
     IEnumerator FadeLightIntensity(float targetIntensity, float lightTransitionTime, SceneSettings destinationSettings)
     {
         float timer = 0.0f;
@@ -174,6 +197,13 @@ public class TransitionManager : MonoBehaviour
     {
         SceneSettings settings = null; // declare the settings
         string currentSceneName = SceneManager.GetActiveScene().name; // get the active scene name
+
+        if (string.IsNullOrEmpty(currentSceneName)) // Check if Scene Name Is Empty
+        {
+            Debug.LogError("TransitionManager: Scene name is empty.");
+            return null;
+        }
+
         foreach (SceneSettings sceneSetting in targetSceneSettings)
         {
             if (sceneSetting.sceneName == currentSceneName)
@@ -181,6 +211,11 @@ public class TransitionManager : MonoBehaviour
                 settings = sceneSetting; // set the settings if the name matches
                 break; //break the loop
             }
+        }
+
+        if (settings == null)
+        {
+            Debug.LogError("TransitionManager: No Scene settings found in the list with this name: " + currentSceneName);
         }
         return settings; //return the settings
     }
