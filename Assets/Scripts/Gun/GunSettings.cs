@@ -31,12 +31,5 @@ public class GunSettings : ScriptableObject
     public float screenShakeStrength; // Amount of screen shake when you shoot
     public bool isDualGun = false; // Flag to determine if this is a dual gun set
 
-    [Header("Audio")]
-    public EventReference gunShotSound;
-    public EventReference reloadSound;
-    public EventReference blankSound;
-    public EventReference equipSound;
-    public EventReference bulletHit;
-
     #endregion
 }

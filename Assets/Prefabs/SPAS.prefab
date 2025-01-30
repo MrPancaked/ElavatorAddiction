@@ -467,8 +467,8 @@ MonoBehaviour:
     m_Bits: 128
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
-  gunAnimator: {fileID: 0}
+    m_Bits: 8
+  gunAnimator: {fileID: 7332462047773541692}
   gunSettings: {fileID: 11400000, guid: e7f423ba1ee092547ab1e97f6453440d, type: 2}
   fpsCam: {fileID: 0}
   playerRb: {fileID: 0}
@@ -485,7 +485,7 @@ MonoBehaviour:
   bloodBurst: {fileID: 1932917029013565841, guid: 0e870cf148aaedf47b215f81d9daec09,
     type: 3}
   reloading: 0
-  damageMultiplier: 1
+  extraDamage: 0
 --- !u!114 &6681186234846937800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,9 +498,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040d483ddf8a586418645f40607e63e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalSway: 12
-  horizontalSway: 8
-  SwaySmoothness: 8
+  verticalSway: 6
+  horizontalSway: 4
+  SwaySmoothness: 3
 --- !u!1 &3423183764082465242
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7755516416488308434}
   - component: {fileID: 7332462047773541692}
+  - component: {fileID: 4599247795742921221}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -956,6 +957,46 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4599247795742921221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6598631143083372880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dd3878d94c3c0a4491f81b6eded728e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipSound:
+    Guid:
+      Data1: -1985325846
+      Data2: 1308096230
+      Data3: -329700442
+      Data4: 1343896600
+    Path: event:/Weapon/Equip
+  shotgunShotSound:
+    Guid:
+      Data1: -1375410770
+      Data2: 1191335039
+      Data3: -485774965
+      Data4: -364827230
+    Path: event:/Weapon/ShotgunShot
+  cockUpSound:
+    Guid:
+      Data1: 1728127774
+      Data2: 1328026564
+      Data3: -154925411
+      Data4: -482540066
+    Path: event:/Weapon/CockUp
+  cockDownSound:
+    Guid:
+      Data1: -222687229
+      Data2: 1174663934
+      Data3: 205248401
+      Data4: 898396825
+    Path: event:/Weapon/CockDown
 --- !u!1 &6723454784697840265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,7 +1263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4516067616490823798
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1304,7 +1345,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 69
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dcab50108bce2cf439b47327599b69d3, type: 2}
   m_sharedMaterial: {fileID: -7119589787176707561, guid: dcab50108bce2cf439b47327599b69d3,

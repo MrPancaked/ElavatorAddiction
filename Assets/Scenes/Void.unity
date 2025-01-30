@@ -2053,6 +2053,8 @@ Transform:
   - {fileID: 2053076238}
   - {fileID: 368440070}
   - {fileID: 1978939371}
+  - {fileID: 1457319669}
+  - {fileID: 745888664}
   - {fileID: 1607405657}
   - {fileID: 1121912252}
   - {fileID: 72598756}
@@ -3235,6 +3237,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743354170}
   m_CullTransparentMesh: 1
+--- !u!1 &745888663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 745888664}
+  - component: {fileID: 745888665}
+  m_Layer: 0
+  m_Name: Transition Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &745888664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745888663}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 566020047}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &745888665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745888663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9324d33744926419d58f267fd5c0db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneLight: {fileID: 1789004883}
+  targetSceneSettings:
+  - {fileID: 11400000, guid: b522ae955f7cbdd4b8a1c89f2dc855bb, type: 2}
+  - {fileID: 11400000, guid: f3acb972f8d512d49aef2b6392238417, type: 2}
 --- !u!1 &776670685
 GameObject:
   m_ObjectHideFlags: 0
@@ -3660,7 +3710,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ImpulseDuration: 0.1
+    ImpulseDuration: 0.2
     ImpulseType: 0
     DissipationRate: 0.25
     RawSignal: {fileID: 0}
@@ -3691,7 +3741,7 @@ MonoBehaviour:
     DissipationMode: 2
     DissipationDistance: 100
     PropagationSpeed: 343
-  DefaultVelocity: {x: 0, y: 0.3, z: -0.2}
+  DefaultVelocity: {x: 0, y: 0.4, z: -0.2}
 --- !u!114 &821970049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5157,6 +5207,7 @@ GameObject:
   - component: {fileID: 1224033870}
   - component: {fileID: 1224033869}
   - component: {fileID: 1224033868}
+  - component: {fileID: 1224033871}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -5240,6 +5291,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1802177691}
+        m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+        m_MethodName: PlayPressSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1224033869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5278,6 +5341,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224033866}
   m_CullTransparentMesh: 1
+--- !u!114 &1224033871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224033866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1802177691}
+          m_TargetAssemblyTypeName: UISounds, Assembly-CSharp
+          m_MethodName: PlayHoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1234939555
 GameObject:
   m_ObjectHideFlags: 0
@@ -5980,6 +6072,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443370858}
   m_CullTransparentMesh: 1
+--- !u!1 &1457319668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1457319669}
+  m_Layer: 0
+  m_Name: ---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1457319669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457319668}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 566020047}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1458618831
 GameObject:
   m_ObjectHideFlags: 0
@@ -7074,6 +7197,7 @@ GameObject:
   - component: {fileID: 1802177688}
   - component: {fileID: 1802177690}
   - component: {fileID: 1802177689}
+  - component: {fileID: 1802177691}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -7120,14 +7244,39 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1802177687}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaa5e1b8daf37e844930647346f5c1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1824772770}
   gun: {fileID: 438759785}
-  theWholeFuckingGame: {fileID: 566020045}
+--- !u!114 &1802177691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802177687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6076f410535aebf41bcde9346d3a805a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSound:
+    Guid:
+      Data1: 124633861
+      Data2: 1077933002
+      Data3: -1488212843
+      Data4: 1165256991
+    Path: event:/UI/UIHover
+  clickSound:
+    Guid:
+      Data1: 1560436203
+      Data2: 1255170916
+      Data3: 912153533
+      Data4: 2002120639
+    Path: event:/UI/UIPress
 --- !u!1 &1824772770
 GameObject:
   m_ObjectHideFlags: 0
@@ -7243,7 +7392,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 1487630971}
-  m_PlaneDistance: 0.1
+  m_PlaneDistance: 0.12
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -8093,6 +8242,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1978939371}
   - component: {fileID: 1978939372}
+  - component: {fileID: 1978939376}
+  - component: {fileID: 1978939374}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -8127,6 +8278,125 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90735b68fe4d3214a9e23688aa8632dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1978939374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978939370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac99ee296d2273646a3ab2495a0d185a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dyingSound:
+    Guid:
+      Data1: 244381142
+      Data2: 1316583084
+      Data3: -563288933
+      Data4: -338514918
+    Path: event:/UI/Dying
+  damageSound:
+    Guid:
+      Data1: 2020663504
+      Data2: 1123414521
+      Data3: 1998900644
+      Data4: -561105128
+    Path: event:/Player/Damage
+  footstepSound:
+    Guid:
+      Data1: 66668512
+      Data2: 1107931447
+      Data3: 1353776572
+      Data4: -1416834981
+    Path: event:/Player/Footsteps
+  inAirSound:
+    Guid:
+      Data1: -40709814
+      Data2: 1174116769
+      Data3: 1775817407
+      Data4: -1368736211
+    Path: event:/Player/InAir
+  jumpSound:
+    Guid:
+      Data1: 1050106847
+      Data2: 1130147827
+      Data3: 932971692
+      Data4: -162323475
+    Path: event:/Player/Jump
+--- !u!114 &1978939376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978939370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac9df3ea84ff0f64d8989ab67390802e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elevatorSoundSource: {fileID: 341224222}
+  doorsSoundSource: {fileID: 200481095}
+  roomtoneSoundSource: {fileID: 953136509}
+  leverSoundSource: {fileID: 86526862}
+  rideSound:
+    Guid:
+      Data1: -251674403
+      Data2: 1204135107
+      Data3: -92284534
+      Data4: 1981531161
+    Path: event:/Elevator/Ride
+  doorCloseSound:
+    Guid:
+      Data1: 318607678
+      Data2: 1171021025
+      Data3: 2066310066
+      Data4: 237913907
+    Path: event:/Elevator/DoorClose
+  doorOpenSound:
+    Guid:
+      Data1: 1030807512
+      Data2: 1283794285
+      Data3: 92168108
+      Data4: 1136249387
+    Path: event:/Elevator/DoorOpen
+  buttonSound:
+    Guid:
+      Data1: 1846394905
+      Data2: 1221497359
+      Data3: -63004244
+      Data4: 52583639
+    Path: event:/Elevator/ButtonPress
+  roomToneSound:
+    Guid:
+      Data1: -2126338503
+      Data2: 1169610999
+      Data3: -1677833029
+      Data4: 922928634
+    Path: event:/Elevator/Roomtone
+  leverDownSound:
+    Guid:
+      Data1: 1297065409
+      Data2: 1155308846
+      Data3: -2050694774
+      Data4: -356529736
+    Path: event:/Elevator/LeverDown
+  leverDownFakeSound:
+    Guid:
+      Data1: 1753921766
+      Data2: 1232299346
+      Data3: -1850824522
+      Data4: -87205529
+    Path: event:/Elevator/LeverDownFake
+  leverUpSound:
+    Guid:
+      Data1: 635973493
+      Data2: 1168746630
+      Data3: 1318301592
+      Data4: 999472868
+    Path: event:/Elevator/LeverUp
 --- !u!1 &2006007787
 GameObject:
   m_ObjectHideFlags: 0
@@ -8288,9 +8558,7 @@ GameObject:
   - component: {fileID: 2053076238}
   - component: {fileID: 2053076240}
   - component: {fileID: 2053076241}
-  - component: {fileID: 2053076239}
   - component: {fileID: 2053076235}
-  - component: {fileID: 2053076237}
   m_Layer: 0
   m_Name: Elevator Manager
   m_TagString: ElavatorManager
@@ -8315,72 +8583,7 @@ MonoBehaviour:
   isButtonActive: 1
   doorIsClosed: 1
   RoomIndex: 0
-  roomText: {fileID: 0}
---- !u!114 &2053076237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053076234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac9df3ea84ff0f64d8989ab67390802e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  elevatorSoundSource: {fileID: 341224222}
-  doorsSoundSource: {fileID: 200481095}
-  roomtoneSoundSource: {fileID: 953136509}
-  leverSoundSource: {fileID: 86526862}
-  rideSound:
-    Guid:
-      Data1: -251674403
-      Data2: 1204135107
-      Data3: -92284534
-      Data4: 1981531161
-    Path: event:/Elevator/Ride
-  doorCloseSound:
-    Guid:
-      Data1: 318607678
-      Data2: 1171021025
-      Data3: 2066310066
-      Data4: 237913907
-    Path: event:/Elevator/DoorClose
-  doorOpenSound:
-    Guid:
-      Data1: 1030807512
-      Data2: 1283794285
-      Data3: 92168108
-      Data4: 1136249387
-    Path: event:/Elevator/DoorOpen
-  buttonSound:
-    Guid:
-      Data1: 1846394905
-      Data2: 1221497359
-      Data3: -63004244
-      Data4: 52583639
-    Path: event:/Elevator/ButtonPress
-  roomToneSound:
-    Guid:
-      Data1: -2126338503
-      Data2: 1169610999
-      Data3: -1677833029
-      Data4: 922928634
-    Path: event:/Elevator/Roomtone
-  leverDownSound:
-    Guid:
-      Data1: 1297065409
-      Data2: 1155308846
-      Data3: -2050694774
-      Data4: -356529736
-    Path: event:/Elevator/LeverDown
-  leverUpSound:
-    Guid:
-      Data1: 635973493
-      Data2: 1168746630
-      Data3: 1318301592
-      Data4: 999472868
-    Path: event:/Elevator/LeverUp
+  roomText: {fileID: 699415835}
 --- !u!4 &2053076238
 Transform:
   m_ObjectHideFlags: 0
@@ -8397,22 +8600,6 @@ Transform:
   - {fileID: 958739498}
   m_Father: {fileID: 566020047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2053076239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053076234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee9324d33744926419d58f267fd5c0db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneLight: {fileID: 1789004883}
-  targetSceneSettings:
-  - {fileID: 11400000, guid: b522ae955f7cbdd4b8a1c89f2dc855bb, type: 2}
-  - {fileID: 11400000, guid: f3acb972f8d512d49aef2b6392238417, type: 2}
 --- !u!65 &2053076240
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8684,11 +8871,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Elavator
       objectReference: {fileID: 0}
+    - target: {fileID: 1064115696530822842, guid: 17c857a8dd5a526479e0031f32d3011d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.38900033
+      objectReference: {fileID: 0}
     - target: {fileID: 1261804523592626966, guid: 17c857a8dd5a526479e0031f32d3011d,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1487630971}
+    - target: {fileID: 3250795942810483205, guid: 17c857a8dd5a526479e0031f32d3011d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.28900033
+      objectReference: {fileID: 0}
+    - target: {fileID: 3271947552776708815, guid: 17c857a8dd5a526479e0031f32d3011d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -55.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3271947552776708815, guid: 17c857a8dd5a526479e0031f32d3011d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3364352103558406991, guid: 17c857a8dd5a526479e0031f32d3011d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.189
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591997111058616423, guid: 17c857a8dd5a526479e0031f32d3011d,
+        type: 3}
+      propertyPath: m_text
+      value: "  - Jump\n\n  - Slide\n\n  - Shoot\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 9090908046091861474, guid: 17c857a8dd5a526479e0031f32d3011d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8740,7 +8957,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8780646262999697306, guid: 17c857a8dd5a526479e0031f32d3011d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8614613997381984538, guid: 17c857a8dd5a526479e0031f32d3011d,

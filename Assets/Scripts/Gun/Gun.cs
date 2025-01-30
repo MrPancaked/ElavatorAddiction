@@ -121,7 +121,7 @@ public class Gun : MonoBehaviour
                 {
 
                     bulletsShot = gunSettings.bulletsPerShot; // Set the amount of bullets per shot
-                    AudioManager.instance.PlayOneShot(gunSettings.gunShotSound, MuzzleFlashPoint.position); //Play the shot sound
+                    //AudioManager.instance.PlayOneShot(gunSettings.gunShotSound, MuzzleFlashPoint.position); //Play the shot sound
                     Shoot(); // Fire the gun
 
                 }
@@ -159,7 +159,7 @@ public class Gun : MonoBehaviour
                     if (dualGuns[currentGunIndex].shotsLeft > 0) // Check if the current gun has ammo
                     {
                         dualGuns[currentGunIndex].bulletsShot = dualGuns[currentGunIndex].gunSettings.bulletsPerShot; // Set bullets per shot
-                        AudioManager.instance.PlayOneShot(dualGuns[currentGunIndex].gunSettings.gunShotSound, dualGuns[currentGunIndex].MuzzleFlashPoint.position); //Play the shot sound
+                        //AudioManager.instance.PlayOneShot(dualGuns[currentGunIndex].gunSettings.gunShotSound, dualGuns[currentGunIndex].MuzzleFlashPoint.position); //Play the shot sound
                         dualGuns[currentGunIndex].Shoot(); // Fire the current gun
                         currentGunIndex = (currentGunIndex + 1) % 2; // Switch to the next gun
                     }
@@ -264,7 +264,6 @@ public class Gun : MonoBehaviour
             }
             if ((whatIsGround & (1 << hitLayer)) != 0) // Instantiate bullet hole
             {
-                AudioManager.instance.PlayOneShot(gunSettings.bulletHit, this.transform.position); // Play bullet hit sound
                 GameObject bulletHoleTemporary = Instantiate(bulletHole, rayHit.point, Quaternion.Euler(0, 180, 0), particlesParent); // Instantiate bullet hole
                 bulletHoleTemporary.transform.LookAt(transform); //Rotate the bullet hole to look at the gun
                 Destroy(bulletHoleTemporary, 1f); //Destroy after 1 sec

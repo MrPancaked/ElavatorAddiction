@@ -142,6 +142,7 @@ public class NewMovement : MonoBehaviour
         {
             jumping = false;
             jumpAvailable = false;
+            PlayerSounds.Instance.PlayJumpSound();
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             rb.AddForce(moveDirection * bhopBoost, ForceMode.Impulse);
@@ -188,6 +189,16 @@ public class NewMovement : MonoBehaviour
             sliding = false;
             transform.localScale = new Vector3(transform.localScale.x, normalYScale, transform.localScale.z);
             rb.drag = groundDrag;
+        }
+
+        // In air sound
+        if (grounded && PlayerSounds.Instance != null)
+        {
+            PlayerSounds.Instance.PlayInAirStop();
+        }
+        else if (PlayerSounds.Instance != null)
+        {
+            PlayerSounds.Instance.PlayInAirStart();
         }
 
         //end of fixedupdate

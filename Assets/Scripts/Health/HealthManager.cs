@@ -85,6 +85,7 @@ public class HealthManager : MonoBehaviour
     private void OnPlayerTakeDamage(float damage) // Updates the health UI display.
     {
         hudAnimator.SetTrigger("Hit"); // Trigger animation
+        PlayerSounds.Instance.PlayHitSound();
         UpdateHealthUI();
         if (health.hp > 0)
         {
@@ -104,6 +105,7 @@ public class HealthManager : MonoBehaviour
             Cursor.visible = true; // Show the cursor
             Cursor.lockState = CursorLockMode.None; // Unlock the cursor
             deathScreenAnimator.SetTrigger("Die"); // Trigger animation
+            PlayerSounds.Instance.PlayDeathStart();
             foreach (Gun gunInstance in guns)
             {
                 gunInstance.reloading = true;
@@ -111,31 +113,21 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-    /*public void HealthUpgrade(float healthIncrease, float healAmount) /// Applies a health upgrade to the player and logs it.
-    {
-        initialHealth += healthIncrease;
-        health.hp += healAmount;
-        Debug.Log("Health Upgrade: " + health.hp);
-        UpdateHealthUI();
-    }*/
-
     #endregion
 
     #region Restarting
 
     public void RestartGame()
     {
-        if (playerIsDead)
-        {
-            StartCoroutine(Restarting());
-        }
+        StartCoroutine(Restarting());
     }
 
     public IEnumerator Restarting()
     {
         Time.timeScale = 1f; // Restore time scale
         playerIsDead = false; // Reset death state
-        HealthManager.Instance.initialHealth = 100f; // Reset health
+        PlayerSounds.Instance.PlayDeathStop();
+        initialHealth = 100f; // Reset health
         health.hp = 100f;
         UpdateHealthUI();
         CoinsLogic.Instance.coinDropChance = 0.5f;
@@ -174,7 +166,7 @@ public class HealthManager : MonoBehaviour
     public IEnumerator VoidTransition()
     {
         Time.timeScale = 1f; // Restore time scale
-        transform.position = new Vector3(transform.position.x, 18.47f, transform.position.z); // Move the player to the respawn point
+        transform.position = new Vector3(transform.position.x, 25f, transform.position.z); // Move the player to the respawn point
         Debug.Log("Player Position set");
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
@@ -185,11 +177,7 @@ public class HealthManager : MonoBehaviour
             yield return null;
         }
         yield return null; // Wait one frame
-        
-
     }
-
-    
 
     #endregion
 

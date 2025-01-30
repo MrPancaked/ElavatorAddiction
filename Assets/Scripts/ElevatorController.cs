@@ -43,7 +43,6 @@ public class ElevatorController : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject); // Prevent the game object from being destroyed in different scenes.
             currentSceneName = SceneManager.GetActiveScene().name; // Set current scene name
-            roomText = GameObject.FindGameObjectWithTag("RoomText").GetComponent<TextMeshProUGUI>();
         }
     }
 
@@ -176,6 +175,6 @@ public class ElevatorController : MonoBehaviour
     #endregion
     public void UpdateRoomIndex()
     {
-        roomText.text = "Floor: " + (-RoomIndex).ToString();
+        roomText.text = "Floor " + (-RoomIndex).ToString();
     }
 }
