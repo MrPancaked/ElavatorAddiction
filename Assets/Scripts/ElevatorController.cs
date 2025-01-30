@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ElevatorController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class ElevatorController : MonoBehaviour
     private string currentSceneName; // String to store the current scene name
     private static ElevatorController instance;
     public static ElevatorController Instance { get { return instance; } }
+    public int RoomIndex = 0;
+    public TextMeshProUGUI roomText;
 
     #endregion
 
@@ -40,6 +43,7 @@ public class ElevatorController : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject); // Prevent the game object from being destroyed in different scenes.
             currentSceneName = SceneManager.GetActiveScene().name; // Set current scene name
+            roomText = GameObject.FindGameObjectWithTag("RoomText").GetComponent<TextMeshProUGUI>();
         }
     }
 
@@ -152,7 +156,8 @@ public class ElevatorController : MonoBehaviour
             {
                 yield return null;
             }
-
+            RoomIndex++;
+            UpdateRoomIndex();
             LevelGenerator.Instance.GenerateLevel(); // Call the GenerateLevel method
             EnemySpawner.Instance.SpawnEnemies();
             ElevatorSounds.Instance.PlayElevatorStop(); //Play the elevator stop sound
@@ -169,4 +174,8 @@ public class ElevatorController : MonoBehaviour
     }
 
     #endregion
+    public void UpdateRoomIndex()
+    {
+        roomText.text = "Floor: " + (-RoomIndex).ToString();
+    }
 }

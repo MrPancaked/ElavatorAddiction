@@ -17,6 +17,7 @@ TagManager:
   - Obsctacle
   - Elevator
   - RespawnPoint
+  - RoomText
   layers:
   - Default
   - TransparentFX
