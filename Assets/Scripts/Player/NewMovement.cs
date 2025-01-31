@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class NewMovement : MonoBehaviour
 {
     private Rigidbody rb;
-    private Animator animator;
+    private Animator animator; // Added Animator variable
 
     [Header("Movement")]
     public float speed;
@@ -18,7 +18,6 @@ public class NewMovement : MonoBehaviour
     public float jumpForce;
     public float jumpTiming;
     public float bhopBoost;
-    [Range(0, 1f)] public float perfectTimingWindow = .2f; // How close we need to the timer to be good
 
     [Header("Sliding")]
     public float slideYScale;
@@ -147,13 +146,7 @@ public class NewMovement : MonoBehaviour
             jumpAvailable = false;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            float relativeTimer = jumpTiming - jumpTimer; // Calculate time since the last jump
-
-            if (relativeTimer <= perfectTimingWindow && relativeTimer > 0) // Check if the player is in the good timing window
-            {
-                rb.AddForce(moveDirection * bhopBoost, ForceMode.Impulse); // bhop boost
-                PlayerSounds.Instance.PlayBhopSound(); // Play perfect jump
-            }
+            rb.AddForce(moveDirection * bhopBoost, ForceMode.Impulse);
         }
 
         //jumping
@@ -207,6 +200,7 @@ public class NewMovement : MonoBehaviour
         {
             PlayerSounds.Instance.PlayInAirStart();
         }
+
         SwitchAnimationStates();
 
         //end of fixedupdate
@@ -214,6 +208,8 @@ public class NewMovement : MonoBehaviour
         jumpReleased = false;
         slidePressed = false;
         slideReleased = false;
+
+        //Debug.Log(rb.drag); THIS SHIT IS ANNOYINGGGG!!!!!!      oh hi Rene:3 hi Misha :3 hi Rene:3 
     }
 
     private void JumpReset()
