@@ -170,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 2759686616367385794, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32.3
+      value: 27.1
       objectReference: {fileID: 0}
     - target: {fileID: 3796622960456743319, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
@@ -261,6 +261,11 @@ PrefabInstance:
         type: 3}
       propertyPath: NoiseModule.strength.scalar
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402546147538555389, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 8402546147538555389, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}

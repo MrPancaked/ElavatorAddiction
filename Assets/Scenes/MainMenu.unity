@@ -1623,8 +1623,8 @@ MonoBehaviour:
   HighHeight: 8
   MidHeight: 3
   lowHeight: -2
-  cameraSpeed: 1.5
-  cameraRotateSpeed: 10
+  cameraSpeed: 1.7
+  cameraRotateSpeed: 14
 --- !u!1 &847510242
 GameObject:
   m_ObjectHideFlags: 0
@@ -5059,6 +5059,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1331819551486851786, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716618073094675867, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194243880731055120, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5706629240240990258, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075615495433100925, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180184661860708453, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203284144273276910, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6954830964001507172, guid: 21c179313b98d6645b6d8196ecd84f87,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5109,10 +5144,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7167912173165838743, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251051014828323914, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7768521638160817630, guid: 21c179313b98d6645b6d8196ecd84f87,
         type: 3}
       propertyPath: m_Name
       value: ElavatorShaft
+      objectReference: {fileID: 0}
+    - target: {fileID: 7853624902943994154, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150227020552513283, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711860079281418885, guid: 21c179313b98d6645b6d8196ecd84f87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
