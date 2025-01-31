@@ -14,6 +14,7 @@ public class Interactions : MonoBehaviour
     private string coinTag = "Coin"; // Tag for coin objects
     private string ElevatorButtonTag = "ElevatorButton"; // Tag for the button in the elevator.
     private string ElevatorLeverTag = "ElevatorLever"; // Tag for the lever outside the elevator.
+    private string BookTag = "Book"; // Tag for the lever outside the elevator.
     private Animator buttonAnimator;
     public static Interactions instance;
     public static Interactions Instance { get { return instance; } }
@@ -113,6 +114,12 @@ public class Interactions : MonoBehaviour
             {
                 ElevatorController.Instance.LeverPressed(); // ApplyRandomUpgrade IS LINKED THERE
             }
+
+            else if (hit.collider.CompareTag(BookTag))
+            {
+                MonologueManager.Instance.UseBook();
+            }
+
             else
             {
                 Debug.Log("Uninteractable");
