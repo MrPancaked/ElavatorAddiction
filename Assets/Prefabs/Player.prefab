@@ -598,6 +598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3364382570679612324}
+  - component: {fileID: 8725160892507436221}
   - component: {fileID: 6489364600403373051}
   - component: {fileID: 5240365597016641081}
   - component: {fileID: 4918400857203237434}
@@ -610,6 +611,7 @@ GameObject:
   - component: {fileID: 7472339462362982192}
   - component: {fileID: 2363603075605729512}
   - component: {fileID: 7171003750088437121}
+  - component: {fileID: 5909768442101564921}
   m_Layer: 6
   m_Name: Player Holder
   m_TagString: Player
@@ -634,6 +636,27 @@ Transform:
   - {fileID: 517027159669905986}
   m_Father: {fileID: 2691225305413714647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8725160892507436221
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784816484273663751}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: af87aca5e72a32b48aea978f4870411a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!136 &6489364600403373051
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -960,6 +983,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa017669abfe9204b94b681aed880483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5909768442101564921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784816484273663751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac99ee296d2273646a3ab2495a0d185a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dyingSound:
+    Guid:
+      Data1: 244381142
+      Data2: 1316583084
+      Data3: -563288933
+      Data4: -338514918
+    Path: event:/UI/Dying
+  damageSound:
+    Guid:
+      Data1: 2020663504
+      Data2: 1123414521
+      Data3: 1998900644
+      Data4: -561105128
+    Path: event:/Player/Damage
+  footstepSound:
+    Guid:
+      Data1: 66668512
+      Data2: 1107931447
+      Data3: 1353776572
+      Data4: -1416834981
+    Path: event:/Player/Footsteps
+  inAirSound:
+    Guid:
+      Data1: -40709814
+      Data2: 1174116769
+      Data3: 1775817407
+      Data4: -1368736211
+    Path: event:/Player/InAir
+  jumpSound:
+    Guid:
+      Data1: 1050106847
+      Data2: 1130147827
+      Data3: 932971692
+      Data4: -162323475
+    Path: event:/Player/Jump
 --- !u!1 &8605598466660808009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1143,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4655439236767218671}
     m_Modifications:
+    - target: {fileID: 1527659687294661605, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3249948968361327493, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1138,6 +1213,11 @@ PrefabInstance:
       propertyPath: playerRb
       value: 
       objectReference: {fileID: 5240365597016641081}
+    - target: {fileID: 8561438924368551406, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

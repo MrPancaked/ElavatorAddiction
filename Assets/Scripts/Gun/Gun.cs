@@ -18,8 +18,6 @@ public class Gun : MonoBehaviour
     [SerializeField] public GunSettings gunSettings; // Gun settings with all statistics and variables
     public Camera fpsCam; // The FPS camera
     public Rigidbody playerRb; // Player's Rigidbody
-    public CinemachineImpulseSource impulseSource; // Impulse source for camera shake
-    public Transform MuzzleFlashPoint; // Transform for the muzzle flash spawn point
     public TextMeshPro ammoCounter; // UI text element for ammo display
     public GameObject reloadFeedbackText; // UI text element for reload feedback (for now lololo hehehe rene im going crazy bithc it is 3 am)
     public List<Gun> dualGuns = new List<Gun>(); // If this is a dual gun PUT BOTH GUNS IN THE LIST
@@ -222,8 +220,8 @@ public class Gun : MonoBehaviour
 
 
         }
-        impulseSource.GenerateImpulseWithForce(gunSettings.screenShakeStrength);
-        BulletEffects(); // Call bullet effects
+        ScreenshakeManager.Instance.TriggerShake("gunshot");
+        //BulletEffects(); // Call bullet effects
     }
 
     IEnumerator BurstShot(Vector3 direction)
@@ -247,29 +245,29 @@ public class Gun : MonoBehaviour
 
     #region Bullet Effects
 
-    private void BulletEffects()
-    {
-        GameObject muzzleFlashTemporary = Instantiate(muzzleFlash, MuzzleFlashPoint.position, Quaternion.identity, particlesParent); // Instantiate muzzleflash
-        muzzleFlashTemporary.transform.forward = fpsCam.transform.forward; // Align the muzzle flash with the camera
-        Destroy(muzzleFlashTemporary, 1f); //Destroy after 1 sec
-
-        if (rayHit.collider != null)
-        {
-            int hitLayer = rayHit.collider.gameObject.layer;
-            if ((whatIsEnemy & (1 << hitLayer)) != 0) // Check if the raycast hit an enemy
-            {
-                // Instantiate blood burst if on an enemy layer
-                GameObject bloodBurstTemporary = Instantiate(bloodBurst, rayHit.point, Quaternion.Euler(0, 180, 0), particlesParent);
-                Destroy(bloodBurstTemporary, 1f); // Destroy after 1 sec
-            }
-            if ((whatIsGround & (1 << hitLayer)) != 0) // Instantiate bullet hole
-            {
-                GameObject bulletHoleTemporary = Instantiate(bulletHole, rayHit.point, Quaternion.Euler(0, 180, 0), particlesParent); // Instantiate bullet hole
-                bulletHoleTemporary.transform.LookAt(transform); //Rotate the bullet hole to look at the gun
-                Destroy(bulletHoleTemporary, 1f); //Destroy after 1 sec
-            }
-        }
-    }
+    //private void BulletEffects()
+    //{
+    //    GameObject muzzleFlashTemporary = Instantiate(muzzleFlash, MuzzleFlashPoint.position, Quaternion.identity, particlesParent); // Instantiate muzzleflash
+    //    muzzleFlashTemporary.transform.forward = fpsCam.transform.forward; // Align the muzzle flash with the camera
+    //    Destroy(muzzleFlashTemporary, 1f); //Destroy after 1 sec
+    //
+    //    if (rayHit.collider != null)
+    //    {
+    //        int hitLayer = rayHit.collider.gameObject.layer;
+    //        if ((whatIsEnemy & (1 << hitLayer)) != 0) // Check if the raycast hit an enemy
+    //        {
+    //            // Instantiate blood burst if on an enemy layer
+    //            GameObject bloodBurstTemporary = Instantiate(bloodBurst, rayHit.point, Quaternion.Euler(0, 180, 0), particlesParent);
+    //            Destroy(bloodBurstTemporary, 1f); // Destroy after 1 sec
+    //        }
+    //        if ((whatIsGround & (1 << hitLayer)) != 0) // Instantiate bullet hole
+    //        {
+    //            GameObject bulletHoleTemporary = Instantiate(bulletHole, rayHit.point, Quaternion.Euler(0, 180, 0), particlesParent); // Instantiate bullet hole
+    //            bulletHoleTemporary.transform.LookAt(transform); //Rotate the bullet hole to look at the gun
+    //            Destroy(bulletHoleTemporary, 1f); //Destroy after 1 sec
+    //        }
+    //    }
+    //}
 
     #endregion
 

@@ -124,57 +124,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &92123792
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 92123793}
-  - component: {fileID: 92123794}
-  m_Layer: 0
-  m_Name: Ambience Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &92123793
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 92123792}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29, y: 0, z: 208}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &92123794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 92123792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e491887b05cd74c4c9f5c26bda86c70a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ambienceEvent:
-    Guid:
-      Data1: 249948014
-      Data2: 1313873479
-      Data3: -1527298892
-      Data4: -1845462199
-    Path: event:/Ambience/AmbienceManager
 --- !u!1 &107028024
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,6 +2635,145 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054017657}
   m_CullTransparentMesh: 1
+--- !u!1 &1170738321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170738326}
+  - component: {fileID: 1170738325}
+  - component: {fileID: 1170738324}
+  - component: {fileID: 1170738323}
+  - component: {fileID: 1170738322}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1170738322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170738321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e491887b05cd74c4c9f5c26bda86c70a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ambienceEvent:
+    Guid:
+      Data1: 389698097
+      Data2: 1150790682
+      Data3: -426962303
+      Data4: 256128821
+    Path: event:/Ambience/AmbienceManager
+--- !u!114 &1170738323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170738321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac99ee296d2273646a3ab2495a0d185a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dyingSound:
+    Guid:
+      Data1: 244381142
+      Data2: 1316583084
+      Data3: -563288933
+      Data4: -338514918
+    Path: event:/UI/Dying
+  damageSound:
+    Guid:
+      Data1: 2020663504
+      Data2: 1123414521
+      Data3: 1998900644
+      Data4: -561105128
+    Path: event:/Player/Damage
+  footstepSound:
+    Guid:
+      Data1: 66668512
+      Data2: 1107931447
+      Data3: 1353776572
+      Data4: -1416834981
+    Path: event:/Player/Footsteps
+  inAirSound:
+    Guid:
+      Data1: -40709814
+      Data2: 1174116769
+      Data3: 1775817407
+      Data4: -1368736211
+    Path: event:/Player/InAir
+  jumpSound:
+    Guid:
+      Data1: 1050106847
+      Data2: 1130147827
+      Data3: 932971692
+      Data4: -162323475
+    Path: event:/Player/Jump
+--- !u!114 &1170738324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170738321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac9df3ea84ff0f64d8989ab67390802e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rideSound:
+    Guid:
+      Data1: -251674403
+      Data2: 1204135107
+      Data3: -92284534
+      Data4: 1981531161
+    Path: event:/Elevator/Ride
+  roomToneSound:
+    Guid:
+      Data1: -2126338503
+      Data2: 1169610999
+      Data3: -1677833029
+      Data4: 922928634
+    Path: event:/Elevator/Roomtone
+--- !u!114 &1170738325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170738321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90735b68fe4d3214a9e23688aa8632dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1170738326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170738321}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.9799995, y: 18.369999, z: -24.470001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1200007608
 GameObject:
   m_ObjectHideFlags: 0
@@ -4931,7 +5019,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 92123793}
+  - {fileID: 1170738326}
   - {fileID: 549913622}
   - {fileID: 777680701}
   - {fileID: 601855873}

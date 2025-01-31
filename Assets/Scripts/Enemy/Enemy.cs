@@ -11,14 +11,13 @@ public class Enemy : MonoBehaviour
     [Header("References")]
     public GameObject CoinBurst;
     public GameObject DeathBurst;
-
+    public EnemySounds enemySounds;
     [SerializeField] EnemySettings enemySettings;
 
     // Private Variables
     [HideInInspector]
     public bool canDamage = true;    // Flag to control if the enemy can deal damage.
     private bool canAttack = true;     // Flag to control if the enemy can attack.
-    private bool isSoundOnCooldown = false; // flag for the cooldown
     private float currentOrbitRadius; // Radius for orbit movement.
     private float hoverTimer = 0.0f;  // Timer for hover movement.
     private Rigidbody rb; // Rigidbody for physics-based movement.
@@ -26,8 +25,6 @@ public class Enemy : MonoBehaviour
     private Transform playerTransform;  // Reference to the player transform.
     private Collider playerCollider; // Reference to the player collider.
     private Vector3 hoverStartPosition; // Starting position of the hover movement.
-    private Coroutine soundCooldown; // Cooldown for the damage sound.
-    private FMOD.Studio.EventInstance idleSoundInstance; // FMOD Instance for loop
     private Health health;          // Reference to the health script on this game object.
     private EnemyCounter enemyCounter; // Reference to the enemy counter script.
     private EnemyState currentState = EnemyState.Idle;  // Current state of the enemy.
@@ -61,12 +58,7 @@ public class Enemy : MonoBehaviour
     {
         hoverStartPosition = transform.position;
         currentOrbitRadius = Random.Range(0f, enemySettings.idleFloatingRadius);
-
-        idleSoundInstance = AudioManager.instance.CreateEventInstance(enemySettings.idleSound); //Use this function to create the event instance
-        if (idleSoundInstance.isValid()) //Validate that the event instance was created
-        {
-            idleSoundInstance.start(); // Start the loop sound
-        }
+        enemySounds.IdleSoundStart();
     }
 
     private void OnDisable() /// Called when the enemy is disabled, remove the die event
@@ -75,15 +67,13 @@ public class Enemy : MonoBehaviour
         health.TakeDamageMethod -= TakeDamage;
         enemyCounter.enemyCount--; // Decrease the enemy counter
         enemyCounter.UpdateEnemyCounter();
-        StopIdleSound();
     }
 
     private void Update()  /// Called every frame. Tracks player position, updates hover timer, and manages the enemy's states.
     {
         playerTransform = playerObject.transform;
         hoverTimer += Time.deltaTime;
-
-        UpdateSoundPosition(); // Update sound emitter position
+        enemySounds.UpdateIdleSound();
 
         switch (currentState)
         {
@@ -144,13 +134,13 @@ public class Enemy : MonoBehaviour
                                               Random.Range(-enemySettings.attackOffset, enemySettings.attackOffset),
                                               Random.Range(-enemySettings.attackOffset, enemySettings.attackOffset));
         rb.drag = enemySettings.attackDrag;
-        rb.AddForce((chaseDirection + randomDirection) * (enemySettings.attackSpeed + ElevatorController.Instance.RoomIndex * 0.5f));
+        rb.AddForce((chaseDirection + randomDirection) * (enemySettings.attackSpeed + ElevatorController.Instance.RoomIndex * 0.3f));
 
         // Smoothly rotate the enemy to face the direction of movement
         if (chaseDirection != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(chaseDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 50 * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 25 * Time.deltaTime);
         }
 
     }
@@ -161,65 +151,26 @@ public class Enemy : MonoBehaviour
 
     public void Die() /// Handles the death of the enemy, disables the model, drops loot, and destroys itself.
     {
+        enemyCounter.UpdateEnemyCounter(); // Update the enemy counter
+
         if (Random.Range(0, 1f) <= CoinsLogic.Instance.coinDropChance)
         {
+            enemySounds.CoinsSound();
             GameObject coins = Instantiate(CoinBurst, transform.position, Quaternion.identity); // Spawn the coin burst
             CoinsLogic.Instance.CollectCoin();
+            gameObject.SetActive(false); // Disables the enemy model
         }
         else
         {
             GameObject blood = Instantiate(DeathBurst, transform.position, Quaternion.identity); // Spawn the blood burst
+            enemySounds.DeathSound();
+            gameObject.SetActive(false); // Disables the enemy model
         }
-        AudioManager.instance.PlayOneShot(enemySettings.deathSound, this.transform.position); // Play enemy damage sound
-        enemyCounter.UpdateEnemyCounter(); // Update the enemy counter
-
-        gameObject.SetActive(false); // Disables the enemy model
-        
     }
 
     public void TakeDamage(float damage)
     {
-        if (!isSoundOnCooldown)
-        {
-            soundCooldown = StartCoroutine(TakeDamageSoundCooldown());
-        }
-    }
-
-    IEnumerator TakeDamageSoundCooldown()
-    {
-        isSoundOnCooldown = true;
-        AudioManager.instance.PlayOneShot(enemySettings.damageSound, this.transform.position); // Play enemy damage sound
-        yield return new WaitForSeconds(0.4f);
-        isSoundOnCooldown = false;
-    }
-
-    #endregion
-
-    #region Sound
-
-    private void UpdateSoundPosition() // Update sound position
-    {
-        if (idleSoundInstance.isValid()) //Validate that the event instance was created
-        {
-            FMOD.Studio.PLAYBACK_STATE playbackState;
-            idleSoundInstance.getPlaybackState(out playbackState);
-
-            if (playbackState != FMOD.Studio.PLAYBACK_STATE.STOPPED)
-            {
-                AudioManager.instance.Set3DAttributes(idleSoundInstance, transform); // Set the 3D attributes
-            }
-        }
-    }
-
-
-    private void StopIdleSound() //Method to stop playing the loop sound.
-    {
-        if (idleSoundInstance.isValid())
-        {
-            idleSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            idleSoundInstance.release();
-        }
-
+        enemySounds.DamageSound();
     }
 
     #endregion

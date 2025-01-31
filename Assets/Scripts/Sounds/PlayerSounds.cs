@@ -13,13 +13,17 @@ public class PlayerSounds : MonoBehaviour
     public EventReference footstepSound;
     public EventReference inAirSound;
     public EventReference jumpSound;
+    public EventReference slideSound;
 
     private EventInstance deathInstance; /// Variable to hold the created event instance
     private EventInstance inAirInstance; /// Variable to hold the created event instance
+    private EventInstance footstepInstance;
     private bool hasStarted = false; // Check if the sound has been started
     private bool isInAir = false; // Check if the sound has been started
     private static PlayerSounds instance;
     public static PlayerSounds Instance { get { return instance; } }
+    private float lastFootstepTime = 0f;
+    public float footstepRate = 0.3f; // Adjust for desired speed
 
     #endregion
 
@@ -36,15 +40,14 @@ public class PlayerSounds : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject); // IMPORTANT!
-            Debug.Log("PlayerSounds instance created.");
         }
     }
 
     void Start()
     {
-        deathInstance = AudioManager.instance.CreateEventInstance(dyingSound); // Create event instance using 2d
-        inAirInstance = AudioManager.instance.CreateEventInstance(inAirSound); // Create event instance using 2d
-        Debug.Log($"Event reference assigned: {dyingSound}"); // Debug Check
+        deathInstance = AudioManager.instance.CreateInstance2D(dyingSound); // Create event instance using 2d
+        inAirInstance = AudioManager.instance.CreateInstance2D(inAirSound); // Create event instance using 2d
+        footstepInstance = AudioManager.instance.CreateInstance2D(footstepSound);
     }
 
 
@@ -57,6 +60,10 @@ public class PlayerSounds : MonoBehaviour
         if (inAirInstance.isValid())
         {
             inAirInstance.release();
+        }
+        if (footstepInstance.isValid())
+        {
+            footstepInstance.release();
         }
     }
 
@@ -93,6 +100,13 @@ public class PlayerSounds : MonoBehaviour
     public void PlayJumpSound()
     {
         AudioManager.instance.PlayOneShot2D(jumpSound);
+        PlayFootstepSound();
+    }
+
+    public void PlaySlideSound()
+    {
+        //AudioManager.instance.PlayOneShot2D(slideSound);
+        PlayFootstepSound();
     }
 
     public void PlayInAirStart()
@@ -109,7 +123,67 @@ public class PlayerSounds : MonoBehaviour
         if (isInAir)
         {
             inAirInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            PlayFootstepSound();
             isInAir = false;
+        }
+    }
+
+    public void PlayFootstepSound()
+    {
+        if (footstepInstance.isValid())
+        {
+            if (Time.time - lastFootstepTime >= footstepRate)
+            {
+                lastFootstepTime = Time.time;
+                GroundSwitch();
+                footstepInstance.start();
+            }
+
+        }
+    }
+
+    private void GroundSwitch()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position + Vector3.up * 0.5f, -Vector3.up);
+        if (Physics.Raycast(ray, out hit, 2.0f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+        {
+            Renderer surfaceRenderer = hit.collider.GetComponent<Renderer>();
+            if (surfaceRenderer == null)
+            {
+                surfaceRenderer = hit.collider.GetComponentInChildren<Renderer>();
+            }
+
+            if (surfaceRenderer)
+            {
+                if (surfaceRenderer.material.name.Contains("Tiles"))
+                {
+                    footstepInstance.setParameterByName("Footsteps", 1);
+                }
+                else if (surfaceRenderer.material.name.Contains("Elavator"))
+                {
+                    footstepInstance.setParameterByName("Footsteps", 2);
+                }
+                else if (surfaceRenderer.material.name.Contains("ChurchRoof"))
+                {
+                    footstepInstance.setParameterByName("Footsteps", 2);
+                }
+                else if (surfaceRenderer.material.name.Contains("Hut"))
+                {
+                    footstepInstance.setParameterByName("Footsteps", 2);
+                }
+            }
+            else if (hit.collider.TryGetComponent<Terrain>(out Terrain terrain))
+            {
+                Material terrainMaterial = terrain.materialTemplate;
+                if (terrainMaterial != null)
+                {
+                    if (terrainMaterial.name.Contains("SnowyGround"))
+                    {
+                        footstepInstance.setParameterByName("Footsteps", 0);
+                    }
+                }
+            }
         }
     }
 

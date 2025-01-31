@@ -19,7 +19,7 @@ public class Upgrades : MonoBehaviour
     public float fireRateMultiplier;
     public float dropchanceMultiplier;
 
-    [Header("Upgrade UI references")]
+    [Header("References")]
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI fireRateText;
     public TextMeshProUGUI speedText;
@@ -69,6 +69,7 @@ public class Upgrades : MonoBehaviour
                 slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 SpeedUpgrade(speedIncrease); // Apply speed upgrade
                 slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.06f);
+                SlotsSounds.Instance.PlayWinSound();
                 break;
             case 1:
                 slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = slotSpinSpeed;
@@ -76,6 +77,7 @@ public class Upgrades : MonoBehaviour
                 slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 DamageUpgrade(damageIncrease);  // Apply strengh upgrade
                 slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.73f);
+                SlotsSounds.Instance.PlayWinSound();
                 break;
             case 2:
                 slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = slotSpinSpeed;
@@ -83,6 +85,7 @@ public class Upgrades : MonoBehaviour
                 slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 healthUpgrade(healthIncrease, healAmount); // Apply health upgrade
                 slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.41f);
+                SlotsSounds.Instance.PlayWinSound();
                 break;
             case 3:
                 slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = slotSpinSpeed;
@@ -90,6 +93,7 @@ public class Upgrades : MonoBehaviour
                 slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 FireRateUpgrade(fireRateMultiplier); // Apply fire rate upgrade
                 slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.9f);
+                SlotsSounds.Instance.PlayWinSound();
                 break;
             case 4:
                 slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = slotSpinSpeed;
@@ -97,6 +101,7 @@ public class Upgrades : MonoBehaviour
                 slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 DropChanceUpgrade(dropchanceMultiplier); // Apply drop chance upgrade
                 slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.23f);
+                SlotsSounds.Instance.PlayWinSound();
                 break;
             case 5:
 
@@ -105,6 +110,7 @@ public class Upgrades : MonoBehaviour
                 slots[slotIndex].GetComponent<ScrollingTexture>().AnimationSpeed = 0;
                 Lose(); // Lose
                 slots[slotIndex].GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, 0.57f);
+                SlotsSounds.Instance.PlayLoseSound();
                 break;
         }
     }

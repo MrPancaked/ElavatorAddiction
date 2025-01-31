@@ -7,15 +7,14 @@ public class AmbienceManager : MonoBehaviour
 {
     #region Variables
 
-    [Header("Ambience Sounds")] /// FMOD event references
+    [Header("Ambience Sounds")]
     public EventReference ambienceEvent;
 
-    private EventInstance ambienceInstance; /// Variable to hold the created event instance
+    private EventInstance ambienceInstance;
     private static AmbienceManager instance;
     public static AmbienceManager Instance { get { return instance; } }
 
-    //private
-    private int currentSceneIndex = -1; // Track the current scene
+    private int currentSceneIndex = -1;
 
     #endregion
 
@@ -31,18 +30,21 @@ public class AmbienceManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // IMPORTANT!
+            //DontDestroyOnLoad(gameObject); //keep if you want the manager to survive scene transitions
         }
     }
 
     void Start()
     {
-        ambienceInstance = AudioManager.instance.CreateEventInstance(ambienceEvent); // Create event instance using 2d
+        // Initialize the ambience event here, before potentially accessing it
+        ambienceInstance = AudioManager.instance.CreateInstance2D(ambienceEvent);
         ambienceInstance.start();
-        UpdateAmbience(SceneManager.GetActiveScene().buildIndex); //set the start of the game ambience track
+        // initialize the correct ambience on game start
+        UpdateAmbience(SceneManager.GetActiveScene().buildIndex);
         Debug.Log("Ambience initialized.");
-    }
 
+
+    }
 
     void OnEnable()
     {
@@ -54,7 +56,7 @@ public class AmbienceManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    void OnDestroy() /// Clean up FMOD event instances when the object is destroyed
+    void OnDestroy()
     {
         if (ambienceInstance.isValid())
         {
@@ -65,37 +67,44 @@ public class AmbienceManager : MonoBehaviour
 
     #region Ambience Logic
 
+    // called from scene loading
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        UpdateAmbience(scene.buildIndex); //check if the active scene is changed, and update the ambience
+        UpdateAmbience(scene.buildIndex);
     }
 
-    private void UpdateAmbience(int sceneIndex)
+    // Public method to update ambience
+    public void UpdateAmbience(int sceneIndex)
     {
+        // Prevent update if already in correct scene. This prevents redundant calls.
         if (sceneIndex == currentSceneIndex) return;
 
+        float parameterValue;
         switch (sceneIndex)
         {
             case 0:
                 Debug.Log("Ambience set to Menu");
-                SetAmbienceState(0f);
+                parameterValue = 0f;
                 break;
             case 1:
                 Debug.Log("Ambience set to Void");
-                SetAmbienceState(1f);
+                parameterValue = 1f;
                 break;
             case 2:
                 Debug.Log("Ambience set to Forest");
-                SetAmbienceState(2f);
+                parameterValue = 2f;
                 break;
             default:
                 Debug.LogWarning($"No Ambience scene state set for scene with index {sceneIndex}");
+                parameterValue = 0f; // Default value so its not left unassigned
                 break;
         }
-        currentSceneIndex = sceneIndex;
-    }
 
-    private void SetAmbienceState(float parameterValue) /// Sets the FMOD parameter for the ambience state.
+        SetAmbienceState(parameterValue);
+        currentSceneIndex = sceneIndex; // only update scene index after setting the parameter
+    }
+    // Private method to set the parameter
+    private void SetAmbienceState(float parameterValue)
     {
         ambienceInstance.setParameterByName("Scene", parameterValue);
     }

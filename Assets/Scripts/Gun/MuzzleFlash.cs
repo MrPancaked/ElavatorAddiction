@@ -11,9 +11,6 @@ public class MuzzleFlash : MonoBehaviour
     public class LightSource
     {
         public Light light;
-        public float minIntensity;
-        public float maxIntensity;
-        public float flashDuration;
     }
     public LightSource lightSource;
 
@@ -23,15 +20,7 @@ public class MuzzleFlash : MonoBehaviour
 
     void Awake()  /// Initializes the light intensity of muzzle flash.
     {
-        if (lightSource.light != null)
-        {
-            lightSource.light.intensity = Random.Range(lightSource.minIntensity, lightSource.maxIntensity);
-            Invoke(nameof(DisableLight), lightSource.flashDuration);
-        }
-        else
-        {
-            Debug.LogWarning($"Light source not set on muzzle flash {gameObject.name}");
-        }
+        Invoke(nameof(DisableLight), 0.05f);
     }
 
     #endregion
@@ -40,10 +29,7 @@ public class MuzzleFlash : MonoBehaviour
 
     private void DisableLight() /// Disables the light after the flash duration.
     {
-        if (lightSource.light != null)
-        {
-            lightSource.light.enabled = false;
-        }
+        lightSource.light.enabled = false;
     }
 
     #endregion

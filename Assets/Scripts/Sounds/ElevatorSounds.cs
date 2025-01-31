@@ -11,26 +11,14 @@ public class ElevatorSounds : MonoBehaviour
 {
     #region Variables
 
-    [Header("References")] /// Positions where the sound should play from
-    public Transform elevatorSoundSource; 
-    public Transform doorsSoundSource;  
-    public Transform roomtoneSoundSource; 
-    public Transform leverSoundSource;
-
-    [Header("Sounds")] /// FMOD event references
-    public EventReference rideSound;  
-    public EventReference doorCloseSound;   
-    public EventReference doorOpenSound;  
-    public EventReference buttonSound;  
-    public EventReference roomToneSound;   
-    public EventReference leverDownSound;
-    public EventReference leverDownFakeSound;
-    public EventReference leverUpSound;   
+    [Header("Sounds")]
+    public EventReference rideSound;
+    public EventReference roomToneSound;
 
     // Private Variables
-    private EventInstance elevatorRideInstance; /// Variable to hold the created event instance
-    private EventInstance roomToneInstance;  /// Variable to hold the created event instance
-    private bool hasStarted = false; // Check if the sound has been started
+    private EventInstance elevatorRideInstance;
+    private EventInstance roomToneInstance;
+    private bool hasStarted = false;
     private static ElevatorSounds instance;
     public static ElevatorSounds Instance { get { return instance; } }
 
@@ -48,21 +36,21 @@ public class ElevatorSounds : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // IMPORTANT!
+            DontDestroyOnLoad(gameObject);
         }
     }
 
     #endregion
 
     #region Unity Methods
-    void Start() /// Initializes the audio instances
+    void Start()
     {
-        elevatorRideInstance = AudioManager.instance.CreateInstance(rideSound, elevatorSoundSource.position); // Create and start event instance.
-        roomToneInstance = AudioManager.instance.CreateInstance(roomToneSound, roomtoneSoundSource.position); //Create and start room tone
+        elevatorRideInstance = AudioManager.instance.CreateInstance2D(rideSound); // Changed to Create2DInstance
+        roomToneInstance = AudioManager.instance.CreateInstance(roomToneSound, this.transform.position); //Keep Room Tone 3D
         roomToneInstance.start();
     }
 
-    void OnDestroy() /// Clean up FMOD event instances when the object is destroyed
+    void OnDestroy()
     {
         if (elevatorRideInstance.isValid())
         {
@@ -78,7 +66,7 @@ public class ElevatorSounds : MonoBehaviour
 
     #region Play Sounds
 
-    public void PlayElevatorStart()  /// Starts the elevator ride sound.
+    public void PlayElevatorStart()
     {
         if (!hasStarted)
         {
@@ -88,48 +76,16 @@ public class ElevatorSounds : MonoBehaviour
         SetRideState(0f);
     }
 
-    public void PlayElevatorStop()  /// Stops the elevator ride sound.
+    public void PlayElevatorStop()
     {
         SetRideState(1f);
         hasStarted = false;
     }
 
-    private void SetRideState(float parameterValue) /// Sets the FMOD parameter for the ride state.
+    private void SetRideState(float parameterValue)
     {
-        elevatorRideInstance.set3DAttributes(RuntimeUtils.To3DAttributes(elevatorSoundSource.position));
         elevatorRideInstance.setParameterByName("State", parameterValue);
     }
-
-    public void PlayLeverDownSound()  /// Plays the lever down sound.
-    {
-        AudioManager.instance.PlayOneShot(leverDownSound, leverSoundSource.position);
-    }
-
-    public void PlayLeverDownFakeSound()  /// Plays the lever down sound.
-    {
-        AudioManager.instance.PlayOneShot(leverDownFakeSound, leverSoundSource.position);
-    }
-
-    public void PlayLeverUpSound()  /// Plays the lever down sound.
-    {
-        AudioManager.instance.PlayOneShot(leverUpSound, leverSoundSource.position);
-    }
-
-    public void PlayDoorCloseSound() /// Plays the door close sound.
-    {
-        AudioManager.instance.PlayOneShot(doorCloseSound, doorsSoundSource.position); 
-    }
-
-    public void PlayDoorOpenSound()  /// Plays the door open sound.
-    {
-        AudioManager.instance.PlayOneShot(doorOpenSound, doorsSoundSource.position); 
-    }
-
-    public void PlayButtonSound(Vector3 hitPosition)  /// Plays the button sound at a given location.
-    {
-        AudioManager.instance.PlayOneShot(buttonSound, hitPosition);
-    }
-
 
     #endregion
 }

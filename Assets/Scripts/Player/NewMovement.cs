@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class NewMovement : MonoBehaviour
 {
     private Rigidbody rb;
+    private Animator animator; // Added Animator variable
 
     [Header("Movement")]
     public float speed;
@@ -90,6 +91,7 @@ public class NewMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>(); // Get the animator
         groundLayer = LayerMask.GetMask("Ground");
         normalYScale = transform.localScale.y;
     }
@@ -155,7 +157,6 @@ public class NewMovement : MonoBehaviour
             jumpAvailable = false;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            
         }
 
         //movement
@@ -181,7 +182,7 @@ public class NewMovement : MonoBehaviour
             {
                 rb.AddForce(moveDirection * slideSpeed, ForceMode.Impulse);
             }
-            
+
         }
 
         if (sliding && slideReleased)
@@ -201,13 +202,15 @@ public class NewMovement : MonoBehaviour
             PlayerSounds.Instance.PlayInAirStart();
         }
 
+        SwitchAnimationStates();
+
         //end of fixedupdate
         jumpPressed = false;
         jumpReleased = false;
         slidePressed = false;
         slideReleased = false;
 
-        //Debug.Log(rb.drag); THIS SHIT IS ANNOYINGGGG!!!!!!      oh hi Rene:3 hi Misha :3
+        //Debug.Log(rb.drag); THIS SHIT IS ANNOYINGGGG!!!!!!      oh hi Rene:3 hi Misha :3 hi Rene:3 
     }
 
     private void JumpReset()
@@ -216,7 +219,7 @@ public class NewMovement : MonoBehaviour
         jumpAvailable = false;
     }
     private void ResetJumpTimer()
-    { 
+    {
         jumpTimer = jumpTiming;
     }
 
@@ -229,5 +232,30 @@ public class NewMovement : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawCube(transform.position + (Vector3.down * transform.localScale.y), boxSize);
+    }
+
+    public void SwitchAnimationStates()
+    {
+        if (grounded && !jumping && sliding)
+        {
+            animator.SetTrigger("Sliding"); // Trigger sliding animation
+        }
+
+        if (!grounded && jumping && !sliding && jumpAvailable)
+        {
+            animator.SetTrigger("Jumping"); // Trigger jump animation
+        }
+
+        if (grounded && !jumping && !sliding)
+        {
+            if (moveDirection.magnitude > 0.5f)
+            {
+                animator.SetTrigger("Running"); // Trigger running animation if moving
+            }
+            else
+            {
+                animator.SetTrigger("Idle"); // trigger Idle animation if not moving 
+            }
+        }
     }
 }

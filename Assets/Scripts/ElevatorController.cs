@@ -103,11 +103,9 @@ public class ElevatorController : MonoBehaviour
         {
             leverAnimationPlaying = true;
             leverAnimator.SetTrigger("Start");
-            ElevatorSounds.Instance.PlayLeverDownSound();
             yield return new WaitForSeconds(0.8f); // Time delay
 
             StartCoroutine(CoinsLogic.Instance.UseCoinForUpgrade());
-            ElevatorSounds.Instance.PlayLeverUpSound();
             yield return new WaitForSeconds(1.8f); // Time delay
 
             leverAnimationPlaying = false;
@@ -120,7 +118,6 @@ public class ElevatorController : MonoBehaviour
 
     public void OpenDoors()
     {
-        ElevatorSounds.Instance.PlayDoorOpenSound(); // Play door open sound
         doorAnimator.SetTrigger("Open"); // Trigger door open animation
         doorIsClosed = false; //Set door as open
         EnemyCounter.Instance.InitiatlizeEnemyCount(); // Update the enemy counter
@@ -130,7 +127,6 @@ public class ElevatorController : MonoBehaviour
     {
         isButtonActive = false; // Disable the button
         Debug.Log("Door close / Sound / Animation");
-        ElevatorSounds.Instance.PlayDoorCloseSound(); // Play door close sound
         doorAnimator.SetTrigger("Close"); // Trigger door close animation
         yield return new WaitForSeconds(2.4f); // Time delay before elevator start
         isButtonActive = true; // Enable the button
@@ -147,8 +143,9 @@ public class ElevatorController : MonoBehaviour
             SceneSettings destinationSettings = TransitionManager.Instance.GetSceneSettings(currentSceneName); // get next scene settings
             ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 1.5f, overrideDuration: 0.8f);
             TransitionManager.Instance.StartFogTransition(destinationSettings, 5f); //Start fog transition
-            yield return new WaitForSeconds(2f); // Time delay before scene transition
+            yield return new WaitForSeconds(3f); // Time delay before scene transition
 
+            AmbienceManager.Instance.UpdateAmbience(2);
             Debug.Log("Screen shake / Scene load / Stop sound");
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destinationSettings.sceneName); //load the scene async
             while (!asyncLoad.isDone)

@@ -4,7 +4,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
 
 [CreateAssetMenu(fileName = "Enemy", menuName = "Items/Enemy")]
 public class EnemySettings : ScriptableObject
@@ -28,12 +27,6 @@ public class EnemySettings : ScriptableObject
     public float idleDrag;    // Drag applied when in idle state
     public float idleFloatingHeight;  // Vertical distance the enemy hovers.
     public float idleFloatingRadius;  // Variation on orbit radius.
-
-    [Header("Audio")]
-    public EventReference spawnSound;
-    public EventReference damageSound;
-    public EventReference idleSound;
-    public EventReference deathSound;
 
     #endregion
 }

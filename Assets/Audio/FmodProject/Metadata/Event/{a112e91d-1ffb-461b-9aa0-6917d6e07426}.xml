@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{ef7f7bc6-033b-4071-b066-ec1974788d1f}">
+		<property name="volume">
+			<value>-11</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{75093981-051c-40d9-ba58-55671a18bb4f}</destination>
 		</relationship>
@@ -113,7 +116,17 @@
 	</object>
 	<object class="MixerBusFader" id="{5c1aa45d-af86-4d7b-a2a2-238bac9e19a2}" />
 	<object class="MixerBusFader" id="{158ed658-333b-4b62-a684-057a2af4e389}" />
-	<object class="SpatialiserEffect" id="{73aec53f-efbd-4a6b-acfb-8826a06beb95}" />
+	<object class="SpatialiserEffect" id="{73aec53f-efbd-4a6b-acfb-8826a06beb95}">
+		<property name="distanceRolloffType">
+			<value>2</value>
+		</property>
+		<property name="maximumDistance">
+			<value>10</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="RandomizerModulator" id="{574a5266-8ce3-48d6-a197-f111d1bc330b}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>pitch</value>

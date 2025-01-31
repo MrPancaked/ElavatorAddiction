@@ -41,7 +41,7 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(sound);
     }
 
-    public EventInstance CreateEventInstance(EventReference sound) /// Creates an instance of a FMOD sound event.
+    public EventInstance CreateInstance2D(EventReference sound) /// Creates an instance of a FMOD sound event.
     {
         EventInstance instance = RuntimeManager.CreateInstance(sound);
         return instance;

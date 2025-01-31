@@ -100,10 +100,8 @@ public class Interactions : MonoBehaviour
                 {
 
                     ElevatorController.Instance.ButtonPressed();
-                    ElevatorSounds.Instance.PlayButtonSound(hit.point); // Pass the hit point
                     hit.collider.GetComponent<Animator>().SetTrigger("Press");
                     nextButtonPressTime = Time.time + buttonCooldown;
-
                 }
                 else
                 {
