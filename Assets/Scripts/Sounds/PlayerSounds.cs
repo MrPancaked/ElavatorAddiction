@@ -14,13 +14,14 @@ public class PlayerSounds : MonoBehaviour
     public EventReference inAirSound;
     public EventReference jumpSound;
     public EventReference slideSound;
+    public EventReference bhopSound;
 
     private EventInstance deathInstance; /// Variable to hold the created event instance
     private EventInstance inAirInstance; /// Variable to hold the created event instance
     private EventInstance footstepInstance;
     private bool hasStarted = false; // Check if the sound has been started
     private bool isInAir = false; // Check if the sound has been started
-    private static PlayerSounds instance;
+    private static PlayerSounds instance; 
     public static PlayerSounds Instance { get { return instance; } }
     private float lastFootstepTime = 0f;
     public float footstepRate = 0.3f; // Adjust for desired speed
@@ -70,6 +71,11 @@ public class PlayerSounds : MonoBehaviour
     #endregion
 
     #region Play Sounds
+
+    public void PlayBhopSound()
+    {
+        AudioManager.instance.PlayOneShot2D(bhopSound);
+    }
 
     public void PlayDeathStart()  /// Starts the elevator ride sound.
     {

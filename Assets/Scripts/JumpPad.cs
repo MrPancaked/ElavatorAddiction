@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 public class JumpPad : MonoBehaviour
 {
 
     public float JumpPadForce;
     public float cooldownTime = 1f;  // Cooldown time in seconds
+    public EventReference JumppadSound;
 
     private Vector3 JumpPadDirection;
     private bool isCoolingDown = false;  // Flag to indicate if the cooldown is active
@@ -37,6 +40,7 @@ public class JumpPad : MonoBehaviour
     private void StartCooldown()
     {
         isCoolingDown = true;
+        AudioManager.instance.PlayOneShot(JumppadSound, this.transform.position);
         Invoke(nameof(ResetCooldown), cooldownTime);
     }
 

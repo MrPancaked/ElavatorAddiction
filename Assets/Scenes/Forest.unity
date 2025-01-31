@@ -222,6 +222,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5518174812926678073, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Name
+      value: Level Generator
+      objectReference: {fileID: 0}
+    - target: {fileID: 5807504787035555887, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: bonfirePrefab
+      value: 
+      objectReference: {fileID: 65013619001183594, guid: 28ef74931cc647748971e9b0c99dab49,
+        type: 3}
     - target: {fileID: 8402546147538555389, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: lengthInSec
@@ -265,7 +276,7 @@ PrefabInstance:
     - target: {fileID: 8402546147538555389, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8402546147538555389, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}

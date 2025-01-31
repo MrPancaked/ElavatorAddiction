@@ -862,6 +862,7 @@ MonoBehaviour:
   jumpForce: 10
   jumpTiming: 0.15
   bhopBoost: 3
+  perfectTimingWindow: 0.2
   slideYScale: 0.6
   slideSpeed: 2
   slideDragIncrease: 0.006
@@ -1037,6 +1038,13 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  bhopSound:
+    Guid:
+      Data1: -549317248
+      Data2: 1169748425
+      Data3: 2009787808
+      Data4: -417063211
+    Path: event:/Player/Bhop
   footstepRate: 0.3
 --- !u!1 &8605598466660808009
 GameObject:

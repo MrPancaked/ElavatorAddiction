@@ -6534,6 +6534,11 @@ PrefabInstance:
       propertyPath: dropChanceText
       value: 
       objectReference: {fileID: 702091580}
+    - target: {fileID: 7219539545731093851, guid: 544ad5ce464c99349a930f1951b09c36,
+        type: 3}
+      propertyPath: perfectTimingWindow
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7247584656866811980, guid: 544ad5ce464c99349a930f1951b09c36,
         type: 3}
       propertyPath: healthImage

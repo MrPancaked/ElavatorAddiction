@@ -153,6 +153,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpPadForce: 35
   cooldownTime: 0.5
+  JumppadSound:
+    Guid:
+      Data1: 710176238
+      Data2: 1096446779
+      Data3: -457648716
+      Data4: -153920196
+    Path: event:/Player/Jumppad
 --- !u!65 &1609397756844123463
 BoxCollider:
   m_ObjectHideFlags: 0
