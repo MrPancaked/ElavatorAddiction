@@ -1030,6 +1030,14 @@ MonoBehaviour:
       Data3: 932971692
       Data4: -162323475
     Path: event:/Player/Jump
+  slideSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  footstepRate: 0.3
 --- !u!1 &8605598466660808009
 GameObject:
   m_ObjectHideFlags: 0
