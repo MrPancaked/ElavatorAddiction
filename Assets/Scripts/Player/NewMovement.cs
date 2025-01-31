@@ -144,7 +144,6 @@ public class NewMovement : MonoBehaviour
         {
             jumping = false;
             jumpAvailable = false;
-            PlayerSounds.Instance.PlayJumpSound();
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             rb.AddForce(moveDirection * bhopBoost, ForceMode.Impulse);
@@ -193,11 +192,11 @@ public class NewMovement : MonoBehaviour
         }
 
         // In air sound
-        if (grounded && PlayerSounds.Instance != null)
+        if (grounded)
         {
             PlayerSounds.Instance.PlayInAirStop();
         }
-        else if (PlayerSounds.Instance != null)
+        else
         {
             PlayerSounds.Instance.PlayInAirStart();
         }

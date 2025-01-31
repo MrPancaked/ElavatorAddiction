@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   name: Shotgun
-  damagePerBullet: 30
-  fireRate: 1
+  damagePerBullet: 25
+  fireRate: 1.8
   reloadTime: 0
   magazineSize: 7
   bulletsPerShot: 7
   timeBetweenBulletsInBursts: 0
   allowContinuesFire: 0
-  spread: 0.08
-  range: 40
-  enemyPushbackForce: 3
+  spread: 0.2
+  range: 50
+  enemyPushbackForce: 4
   playerPushbackForce: 8
   screenShakeStrength: 0.5
   isDualGun: 0
