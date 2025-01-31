@@ -28,6 +28,9 @@ public class NewMovement : MonoBehaviour
     [Header("Ground Detection")]
     public Vector3 boxSize;
 
+    [Header("Stomp")] // Added Stomp Timer Header
+    public float stompTimer = 2.5f; // Time in air for stomp sound
+
     //private shit    
     [HideInInspector]
     public bool jumpPressed = false;
@@ -49,12 +52,15 @@ public class NewMovement : MonoBehaviour
     public static NewMovement instance;
     public static NewMovement Instance { get { return instance; } }
 
-    private void Awake()  /// Makes sure this object survives the scene transition, and that there is only one.
+    private float timeInAir; // Timer for stomp sound
+    private bool wasGroundedLastFrame; // Store grounded state of last frame
+
+    private void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // IMPORTANT!
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -63,26 +69,26 @@ public class NewMovement : MonoBehaviour
         }
     }
 
-    void Update() // I HAD TO MOVE THIS HERE BECAUSE THE INPUTS HAVE TO NOT HAVE AN UPDATE METHOD BECAUSE OF SINGLETONES AND SHIT PLEASE RENE ITS 5 AM!!!!!
+    void Update()
     {
-        Inputs.Instance.moveMentInput = Inputs.Instance.movement.ReadValue<Vector2>().normalized; // Read and normalize the movement input
+        Inputs.Instance.moveMentInput = Inputs.Instance.movement.ReadValue<Vector2>().normalized;
 
-        if (Inputs.Instance.jump.WasPressedThisFrame()) // Check for jump press
+        if (Inputs.Instance.jump.WasPressedThisFrame())
         {
             jumpPressed = true;
         }
 
-        if (Inputs.Instance.jump.WasReleasedThisFrame()) // Check for jump release
+        if (Inputs.Instance.jump.WasReleasedThisFrame())
         {
             jumpReleased = true;
         }
 
-        if (Inputs.Instance.slide.WasPressedThisFrame()) // Check for slide press
+        if (Inputs.Instance.slide.WasPressedThisFrame())
         {
             slidePressed = true;
         }
 
-        if (Inputs.Instance.slide.WasReleasedThisFrame()) // Check for slide release
+        if (Inputs.Instance.slide.WasReleasedThisFrame())
         {
             slideReleased = true;
         }
@@ -91,9 +97,11 @@ public class NewMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>(); // Get the animator
+        animator = GetComponent<Animator>();
         groundLayer = LayerMask.GetMask("Ground");
         normalYScale = transform.localScale.y;
+        timeInAir = 0f; // Initialize air time
+        wasGroundedLastFrame = true;
     }
 
     void FixedUpdate()
@@ -121,7 +129,28 @@ public class NewMovement : MonoBehaviour
             ResetJumpTimer();
         }
 
-        grounded = IsGrounded();
+        // Check if grounded
+        bool currentGrounded = IsGrounded();
+        grounded = currentGrounded;
+
+        // Reset air time when landing
+        if (grounded && !wasGroundedLastFrame)
+        {
+            if (timeInAir >= stompTimer)
+            {
+                PlayerSounds.Instance.PlayStompSound(); // Play stomp sound
+                ScreenshakeManager.Instance.TriggerShake("Slam");
+                ScreenshakeManager.Instance.TriggerShake("slam", overrideForce: 1f, overrideDuration: 0.2f);
+            }
+            timeInAir = 0f;
+        }
+
+        // Update air time if SLIDING DOWN THE AIR
+        if (sliding && !grounded)
+        {
+            timeInAir += Time.fixedDeltaTime;
+        }
+        wasGroundedLastFrame = currentGrounded; // Store state for next frame
 
         //drag
         if (grounded && !sliding)
@@ -136,7 +165,7 @@ public class NewMovement : MonoBehaviour
 
         if (sliding && grounded && (rb.drag < groundDrag))
         {
-            rb.drag += slideDragIncrease * groundDrag; /// Increase drag when sliding
+            rb.drag += slideDragIncrease * groundDrag;
         }
 
         //jumping
@@ -144,6 +173,7 @@ public class NewMovement : MonoBehaviour
         {
             jumping = false;
             jumpAvailable = false;
+            PlayerSounds.Instance.PlayJumpSound();
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             rb.AddForce(moveDirection * bhopBoost, ForceMode.Impulse);
@@ -173,10 +203,10 @@ public class NewMovement : MonoBehaviour
         //sliding
         if (slidePressed && !sliding)
         {
-            transform.localScale = new Vector3(transform.localScale.x, slideYScale, transform.localScale.z); /// Set crouch scale
+            transform.localScale = new Vector3(transform.localScale.x, slideYScale, transform.localScale.z);
             sliding = true;
-            rb.drag = 0; /// Remove drag when sliding
-            rb.AddForce(Vector3.down * downForce, ForceMode.Impulse); /// Move the player down
+            rb.drag = 0;
+            rb.AddForce(Vector3.down * downForce, ForceMode.Impulse);
             if (grounded)
             {
                 rb.AddForce(moveDirection * slideSpeed, ForceMode.Impulse);
@@ -208,8 +238,6 @@ public class NewMovement : MonoBehaviour
         jumpReleased = false;
         slidePressed = false;
         slideReleased = false;
-
-        //Debug.Log(rb.drag); THIS SHIT IS ANNOYINGGGG!!!!!!      oh hi Rene:3 hi Misha :3 hi Rene:3 
     }
 
     private void JumpReset()
@@ -222,12 +250,12 @@ public class NewMovement : MonoBehaviour
         jumpTimer = jumpTiming;
     }
 
-    public bool IsGrounded() // Cast a ray downward from the player's position
+    public bool IsGrounded()
     {
         return Physics.OverlapBox(transform.position + (Vector3.down * transform.localScale.y), boxSize / 2, Quaternion.identity, groundLayer).Length > 0;
     }
 
-    public void OnDrawGizmos() // Draw the ray in the Scene view for debugging
+    public void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawCube(transform.position + (Vector3.down * transform.localScale.y), boxSize);
@@ -237,23 +265,23 @@ public class NewMovement : MonoBehaviour
     {
         if (grounded && !jumping && sliding)
         {
-            animator.SetTrigger("Sliding"); // Trigger sliding animation
+            animator.SetTrigger("Sliding");
         }
 
         if (!grounded && jumping && !sliding && jumpAvailable)
         {
-            animator.SetTrigger("Jumping"); // Trigger jump animation
+            animator.SetTrigger("Jumping");
         }
 
         if (grounded && !jumping && !sliding)
         {
             if (moveDirection.magnitude > 0.5f)
             {
-                animator.SetTrigger("Running"); // Trigger running animation if moving
+                animator.SetTrigger("Running");
             }
             else
             {
-                animator.SetTrigger("Idle"); // trigger Idle animation if not moving 
+                animator.SetTrigger("Idle");
             }
         }
     }

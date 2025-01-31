@@ -72,7 +72,7 @@ public class PlayerSounds : MonoBehaviour
 
     #region Play Sounds
 
-    public void PlayBhopSound()
+    public void PlayStompSound()
     {
         AudioManager.instance.PlayOneShot2D(bhopSound);
     }
@@ -105,7 +105,6 @@ public class PlayerSounds : MonoBehaviour
 
     public void PlayJumpSound()
     {
-        Debug.Log("JUMPERRR");
         AudioManager.instance.PlayOneShot2D(jumpSound);
         PlayFootstepSound();
     }

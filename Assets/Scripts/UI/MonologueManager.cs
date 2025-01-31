@@ -55,16 +55,16 @@ public class MonologueManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Inputs.Instance.interaction.WasPressedThisFrame())
-        {
-            if (isRunning && !skipLine)
-            {
-                skipLine = true;
-            }
-        }
-    }
+    //void Update()
+    //{
+    //    if (Inputs.Instance.interaction.WasPressedThisFrame())
+    //    {
+    //        if (isRunning && !skipLine)
+    //        {
+    //            skipLine = true;
+    //        }
+    //    }
+    //}
 
     #endregion
 
@@ -154,7 +154,7 @@ public class MonologueManager : MonoBehaviour
             skipLine = false;
             yield break;
         }
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.9f);
         yield return StartCoroutine(ClearLine(0.005f));
 
 
@@ -164,42 +164,30 @@ public class MonologueManager : MonoBehaviour
             skipLine = false;
             yield break;
         }
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.9f);
         yield return StartCoroutine(ClearLine(0.005f));
 
-
-        yield return StartCoroutine(TypeLine("//Stay a little longer..//", 0.01f));
+        yield return StartCoroutine(TypeLine("Why is she calling for me?", 0.06f));
         if (skipLine)
         {
             skipLine = false;
             yield break;
         }
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.9f);
         yield return StartCoroutine(ClearLine(0.005f));
-        yield return new WaitForSeconds(0.5f);
 
 
-        yield return StartCoroutine(TypeLine("Why is she calling for me?", 0.08f));
+        yield return StartCoroutine(TypeLine("Am I...", 0.03f));
         if (skipLine)
         {
             skipLine = false;
             yield break;
         }
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.8f);
         yield return StartCoroutine(ClearLine(0.005f));
 
 
-        yield return StartCoroutine(TypeLine("Am I...", 0.06f));
-        if (skipLine)
-        {
-            skipLine = false;
-            yield break;
-        }
-        yield return new WaitForSeconds(0.7f);
-        yield return StartCoroutine(ClearLine(0.005f));
-
-
-        yield return StartCoroutine(TypeLine("In a coma?", 0.15f));
+        yield return StartCoroutine(TypeLine("In a coma?", 0.12f));
         if (skipLine)
         {
             skipLine = false;
@@ -209,13 +197,13 @@ public class MonologueManager : MonoBehaviour
         yield return StartCoroutine(ClearLine(0.005f));
 
 
-        yield return StartCoroutine(TypeLine("...", 0.5f));
+        yield return StartCoroutine(TypeLine("...", 0.3f));
         if (skipLine)
         {
             skipLine = false;
             yield break;
         }
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
         yield return StartCoroutine(ClearLine(0.005f));
 
 
@@ -261,23 +249,23 @@ public class MonologueManager : MonoBehaviour
         isRunning = true;
 
 
-        yield return StartCoroutine(TypeLine("<02.02.1965>", 0.07f));
+        yield return StartCoroutine(TypeLine("<02.02.1965>", 0.05f));
         if (skipLine)
         {
             skipLine = false;
             yield break;
         }
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.8f);
         yield return StartCoroutine(ClearLine(0.01f));
 
 
-        yield return StartCoroutine(TypeLine("The day I lost my parents", 0.07f));
+        yield return StartCoroutine(TypeLine("The day I lost my parents", 0.03f));
         if (skipLine)
         {
             skipLine = false;
             yield break;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.6f);
         yield return StartCoroutine(ClearLine(0.01f));
 
 
