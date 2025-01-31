@@ -105,6 +105,7 @@ public class PlayerSounds : MonoBehaviour
 
     public void PlayJumpSound()
     {
+        Debug.Log("JUMPERRR");
         AudioManager.instance.PlayOneShot2D(jumpSound);
         PlayFootstepSound();
     }

@@ -57,10 +57,12 @@ public class MonologueManager : MonoBehaviour
 
     void Update()
     {
-        // Example: Check for input to skip the line (you can change this to any trigger)
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Inputs.Instance.interaction.WasPressedThisFrame())
         {
-            skipLine = true;
+            if (isRunning && !skipLine)
+            {
+                skipLine = true;
+            }
         }
     }
 

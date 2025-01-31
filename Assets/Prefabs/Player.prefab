@@ -862,7 +862,6 @@ MonoBehaviour:
   jumpForce: 10
   jumpTiming: 0.15
   bhopBoost: 3
-  perfectTimingWindow: 0.2
   slideYScale: 0.6
   slideSpeed: 2
   slideDragIncrease: 0.006
