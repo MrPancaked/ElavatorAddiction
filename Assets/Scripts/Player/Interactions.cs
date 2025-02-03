@@ -117,7 +117,7 @@ public class Interactions : MonoBehaviour
 
             else if (hit.collider.CompareTag(BookTag))
             {
-                MonologueManager.Instance.UseBook();
+                DialogueManager.Instance.StartCoroutine(DialogueManager.Instance.ReadBook());
             }
 
             else
