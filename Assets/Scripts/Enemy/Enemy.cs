@@ -121,7 +121,7 @@ public class Enemy : MonoBehaviour
                 if (hit.collider == playerCollider)
                 {
                     currentState = EnemyState.Attacking;
-                    rb.drag = enemySettings.attackDrag + 0.1f * ElevatorController.Instance.RoomIndex;
+                    rb.drag = enemySettings.attackDrag + 0.1f * TransitionManager.Instance.RoomIndex;
                 }
             }
         }
@@ -134,7 +134,7 @@ public class Enemy : MonoBehaviour
                                               Random.Range(-enemySettings.attackOffset, enemySettings.attackOffset),
                                               Random.Range(-enemySettings.attackOffset, enemySettings.attackOffset));
         rb.drag = enemySettings.attackDrag;
-        rb.AddForce((chaseDirection + randomDirection) * (enemySettings.attackSpeed + ElevatorController.Instance.RoomIndex * 0.3f));
+        rb.AddForce((chaseDirection + randomDirection) * (enemySettings.attackSpeed + TransitionManager.Instance.RoomIndex * 0.3f));
 
         // Smoothly rotate the enemy to face the direction of movement
         if (chaseDirection != Vector3.zero)

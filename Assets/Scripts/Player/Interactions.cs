@@ -112,7 +112,7 @@ public class Interactions : MonoBehaviour
 
             else if (hit.collider.CompareTag(ElevatorLeverTag))
             {
-                ElevatorController.Instance.LeverPressed(); // ApplyRandomUpgrade IS LINKED THERE
+                ElevatorController.Instance.StartCoroutine(ElevatorController.Instance.LeverPressed());
             }
 
             else if (hit.collider.CompareTag(BookTag))

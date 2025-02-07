@@ -14,8 +14,7 @@ public class HealthManager : MonoBehaviour
     #region Variables
 
     [Header("Player")]
-    private GameObject player;      // Reference to the player game object
-    private Transform respawnPoint;     // Reference to the respawn point Transform
+    public GameObject player;      // Reference to the player game object
     public Health health;          // Reference to the Health component.
     public List<Gun> guns = new List<Gun>(); // List of guns to reset after death
 
@@ -97,8 +96,7 @@ public class HealthManager : MonoBehaviour
     {
         if (!playerIsDead)
         {
-            player = gameObject; // Re-find Player
-            player.transform.position = new Vector3(player.transform.position.x, 18.69f, player.transform.position.z);
+            //player = gameObject; // Re-find Player
             playerIsDead = true;
             Time.timeScale = 0f; // Pause the game
             Debug.Log("Player died");
@@ -124,59 +122,35 @@ public class HealthManager : MonoBehaviour
 
     public IEnumerator Restarting()
     {
-        Time.timeScale = 1f; // Restore time scale
         playerIsDead = false; // Reset death state
-        PlayerSounds.Instance.PlayDeathStop();
+        Time.timeScale = 1f; // Restore time scale
         initialHealth = 100f; // Reset health
         health.hp = 100f;
         UpdateHealthUI();
+        PlayerSounds.Instance.PlayDeathStop();
+        TransitionManager.Instance.RoomIndex = 0;
+        TransitionManager.Instance.UpdateRoomIndex();
         CoinsLogic.Instance.coinDropChance = 0.5f;
         CoinsLogic.Instance.ResetCoins();
+        NewMovement.Instance.speed = 200f;
+        EnemyCounter.Instance.UpdateEnemyCounter();
         foreach (Gun gunInstance in guns)
         {
             gunInstance.gunSettings.fireRate = 1f;
             gunInstance.extraDamage = 0f;
         }
-        NewMovement.Instance.speed = 200f;
-        EnemyCounter.Instance.UpdateEnemyCounter();
-
-        Cursor.visible = false; // Hide the cursor
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        ElevatorController.Instance.RoomIndex = 0;
-        ElevatorController.Instance.UpdateRoomIndex();
         yield return null; // Wait one frame
+
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void");
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
-        yield return null; // Wait one frame
-        ElevatorController.Instance.RoomIndex = 0;
-        Cursor.visible = false; // Hide the cursor
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        yield return null; // Wait one frame
+
+        player.transform.position = new Vector3(player.transform.position.x, 19f, player.transform.position.z);
         deathScreenAnimator.SetTrigger("Respawn"); // trigger Reset animation
-        foreach (Gun gunInstance in guns)
-        {
-            gunInstance.ReloadFinished();
-            yield return null; // Wait one frame 
-        }
-    }
-
-    public IEnumerator VoidTransition()
-    {
-        Time.timeScale = 1f; // Restore time scale
-        transform.position = new Vector3(transform.position.x, 25f, transform.position.z); // Move the player to the respawn point
-        Debug.Log("Player Position set");
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        yield return null; // Wait one frame
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void");
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-        yield return null; // Wait one frame
     }
 
     #endregion

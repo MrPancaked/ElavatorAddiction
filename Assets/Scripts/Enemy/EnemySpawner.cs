@@ -53,7 +53,7 @@ public class EnemySpawner : MonoBehaviour
 
         spawnedGroupPositions.Clear();
 
-        int numGroups = Random.Range(minGroups + ElevatorController.Instance.RoomIndex, maxGroups + 1 + ElevatorController.Instance.RoomIndex);
+        int numGroups = Random.Range(minGroups + TransitionManager.Instance.RoomIndex, maxGroups + 1 + TransitionManager.Instance.RoomIndex);
 
         for (int i = 0; i < numGroups; i++)
         {

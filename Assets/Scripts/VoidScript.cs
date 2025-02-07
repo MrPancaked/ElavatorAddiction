@@ -9,7 +9,7 @@ public class VoidScript : MonoBehaviour
     {
         if (otherCollider.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(HealthManager.Instance.VoidTransition());
+            StartCoroutine(TransitionManager.Instance.VoidTransition());
         }
     }
 }
