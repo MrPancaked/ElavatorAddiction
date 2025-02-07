@@ -66,6 +66,7 @@ public class LevelGenerator : MonoBehaviour
         {
             Debug.LogError("Player spawn point with tag 'Elevator' not found.");
         }
+        //balls
     }
 
     #endregion
