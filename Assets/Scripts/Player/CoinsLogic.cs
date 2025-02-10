@@ -73,7 +73,7 @@ public class CoinsLogic : MonoBehaviour
 
     private void UpdateCoinsDisplay() /// Updates the coins display on the screen.
     {
-        coinsCounter.SetText("$ " + playerCoins);  // Update coins text
+        coinsCounter.SetText("$" + playerCoins);  // Update coins text
     }
 
     #endregion

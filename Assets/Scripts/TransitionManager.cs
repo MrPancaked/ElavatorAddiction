@@ -10,7 +10,7 @@ public class TransitionManager : MonoBehaviour
     #region Header Variables
 
     [Header("References")]
-    public TextMeshProUGUI roomText;
+    public TextMeshPro roomText;
     public Light sceneLight; // Reference to the scene light
     public List<SceneSettings> targetSceneSettings; // List of all scene settings
 
@@ -48,6 +48,7 @@ public class TransitionManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject); // Prevent the game object from being destroyed in different scenes.
             SceneManager.sceneLoaded += OnSceneLoaded; // Add listener to scene loaded
+            UpdateRoomIndex();
             currentSceneName = SceneManager.GetActiveScene().name; // Set current scene name          
         }
     }
@@ -238,6 +239,6 @@ public class TransitionManager : MonoBehaviour
 
     public void UpdateRoomIndex()
     {
-        roomText.text = "Floor " + (-RoomIndex).ToString();
+        roomText.text = (-RoomIndex).ToString();
     }
 }

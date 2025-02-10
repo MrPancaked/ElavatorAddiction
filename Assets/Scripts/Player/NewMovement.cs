@@ -18,6 +18,7 @@ public class NewMovement : MonoBehaviour
     public float jumpForce;
     public float jumpTiming;
     public float bhopBoost;
+    public float stompTimer = 2.5f; // Time in air for stomp sound
 
     [Header("Sliding")]
     public float slideYScale;
@@ -27,9 +28,6 @@ public class NewMovement : MonoBehaviour
 
     [Header("Ground Detection")]
     public Vector3 boxSize;
-
-    [Header("Stomp")] // Added Stomp Timer Header
-    public float stompTimer = 2.5f; // Time in air for stomp sound
 
     //private shit    
     [HideInInspector]
@@ -49,11 +47,10 @@ public class NewMovement : MonoBehaviour
     private bool grounded;
     private bool sliding;
     private LayerMask groundLayer;
-    public static NewMovement instance;
-    public static NewMovement Instance { get { return instance; } }
-
     private float timeInAir; // Timer for stomp sound
     private bool wasGroundedLastFrame; // Store grounded state of last frame
+    public static NewMovement instance;
+    public static NewMovement Instance { get { return instance; } }
 
     private void Awake()
     {
@@ -267,22 +264,17 @@ public class NewMovement : MonoBehaviour
         {
             animator.SetTrigger("Sliding");
         }
-
-        if (!grounded && jumping && !sliding && jumpAvailable)
+        else if (!grounded && jumping && !sliding && jumpAvailable)
         {
             animator.SetTrigger("Jumping");
         }
-
-        if (grounded && !jumping && !sliding)
+        else if (grounded && !jumping && !sliding && moveDirection.magnitude > 0.9f)
         {
-            if (moveDirection.magnitude > 0.5f)
-            {
-                animator.SetTrigger("Running");
-            }
-            else
-            {
-                animator.SetTrigger("Idle");
-            }
+            animator.SetTrigger("Running");
+        }
+        else
+        {
+            animator.SetTrigger("Idle");
         }
     }
 }
