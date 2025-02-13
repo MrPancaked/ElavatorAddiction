@@ -98,7 +98,7 @@
 	</object>
 	<object class="MultiSound" id="{2b82394d-a94d-4f64-ab17-3c8bf83b9fd0}">
 		<property name="volume">
-			<value>1</value>
+			<value>-3</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{bf0b9bc6-6a59-4815-a6fb-1802fa4de4ac}</destination>

@@ -25,7 +25,7 @@ public class MovementAdvancedOld : MonoBehaviour
     private InputAction jump; /// Input of the player
 
 
-    [Header("Jumping")]
+    [Header("Jump")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier; /// Multiplier to movement speed when in the air

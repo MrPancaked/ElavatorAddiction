@@ -18,7 +18,7 @@ public class MovementAdvanced : MonoBehaviour
     private float moveSpeed; /// Current move speed of the player
     public float maxSlopeAngle; /// Maximum angle of a slope the player can walk up
 
-    [Header("Jumping")]
+    [Header("Jump")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier; /// Multiplier to movement speed when in the air

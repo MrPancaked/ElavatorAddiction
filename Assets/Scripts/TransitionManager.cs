@@ -192,7 +192,7 @@ public class TransitionManager : MonoBehaviour
     {
         Debug.Log("Ride started / Button disabled / Start sound");
         ElevatorController.Instance.isButtonActive = false; // Disable the button
-        ElevatorSounds.Instance.PlayElevatorStart(); //play elevator start sound
+        SoundManager.Instance.PlayElevatorStart(); //play elevator start sound
         yield return new WaitForSeconds(0.5f); // Makes the screenshake match the sound, otherwise its useless
 
         Debug.Log("Screen shake / Fog transition");
@@ -201,7 +201,6 @@ public class TransitionManager : MonoBehaviour
         StartFogTransition(destinationSettings, 5f); //Start fog transition
         yield return new WaitForSeconds(3f); // Time delay before scene transition
 
-        AmbienceManager.Instance.UpdateAmbience(2);
         Debug.Log("Screen shake / Scene load / Stop sound");
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destinationSettings.sceneName); //load the scene async
         while (!asyncLoad.isDone)
@@ -212,7 +211,7 @@ public class TransitionManager : MonoBehaviour
         UpdateRoomIndex();
         LevelGenerator.Instance.GenerateLevel(); // Call the GenerateLevel method
         EnemySpawner.Instance.SpawnEnemies();
-        ElevatorSounds.Instance.PlayElevatorStop(); //Play the elevator stop sound
+        SoundManager.Instance.PlayElevatorStop(); //Play the elevator stop sound
         yield return new WaitForSeconds(0.3f); // Makes the screenshake match the sound, otherwise its useless
         ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 0.7f, overrideDuration: 0.8f); // Trigger screen shake
         yield return new WaitForSeconds(1.5f); // wait for the delay before opening the doors

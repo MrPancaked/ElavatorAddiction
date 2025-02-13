@@ -132,7 +132,7 @@ public class HealthManager : MonoBehaviour
         TransitionManager.Instance.UpdateRoomIndex();
         CoinsLogic.Instance.coinDropChance = 0.5f;
         CoinsLogic.Instance.ResetCoins();
-        NewMovement.Instance.speed = 200f;
+        PlayerMovement.Instance.runSpeed = 200f;
         EnemyCounter.Instance.UpdateEnemyCounter();
         foreach (Gun gunInstance in guns)
         {

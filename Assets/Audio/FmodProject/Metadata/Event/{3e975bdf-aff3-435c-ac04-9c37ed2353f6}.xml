@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{84f6d79f-7eb6-47cf-848f-48f8a8cf8e9a}">
+		<property name="volume">
+			<value>-3.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{07f0f122-e633-4aa8-af95-f7953f001b90}</destination>
 		</relationship>
@@ -104,9 +107,9 @@
 			<destination>{04a1d859-385d-425a-b41d-2c4ee03e1780}</destination>
 		</relationship>
 		<relationship name="sounds">
-			<destination>{be8a501a-d34a-47d5-b5f0-160419f1295d}</destination>
-			<destination>{868bd622-d93c-4b08-bdd9-be9943be6ae7}</destination>
-			<destination>{ec192c9e-81ae-44d7-ab11-7a78ac670953}</destination>
+			<destination>{16c0cc01-79e8-4651-963b-98eb38eb250c}</destination>
+			<destination>{b6de3b37-fe19-4ac1-828d-cc09fd705504}</destination>
+			<destination>{a81beab8-6b28-463f-9929-2c2f89af98dc}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{8fa34ca0-87f8-40fe-a2c3-e2dfc7eae6b2}" />
@@ -119,19 +122,19 @@
 			<value>2.5</value>
 		</property>
 	</object>
-	<object class="SingleSound" id="{be8a501a-d34a-47d5-b5f0-160419f1295d}">
+	<object class="SingleSound" id="{16c0cc01-79e8-4651-963b-98eb38eb250c}">
 		<relationship name="audioFile">
-			<destination>{45ee551e-ff6c-4926-863d-686942902a24}</destination>
+			<destination>{78b59db9-0bb5-4b73-9b52-d01226ec7312}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{868bd622-d93c-4b08-bdd9-be9943be6ae7}">
+	<object class="SingleSound" id="{b6de3b37-fe19-4ac1-828d-cc09fd705504}">
 		<relationship name="audioFile">
-			<destination>{a2a1c325-b9dc-4cdb-b2b2-124deb2a2ca0}</destination>
+			<destination>{5fb346ed-ed3a-44e2-8517-5e3e80ad09ff}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{ec192c9e-81ae-44d7-ab11-7a78ac670953}">
+	<object class="SingleSound" id="{a81beab8-6b28-463f-9929-2c2f89af98dc}">
 		<relationship name="audioFile">
-			<destination>{2530785e-1208-494c-b55c-fa8bef1212a7}</destination>
+			<destination>{c52fb1a0-3f2b-4025-8bf2-33ae3c715ae6}</destination>
 		</relationship>
 	</object>
 </objects>

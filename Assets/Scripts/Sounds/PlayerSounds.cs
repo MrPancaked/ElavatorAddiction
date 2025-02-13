@@ -15,6 +15,7 @@ public class PlayerSounds : MonoBehaviour
     public EventReference jumpSound;
     public EventReference slideSound;
     public EventReference bhopSound;
+    public EventReference slamSound;
 
     private EventInstance deathInstance; /// Variable to hold the created event instance
     private EventInstance inAirInstance; /// Variable to hold the created event instance
@@ -72,11 +73,6 @@ public class PlayerSounds : MonoBehaviour
 
     #region Play Sounds
 
-    public void PlayStompSound()
-    {
-        AudioManager.instance.PlayOneShot2D(bhopSound);
-    }
-
     public void PlayDeathStart()  /// Starts the elevator ride sound.
     {
         if (!hasStarted)
@@ -107,6 +103,16 @@ public class PlayerSounds : MonoBehaviour
     {
         AudioManager.instance.PlayOneShot2D(jumpSound);
         PlayFootstepSound();
+    }
+
+    public void PlayBhopSound()
+    {
+        AudioManager.instance.PlayOneShot2D(bhopSound);
+    }
+
+    public void PlaySlamSound()
+    {
+        AudioManager.instance.PlayOneShot2D(slamSound);
     }
 
     public void PlaySlideSound()

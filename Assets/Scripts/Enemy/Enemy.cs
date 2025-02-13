@@ -9,10 +9,13 @@ public class Enemy : MonoBehaviour
     #region Variables
 
     [Header("References")]
-    public GameObject CoinBurst;
-    public GameObject DeathBurst;
     public EnemySounds enemySounds;
-    [SerializeField] EnemySettings enemySettings;
+    public EnemySettings enemySettings;
+
+    [Header("Particles")]
+    public GameObject Coins;
+    public GameObject Blood;
+    public GameObject Flash;
 
     // Private Variables
     [HideInInspector]
@@ -156,13 +159,13 @@ public class Enemy : MonoBehaviour
         if (Random.Range(0, 1f) <= CoinsLogic.Instance.coinDropChance)
         {
             enemySounds.CoinsSound();
-            GameObject coins = Instantiate(CoinBurst, transform.position, Quaternion.identity); // Spawn the coin burst
+            GameObject coins = Instantiate(Coins, transform.position, Quaternion.identity); // Spawn the coin burst
             CoinsLogic.Instance.CollectCoin();
             gameObject.SetActive(false); // Disables the enemy model
         }
         else
         {
-            GameObject blood = Instantiate(DeathBurst, transform.position, Quaternion.identity); // Spawn the blood burst
+            GameObject flash = Instantiate(Flash, transform.position, Quaternion.identity); // Spawn the coin burst
             enemySounds.DeathSound();
             gameObject.SetActive(false); // Disables the enemy model
         }
@@ -170,6 +173,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        GameObject blood = Instantiate(Blood, transform.position, Quaternion.identity); // Spawn the blood burst
         enemySounds.DamageSound();
     }
 

@@ -117,9 +117,9 @@ public class Upgrades : MonoBehaviour
 
     private void SpeedUpgrade(float speedIncrease) /// Applies a speed upgrade to the player and logs it.
     {
-        NewMovement.Instance.speed += speedIncrease;
+        PlayerMovement.Instance.runSpeed += speedIncrease;
         UpdateUpgradeUI();
-        Debug.Log("Speed upgrade: " + NewMovement.Instance.speed);
+        Debug.Log("Speed upgrade: " + PlayerMovement.Instance.runSpeed);
     }
 
     private void DamageUpgrade(float damageIncrease) /// Applies a strengh upgrade to the player and logs it.
@@ -162,7 +162,7 @@ public class Upgrades : MonoBehaviour
     { 
         damageText.text = (Shotgun.gunSettings.damagePerBullet + Shotgun.extraDamage).ToString();
         fireRateText.text = Mathf.RoundToInt(1/Shotgun.gunSettings.fireRate * 100) + "%";
-        speedText.text = NewMovement.Instance.speed.ToString();
+        speedText.text = PlayerMovement.Instance.runSpeed.ToString();
         healthText.text = HealthManager.Instance.initialHealth.ToString();
         dropChanceText.text = Mathf.RoundToInt(CoinsLogic.Instance.coinDropChance * 100) + "%";
     }
