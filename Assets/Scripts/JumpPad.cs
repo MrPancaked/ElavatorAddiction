@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------------------------------------
+// Description: Launches the player when he steps on the jump pad:)
+//--------------------------------------------------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +9,6 @@ using FMODUnity;
 
 public class JumpPad : MonoBehaviour
 {
-
     public float JumpPadForce;
     public float cooldownTime = 1f;  // Cooldown time in seconds
     public EventReference JumppadSound;
@@ -21,19 +23,21 @@ public class JumpPad : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Rigidbody rb = other.GetComponent<Rigidbody>(); // Get the Rigidbody once
+        Rigidbody rb = other.GetComponent<Rigidbody>(); // Get the Rigidbody
 
-        if (rb != null && !isCoolingDown) // Check if a Rigidbody exists, and if cooldown is active
+        if (rb != null && !isCoolingDown) // Null and cooldown check
         {
-            float appliedForce = JumpPadForce; // By default, apply the full force
+            float appliedForce = JumpPadForce; // Normal force
 
-            if (other.CompareTag("Damageable")) // Check if the colliding object is tagged "enemy"
+            if (other.CompareTag("Damageable")) // Check if not enemy
             {
-                appliedForce = JumpPadForce / 3f; // Reduce the force by half
+                appliedForce = JumpPadForce / 3f; // Low force
+
             }
 
-            rb.AddForce(JumpPadDirection * appliedForce, ForceMode.Impulse);
-            StartCooldown(); // Begin the cooldown process
+            rb.AddForce(JumpPadDirection * appliedForce, ForceMode.Impulse); // Launch em up
+
+            StartCooldown(); // Cooldown
         }
     }
 

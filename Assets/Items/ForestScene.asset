@@ -15,6 +15,6 @@ MonoBehaviour:
   sceneName: Forest
   backgroundColor: '#000000'
   fogColorHex: '#000000'
-  fogStartDistance: 10
-  fogEndDistance: 50
+  fogStartDistance: 15
+  fogEndDistance: 35
   lightIntensity: 0
