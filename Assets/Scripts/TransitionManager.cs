@@ -51,12 +51,12 @@ public class TransitionManager : MonoBehaviour
 
         Debug.Log("Screen shake / Fog transition");
         ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 1.5f, overrideDuration: 0.8f);
-        SceneSettings destinationSettings = FogManager.Instance.GetSceneSettings("Forest");
-        FogManager.Instance.SetFogAndLightTransition(destinationSettings, 3f);
+        SceneSettings destination = FogManager.Instance.GetSceneSettings("Forest");
+        FogManager.Instance.SetFogAndLightTransition(destination, 3f);
         yield return new WaitForSeconds(3f);
 
         Debug.Log("Scene load");
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destinationSettings.sceneName);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destination.sceneName);
         while (!asyncLoad.isDone)
         {
             yield return null;
@@ -83,12 +83,12 @@ public class TransitionManager : MonoBehaviour
 
     public IEnumerator VoidTransition()
     {
-        SceneSettings destinationSettings = FogManager.Instance.GetSceneSettings("Void"); // Get scene settings
-        FogManager.Instance.SetFogAndLightTransition(destinationSettings, 1f); // Start fog and light transition
+        SceneSettings destination = FogManager.Instance.GetSceneSettings("GrassVoid"); // Get scene settings
+        FogManager.Instance.SetFogAndLightTransition(destination, 1f); // Start fog and light transition
         yield return new WaitForSeconds(1f);
-
-        HealthManager.Instance.player.transform.position = new Vector3(HealthManager.Instance.player.transform.position.x, 30f, HealthManager.Instance.player.transform.position.z); // Reposition the player
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void");
+        HealthManager.Instance.player.transform.position = new Vector3(HealthManager.Instance.player.transform.position.x, 60f, HealthManager.Instance.player.transform.position.z); // Reposition the player
+        yield return null;
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destination.sceneName);
         while (!asyncLoad.isDone)
         {
             yield return null;

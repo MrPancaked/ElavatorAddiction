@@ -141,13 +141,13 @@ public class HealthManager : MonoBehaviour
         }
         yield return null; // Wait one frame
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GrassVoid");
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
-        player.transform.position = new Vector3(player.transform.position.x, 19f, player.transform.position.z);
+        player.transform.position = new Vector3(player.transform.position.x, 10f, player.transform.position.z);
         deathScreenAnimator.SetTrigger("Respawn"); // trigger Reset animation
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor

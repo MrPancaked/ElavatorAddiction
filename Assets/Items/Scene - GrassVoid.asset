@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18a402d702c764f47b9788a74381a296, type: 3}
-  m_Name: ForestScene
+  m_Name: Scene - GrassVoid
   m_EditorClassIdentifier: 
-  sceneName: Forest
-  backgroundColor: '#000000'
-  fogColorHex: '#000000'
-  fogStartDistance: 15
-  fogEndDistance: 35
-  lightIntensity: 0
+  sceneName: GrassVoid
+  backgroundColor: '#FFFFFF'
+  fogColorHex: '#FFFFFF'
+  fogStartDistance: 0
+  fogEndDistance: 10
+  lightIntensity: 2
