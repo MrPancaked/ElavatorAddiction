@@ -20,24 +20,24 @@ public class Gun : MonoBehaviour
     public Rigidbody playerRb; // Player's Rigidbody
     public TextMeshPro ammoCounter; // UI text element for ammo display
     public GameObject reloadFeedbackText; // UI text element for reload feedback (for now lololo hehehe rene im going crazy bithc it is 3 am)
-    public List<Gun> dualGuns = new List<Gun>(); // If this is a dual gun PUT BOTH GUNS IN THE LIST
 
     [Header("Particles")]
-    public Transform particlesParent; // The parent that we will be instantiating all of our particle effects into
-    public GameObject muzzleFlash; // The muzzle flash effect
     public GameObject bulletHole; // The bullet hole effect
-    public GameObject bloodBurst; // The blood burst effect
+
+    [Header("Leave empty if not dual gun")]
+    public List<Gun> dualGuns = new List<Gun>(); // PUT BOTH GUNS IN THE LIST
 
     // Private Variables
     [HideInInspector]
     public bool reloading; // Check if the gun is currently reloading
+    [HideInInspector]
+    public float extraDamage = 0f; // Damage multiplier for upgrades
     private bool shooting = false; // Check if the player is currently shooting
     private bool readyToShoot; // Check if the gun is ready to shoot
     private int shotsLeft; // Ooverall shots (not bullets) in the magazine
     private int bulletsShot; // Bullets shot in a single shot or burst
     private RaycastHit rayHit; // Info about the raycast
     private int currentGunIndex = 0; // Track which gun to fire in a dual gun set
-    public float extraDamage = 0f; // Damage multiplier for upgrades
     private bool isLastShotInProgress = false; // Flag to prevent auto-reload before the shot is finished
 
     #endregion
@@ -221,7 +221,7 @@ public class Gun : MonoBehaviour
 
         }
         ScreenshakeManager.Instance.TriggerShake("gunshot");
-        //BulletEffects(); // Call bullet effects
+        BulletHoles(); // Call bullet effects
     }
 
     IEnumerator BurstShot(Vector3 direction)
@@ -245,29 +245,19 @@ public class Gun : MonoBehaviour
 
     #region Bullet Effects
 
-    //private void BulletEffects()
-    //{
-    //    GameObject muzzleFlashTemporary = Instantiate(muzzleFlash, MuzzleFlashPoint.position, Quaternion.identity, particlesParent); // Instantiate muzzleflash
-    //    muzzleFlashTemporary.transform.forward = fpsCam.transform.forward; // Align the muzzle flash with the camera
-    //    Destroy(muzzleFlashTemporary, 1f); //Destroy after 1 sec
-    //
-    //    if (rayHit.collider != null)
-    //    {
-    //        int hitLayer = rayHit.collider.gameObject.layer;
-    //        if ((whatIsEnemy & (1 << hitLayer)) != 0) // Check if the raycast hit an enemy
-    //        {
-    //            // Instantiate blood burst if on an enemy layer
-    //            GameObject bloodBurstTemporary = Instantiate(bloodBurst, rayHit.point, Quaternion.Euler(0, 180, 0), particlesParent);
-    //            Destroy(bloodBurstTemporary, 1f); // Destroy after 1 sec
-    //        }
-    //        if ((whatIsGround & (1 << hitLayer)) != 0) // Instantiate bullet hole
-    //        {
-    //            GameObject bulletHoleTemporary = Instantiate(bulletHole, rayHit.point, Quaternion.Euler(0, 180, 0), particlesParent); // Instantiate bullet hole
-    //            bulletHoleTemporary.transform.LookAt(transform); //Rotate the bullet hole to look at the gun
-    //            Destroy(bulletHoleTemporary, 1f); //Destroy after 1 sec
-    //        }
-    //    }
-    //}
+    private void BulletHoles()
+    {
+        if (rayHit.collider != null)
+        {
+            int hitLayer = rayHit.collider.gameObject.layer;
+            if ((whatIsGround & (1 << hitLayer)) != 0) // Instantiate bullet hole
+            {
+                GameObject bulletHoleTemporary = Instantiate(bulletHole, rayHit.point, Quaternion.Euler(0, 180, 0)); // Instantiate bullet hole
+                bulletHoleTemporary.transform.LookAt(transform); //Rotate the bullet hole to look at the gun
+                Destroy(bulletHoleTemporary, 1f); //Destroy after 1 sec
+            }
+        }
+    }
 
     #endregion
 

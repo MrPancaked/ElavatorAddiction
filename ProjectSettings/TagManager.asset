@@ -18,6 +18,7 @@ TagManager:
   - Elevator
   - RespawnPoint
   - RoomText
+  - Grass
   layers:
   - Default
   - TransparentFX

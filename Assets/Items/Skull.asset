@@ -17,7 +17,7 @@ MonoBehaviour:
   attackScreenShake: 1
   attackSpeed: 4.5
   attackDrag: 0.2
-  attackOffset: 2
+  attackOffset: 0.5
   attackCooldownMin: 2
   attackCooldownMax: 5
   idleSpeed: 2

@@ -1,20 +1,20 @@
 //--------------------------------------------------------------------------------------------------
-// Description: Rotates the spotlight lol
+// Description: Rotates the thingy lol
 //--------------------------------------------------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotatingSpotlights : MonoBehaviour
+public class RotatingObject : MonoBehaviour
 {
     [Header("References")]
-    public Transform Spotlights;
+    public Transform gameObject;
 
     [Header("Vartiables")]
     public float rotationSpeed;
 
     void Update()
     {
-        Spotlights.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+        gameObject.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
     }
 }

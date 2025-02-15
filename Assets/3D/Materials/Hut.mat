@@ -102,7 +102,7 @@ Material:
     - Boolean_193028D2: 1
     - Boolean_3F1A8DAB: 1
     - Boolean_43476D73: 1
-    - Boolean_7165A49C: 0
+    - Boolean_7165A49C: 1
     - Boolean_85059BBE: 1
     - Boolean_8BBF99CD: 1
     - Boolean_D258FF8E: 1
@@ -111,7 +111,7 @@ Material:
     - Vector1_6F288C5B: 2
     - Vector1_B2CC132F: 40
     - Vector1_B9994903: 11
-    - Vector1_E8746023: 120
+    - Vector1_E8746023: -27.2
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0

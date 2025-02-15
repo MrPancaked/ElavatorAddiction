@@ -1,50 +1,66 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Required for SceneManager
 
 namespace GrassFlow.Examples
 {
     public class ClickRipple : MonoBehaviour
     {
 
-        public float rippleRate = 0.1f;
-        public float contactOffset = 1f;
-        public Collider grassCol;
-        public float ripStrength;
-        public float ripDecayRate;
-        public float ripSpeed;
-        public float ripRadius;
-        public float physicsPushDist = 5f;
+        [Header("References")]
+        public Gun gun;
 
-        float timer = 0;
+        [Header("Settings")]
 
-        Collider[] colliders = new Collider[5];
+        public float contactOffset = 3f;
+        public float ripStrength = 1.2f;
+        public float ripDecayRate = 1f;
+        public float ripSpeed = 20f;
+        public float ripRadius = 0.1f;
 
         Ray ray;
         RaycastHit hit;
+        private float timer = 0;
+        private Collider grassCollider;
+        private string grassTag = "Grass"; // Tag for the grass object.
+        private bool canApplyRipples = false; // Flag to control Update logic
+
+        private void OnEnable() 
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnDisable() 
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            GameObject grassTerrain = GameObject.FindGameObjectWithTag(grassTag);
+
+            if (grassTerrain != null)
+            {
+                grassCollider = grassTerrain.GetComponent<Collider>(); // Get the Collider component
+                canApplyRipples = true;
+            }
+            else
+            {
+                canApplyRipples = false;
+            }
+        }
 
         private void Update()
         {
-            if (Input.GetMouseButton(0) && timer > rippleRate)
+            if (!canApplyRipples) return;
+            if (Input.GetMouseButton(0) && timer > gun.gunSettings.fireRate)
             {
                 timer = 0;
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (grassCol.Raycast(ray, out hit, 9999f))
+                if (grassCollider.Raycast(ray, out hit, 9999f))
                 {
                     GrassFlowRenderer.AddRipple(hit.point + hit.normal * contactOffset, ripStrength, ripDecayRate, ripSpeed, ripRadius, 0);
-                    //int cols = Physics.OverlapSphereNonAlloc(hit.point, physicsPushDist, colliders);
-                    //if (cols > 0)
-                    //{
-                    //    for (int i = 0; i < cols; i++)
-                    //    {
-                    //        if (colliders[i].CompareTag("Player")) continue;
-                    //        Rigidbody rb = colliders[i].attachedRigidbody;
-                    //        if (rb)
-                    //        {
-                    //            rb.AddExplosionForce(ripStrength * 2f, hit.point, physicsPushDist, 0.1f, ForceMode.Impulse);
-                    //        }
-                    //    }
-                    //}
                 }
             }
             timer += Time.deltaTime;

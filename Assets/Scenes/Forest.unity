@@ -149,7 +149,7 @@ PrefabInstance:
     - target: {fileID: 137190367860815854, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 44.4
       objectReference: {fileID: 0}
     - target: {fileID: 185017281206308147, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
@@ -176,7 +176,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -250
       objectReference: {fileID: 0}
+    - target: {fileID: 2150676738215352730, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2431891220752119738, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573095271107458238, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -189,12 +199,12 @@ PrefabInstance:
     - target: {fileID: 2759686616367385794, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 14.3
       objectReference: {fileID: 0}
     - target: {fileID: 2759686616367385794, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 46.6
       objectReference: {fileID: 0}
     - target: {fileID: 3162179343281365573, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
@@ -210,6 +220,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387022772914884704, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3565717953076067714, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
@@ -296,6 +311,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4384736508959136167, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4695785831532950800, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_Size.y
@@ -306,6 +326,12 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: -0.005332245
       objectReference: {fileID: 0}
+    - target: {fileID: 4754668552646124397, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: f80b30d119a907c479877436198b4979,
+        type: 2}
     - target: {fileID: 5026732728138387970, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -321,10 +347,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5718651119532534118, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_NormalDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961168841713998398, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: f80b30d119a907c479877436198b4979,
+        type: 2}
     - target: {fileID: 6074448190513250300, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_Intensity
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6101478039281839945, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
@@ -361,10 +398,32 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7030572149511052970, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: f80b30d119a907c479877436198b4979,
+        type: 2}
+    - target: {fileID: 7473055859247735844, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: f80b30d119a907c479877436198b4979,
+        type: 2}
     - target: {fileID: 7650683280775578115, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_Intensity
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7664648549643139193, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7784683846260650932, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8015554485509694759, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
@@ -391,10 +450,15 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8659474569959778013, guid: 861f3116620002a48898bdfa74a62b1b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9063948993486371706, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
       propertyPath: m_Intensity
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9193908747253182376, guid: 861f3116620002a48898bdfa74a62b1b,
         type: 3}
@@ -468,7 +532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightSource: {fileID: 5038220718017429002}
-  lightIntensity: 1
+  lightIntensity: 2
   transitionTime: 1.5
 --- !u!114 &5038220718017429008
 MonoBehaviour:
@@ -483,7 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightSource: {fileID: 5038220718017429004}
-  lightIntensity: 1
+  lightIntensity: 2
   transitionTime: 1.5
 --- !u!114 &5038220718017429009
 MonoBehaviour:
@@ -498,7 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightSource: {fileID: 5038220718017429006}
-  lightIntensity: 1
+  lightIntensity: 2
   transitionTime: 1.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

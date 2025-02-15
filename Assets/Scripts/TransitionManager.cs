@@ -86,6 +86,8 @@ public class TransitionManager : MonoBehaviour
         SceneSettings destination = FogManager.Instance.GetSceneSettings("GrassVoid"); // Get scene settings
         FogManager.Instance.SetFogAndLightTransition(destination, 1f); // Start fog and light transition
         yield return new WaitForSeconds(1f);
+        yield return null;
+        Debug.Log("Player Position set");
         HealthManager.Instance.player.transform.position = new Vector3(HealthManager.Instance.player.transform.position.x, 60f, HealthManager.Instance.player.transform.position.z); // Reposition the player
         yield return null;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destination.sceneName);
@@ -93,6 +95,8 @@ public class TransitionManager : MonoBehaviour
         {
             yield return null;
         }
+
+
     }
 
     public void UpdateRoomIndex()

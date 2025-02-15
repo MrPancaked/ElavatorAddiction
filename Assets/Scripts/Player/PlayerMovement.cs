@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     private const float slideSpeedTrashhold = 1f;
     private const float runSpeedTrashhold = 4f;
     private const float fovSpeedLimit = 30f;
-    private const float slamDistance = 2f;
+    private const float slamDistance = 3f;
 
     // States and singleton
     public enum MovementState
@@ -385,7 +385,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 fallPosition = transform.position.y;
                 PlayerSounds.Instance.PlaySlamSound();
-                ScreenshakeManager.Instance.TriggerShake("slam", overrideForce: 1f, overrideDuration: 0.2f);
+                ScreenshakeManager.Instance.TriggerShake("slam", overrideForce: 2f, overrideDuration: 0.4f);
             }
         }
     }

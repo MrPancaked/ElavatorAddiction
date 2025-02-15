@@ -11,17 +11,11 @@ public class Interactions : MonoBehaviour
 
     // Private Variables
     private Camera playerCamera; // Reference to the player's camera.
-    private string coinTag = "Coin"; // Tag for coin objects
-    private string ElevatorButtonTag = "ElevatorButton"; // Tag for the button in the elevator.
-    private string ElevatorLeverTag = "ElevatorLever"; // Tag for the lever outside the elevator.
-    private string BookTag = "Book"; // Tag for the lever outside the elevator.
+    private float buttonCooldown = 2.4f; // 2-second cooldown
+    private float nextButtonPressTime = 0f;  // The next time the button can be pressed
     private Animator buttonAnimator;
     public static Interactions instance;
     public static Interactions Instance { get { return instance; } }
-
-    // Cooldown variables
-    private float buttonCooldown = 2.4f; // 2-second cooldown
-    private float nextButtonPressTime = 0f;  // The next time the button can be pressed
 
     #endregion
 
@@ -74,18 +68,6 @@ public class Interactions : MonoBehaviour
 
     #endregion
 
-    #region Collecting Items Logic
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag(coinTag)) // If the object has a coin tag
-        {
-            CoinsLogic.Instance.CollectCoin(); // Collect the coin
-        }
-    }
-
-    #endregion
-
     #region Interaction Logic
 
     void Interact() /// Performs the interaction, raycasting and checking for interactable objects.
@@ -95,14 +77,16 @@ public class Interactions : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 3f))
         {
-            if (hit.collider.CompareTag(ElevatorButtonTag))
+            if (hit.collider.CompareTag("ElevatorButton"))
             {
                 if (Time.time >= nextButtonPressTime)
                 {
-
                     ElevatorController.Instance.ButtonPressed();
-                    hit.collider.GetComponent<Animator>().SetTrigger("Press");
                     nextButtonPressTime = Time.time + buttonCooldown;
+                    if (hit.collider.GetComponent<Animator>() != null)
+                    {
+                        hit.collider.GetComponent<Animator>().SetTrigger("Press");
+                    }
                 }
                 else
                 {
@@ -110,12 +94,12 @@ public class Interactions : MonoBehaviour
                 }
             }
 
-            else if (hit.collider.CompareTag(ElevatorLeverTag))
+            else if (hit.collider.CompareTag("ElevatorLever"))
             {
                 ElevatorController.Instance.StartCoroutine(ElevatorController.Instance.LeverPressed());
             }
 
-            else if (hit.collider.CompareTag(BookTag))
+            else if (hit.collider.CompareTag("Book"))
             {
                 DialogueManager.Instance.StartCoroutine(DialogueManager.Instance.ReadBook());
             }
@@ -124,6 +108,18 @@ public class Interactions : MonoBehaviour
             {
                 Debug.Log("Uninteractable");
             }
+        }
+    }
+
+    #endregion
+
+    #region Collecting Items Logic
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Coin")) // If the object has a coin tag
+        {
+            CoinsLogic.Instance.CollectCoin(); // Collect the coin
         }
     }
 

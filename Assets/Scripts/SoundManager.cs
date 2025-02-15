@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 // Description: Manages the elevator sound logic, using FMOD parameters to transition between
-//              elevator start and stop sounds.
+//              elevator start and stop sounds.  Also manages ambience based on scene name.
 //--------------------------------------------------------------------------------------------------
 using UnityEngine;
 using FMODUnity;
@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
     private EventInstance elevatorRideInstance;
     private EventInstance roomToneInstance;
     private EventInstance ambienceInstance;
-    private int currentSceneIndex = -1;
+    private string currentSceneName = "";  // Store the current scene name
     private bool hasStarted = false;
     private static SoundManager instance;
     public static SoundManager Instance { get { return instance; } }
@@ -52,15 +52,14 @@ public class SoundManager : MonoBehaviour
         roomToneInstance = AudioManager.instance.CreateInstance(roomToneSound, this.transform.position); // Initialize the roomtone event
         ambienceInstance = AudioManager.instance.CreateInstance2D(ambienceEvent); // Initialize the ambience event
 
-        UpdateAmbience(SceneManager.GetActiveScene().buildIndex); // initialize the correct ambience
+        UpdateAmbience(SceneManager.GetActiveScene().name); // initialize the correct ambience using scene name
 
-        ambienceInstance.start(); // Play the ambience event
         roomToneInstance.start(); // Play the roomtone event
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        UpdateAmbience(scene.buildIndex);
+        UpdateAmbience(scene.name); // Update ambience using scene name
     }
 
     void OnEnable()
@@ -118,33 +117,39 @@ public class SoundManager : MonoBehaviour
 
     #region Ambience Sounds
 
-    public void UpdateAmbience(int sceneIndex) 
+    public void UpdateAmbience(string sceneName)
     {
-        if (sceneIndex == currentSceneIndex) return; // Prevent if already correct - no redundant calls
+        if (sceneName == currentSceneName) return; // Prevent redundant calls
 
         float parameterValue;
-        switch (sceneIndex)
+        switch (sceneName)
         {
-            case 0:
+            case "Menu":
                 Debug.Log("Ambience set to Menu");
                 parameterValue = 0f;
                 break;
-            case 1:
+            case "Void":
+            case "GrassVoid":
                 Debug.Log("Ambience set to Void");
                 parameterValue = 1f;
                 break;
-            case 2:
+            case "Forest":
                 Debug.Log("Ambience set to Forest");
                 parameterValue = 2f;
                 break;
             default:
-                Debug.LogWarning($"No Ambience scene state set for scene with index {sceneIndex}");
+                Debug.LogWarning($"No Ambience scene state set for scene with name {sceneName}");
                 parameterValue = 0f; // Default value so its not left unassigned
                 break;
         }
 
         ambienceInstance.setParameterByName("Scene", parameterValue); // Set the sound
-        currentSceneIndex = sceneIndex; // Update index after setting
+        currentSceneName = sceneName; // Update scene name after setting
+
+        if (ambienceInstance.isValid())
+        {
+            ambienceInstance.start();
+        }
     }
 
     #endregion
