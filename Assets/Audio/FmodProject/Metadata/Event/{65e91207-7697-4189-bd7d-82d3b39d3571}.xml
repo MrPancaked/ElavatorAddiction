@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{65e91207-7697-4189-bd7d-82d3b39d3571}">
 		<property name="name">
-			<value>DeerSpawn</value>
+			<value>Enemy_Spawn</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -105,8 +105,8 @@
 			<destination>{1a29c79b-721f-43c6-a839-6ba2f55e6684}</destination>
 		</relationship>
 		<relationship name="sounds">
-			<destination>{1fe091c6-d6a6-43fc-87a9-2d4b294b5f52}</destination>
-			<destination>{b5278c3f-448c-4e1f-a7aa-e02f136e3052}</destination>
+			<destination>{fadbac80-8c68-429b-8a29-cb47464f5019}</destination>
+			<destination>{aa1c7ae0-56f6-416a-8484-449f2d27e705}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{f6629b30-2fe1-42f3-a572-e5fb5b49e602}" />
@@ -120,14 +120,14 @@
 			<value>6.25</value>
 		</property>
 	</object>
-	<object class="SingleSound" id="{1fe091c6-d6a6-43fc-87a9-2d4b294b5f52}">
+	<object class="SingleSound" id="{fadbac80-8c68-429b-8a29-cb47464f5019}">
 		<relationship name="audioFile">
-			<destination>{34daed09-517a-4a8d-b6b9-d1e9afe4501e}</destination>
+			<destination>{3411f6db-e3e8-4088-b6ac-8da707713cea}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{b5278c3f-448c-4e1f-a7aa-e02f136e3052}">
+	<object class="SingleSound" id="{aa1c7ae0-56f6-416a-8484-449f2d27e705}">
 		<relationship name="audioFile">
-			<destination>{51598faf-e68d-4e51-8151-1cbfdd4d4ba3}</destination>
+			<destination>{41a8a477-ff1d-4cf8-b70c-ae145ed50826}</destination>
 		</relationship>
 	</object>
 </objects>

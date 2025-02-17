@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{ff4a61ba-2d22-459f-b483-e2e8fc9aa585}">
 		<property name="name">
-			<value>DeerDamage</value>
+			<value>Enemy_Damage</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -105,10 +105,10 @@
 			<destination>{32a297e6-b782-461b-a82f-4bb3ce99706f}</destination>
 		</relationship>
 		<relationship name="sounds">
-			<destination>{52736fe7-c29d-426f-ae3b-22581faaeb3f}</destination>
-			<destination>{4b0d0b44-968e-411c-91ad-cdafed3bae45}</destination>
-			<destination>{bef93c24-f497-4dd4-82e0-a054d412c60a}</destination>
-			<destination>{7d4f3d6b-000c-4070-ad2b-cdcdc139c08c}</destination>
+			<destination>{691e937d-f76d-4072-bd18-f0fb47e86638}</destination>
+			<destination>{edd5dc50-ff9e-4143-a82a-e28653f68822}</destination>
+			<destination>{95b4cdbe-bc3e-4acf-a60f-3e04cbcf76e6}</destination>
+			<destination>{3e8f9f52-f4e0-4e36-8e7b-dae019b1d1f1}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{40d39dd2-7886-4cfc-8931-7a35391c49c6}" />
@@ -122,24 +122,24 @@
 			<value>6.25</value>
 		</property>
 	</object>
-	<object class="SingleSound" id="{52736fe7-c29d-426f-ae3b-22581faaeb3f}">
+	<object class="SingleSound" id="{691e937d-f76d-4072-bd18-f0fb47e86638}">
 		<relationship name="audioFile">
-			<destination>{18a7203e-266d-49bc-9abc-eb6c7f6e9ca7}</destination>
+			<destination>{3fc3f866-9993-44f8-923b-f3fb18cf5bab}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{4b0d0b44-968e-411c-91ad-cdafed3bae45}">
+	<object class="SingleSound" id="{edd5dc50-ff9e-4143-a82a-e28653f68822}">
 		<relationship name="audioFile">
-			<destination>{974f8594-8192-43c6-be92-c850dbf7396d}</destination>
+			<destination>{d3b05454-7094-41c6-b9af-035b6f135e3f}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{bef93c24-f497-4dd4-82e0-a054d412c60a}">
+	<object class="SingleSound" id="{95b4cdbe-bc3e-4acf-a60f-3e04cbcf76e6}">
 		<relationship name="audioFile">
-			<destination>{32feb606-75cd-4884-848a-124bc8db9f8a}</destination>
+			<destination>{3202c2c2-a3d1-4fe9-b453-d10bcecd5cc6}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{7d4f3d6b-000c-4070-ad2b-cdcdc139c08c}">
+	<object class="SingleSound" id="{3e8f9f52-f4e0-4e36-8e7b-dae019b1d1f1}">
 		<relationship name="audioFile">
-			<destination>{c1eb41c5-bfec-49ea-b844-187ca78bb119}</destination>
+			<destination>{67c64b3e-d536-44a8-91dd-6fbe1eed93f4}</destination>
 		</relationship>
 	</object>
 </objects>

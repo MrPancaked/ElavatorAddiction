@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{72b7a6a5-ff92-45e9-9786-4de57a05cc53}">
 		<property name="name">
-			<value>CoinDrop</value>
+			<value>Enemy_Coin_Drop</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -114,9 +114,9 @@
 			<destination>{479e92fa-2ba9-4a53-8aa6-7dde649e86cb}</destination>
 		</relationship>
 		<relationship name="sounds">
-			<destination>{be1d694a-2707-4b3d-8aac-ecd1459a87e0}</destination>
-			<destination>{76a32900-f778-4102-a831-1e0fd14395e2}</destination>
-			<destination>{c997e354-38c8-4b6a-beaa-79d88b599f2d}</destination>
+			<destination>{151a90e0-9a9f-416f-9c7f-e8107cce48b8}</destination>
+			<destination>{6b4312d8-0c99-4482-9668-3761e3e62dc2}</destination>
+			<destination>{3f130c55-473a-49ae-981b-dd3b196d1ba6}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{811d1600-810f-49c6-87eb-47d61628d79a}" />
@@ -130,19 +130,19 @@
 			<value>5</value>
 		</property>
 	</object>
-	<object class="SingleSound" id="{be1d694a-2707-4b3d-8aac-ecd1459a87e0}">
+	<object class="SingleSound" id="{151a90e0-9a9f-416f-9c7f-e8107cce48b8}">
 		<relationship name="audioFile">
-			<destination>{3aaa1b99-88a0-4dad-9336-ce27207ad061}</destination>
+			<destination>{58de47f3-436b-447b-baaa-8091b7b75910}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{76a32900-f778-4102-a831-1e0fd14395e2}">
+	<object class="SingleSound" id="{6b4312d8-0c99-4482-9668-3761e3e62dc2}">
 		<relationship name="audioFile">
-			<destination>{34294042-443d-4005-ab19-6f731326627a}</destination>
+			<destination>{1421a9bb-79b8-478e-a3c5-5ccdeeab0ce8}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{c997e354-38c8-4b6a-beaa-79d88b599f2d}">
+	<object class="SingleSound" id="{3f130c55-473a-49ae-981b-dd3b196d1ba6}">
 		<relationship name="audioFile">
-			<destination>{e1c71438-9764-4972-ab2a-8e55033fe559}</destination>
+			<destination>{1f39caf1-bae6-44af-9fc0-607eee37b043}</destination>
 		</relationship>
 	</object>
 </objects>

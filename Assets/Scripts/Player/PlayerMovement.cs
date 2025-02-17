@@ -411,6 +411,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void SlidingSound()
+    {
+        if (isSliding && isGrounded)
+        {
+            PlayerSounds.Instance.PlaySlideSound();
+        }
+        else
+        {
+            PlayerSounds.Instance.StopSlideSound();
+        }
+    }
+
     private void AirSound()
     {
         if (isGrounded)
@@ -427,6 +439,7 @@ public class PlayerMovement : MonoBehaviour
     {
         SlamSound();
         AnimatorStates();
+        SlidingSound();
         AirSound();
     }
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a437e06a-1532-43d9-9c9f-52bb5933db54}">
+		<property name="assetPath">
+			<value>Player_Flying.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>7.2857142857142856</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d06376f8-c45d-49d8-a83b-daf9e9f7f6e7}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{8142a639-d8f7-45b6-bb4c-fe9bfac50237}">
 		<property name="name">
-			<value>Roomtone</value>
+			<value>Elevator_Roomtone</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -70,9 +70,9 @@
 			<destination>{781a45e7-ad39-443c-a2c2-3a59c73af516}</destination>
 		</relationship>
 		<relationship name="modules">
-			<destination>{e60bcdc8-c108-422b-ad10-a0c61f2be4b3}</destination>
 			<destination>{e2d61fbf-b918-4f56-bbf3-2012c4fdb2c8}</destination>
 			<destination>{c445291b-7265-4602-832d-f932dc5ede06}</destination>
+			<destination>{291d4c9f-85ae-406a-bcc0-054f01e52b18}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{06a66f44-c133-47b4-937d-0e17cffa353e}</destination>
@@ -80,7 +80,7 @@
 	</object>
 	<object class="Timeline" id="{085bf3cf-5388-43b8-b6ed-34d2941ab01c}">
 		<relationship name="modules">
-			<destination>{e60bcdc8-c108-422b-ad10-a0c61f2be4b3}</destination>
+			<destination>{291d4c9f-85ae-406a-bcc0-054f01e52b18}</destination>
 		</relationship>
 		<relationship name="markers">
 			<destination>{efc626e9-0c49-4da6-901a-4bfc20b9d151}</destination>
@@ -126,17 +126,6 @@
 			<destination>{dad41d7a-38b2-4dff-9438-5cb0759cbda9}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{e60bcdc8-c108-422b-ad10-a0c61f2be4b3}">
-		<property name="length">
-			<value>27</value>
-		</property>
-		<relationship name="modulators">
-			<destination>{4706405d-e350-4936-affe-645f87050d44}</destination>
-		</relationship>
-		<relationship name="audioFile">
-			<destination>{f6e0e823-7074-4f8b-b996-2b8d40fefdb9}</destination>
-		</relationship>
-	</object>
 	<object class="TransitionSourceSound" id="{e2d61fbf-b918-4f56-bbf3-2012c4fdb2c8}">
 		<property name="length">
 			<value>2</value>
@@ -151,6 +140,14 @@
 		</property>
 		<relationship name="fadeInCurve">
 			<destination>{61ca3828-cac7-4468-93aa-6420a738078b}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{291d4c9f-85ae-406a-bcc0-054f01e52b18}">
+		<property name="length">
+			<value>27</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{87c00c37-76a7-414d-8a65-aee18a341331}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{06a66f44-c133-47b4-937d-0e17cffa353e}">
@@ -192,11 +189,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{d3e59eda-f558-4298-950a-965cb87d6753}" />
 	<object class="MixerBusFader" id="{ba1256df-8867-47cd-8aad-8490ebc7b207}" />
-	<object class="RandomizerModulator" id="{4706405d-e350-4936-affe-645f87050d44}">
-		<property name="nameOfPropertyBeingModulated">
-			<value>pitch</value>
-		</property>
-	</object>
 	<object class="TransitionSourceFadeOutCurve" id="{f2485bb8-133f-4a88-9b5d-1007b953496c}">
 		<relationship name="startPoint">
 			<destination>{2ebebba4-1a1b-4e15-98e1-771d223fb334}</destination>

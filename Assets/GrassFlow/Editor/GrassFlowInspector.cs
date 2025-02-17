@@ -939,7 +939,7 @@ public class GrassFlowInspector : Editor {
 
         useDeltaTimePaint = EditorGUILayout.ToggleLeft(new GUIContent("Use Delta Time Paint",
             "If on the brush strength is multiplied by delta time to make painting strength framerate independent. " +
-            "It's useful to turn this off if you want to use brushes more like stamps and use strength of 1 and apply the full brush to the grass with a single click."), useDeltaTimePaint);
+            "It's useful to turn this off if you want to use brushes more like stamps and use strength of 1 and apply the full brush to the grass with a single press."), useDeltaTimePaint);
 
 
         if (drawGMesh.renderType == GrassFlowRenderer.GrassRenderType.Terrain) {

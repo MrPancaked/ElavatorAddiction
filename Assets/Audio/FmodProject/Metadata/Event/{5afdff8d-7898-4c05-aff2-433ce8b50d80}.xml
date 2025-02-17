@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{5afdff8d-7898-4c05-aff2-433ce8b50d80}">
 		<property name="name">
-			<value>RideEnd</value>
+			<value>Elevator_Ride_End</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -105,7 +105,7 @@
 			<destination>{7dbbb36f-faf7-4d3c-98f8-93ca79c0a861}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{729300e6-22cf-48ca-b34e-4a52fcda97cc}</destination>
+			<destination>{a8f21d5c-3c07-42e8-9be2-9f6e1b12b66e}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{69b73050-3602-43b5-be40-ecea984f3801}" />

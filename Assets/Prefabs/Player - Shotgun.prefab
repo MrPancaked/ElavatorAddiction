@@ -594,14 +594,9 @@ MonoBehaviour:
   playerRb: {fileID: 0}
   ammoCounter: {fileID: 6797144894634387714}
   reloadFeedbackText: {fileID: 0}
-  dualGuns: []
-  particlesParent: {fileID: 0}
-  muzzleFlash: {fileID: 7548889807513906146, guid: 935e1d2f61ec7404d8fc056f0fca803e,
-    type: 3}
   bulletHole: {fileID: 1932917029013565841, guid: 87ef789bbfbea974b86ea4236f23d52d,
     type: 3}
-  bloodBurst: {fileID: 1932917029013565841, guid: 0e870cf148aaedf47b215f81d9daec09,
-    type: 3}
+  dualGuns: []
   reloading: 0
   extraDamage: 0
 --- !u!114 &6681186234846937800
@@ -20942,28 +20937,28 @@ MonoBehaviour:
       Data2: 1308096230
       Data3: -329700442
       Data4: 1343896600
-    Path: event:/Weapon/Equip
+    Path: event:/Weapon/Shotgun_Equip
   shotgunShotSound:
     Guid:
       Data1: -1375410770
       Data2: 1191335039
       Data3: -485774965
       Data4: -364827230
-    Path: event:/Weapon/ShotgunShot
+    Path: event:/Weapon/Shotgun_Shot
   cockUpSound:
     Guid:
       Data1: 1728127774
       Data2: 1328026564
       Data3: -154925411
       Data4: -482540066
-    Path: event:/Weapon/CockUp
+    Path: event:/Weapon/Shotgun_Cock_Up
   cockDownSound:
     Guid:
       Data1: -222687229
       Data2: 1174663934
       Data3: 205248401
       Data4: 898396825
-    Path: event:/Weapon/CockDown
+    Path: event:/Weapon/Shotgun_Cock_Down
 --- !u!1 &6723454784697840265
 GameObject:
   m_ObjectHideFlags: 0

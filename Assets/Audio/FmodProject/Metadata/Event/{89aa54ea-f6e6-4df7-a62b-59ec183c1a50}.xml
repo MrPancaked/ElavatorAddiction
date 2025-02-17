@@ -2,10 +2,10 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{89aa54ea-f6e6-4df7-a62b-59ec183c1a50}">
 		<property name="name">
-			<value>Equip</value>
+			<value>Shotgun_Equip</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{c8d56f0b-34b9-4267-a42c-23c6eff79777}</destination>
@@ -85,11 +85,7 @@
 			<destination>{31f82dd7-12d8-403b-ab80-593a17af0a65}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{30aab9ff-967b-4926-b60e-87a14a46f21e}">
-		<relationship name="sounds">
-			<destination>{ebf26b72-8035-4512-9eb8-863d54ba8d50}</destination>
-		</relationship>
-	</object>
+	<object class="MultiSound" id="{30aab9ff-967b-4926-b60e-87a14a46f21e}" />
 	<object class="MixerBusEffectChain" id="{374a351d-9c6b-4cdb-9435-4dd1a832a224}">
 		<relationship name="effects">
 			<destination>{d68fb381-7ed1-45a3-9ebe-6d5f952f0721}</destination>
@@ -102,25 +98,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{17ff517a-d4e4-4955-9628-578cd4a333c4}" />
-	<object class="SingleSound" id="{ebf26b72-8035-4512-9eb8-863d54ba8d50}">
-		<property name="pitch">
-			<value>4.5</value>
-		</property>
-		<relationship name="modulators">
-			<destination>{b9fedaf7-6220-43d1-aefa-26673977f49f}</destination>
-		</relationship>
-		<relationship name="audioFile">
-			<destination>{51a9c44f-69fb-4b31-960a-7fed3c4c9a49}</destination>
-		</relationship>
-	</object>
 	<object class="MixerBusFader" id="{d68fb381-7ed1-45a3-9ebe-6d5f952f0721}" />
 	<object class="MixerBusFader" id="{adf8b528-4358-4113-a303-d65c30877f5d}" />
-	<object class="RandomizerModulator" id="{b9fedaf7-6220-43d1-aefa-26673977f49f}">
-		<property name="nameOfPropertyBeingModulated">
-			<value>pitch</value>
-		</property>
-		<property name="amount">
-			<value>2.5</value>
-		</property>
-	</object>
 </objects>

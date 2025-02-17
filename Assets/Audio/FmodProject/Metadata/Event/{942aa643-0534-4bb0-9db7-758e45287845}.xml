@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{942aa643-0534-4bb0-9db7-758e45287845}">
 		<property name="name">
-			<value>Death</value>
+			<value>Player_Death</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{f22dc063-de64-49a3-a5c0-d62362330b76}</destination>
+			<destination>{8c2e4ef4-7421-4d6e-b9a9-b6fb1faf31fd}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{acc6acc0-fb37-4d64-bf39-6d63c451c0f2}</destination>
@@ -118,7 +118,7 @@
 			<value>11.462199546485261</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{b4193e62-0b9e-44e9-8556-eb33ef2bf077}</destination>
+			<destination>{73fc67b4-ccdd-4256-9e08-c6470bdc6030}</destination>
 		</relationship>
 	</object>
 	<object class="TransitionSourceSound" id="{46dcec17-a354-48f1-978a-806f29af0cef}">

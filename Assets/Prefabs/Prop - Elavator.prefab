@@ -864,28 +864,28 @@ MonoBehaviour:
       Data2: 1200046927
       Data3: -840613698
       Data4: -670224066
-    Path: event:/Machine/Win
+    Path: event:/Machine/Slots_Win
   loseSound:
     Guid:
       Data1: -1205949094
       Data2: 1323975008
       Data3: 704693634
       Data4: -286640196
-    Path: event:/Machine/Lose
+    Path: event:/Machine/Slots_Lose
   rollSound:
     Guid:
       Data1: -2098796583
       Data2: 1285109045
       Data3: -1206017384
       Data4: 976453886
-    Path: event:/Machine/Rolling
+    Path: event:/Machine/Slots_Rolling
   jackpotSound:
     Guid:
       Data1: -1592596195
       Data2: 1176182779
       Data3: 392798362
       Data4: 645193942
-    Path: event:/Machine/Jackpot
+    Path: event:/Machine/Slots_Jackpot
 --- !u!1 &1247584595937031231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,14 +2697,14 @@ MonoBehaviour:
       Data2: 1171021025
       Data3: 2066310066
       Data4: 237913907
-    Path: event:/Elevator/DoorClose
+    Path: event:/Elevator/Elevator_Door_Close
   doorOpenSound:
     Guid:
       Data1: 1030807512
       Data2: 1283794285
       Data3: 92168108
       Data4: 1136249387
-    Path: event:/Elevator/DoorOpen
+    Path: event:/Elevator/Elevator_Door_Open
 --- !u!1 &3790178935925425441
 GameObject:
   m_ObjectHideFlags: 0
@@ -3580,28 +3580,28 @@ MonoBehaviour:
       Data2: 1221497359
       Data3: -63004244
       Data4: 52583639
-    Path: event:/Elevator/ButtonPress
+    Path: event:/Elevator/Elevator_Button
   leverDownSound:
     Guid:
       Data1: 1297065409
       Data2: 1155308846
       Data3: -2050694774
       Data4: -356529736
-    Path: event:/Elevator/LeverDown
+    Path: event:/Elevator/Elevator_Lever_Down
   leverDownFakeSound:
     Guid:
       Data1: 1753921766
       Data2: 1232299346
       Data3: -1850824522
       Data4: -87205529
-    Path: event:/Elevator/LeverDownFake
+    Path: event:/Elevator/Elevator_Lever_Broken
   leverUpSound:
     Guid:
       Data1: 635973493
       Data2: 1168746630
       Data3: 1318301592
       Data4: 999472868
-    Path: event:/Elevator/LeverUp
+    Path: event:/Elevator/Elevator_Lever_Up
 --- !u!1 &4561402249250461240
 GameObject:
   m_ObjectHideFlags: 0
@@ -4509,28 +4509,28 @@ MonoBehaviour:
       Data2: 1221497359
       Data3: -63004244
       Data4: 52583639
-    Path: event:/Elevator/ButtonPress
+    Path: event:/Elevator/Elevator_Button
   leverDownSound:
     Guid:
       Data1: 1297065409
       Data2: 1155308846
       Data3: -2050694774
       Data4: -356529736
-    Path: event:/Elevator/LeverDown
+    Path: event:/Elevator/Elevator_Lever_Down
   leverDownFakeSound:
     Guid:
       Data1: 1753921766
       Data2: 1232299346
       Data3: -1850824522
       Data4: -87205529
-    Path: event:/Elevator/LeverDownFake
+    Path: event:/Elevator/Elevator_Lever_Broken
   leverUpSound:
     Guid:
       Data1: 635973493
       Data2: 1168746630
       Data3: 1318301592
       Data4: 999472868
-    Path: event:/Elevator/LeverUp
+    Path: event:/Elevator/Elevator_Lever_Up
 --- !u!1 &5331779447811010271
 GameObject:
   m_ObjectHideFlags: 0
@@ -6177,28 +6177,28 @@ MonoBehaviour:
       Data2: 1221497359
       Data3: -63004244
       Data4: 52583639
-    Path: event:/Elevator/ButtonPress
+    Path: event:/Elevator/Elevator_Button
   leverDownSound:
     Guid:
       Data1: 1297065409
       Data2: 1155308846
       Data3: -2050694774
       Data4: -356529736
-    Path: event:/Elevator/LeverDown
+    Path: event:/Elevator/Elevator_Lever_Down
   leverDownFakeSound:
     Guid:
       Data1: 1753921766
       Data2: 1232299346
       Data3: -1850824522
       Data4: -87205529
-    Path: event:/Elevator/LeverDownFake
+    Path: event:/Elevator/Elevator_Lever_Broken
   leverUpSound:
     Guid:
       Data1: 635973493
       Data2: 1168746630
       Data3: 1318301592
       Data4: 999472868
-    Path: event:/Elevator/LeverUp
+    Path: event:/Elevator/Elevator_Lever_Up
 --- !u!1 &7372676421701823676
 GameObject:
   m_ObjectHideFlags: 0

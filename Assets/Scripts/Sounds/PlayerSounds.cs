@@ -17,15 +17,20 @@ public class PlayerSounds : MonoBehaviour
     public EventReference bhopSound;
     public EventReference slamSound;
 
+    // Private stuff
     private EventInstance deathInstance; /// Variable to hold the created event instance
     private EventInstance inAirInstance; /// Variable to hold the created event instance
     private EventInstance footstepInstance;
-    private bool hasStarted = false; // Check if the sound has been started
-    private bool isInAir = false; // Check if the sound has been started
+    private EventInstance slidingInstance;
+    private bool isDead = false; // Check if the sound has been started
+    private bool isGrounded = false; // Check if the sound has been started
+    private bool isSliding = false; // Check if the sound has been started
+    private float lastFootstepTime = 0f;
+    private float footstepRate = 0.3f; // Adjust for desired speed
+    private float lastSlideGroundcheckCooldown = 0f;
+    private float SlideGroundcheckCooldownRate = 0.3f;
     private static PlayerSounds instance; 
     public static PlayerSounds Instance { get { return instance; } }
-    private float lastFootstepTime = 0f;
-    public float footstepRate = 0.3f; // Adjust for desired speed
 
     #endregion
 
@@ -50,6 +55,7 @@ public class PlayerSounds : MonoBehaviour
         deathInstance = AudioManager.instance.CreateInstance2D(dyingSound); // Create event instance using 2d
         inAirInstance = AudioManager.instance.CreateInstance2D(inAirSound); // Create event instance using 2d
         footstepInstance = AudioManager.instance.CreateInstance2D(footstepSound);
+        slidingInstance = AudioManager.instance.CreateInstance2D(slideSound);
     }
 
 
@@ -67,6 +73,10 @@ public class PlayerSounds : MonoBehaviour
         {
             footstepInstance.release();
         }
+        if (slidingInstance.isValid())
+        {
+            slidingInstance.release();
+        }
     }
 
     #endregion
@@ -75,18 +85,21 @@ public class PlayerSounds : MonoBehaviour
 
     public void PlayDeathStart()  /// Starts the elevator ride sound.
     {
-        if (!hasStarted)
+        if (!isDead)
         {
+            isDead = true;
+            SetDeathState(0f);
             deathInstance.start();
-            hasStarted = true;
         }
-        SetDeathState(0f);
     }
 
     public void PlayDeathStop()  /// Stops the elevator ride sound.
     {
-        SetDeathState(1f);
-        hasStarted = false;
+        if (isDead)
+        {
+            isDead = false;
+            SetDeathState(1f);
+        }
     }
 
     private void SetDeathState(float parameterValue) /// Sets the FMOD parameter for the ride state.
@@ -117,26 +130,45 @@ public class PlayerSounds : MonoBehaviour
 
     public void PlaySlideSound()
     {
-        //AudioManager.instance.PlayOneShot2D(slideSound);
-        PlayFootstepSound();
+        if (!isSliding)
+        {
+            isSliding = true;
+
+            //if (Time.time - lastSlideGroundcheckCooldown >= SlideGroundcheckCooldownRate)
+            //{
+            //lastSlideGroundcheckCooldown = Time.time;
+            GroundSwitch();
+            slidingInstance.start();
+            //}
+        }
+    }
+
+    public void StopSlideSound()
+    {
+        if (isSliding)
+        {
+            isSliding = false;
+            slidingInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            PlayFootstepSound();
+        }
     }
 
     public void PlayInAirStart()
     {
-        if (!isInAir)
+        if (isGrounded)
         {
+            isGrounded = false;
             inAirInstance.start();
-            isInAir = true;
         }
     }
 
     public void PlayInAirStop()
     {
-        if (isInAir)
+        if (!isGrounded)
         {
+            isGrounded = true;
             inAirInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             PlayFootstepSound();
-            isInAir = false;
         }
     }
 
@@ -150,7 +182,6 @@ public class PlayerSounds : MonoBehaviour
                 GroundSwitch();
                 footstepInstance.start();
             }
-
         }
     }
 
@@ -171,18 +202,22 @@ public class PlayerSounds : MonoBehaviour
                 if (surfaceRenderer.material.name.Contains("Tiles"))
                 {
                     footstepInstance.setParameterByName("Footsteps", 1);
+                    slidingInstance.setParameterByName("Sliding", 1);
                 }
                 else if (surfaceRenderer.material.name.Contains("Elavator"))
                 {
                     footstepInstance.setParameterByName("Footsteps", 2);
+                    slidingInstance.setParameterByName("Sliding", 2);
                 }
                 else if (surfaceRenderer.material.name.Contains("ChurchRoof"))
                 {
                     footstepInstance.setParameterByName("Footsteps", 2);
+                    slidingInstance.setParameterByName("Sliding", 2);
                 }
                 else if (surfaceRenderer.material.name.Contains("Hut"))
                 {
                     footstepInstance.setParameterByName("Footsteps", 2);
+                    slidingInstance.setParameterByName("Sliding", 2);
                 }
             }
             else if (hit.collider.TryGetComponent<Terrain>(out Terrain terrain))
@@ -193,6 +228,12 @@ public class PlayerSounds : MonoBehaviour
                     if (terrainMaterial.name.Contains("SnowyGround"))
                     {
                         footstepInstance.setParameterByName("Footsteps", 0);
+                        slidingInstance.setParameterByName("Sliding", 0);
+                    }
+                    if (terrainMaterial.name.Contains("Grass"))
+                    {
+                        footstepInstance.setParameterByName("Footsteps", 3);
+                        slidingInstance.setParameterByName("Sliding", 3);
                     }
                 }
             }

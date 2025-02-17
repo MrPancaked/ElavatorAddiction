@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{173a5231-ac1a-4497-8112-8de63537440f}">
 		<property name="name">
-			<value>AmbienceManager</value>
+			<value>Ambience_Manager</value>
 		</property>
 		<property name="outputFormat">
 			<value>5</value>
@@ -90,6 +90,9 @@
 		</relationship>
 	</object>
 	<object class="EventSound" id="{9fda6f5c-97a9-466c-9f7d-58ff9e7ca406}">
+		<property name="volume">
+			<value>-3.5</value>
+		</property>
 		<relationship name="event">
 			<destination>{09f5fb37-eb58-4db3-b317-a3d58c5d3575}</destination>
 		</relationship>
@@ -105,6 +108,9 @@
 	<object class="EventSound" id="{4882e251-4be9-4208-8fb6-3be50d9f69d9}">
 		<property name="start">
 			<value>2</value>
+		</property>
+		<property name="volume">
+			<value>-3.5</value>
 		</property>
 		<relationship name="event">
 			<destination>{999f0e58-2fc4-4bfa-905d-b88cd0db9150}</destination>

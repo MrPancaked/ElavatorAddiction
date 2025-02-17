@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{0e90f5d6-76ac-4e79-9be4-6cde1aacd2eb}">
 		<property name="name">
-			<value>Dying</value>
+			<value>Player_Death_Manager</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{f22dc063-de64-49a3-a5c0-d62362330b76}</destination>
+			<destination>{8c2e4ef4-7421-4d6e-b9a9-b6fb1faf31fd}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{3f754258-ad4c-440d-906a-2b4e6bd8d873}</destination>

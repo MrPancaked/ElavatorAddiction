@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{6701231e-13c4-4f28-9d06-c4f6de053de3}">
 		<property name="name">
-			<value>CockUp</value>
+			<value>Shotgun_Cock_Up</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -110,9 +110,9 @@
 			<destination>{72f7af96-ec45-403c-b30f-520178be4b6c}</destination>
 		</relationship>
 		<relationship name="sounds">
-			<destination>{3426f0b6-53c6-46e1-9776-d4e957645ee3}</destination>
-			<destination>{19d05c93-21ea-42f3-ad23-07943aaf13ce}</destination>
-			<destination>{24e615c8-0a18-4e19-bfe2-187e7f9bd073}</destination>
+			<destination>{e581f2d2-ddb6-4379-b4de-358a2aea539f}</destination>
+			<destination>{8155dfd7-ec6d-4362-99e4-f9072c174d90}</destination>
+			<destination>{6d1034d6-c25a-4884-b06a-b8c0823720fc}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{8a4b0e8d-e7c1-41e0-98d7-2d81a44754e4}" />
@@ -125,19 +125,19 @@
 			<value>2.5</value>
 		</property>
 	</object>
-	<object class="SingleSound" id="{3426f0b6-53c6-46e1-9776-d4e957645ee3}">
+	<object class="SingleSound" id="{e581f2d2-ddb6-4379-b4de-358a2aea539f}">
 		<relationship name="audioFile">
-			<destination>{10794277-b029-47bd-9f91-f2b4aa4dec84}</destination>
+			<destination>{6ea2e0e7-6659-4d75-9d16-53023dcef360}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{19d05c93-21ea-42f3-ad23-07943aaf13ce}">
+	<object class="SingleSound" id="{8155dfd7-ec6d-4362-99e4-f9072c174d90}">
 		<relationship name="audioFile">
-			<destination>{40403462-fa9c-45ab-bae2-a044a904003f}</destination>
+			<destination>{e8516f21-b880-4a20-9f74-81a110609a4e}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{24e615c8-0a18-4e19-bfe2-187e7f9bd073}">
+	<object class="SingleSound" id="{6d1034d6-c25a-4884-b06a-b8c0823720fc}">
 		<relationship name="audioFile">
-			<destination>{216fa4fb-be7d-4bd6-be7a-185ec3a7e0c5}</destination>
+			<destination>{80e68a0f-e16a-4f50-8868-b3817050c5d8}</destination>
 		</relationship>
 	</object>
 </objects>

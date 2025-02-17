@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{fd92d14a-99a1-45fb-bfd2-d8692dbe6aae}">
 		<property name="name">
-			<value>InAir</value>
+			<value>Player_Flying</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -118,7 +118,7 @@
 			<destination>{94cc35b7-68a7-4887-9402-aba8c52bbe75}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{3970a3f6-7f09-41f9-a38a-9196bca88292}</destination>
+			<destination>{a437e06a-1532-43d9-9c9f-52bb5933db54}</destination>
 		</relationship>
 	</object>
 	<object class="TransitionSourceSound" id="{64697f0c-236b-4ba1-a992-e64d76c0ab8f}">

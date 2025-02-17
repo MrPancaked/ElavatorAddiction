@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{f7cda710-0f26-498f-91b0-8be940dfd67b}">
 		<property name="name">
-			<value>VoidAmbience</value>
+			<value>Ambience_Void</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -64,9 +64,9 @@
 	<object class="MarkerTrack" id="{b3bba6a6-41b8-40b0-93bf-a352f0556c4e}" />
 	<object class="GroupTrack" id="{9cea74aa-6e3b-4e8c-ad41-659375b40e78}">
 		<relationship name="modules">
-			<destination>{1380baf6-62ab-4536-881a-93fc9bc184eb}</destination>
 			<destination>{c6b18571-02bd-4546-b7db-e2245b7aafe6}</destination>
 			<destination>{1c0eef2d-738f-40fe-8af8-27377b50eda9}</destination>
+			<destination>{e0df57f4-3c11-48fc-9005-2b7344fa8a5e}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{c0034dbc-bee8-4d05-8125-3c6c8f60bf20}</destination>
@@ -74,7 +74,7 @@
 	</object>
 	<object class="Timeline" id="{2c84bc8d-b6a1-4cdd-8ff4-a61b7f0894a0}">
 		<relationship name="modules">
-			<destination>{1380baf6-62ab-4536-881a-93fc9bc184eb}</destination>
+			<destination>{e0df57f4-3c11-48fc-9005-2b7344fa8a5e}</destination>
 		</relationship>
 		<relationship name="markers">
 			<destination>{73f64c66-b6d8-4d19-b961-77b53e796b9a}</destination>
@@ -110,14 +110,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1630ca8c-82ac-4c8b-b124-0e9abd1155fb}" />
-	<object class="SingleSound" id="{1380baf6-62ab-4536-881a-93fc9bc184eb}">
-		<property name="length">
-			<value>10.285714285714286</value>
-		</property>
-		<relationship name="audioFile">
-			<destination>{3c2d10c1-df76-453b-9d75-797235522fa6}</destination>
-		</relationship>
-	</object>
 	<object class="TransitionSourceSound" id="{c6b18571-02bd-4546-b7db-e2245b7aafe6}">
 		<relationship name="fadeOutCurve">
 			<destination>{eddbdaa6-d5bc-4627-9307-433cb740a0b0}</destination>
@@ -126,6 +118,14 @@
 	<object class="TransitionDestinationSound" id="{1c0eef2d-738f-40fe-8af8-27377b50eda9}">
 		<relationship name="fadeInCurve">
 			<destination>{928b2399-daf0-432b-9457-40d272f940fd}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{e0df57f4-3c11-48fc-9005-2b7344fa8a5e}">
+		<property name="length">
+			<value>10.285714285714286</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{f6e86395-a61f-4153-9de7-43b6cc33a964}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{c0034dbc-bee8-4d05-8125-3c6c8f60bf20}">

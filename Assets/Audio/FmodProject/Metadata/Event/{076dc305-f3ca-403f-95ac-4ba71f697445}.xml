@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{076dc305-f3ca-403f-95ac-4ba71f697445}">
 		<property name="name">
-			<value>UIHover</value>
+			<value>UI_Hover</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -111,9 +111,10 @@
 		</property>
 		<relationship name="modulators">
 			<destination>{21c7e354-c0b1-4604-b793-f1fe324e5761}</destination>
+			<destination>{1beeb88e-b598-433b-b148-feeb468d3a40}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{87e15806-b891-4d72-8122-d8133f4dd736}</destination>
+			<destination>{0d13c0bf-603c-4c1e-abf2-b0c4131b7056}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{2c7d4063-1796-42a4-85aa-2977b581c8aa}" />
@@ -124,6 +125,20 @@
 		</property>
 		<property name="amount">
 			<value>2.5</value>
+		</property>
+	</object>
+	<object class="ADSRModulator" id="{1beeb88e-b598-433b-b148-feeb468d3a40}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>40</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
 		</property>
 	</object>
 </objects>

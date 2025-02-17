@@ -11,21 +11,59 @@ public class UISounds : MonoBehaviour
     #region Variables
 
     [Header("Sounds")] /// FMOD event references
-    public EventReference hoverSound;
-    public EventReference clickSound;
+    public EventReference hover;
+    public EventReference press;
+    public EventReference windowOpen;
+    public EventReference windowClose;
+    public EventReference dialogue;
+    private static UISounds instance;
+    public static UISounds Instance { get { return instance; } }
+
+    #endregion
+
+    #region Unity Methods
+
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // IMPORTANT!
+        }
+    }
 
     #endregion
 
     #region Play Sounds
 
-    public void PlayHoverSound()
+    public void HoverSound()
     {
-        AudioManager.instance.PlayOneShot2D(hoverSound);
+        AudioManager.instance.PlayOneShot2D(hover);
     }
 
-    public void PlayPressSound()
+    public void PressSound()
     {
-        AudioManager.instance.PlayOneShot2D(clickSound);
+        AudioManager.instance.PlayOneShot2D(press);
+    }
+
+    public void WindowOpenSound()
+    {
+        AudioManager.instance.PlayOneShot2D(windowOpen);
+    }
+
+    public void WindowCloseSound()
+    {
+        AudioManager.instance.PlayOneShot2D(windowClose);
+    }
+
+    public void DialogueSound()
+    {
+        AudioManager.instance.PlayOneShot2D(dialogue);
     }
 
     #endregion

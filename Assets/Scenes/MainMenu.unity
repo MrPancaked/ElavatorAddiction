@@ -4432,14 +4432,14 @@ MonoBehaviour:
       Data2: 1077933002
       Data3: -1488212843
       Data4: 1165256991
-    Path: event:/UI/UIHover
+    Path: event:/UI/UI_Hover
   clickSound:
     Guid:
       Data1: 1560436203
       Data2: 1255170916
       Data3: 912153533
       Data4: 2002120639
-    Path: event:/UI/UIPress
+    Path: event:/UI/UI_Press
 --- !u!1 &1748946501
 GameObject:
   m_ObjectHideFlags: 0

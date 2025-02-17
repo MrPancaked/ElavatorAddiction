@@ -159,7 +159,7 @@ MonoBehaviour:
       Data2: 1096446779
       Data3: -457648716
       Data4: -153920196
-    Path: event:/Player/Jumppad
+    Path: event:/Player/Player_Jumppad
 --- !u!65 &1609397756844123463
 BoxCollider:
   m_ObjectHideFlags: 0

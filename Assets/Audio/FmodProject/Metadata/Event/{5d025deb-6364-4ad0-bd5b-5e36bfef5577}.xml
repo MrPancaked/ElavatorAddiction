@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{5d025deb-6364-4ad0-bd5b-5e36bfef5577}">
 		<property name="name">
-			<value>UIPress</value>
+			<value>UI_Press</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -107,7 +107,7 @@
 			<destination>{4ff6e8a2-310d-483b-adeb-dd5f8f04adc3}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{928eeb14-0267-4727-8807-81a3f1e15eb2}</destination>
+			<destination>{88fdf604-5a8c-497f-ab65-282213e5f10e}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{42325249-5af7-4d46-9564-f693199755d4}" />

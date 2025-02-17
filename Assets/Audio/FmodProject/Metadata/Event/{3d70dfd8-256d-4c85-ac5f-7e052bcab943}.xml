@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{3d70dfd8-256d-4c85-ac5f-7e052bcab943}">
 		<property name="name">
-			<value>DoorOpen</value>
+			<value>Elevator_Door_Open</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -105,8 +105,8 @@
 			<destination>{a7c7a672-4b02-4d5d-8580-275bdb47ae3d}</destination>
 		</relationship>
 		<relationship name="sounds">
-			<destination>{76673cc5-3fc0-451c-80b8-2c9ebe57d938}</destination>
-			<destination>{3d326a8c-7069-4856-af02-fdca46aac987}</destination>
+			<destination>{70dba20b-737d-4884-877f-4680052bf7f2}</destination>
+			<destination>{1404d91f-b13c-40cb-827e-aa38feb46ed6}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{ba9bddeb-93fd-493e-a703-191e1f131ab4}" />
@@ -127,17 +127,14 @@
 			<value>0.200000003</value>
 		</property>
 	</object>
-	<object class="SingleSound" id="{76673cc5-3fc0-451c-80b8-2c9ebe57d938}">
+	<object class="SingleSound" id="{70dba20b-737d-4884-877f-4680052bf7f2}">
 		<relationship name="audioFile">
-			<destination>{aa97092f-224a-49c0-b3d6-175023e5cf0c}</destination>
+			<destination>{28dbb75a-4c7b-4733-bc66-5d5d3c4208e7}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{3d326a8c-7069-4856-af02-fdca46aac987}">
-		<property name="pitch">
-			<value>0.800000012</value>
-		</property>
+	<object class="SingleSound" id="{1404d91f-b13c-40cb-827e-aa38feb46ed6}">
 		<relationship name="audioFile">
-			<destination>{e3473119-4d5b-465b-88dc-ec466d160413}</destination>
+			<destination>{f034cfaf-fb38-4a63-a4fd-4a7248f7a624}</destination>
 		</relationship>
 	</object>
 </objects>

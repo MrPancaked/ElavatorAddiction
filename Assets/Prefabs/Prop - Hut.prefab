@@ -752,6 +752,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 407019097274268941, guid: 29aa840b22ec5b34e86d99146837aa20,
+        type: 3}
+      propertyPath: JumppadSound.Path
+      value: event:/Player/Player_Jumppad
+      objectReference: {fileID: 0}
     - target: {fileID: 4803669776189387453, guid: 29aa840b22ec5b34e86d99146837aa20,
         type: 3}
       propertyPath: m_Name

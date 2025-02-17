@@ -10,12 +10,13 @@ public class DialogueManager : MonoBehaviour
     public Animator dialogueAnimator;
     public GameObject monologueWindow;
     public TextMeshProUGUI monologueText;
-    public string[] randomPhrases;
 
     [HideInInspector]
-    public bool isRunning;
+    public bool isOpen;
     private int randomPhraseIndex;
-    private bool skipLine; // Flag to indicate a skip request
+    private bool skipLine;
+    private bool lastLine;
+    private bool isRunning;
     private static DialogueManager instance;
     public static DialogueManager Instance { get { return instance; } }
 
@@ -33,7 +34,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // IMPORTANT!
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -44,9 +45,16 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if (Inputs.Instance.interaction.WasPressedThisFrame() && isRunning)
+        if (Inputs.Instance.interaction.WasPressedThisFrame() && isOpen)
         {
-            skipLine = true;
+            if (lastLine && !isRunning)
+            {
+                CloseWindow();
+            }
+            else
+            {
+                skipLine = true;
+            }
         }
     }
 
@@ -57,54 +65,66 @@ public class DialogueManager : MonoBehaviour
     public void OpenWindow()
     {
         ClearText();
-        isRunning = true;
+        UISounds.Instance.WindowOpenSound();
+        isOpen = true;
         dialogueAnimator.SetTrigger("Open");
     }
 
     public void CloseWindow()
     {
-        isRunning = false;
+        lastLine = false;
+        isOpen = false;
+        UISounds.Instance.WindowCloseSound();
         dialogueAnimator.SetTrigger("Close");
     }
 
     public void ClearText()
     {
-        monologueText.text = ""; // Clear the text for the next line.
+        monologueText.text = "";
     }
 
     #endregion
 
     #region Text Updating
 
-    IEnumerator HandleLine(string line, float textSpeed)  //Removed the delayAfterLine parameter and adapted to be only one line.
+    IEnumerator HandleLine(string line, float textSpeed)
     {
+        isRunning = true;
         yield return StartCoroutine(TypeLine(line, textSpeed));
-        yield return StartCoroutine(WaitForInput()); // Wait for input to continue
-        yield return StartCoroutine(ClearLine(0.005f));
+        isRunning = false;
+
+        yield return StartCoroutine(WaitForInput());
+
+        if (!lastLine)
+        {
+            yield return StartCoroutine(ClearLine(0.005f));
+        }
     }
 
     IEnumerator TypeLine(string line, float textSpeed)
     {
+        monologueText.text = "";
         foreach (char c in line.ToCharArray())
         {
             if (skipLine)
             {
                 monologueText.text = line;
-                skipLine = false; // Reset skipLine
-                yield break;
+                skipLine = false;
+                break;
             }
             monologueText.text += c;
+            UISounds.Instance.DialogueSound();
             yield return new WaitForSeconds(textSpeed);
         }
     }
 
-    IEnumerator WaitForInput() // New coroutine to wait for the 'E' key press
+    IEnumerator WaitForInput()
     {
-        skipLine = false; //reset skipLine
+        skipLine = false;
 
         while (!skipLine)
         {
-            yield return null; // Wait until skipLine is true
+            yield return null;
         }
     }
 
@@ -115,9 +135,10 @@ public class DialogueManager : MonoBehaviour
             if (skipLine)
             {
                 monologueText.text = "";
-                skipLine = false;  // Reset skipLine
+                skipLine = false;
                 yield break;
             }
+            UISounds.Instance.DialogueSound();
             monologueText.text = monologueText.text.Substring(0, monologueText.text.Length - 1);
             yield return new WaitForSeconds(textSpeed);
         }
@@ -129,7 +150,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator IntroMonologue()
     {
-        if (isRunning)
+        if (isOpen)
         {
             yield break;
         }
@@ -138,51 +159,52 @@ public class DialogueManager : MonoBehaviour
 
         List<(string line, float textSpeed)> dialogue = new List<(string line, float textSpeed)>
         {
-            ("Where am I?", 0.01f),
-            //("//No, please don't go!//", 0.02f),
-            //("//Wake up… please…//", 0.01f),
-            //("Why is she calling for me?", 0.06f),
-            //("Am I...", 0.03f),
-            //("In a coma?", 0.12f),
+            ("Where am I?", 0.04f),
             ("...", 0.2f)
         };
 
-        foreach (var (line, textSpeed) in dialogue)
+        for (int i = 0; i < dialogue.Count; i++)
         {
-            yield return StartCoroutine(HandleLine(line, textSpeed)); //Removed the delayAfterLine parameter
+            lastLine = (i == dialogue.Count - 1);
+            yield return StartCoroutine(HandleLine(dialogue[i].line, dialogue[i].textSpeed));
         }
-
-        CloseWindow();
     }
 
-    public IEnumerator ElevatorMonologue()
+    // Modified ElevatorMonologue to take the dialogue list as an argument
+    public IEnumerator ElevatorMonologue(string[] dialogues)
     {
-        if (isRunning)
+        if (isOpen)
         {
             yield break;
         }
 
         OpenWindow();
 
-        randomPhraseIndex = Random.Range(0, randomPhrases.Length);
-        yield return StartCoroutine(HandleLine(randomPhrases[randomPhraseIndex], 0.01f));
-
-        CloseWindow();
+        randomPhraseIndex = Random.Range(0, dialogues.Length);
+        lastLine = true;
+        yield return StartCoroutine(HandleLine(dialogues[randomPhraseIndex], 0.04f));
     }
 
     public IEnumerator ReadBook()
     {
-        if (isRunning)
+        if (isOpen)
         {
             yield break;
         }
 
         OpenWindow();
 
-        yield return StartCoroutine(HandleLine("02.02.1965", 0.05f));
-        yield return StartCoroutine(HandleLine("The day I lost my parents", 0.03f));
+        List<(string line, float textSpeed)> dialogue = new List<(string line, float textSpeed)>
+        {
+            ("02.02.1965", 0.05f),
+            ("The day I lost my parents", 0.03f)
+        };
 
-        CloseWindow();
+        for (int i = 0; i < dialogue.Count; i++)
+        {
+            lastLine = (i == dialogue.Count - 1);
+            yield return StartCoroutine(HandleLine(dialogue[i].line, dialogue[i].textSpeed));
+        }
     }
 
     #endregion

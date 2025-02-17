@@ -2,21 +2,31 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GrassMat Curved
   m_Shader: {fileID: 4800000, guid: 670f904d8dba2d64da2a16b58b02b5e0, type: 3}
-  m_ShaderKeywords: MULTI_SEGMENT RENDERMODE_MESH RENDERMODE_TERRAIN UNITY_EDITOR
-    _RENDERMODE_TERRAIN _USE_MESH
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - MULTI_SEGMENT
+  - RENDERMODE_MESH
+  m_InvalidKeywords:
+  - ALPHALOCK_ON
+  - RENDERMODE_TERRAIN
+  - UNITY_EDITOR
+  - _RENDERMODE_TERRAIN
+  - _USE_MESH
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -76,6 +86,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Rendermode: 0
     - _ALPHA_TO_MASK: 0
@@ -146,3 +157,4 @@ Material:
     - windDir: {r: -0.8, g: -0.45, b: -0.3, a: 0}
     - windDir2: {r: 0.5, g: 0.5, b: 1, a: 1}
     - windTint: {r: 1, g: 1, b: 0.92517304, a: 0.2}
+  m_BuildTextureStacks: []

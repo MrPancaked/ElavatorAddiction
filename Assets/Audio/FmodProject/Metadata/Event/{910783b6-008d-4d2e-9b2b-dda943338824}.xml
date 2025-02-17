@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{910783b6-008d-4d2e-9b2b-dda943338824}">
 		<property name="name">
-			<value>Respawn</value>
+			<value>Player_Respawn</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{f22dc063-de64-49a3-a5c0-d62362330b76}</destination>
+			<destination>{8c2e4ef4-7421-4d6e-b9a9-b6fb1faf31fd}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{334ab4df-74fa-4746-a4e1-37a29a75918e}</destination>
@@ -104,7 +104,7 @@
 			<destination>{86a32a67-2869-455d-bc61-204be7e65c47}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{ba813d10-ce2b-46bf-a7ea-555b1a6c5fc2}</destination>
+			<destination>{bf9f5429-7d1e-4299-a3a2-30921e5aaed5}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{c5bcd934-8597-4929-bbbe-9fed18691752}" />

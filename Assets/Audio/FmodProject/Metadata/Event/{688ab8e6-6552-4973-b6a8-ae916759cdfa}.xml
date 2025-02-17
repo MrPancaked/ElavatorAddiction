@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{688ab8e6-6552-4973-b6a8-ae916759cdfa}">
 		<property name="name">
-			<value>LeverDownFake</value>
+			<value>Elevator_Lever_Broken</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -108,7 +108,7 @@
 			<destination>{fb0a89d2-cba8-4d3b-913a-5ffa8ddbcb57}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{563aae4d-76c8-48b1-892b-c88da761d61d}</destination>
+			<destination>{b4e25ad7-4b47-4e5d-92e3-105846bded04}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{955a0c09-fc34-441f-9f27-12f129967a7c}" />

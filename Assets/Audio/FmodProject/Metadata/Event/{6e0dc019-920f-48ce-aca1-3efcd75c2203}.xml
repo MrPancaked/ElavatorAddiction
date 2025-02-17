@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{6e0dc019-920f-48ce-aca1-3efcd75c2203}">
 		<property name="name">
-			<value>ButtonPress</value>
+			<value>Elevator_Button</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -114,8 +114,8 @@
 			<destination>{24a1048a-a1a3-42da-a54c-8a344497a47f}</destination>
 		</relationship>
 		<relationship name="sounds">
-			<destination>{781c7c58-f352-45b1-aed9-22be4e6ea49b}</destination>
-			<destination>{8119057c-81e5-4f9f-bb5a-fbec769fec29}</destination>
+			<destination>{2b49d17b-1fb8-4f08-8e85-69f5c158bbef}</destination>
+			<destination>{b59543fb-db59-48bb-9455-66410f6edf1a}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{4a725aa5-1842-4913-a64f-4d252d244032}" />
@@ -136,14 +136,14 @@
 			<value>3</value>
 		</property>
 	</object>
-	<object class="SingleSound" id="{781c7c58-f352-45b1-aed9-22be4e6ea49b}">
+	<object class="SingleSound" id="{2b49d17b-1fb8-4f08-8e85-69f5c158bbef}">
 		<relationship name="audioFile">
-			<destination>{e2d911ad-e8c3-4acc-a232-3eacfd44dac5}</destination>
+			<destination>{28295c0c-dc6b-4aa2-a83f-9d16286ecdcd}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{8119057c-81e5-4f9f-bb5a-fbec769fec29}">
+	<object class="SingleSound" id="{b59543fb-db59-48bb-9455-66410f6edf1a}">
 		<relationship name="audioFile">
-			<destination>{ebcefe56-274f-4ec0-b060-6170470f7bee}</destination>
+			<destination>{a5fc35bd-cfbe-4393-9d2a-e477fc3e1a71}</destination>
 		</relationship>
 	</object>
 </objects>

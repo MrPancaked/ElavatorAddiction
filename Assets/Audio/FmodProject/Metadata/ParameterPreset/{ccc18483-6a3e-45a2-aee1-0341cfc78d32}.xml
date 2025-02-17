@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{ccc18483-6a3e-45a2-aee1-0341cfc78d32}">
+		<property name="name">
+			<value>Sliding</value>
+		</property>
+		<relationship name="folder">
+			<destination>{e25c7827-7fde-4c50-83de-272119a9baf6}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{80862657-bf4e-4ee6-aae7-07c08ab3a2ee}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{80862657-bf4e-4ee6-aae7-07c08ab3a2ee}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Snow</value>
+			<value>Rock</value>
+			<value>Wood</value>
+			<value>Grass</value>
+		</property>
+		<property name="initialValue">
+			<value>3</value>
+		</property>
+	</object>
+</objects>

@@ -1145,35 +1145,35 @@ MonoBehaviour:
       Data2: 1316583084
       Data3: -563288933
       Data4: -338514918
-    Path: event:/UI/Dying
+    Path: event:/Player/Player_Death_Manager
   damageSound:
     Guid:
       Data1: 2020663504
       Data2: 1123414521
       Data3: 1998900644
       Data4: -561105128
-    Path: event:/Player/Damage
+    Path: event:/Player/Player_Damage
   footstepSound:
     Guid:
       Data1: 66668512
       Data2: 1107931447
       Data3: 1353776572
       Data4: -1416834981
-    Path: event:/Player/Footsteps
+    Path: event:/Player/Player_Footsteps_Manager
   inAirSound:
     Guid:
       Data1: -40709814
       Data2: 1174116769
       Data3: 1775817407
       Data4: -1368736211
-    Path: event:/Player/InAir
+    Path: event:/Player/Player_Flying
   jumpSound:
     Guid:
       Data1: 1050106847
       Data2: 1130147827
       Data3: 932971692
       Data4: -162323475
-    Path: event:/Player/Jump
+    Path: event:/Player/Player_Jump
   slideSound:
     Guid:
       Data1: 0
@@ -1187,15 +1187,14 @@ MonoBehaviour:
       Data2: 1111811953
       Data3: 353378212
       Data4: -1998443670
-    Path: event:/Player/Bhop
+    Path: event:/Player/Player_Bhop
   slamSound:
     Guid:
       Data1: -549317248
       Data2: 1169748425
       Data3: 2009787808
       Data4: -417063211
-    Path: event:/Player/Slam
-  footstepRate: 0.3
+    Path: event:/Player/Player_Slam
 --- !u!114 &7999755327413551640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1373,6 +1372,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599247795742921221, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
+        type: 3}
+      propertyPath: cockUpSound.Path
+      value: event:/Weapon/Shotgun_Cock_Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599247795742921221, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
+        type: 3}
+      propertyPath: cockDownSound.Path
+      value: event:/Weapon/Shotgun_Cock_Down
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599247795742921221, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
+        type: 3}
+      propertyPath: shotgunShotSound.Path
+      value: event:/Weapon/Shotgun_Shot
       objectReference: {fileID: 0}
     - target: {fileID: 4710620907811405357, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
         type: 3}

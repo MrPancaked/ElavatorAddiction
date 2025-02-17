@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{2a546dee-733b-415a-b4d5-b8e43c5dd3f6}">
 		<property name="name">
-			<value>Jumppad</value>
+			<value>Player_Jumppad</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -108,9 +108,9 @@
 			<destination>{61e6361b-758f-4ffb-9a8e-3419eb570012}</destination>
 		</relationship>
 		<relationship name="sounds">
-			<destination>{d78a4661-c277-4f7c-bc04-78fde07e6f0b}</destination>
-			<destination>{dfc5d4b5-c96d-4045-8c8e-728289adb763}</destination>
-			<destination>{09d09cf1-e1fc-4da4-958e-7c6bf753bb5f}</destination>
+			<destination>{063a28ca-8017-4ed0-961b-4dbc6cb0f2b7}</destination>
+			<destination>{02e859a4-bb9c-4ad1-b28e-17e62ca98e0d}</destination>
+			<destination>{2fa777a6-15a3-4ed9-883c-6c64f2e926de}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{8d7baf62-5215-4d65-ae96-d07e9e72ee9d}" />
@@ -131,19 +131,19 @@
 			<value>4</value>
 		</property>
 	</object>
-	<object class="SingleSound" id="{d78a4661-c277-4f7c-bc04-78fde07e6f0b}">
+	<object class="SingleSound" id="{063a28ca-8017-4ed0-961b-4dbc6cb0f2b7}">
 		<relationship name="audioFile">
-			<destination>{1c60a195-e354-4082-b17d-4d4eb58f99e2}</destination>
+			<destination>{086f731c-5598-4591-a068-1b1ff0fc1dfb}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{dfc5d4b5-c96d-4045-8c8e-728289adb763}">
+	<object class="SingleSound" id="{02e859a4-bb9c-4ad1-b28e-17e62ca98e0d}">
 		<relationship name="audioFile">
-			<destination>{19338bb8-172a-4837-8c93-533386c292bb}</destination>
+			<destination>{c39aef40-57ea-432e-8fc9-8a7faf23d0ee}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{09d09cf1-e1fc-4da4-958e-7c6bf753bb5f}">
+	<object class="SingleSound" id="{2fa777a6-15a3-4ed9-883c-6c64f2e926de}">
 		<relationship name="audioFile">
-			<destination>{f691846f-5383-4508-8000-994146ad5c0e}</destination>
+			<destination>{98ad2153-0c08-41ea-80cf-b58893dd73e3}</destination>
 		</relationship>
 	</object>
 </objects>

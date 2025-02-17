@@ -527,11 +527,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995efd817add64744802e21eacdb5a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySounds: {fileID: 5508961265706135672}
+  enemySettings: {fileID: 11400000, guid: eea33707b68420746aee9d61181b1d60, type: 2}
   Coins: {fileID: 1932917029013565841, guid: cb1911b3e0a9bc74a843794349421273, type: 3}
   Blood: {fileID: 1932917029013565841, guid: 0e870cf148aaedf47b215f81d9daec09, type: 3}
   Flash: {fileID: 5328029466290212115, guid: 04a18aef9dc709245b4b956a2a80fed1, type: 3}
-  enemySounds: {fileID: 5508961265706135672}
-  enemySettings: {fileID: 11400000, guid: eea33707b68420746aee9d61181b1d60, type: 2}
   canDamage: 1
 --- !u!114 &5508961265706135672
 MonoBehaviour:
@@ -552,32 +552,32 @@ MonoBehaviour:
       Data2: 1099527831
       Data3: -746422851
       Data4: 1899339187
-    Path: event:/Enemy/DeerSpawn
+    Path: event:/Enemy/Enemy_Spawn
   damageSound:
     Guid:
       Data1: -11902534
       Data2: 1168059682
       Data3: -387808332
       Data4: -2052744452
-    Path: event:/Enemy/DeerDamage
+    Path: event:/Enemy/Enemy_Damage
   idleSound:
     Guid:
       Data1: -1150702860
       Data2: 1183175499
       Data3: 1343371676
       Data4: 622305232
-    Path: event:/Enemy/DeerIdle
+    Path: event:/Enemy/Enemy_Idle
   deathSound:
     Guid:
       Data1: 141520808
       Data2: 1111908020
       Data3: -1083530059
       Data4: 135515739
-    Path: event:/Enemy/DeerScreech
+    Path: event:/Enemy/Enemy_Death
   coinsSound:
     Guid:
       Data1: 1924638373
       Data2: 1172963218
       Data3: -447904105
       Data4: 1405879674
-    Path: event:/Enemy/CoinDrop
+    Path: event:/Enemy/Enemy_Coin_Drop

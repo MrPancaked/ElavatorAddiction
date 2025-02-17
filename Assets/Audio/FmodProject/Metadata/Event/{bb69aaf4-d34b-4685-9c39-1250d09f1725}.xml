@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{bb69aaf4-d34b-4685-9c39-1250d09f1725}">
 		<property name="name">
-			<value>DeerIdle</value>
+			<value>Enemy_Idle</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -118,7 +118,7 @@
 			<destination>{e6785b99-e87a-4a77-a7e5-9211e4e0ffc4}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{67200df4-1729-4af9-8baf-4b7719c6d616}</destination>
+			<destination>{33e6b72c-5f16-4f65-a47f-e8b5b7b5440e}</destination>
 		</relationship>
 	</object>
 	<object class="TransitionSourceSound" id="{1d3eb55e-3d40-44fd-a90f-a8e711e89c91}">

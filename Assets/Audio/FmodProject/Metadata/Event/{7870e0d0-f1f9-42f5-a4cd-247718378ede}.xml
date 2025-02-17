@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{7870e0d0-f1f9-42f5-a4cd-247718378ede}">
 		<property name="name">
-			<value>Damage</value>
+			<value>Player_Damage</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -107,9 +107,9 @@
 			<destination>{7dae44fb-b2fc-4530-9c60-96b19a490789}</destination>
 		</relationship>
 		<relationship name="sounds">
-			<destination>{02434036-f7e6-42ff-bab2-d048a774f756}</destination>
-			<destination>{f120d7f9-764b-41dd-9292-a6eb3293429e}</destination>
-			<destination>{b3147ea9-f9c6-4427-a1b6-0236fd71b0ec}</destination>
+			<destination>{4d2162b2-7381-4a12-bc18-5ce88287d058}</destination>
+			<destination>{ee1769c7-8588-4c58-a1a8-9233f86fde8b}</destination>
+			<destination>{fab698b1-1dc4-490a-9486-7619b2cdca51}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{98f337d0-2a1a-4030-ab69-9becbde1ecfe}" />
@@ -122,19 +122,19 @@
 			<value>9.5</value>
 		</property>
 	</object>
-	<object class="SingleSound" id="{02434036-f7e6-42ff-bab2-d048a774f756}">
+	<object class="SingleSound" id="{4d2162b2-7381-4a12-bc18-5ce88287d058}">
 		<relationship name="audioFile">
-			<destination>{90ca759b-c9f6-43ed-8dd1-20e3febf615e}</destination>
+			<destination>{f8cbd52c-4c74-4b51-bce8-75e6d6d7caa5}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{f120d7f9-764b-41dd-9292-a6eb3293429e}">
+	<object class="SingleSound" id="{ee1769c7-8588-4c58-a1a8-9233f86fde8b}">
 		<relationship name="audioFile">
-			<destination>{8fcb14a4-0faf-4fea-a5e1-2203fc0eb4b6}</destination>
+			<destination>{88515fbe-cbb1-47df-afa4-7666c194b340}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{b3147ea9-f9c6-4427-a1b6-0236fd71b0ec}">
+	<object class="SingleSound" id="{fab698b1-1dc4-490a-9486-7619b2cdca51}">
 		<relationship name="audioFile">
-			<destination>{d493b810-3640-4d69-b054-ef7fbbdd49ed}</destination>
+			<destination>{2da13223-8a38-4591-8693-cbe99bf1f920}</destination>
 		</relationship>
 	</object>
 </objects>

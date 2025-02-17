@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{a112e91d-1ffb-461b-9aa0-6917d6e07426}">
 		<property name="name">
-			<value>Jackpot</value>
+			<value>Slots_Jackpot</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -111,7 +111,7 @@
 			<destination>{574a5266-8ce3-48d6-a197-f111d1bc330b}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{69c72d2d-9309-428f-8c9e-da1149ba12cd}</destination>
+			<destination>{df855b5f-e19e-493a-b10a-3a86c1001fc1}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{5c1aa45d-af86-4d7b-a2a2-238bac9e19a2}" />
