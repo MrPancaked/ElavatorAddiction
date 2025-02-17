@@ -49,18 +49,19 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         elevatorRideInstance = AudioManager.instance.CreateInstance2D(rideSound); // Initialize the ride event
-        roomToneInstance = AudioManager.instance.CreateInstance(roomToneSound, this.transform.position); // Initialize the roomtone event
         ambienceInstance = AudioManager.instance.CreateInstance2D(ambienceEvent); // Initialize the ambience event
+        roomToneInstance = AudioManager.instance.CreateInstance(roomToneSound, this.transform.position); // Initialize the roomtone event
+        roomToneInstance.start(); // Play room tone
 
-        UpdateAmbience(SceneManager.GetActiveScene().name); // initialize the correct ambience using scene name
-
-        roomToneInstance.start(); // Play the roomtone event
+        UpdateAmbience(SceneManager.GetActiveScene().name); // Ensure ambience updates before playing
+        ambienceInstance.start(); // Start ambience after setting parameter
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        UpdateAmbience(scene.name); // Update ambience using scene name
+        UpdateAmbience(scene.name);
     }
+
 
     void OnEnable()
     {
@@ -119,9 +120,10 @@ public class SoundManager : MonoBehaviour
 
     public void UpdateAmbience(string sceneName)
     {
-        if (sceneName == currentSceneName) return; // Prevent redundant calls
+        //if (sceneName == currentSceneName) return; // Prevent redundant calls
 
         float parameterValue;
+
         switch (sceneName)
         {
             case "Menu":
@@ -129,7 +131,6 @@ public class SoundManager : MonoBehaviour
                 parameterValue = 0f;
                 break;
             case "Void":
-            case "GrassVoid":
                 Debug.Log("Ambience set to Void");
                 parameterValue = 1f;
                 break;
@@ -137,20 +138,29 @@ public class SoundManager : MonoBehaviour
                 Debug.Log("Ambience set to Forest");
                 parameterValue = 2f;
                 break;
+            case "GrassVoid":
+                Debug.Log("Ambience set to Grass Void");
+                parameterValue = 3f;
+                break;
             default:
                 Debug.LogWarning($"No Ambience scene state set for scene with name {sceneName}");
-                parameterValue = 0f; // Default value so its not left unassigned
+                parameterValue = 0f;
                 break;
         }
 
-        ambienceInstance.setParameterByName("Scene", parameterValue); // Set the sound
-        currentSceneName = sceneName; // Update scene name after setting
+        currentSceneName = sceneName; // Update stored scene name
 
         if (ambienceInstance.isValid())
         {
-            ambienceInstance.start();
+            ambienceInstance.setParameterByName("Scene", parameterValue);
+            Debug.Log($"Ambience set to {sceneName}");
+        }
+        else
+        {
+            Debug.LogWarning("Ambience instance is not valid.");
         }
     }
+
 
     #endregion
 }

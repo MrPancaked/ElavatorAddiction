@@ -13,10 +13,9 @@ public class HealthManager : MonoBehaviour
 {
     #region Variables
 
-    [Header("Player")]
+    [Header("References")]
     public GameObject player;      // Reference to the player game object
     public Health health;          // Reference to the Health component.
-    public List<Gun> guns = new List<Gun>(); // List of guns to reset after death
 
     [Header("UI")]
     public Animator deathScreenAnimator; // Reference to the Animator on death screen
@@ -96,18 +95,21 @@ public class HealthManager : MonoBehaviour
     {
         if (!playerIsDead)
         {
-            //player = gameObject; // Re-find Player
-            playerIsDead = true;
-            Time.timeScale = 0f; // Pause the game
             Debug.Log("Player died");
+            Time.timeScale = 0f; // Pause the game
+            playerIsDead = true;
             Cursor.visible = true; // Show the cursor
             Cursor.lockState = CursorLockMode.None; // Unlock the cursor
             deathScreenAnimator.SetTrigger("Die"); // Trigger animation
             PlayerSounds.Instance.PlayDeathStart();
-            foreach (Gun gunInstance in guns)
+            foreach (Gun gunInstance in TransitionManager.Instance.guns)
             {
-                gunInstance.reloading = true;
+                if (gunInstance != null) // Null check
+                {
+                    gunInstance.reloading = true;
+                }
             }
+            //player = gameObject; // Re-find Player
         }
     }
 
@@ -117,40 +119,12 @@ public class HealthManager : MonoBehaviour
 
     public void RestartGame()
     {
-        StartCoroutine(Restarting());
-    }
-
-    public IEnumerator Restarting()
-    {
         playerIsDead = false; // Reset death state
-        Time.timeScale = 1f; // Restore time scale
         initialHealth = 100f; // Reset health
         health.hp = 100f;
         UpdateHealthUI();
-        PlayerSounds.Instance.PlayDeathStop();
-        TransitionManager.Instance.RoomIndex = 0;
-        TransitionManager.Instance.UpdateRoomIndex();
-        CoinsLogic.Instance.coinDropChance = 0.5f;
-        CoinsLogic.Instance.ResetCoins();
-        PlayerMovement.Instance.runSpeed = 200f;
-        EnemyCounter.Instance.UpdateEnemyCounter();
-        foreach (Gun gunInstance in guns)
-        {
-            gunInstance.gunSettings.fireRate = 1f;
-            gunInstance.extraDamage = 0f;
-        }
-        yield return null; // Wait one frame
-
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GrassVoid");
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-
-        player.transform.position = new Vector3(player.transform.position.x, 10f, player.transform.position.z);
-        deathScreenAnimator.SetTrigger("Respawn"); // trigger Reset animation
-        Cursor.visible = false; // Hide the cursor
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        Time.timeScale = 1f; // Restore time scale
+        TransitionManager.Instance.StartCoroutine(TransitionManager.Instance.RestartTransition());
     }
 
     #endregion

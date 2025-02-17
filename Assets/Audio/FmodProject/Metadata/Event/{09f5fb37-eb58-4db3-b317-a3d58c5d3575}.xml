@@ -211,7 +211,7 @@
 			<value>300</value>
 		</property>
 		<property name="releaseTime">
-			<value>700</value>
+			<value>500</value>
 		</property>
 		<property name="finalValue">
 			<value>-80</value>

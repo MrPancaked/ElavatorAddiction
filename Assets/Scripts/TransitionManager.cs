@@ -10,6 +10,7 @@ public class TransitionManager : MonoBehaviour
 
     [Header("References")]
     public TextMeshPro roomText;
+    public List<Gun> guns = new List<Gun>(); // List of guns to reset after death
 
     // Private variables
     [HideInInspector] public int RoomIndex = 0;
@@ -86,18 +87,52 @@ public class TransitionManager : MonoBehaviour
         SceneSettings destination = FogManager.Instance.GetSceneSettings("GrassVoid"); // Get scene settings
         FogManager.Instance.SetFogAndLightTransition(destination, 1f); // Start fog and light transition
         yield return new WaitForSeconds(1f);
-        yield return null;
-        Debug.Log("Player Position set");
-        HealthManager.Instance.player.transform.position = new Vector3(HealthManager.Instance.player.transform.position.x, 60f, HealthManager.Instance.player.transform.position.z); // Reposition the player
-        yield return null;
+       
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destination.sceneName);
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
-
+        Debug.Log("Player Position set");
+        HealthManager.Instance.player.transform.position = new Vector3(HealthManager.Instance.player.transform.position.x, 60f, HealthManager.Instance.player.transform.position.z); // Reposition the player
     }
+
+    public IEnumerator RestartTransition()
+    {
+        Debug.Log("Restarting");
+        PlayerSounds.Instance.PlayDeathStop();
+        RoomIndex = 0;
+        UpdateRoomIndex();
+        CoinsLogic.Instance.coinDropChance = 0.5f;
+        CoinsLogic.Instance.ResetCoins();
+        PlayerMovement.Instance.runSpeed = 200f;
+        EnemyCounter.Instance.UpdateEnemyCounter();
+        foreach (Gun gunInstance in guns)
+        {
+            gunInstance.gunSettings.fireRate = 1f;
+            gunInstance.extraDamage = 0f;
+        }
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GrassVoid");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        HealthManager.Instance.player.transform.position = new Vector3(HealthManager.Instance.player.transform.position.x, 10f, HealthManager.Instance.player.transform.position.z);
+        HealthManager.Instance.deathScreenAnimator.SetTrigger("Respawn"); // trigger Reset animation
+        Cursor.visible = false; // Hide the cursor
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        foreach (Gun gunInstance in guns)
+        {
+            if (gunInstance != null) // Null check
+            {
+                gunInstance.reloading = false;
+            }
+        }
+    }
+
 
     public void UpdateRoomIndex()
     {
