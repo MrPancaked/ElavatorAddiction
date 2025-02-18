@@ -149,7 +149,7 @@ public class PlayerSounds : MonoBehaviour
         {
             isSliding = false;
             slidingInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            PlayFootstepSound();
+            //PlayFootstepSound();
         }
     }
 

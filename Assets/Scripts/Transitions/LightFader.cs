@@ -22,7 +22,7 @@ public class LightFader : MonoBehaviour
         StartCoroutine(FadeInLight());
     }
 
-    private IEnumerator FadeInLight()
+    public IEnumerator FadeInLight()
     {
         lightSource.intensity = 0f; // Ensure the light starts at 0 intensity.
         float timer = 0f;
@@ -38,6 +38,23 @@ public class LightFader : MonoBehaviour
         }
 
         lightSource.intensity = lightIntensity; // Ensure the light reaches the exact target intensity.
+    }
+
+    public IEnumerator FadeOutLight(float duration)
+    {
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / duration;  // Normalized time (0 to 1)
+
+            lightSource.intensity = Mathf.Lerp(lightIntensity, 0f, t);
+
+            yield return null;
+        }
+
+        lightSource.intensity = 0f; // Ensure the light reaches the exact target intensity.
     }
 
     #endregion

@@ -109,7 +109,6 @@ public class HealthManager : MonoBehaviour
                     gunInstance.reloading = true;
                 }
             }
-            //player = gameObject; // Re-find Player
         }
     }
 
@@ -126,6 +125,12 @@ public class HealthManager : MonoBehaviour
         Time.timeScale = 1f; // Restore time scale
         TransitionManager.Instance.StartCoroutine(TransitionManager.Instance.RestartTransition());
     }
+
+    public void RepositionPlayer(float height)
+    {
+        player.transform.position = new Vector3(player.transform.position.x, height, player.transform.position.z);
+    }
+
 
     #endregion
 

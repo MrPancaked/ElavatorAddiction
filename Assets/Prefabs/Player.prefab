@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 91489145338851501}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12331267, y: 0.1457548, z: -0.018313406, w: 0.98143476}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0.39999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -361,7 +361,7 @@ Transform:
   m_GameObject: {fileID: 1544067631284132747}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12331267, y: 0.1457548, z: -0.018313406, w: 0.98143476}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0.39999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -377,8 +377,8 @@ Camera:
   m_GameObject: {fileID: 1544067631284132747}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1082,8 +1082,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 7784816484273663751}
   health: {fileID: 8606113254386454732}
-  guns:
-  - {fileID: 8921157221110998851}
   deathScreenAnimator: {fileID: 0}
   hudAnimator: {fileID: 0}
   healthImage: {fileID: 0}
@@ -1176,11 +1174,11 @@ MonoBehaviour:
     Path: event:/Player/Player_Jump
   slideSound:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -84886507
+      Data2: 1081545021
+      Data3: -287724377
+      Data4: -794520414
+    Path: event:/Player/Player_Sliding_Manager
   bhopSound:
     Guid:
       Data1: 1184254502
@@ -1453,7 +1451,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8006347081162037459, guid: 5bc964ad15e008f4b912fb9f6f7e0218, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3249948968361327493, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
@@ -1469,6 +1468,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1613082837495354461}
+    - targetCorrespondingSourceObject: {fileID: 8166982131943703876, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2624662759324784947}
+    - targetCorrespondingSourceObject: {fileID: 8166982131943703876, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4544646718397373260}
   m_SourcePrefab: {fileID: 100100000, guid: 5bc964ad15e008f4b912fb9f6f7e0218, type: 3}
 --- !u!4 &1283560640783170651 stripped
 Transform:
@@ -1500,6 +1507,62 @@ MonoBehaviour:
   ripDecayRate: 1
   ripSpeed: 20
   ripRadius: 0.1
+--- !u!1 &1945035780787131082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2752855477827310868, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
+    type: 3}
+  m_PrefabInstance: {fileID: 4380380400298444766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5592571604877492890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8166982131943703876, guid: 5bc964ad15e008f4b912fb9f6f7e0218,
+    type: 3}
+  m_PrefabInstance: {fileID: 4380380400298444766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &2624662759324784947
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592571604877492890}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &4544646718397373260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592571604877492890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a65bbdeff3aefe42949f8d063bed6b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: {fileID: 1945035780787131082}
+  keychainParent: {fileID: 5592571604877492890}
+  springForce: 50
+  damper: 5
+  maxDistance: 0.5
 --- !u!114 &8921157221110998851 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5117336013775315101, guid: 5bc964ad15e008f4b912fb9f6f7e0218,

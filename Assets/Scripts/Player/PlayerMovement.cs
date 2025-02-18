@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Reference")]
     public LayerMask groundLayer;
-    public CinemachineBrain brain;  // Assign this in the Inspector
+    public CinemachineBrain brain; 
     public Animator animator;
     public Rigidbody rb;
 
@@ -67,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
     private const float normalHeight = 0.8f;
     private const float slideHeight = 0.6f;
     private const float slideSpeedTrashhold = 1f;
+    private const float slideSoundTrashhold = 2f;
     private const float runSpeedTrashhold = 4f;
     private const float fovSpeedLimit = 30f;
     private const float slamDistance = 3f;
@@ -413,7 +414,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void SlidingSound()
     {
-        if (isSliding && isGrounded)
+        if (isSliding && isGrounded && currentSpeed > slideSoundTrashhold)
         {
             PlayerSounds.Instance.PlaySlideSound();
         }

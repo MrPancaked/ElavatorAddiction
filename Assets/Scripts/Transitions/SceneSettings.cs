@@ -15,6 +15,7 @@ public class SceneSettings : ScriptableObject
     public float fogStartDistance = 3f;
     public float fogEndDistance = 30f;
     public float lightIntensity = 0f;
+    public bool hasSkybox = false;
 
     #endregion
 }

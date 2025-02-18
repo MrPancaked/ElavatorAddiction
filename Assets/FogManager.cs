@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class FogManager : MonoBehaviour
 {
-    #region Header Variables
+    #region Variables
 
     [Header("References")]
     public Light sceneLight;
@@ -51,11 +51,6 @@ public class FogManager : MonoBehaviour
     #region Scene Settings Management
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        ApplyCurrentSceneSettings();
-    }
-
-    public void ApplyCurrentSceneSettings()
     {
         SceneSettings settings = GetSceneSettings(SceneManager.GetActiveScene().name);
         ApplyFogAndLightSettings(settings);
@@ -115,16 +110,25 @@ public class FogManager : MonoBehaviour
 
     private void ApplyFogAndLightSettings(SceneSettings settings)
     {
-        mainCamera = Camera.main;
-
+        sceneLight.intensity = settings.lightIntensity;
         ColorUtility.TryParseHtmlString(settings.fogColorHex, out Color fogColor);
         ColorUtility.TryParseHtmlString(settings.backgroundColor, out Color bgColor);
 
         RenderSettings.fogColor = fogColor;
         RenderSettings.fogStartDistance = settings.fogStartDistance;
         RenderSettings.fogEndDistance = settings.fogEndDistance;
-        mainCamera.backgroundColor = bgColor;
-        sceneLight.intensity = settings.lightIntensity;
+
+        mainCamera = Camera.main;
+        
+        if (settings.hasSkybox) // Set skybox
+        {
+            mainCamera.clearFlags = CameraClearFlags.Skybox;
+        }
+        else // Set solid color
+        {
+            mainCamera.clearFlags = CameraClearFlags.SolidColor;
+            mainCamera.backgroundColor = bgColor;
+        }
     }
 
     #endregion

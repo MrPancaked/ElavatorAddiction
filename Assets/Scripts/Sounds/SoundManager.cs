@@ -120,45 +120,31 @@ public class SoundManager : MonoBehaviour
 
     public void UpdateAmbience(string sceneName)
     {
-        //if (sceneName == currentSceneName) return; // Prevent redundant calls
-
         float parameterValue;
 
         switch (sceneName)
         {
             case "Menu":
-                Debug.Log("Ambience set to Menu");
                 parameterValue = 0f;
                 break;
             case "Void":
-                Debug.Log("Ambience set to Void");
                 parameterValue = 1f;
                 break;
             case "Forest":
-                Debug.Log("Ambience set to Forest");
                 parameterValue = 2f;
                 break;
             case "GrassVoid":
-                Debug.Log("Ambience set to Grass Void");
                 parameterValue = 3f;
                 break;
             default:
-                Debug.LogWarning($"No Ambience scene state set for scene with name {sceneName}");
                 parameterValue = 0f;
+                Debug.LogWarning($"No Ambience scene state set for scene with name {sceneName}");
                 break;
         }
 
+        Debug.Log($"Ambience set to {sceneName}");
         currentSceneName = sceneName; // Update stored scene name
-
-        if (ambienceInstance.isValid())
-        {
-            ambienceInstance.setParameterByName("Scene", parameterValue);
-            Debug.Log($"Ambience set to {sceneName}");
-        }
-        else
-        {
-            Debug.LogWarning("Ambience instance is not valid.");
-        }
+        ambienceInstance.setParameterByName("Scene", parameterValue);
     }
 
 

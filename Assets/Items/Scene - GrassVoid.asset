@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Scene - GrassVoid
   m_EditorClassIdentifier: 
   sceneName: GrassVoid
-  backgroundColor: '#FFFFFF'
-  fogColorHex: '#FFFFFF'
+  backgroundColor: '#270000'
+  fogColorHex: '#270000'
   fogStartDistance: 0
   fogEndDistance: 10
   lightIntensity: 3
+  hasSkybox: 1

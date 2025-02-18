@@ -33,10 +33,9 @@ public class TransitionManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            UpdateRoomIndex();
+            currentSceneName = SceneManager.GetActiveScene().name;
         }
-
-        UpdateRoomIndex();
-        currentSceneName = SceneManager.GetActiveScene().name;
     }
 
     #endregion
@@ -53,6 +52,12 @@ public class TransitionManager : MonoBehaviour
         Debug.Log("Screen shake / Fog transition");
         ScreenshakeManager.Instance.TriggerShake("elevator", overrideForce: 1.5f, overrideDuration: 0.8f);
         SceneSettings destination = FogManager.Instance.GetSceneSettings("Forest");
+
+        LightFader[] lightFaders = FindObjectsOfType<LightFader>(); // Find and fade out all lights
+        foreach (LightFader fader in lightFaders)
+        {
+            StartCoroutine(fader.FadeOutLight(3f));
+        }
         FogManager.Instance.SetFogAndLightTransition(destination, 3f);
         yield return new WaitForSeconds(3f);
 
@@ -84,19 +89,26 @@ public class TransitionManager : MonoBehaviour
 
     public IEnumerator VoidTransition()
     {
-        SceneSettings destination = FogManager.Instance.GetSceneSettings("GrassVoid"); // Get scene settings
-        FogManager.Instance.SetFogAndLightTransition(destination, 1f); // Start fog and light transition
-        yield return new WaitForSeconds(1f);
+        SceneSettings destination = FogManager.Instance.GetSceneSettings("GrassVoid");
+        FogManager.Instance.SetFogAndLightTransition(destination, 1f);
        
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(destination.sceneName);
+        LightFader[] lightFaders = FindObjectsOfType<LightFader>(); // Find and fade out all lights
+        foreach (LightFader fader in lightFaders)
+        {
+            StartCoroutine(fader.FadeOutLight(1f)); 
+        }
+        yield return new WaitForSeconds(1f);
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GrassVoid");
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
-        Debug.Log("Player Position set");
-        HealthManager.Instance.player.transform.position = new Vector3(HealthManager.Instance.player.transform.position.x, 60f, HealthManager.Instance.player.transform.position.z); // Reposition the player
+        yield return new WaitForFixedUpdate();
+        HealthManager.Instance.RepositionPlayer(50f);
     }
+
 
     public IEnumerator RestartTransition()
     {
@@ -120,7 +132,9 @@ public class TransitionManager : MonoBehaviour
             yield return null;
         }
 
-        HealthManager.Instance.player.transform.position = new Vector3(HealthManager.Instance.player.transform.position.x, 10f, HealthManager.Instance.player.transform.position.z);
+        yield return new WaitForFixedUpdate();
+        HealthManager.Instance.RepositionPlayer(10f);
+
         HealthManager.Instance.deathScreenAnimator.SetTrigger("Respawn"); // trigger Reset animation
         Cursor.visible = false; // Hide the cursor
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
@@ -132,7 +146,6 @@ public class TransitionManager : MonoBehaviour
             }
         }
     }
-
 
     public void UpdateRoomIndex()
     {

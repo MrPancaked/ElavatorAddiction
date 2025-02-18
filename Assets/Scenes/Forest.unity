@@ -538,7 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightSource: {fileID: 5038220718017429002}
   lightIntensity: 2
-  transitionTime: 1.5
+  transitionTime: 2.5
 --- !u!114 &5038220718017429008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,7 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightSource: {fileID: 5038220718017429004}
   lightIntensity: 2
-  transitionTime: 1.5
+  transitionTime: 2.5
 --- !u!114 &5038220718017429009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,7 +568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightSource: {fileID: 5038220718017429006}
   lightIntensity: 2
-  transitionTime: 1.5
+  transitionTime: 2.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
