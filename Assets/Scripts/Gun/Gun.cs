@@ -24,14 +24,12 @@ public class Gun : MonoBehaviour
     [Header("Particles")]
     public GameObject bulletHole; // The bullet hole effect
 
-    [Header("Leave empty if not dual gun")]
-    public List<Gun> dualGuns = new List<Gun>(); // PUT BOTH GUNS IN THE LIST
+    //[Header("Leave empty if not dual gun")]
+    //public List<Gun> dualGuns = new List<Gun>(); // PUT BOTH GUNS IN THE LIST
 
     // Private Variables
     [HideInInspector]
     public bool reloading; // Check if the gun is currently reloading
-    [HideInInspector]
-    public float extraDamage = 0f; // Damage multiplier for upgrades
     private bool shooting = false; // Check if the player is currently shooting
     private bool readyToShoot; // Check if the gun is ready to shoot
     private int shotsLeft; // Ooverall shots (not bullets) in the magazine
@@ -39,7 +37,10 @@ public class Gun : MonoBehaviour
     private RaycastHit rayHit; // Info about the raycast
     private int currentGunIndex = 0; // Track which gun to fire in a dual gun set
     private bool isLastShotInProgress = false; // Flag to prevent auto-reload before the shot is finished
-
+    [HideInInspector]
+    public float originalExtraDamage;
+    [HideInInspector]
+    public float originalFireRate;
     #endregion
 
     #region Unity Methods
@@ -49,7 +50,8 @@ public class Gun : MonoBehaviour
         shotsLeft = gunSettings.magazineSize / gunSettings.bulletsPerShot; // Initialize shots left to max magazine size at start
         readyToShoot = true; // Allow shooting initially
         reloadFeedbackText.SetActive(false); // Disable reload text at start
-        
+        originalExtraDamage = gunSettings.extraDamage;
+        originalFireRate = gunSettings.fireRate;
     }
 
     private void Start()
@@ -72,25 +74,26 @@ public class Gun : MonoBehaviour
     //{
     //    gunSettings.fireRate = 1f; // Set the fire rate to 1 initially
     //}
+
     #endregion
 
     #region Input Logic
 
     private void MyInput()
     {
-        if (gunSettings.allowContinuesFire)
-        {
-            if (Inputs.Instance.shoot.IsPressed())
-            {
-                shooting = true;
-            }
-            else
-            {
-                shooting = false;
-            }
-        }
-        else
-        {
+        //if (gunSettings.allowContinuesFire)
+        //{
+        //    if (Inputs.Instance.shoot.IsPressed())
+        //    {
+        //        shooting = true;
+        //    }
+        //    else
+        //    {
+        //        shooting = false;
+        //    }
+        //}
+        //else
+        //{
             if (Inputs.Instance.shoot.WasPressedThisFrame())
             {
                 shooting = true;
@@ -99,12 +102,12 @@ public class Gun : MonoBehaviour
             {
                 shooting = false;//Make sure that we set to false once released so we can fire again
             }
-        }
+        //}
 
 
         // Handle logic for normal (single) guns
-        if (!gunSettings.isDualGun)
-        {
+        //if (!gunSettings.isDualGun)
+        //{
             //Auto reload if bullets = 0 && not reloading and not finishing the last shot.
             if (shotsLeft <= 0 && !reloading && !isLastShotInProgress)
             {
@@ -126,45 +129,45 @@ public class Gun : MonoBehaviour
 
             }
 
-        }
+        //}
 
         // Handle logic for dual guns
-        else
-        {
-            bool allGunsEmpty = true;
-            foreach (Gun gun in dualGuns)
-            {
-                if (gun.shotsLeft > 0)
-                {
-                    allGunsEmpty = false;
-                    break;
-                }
-            }
-            //Auto reload if both guns are empty && not reloading and not finishing the last shot
-            if (allGunsEmpty && !reloading && !isLastShotInProgress)
-            {
-                Reload();
-            }
-            if (Inputs.Instance.reload.WasPressedThisFrame() && (dualGuns[0].shotsLeft < (dualGuns[0].gunSettings.magazineSize / dualGuns[0].gunSettings.bulletsPerShot) ||
-                                                                        dualGuns[1].shotsLeft < (dualGuns[1].gunSettings.magazineSize / dualGuns[1].gunSettings.bulletsPerShot))
-                                                                        && !reloading) Reload();  // Check if the player is trying to reload
-
-            if (shooting && !reloading) // Handle shooting logic if the player is trying to shoot and the gun is not reloading
-            {
-
-                if (dualGuns[currentGunIndex].readyToShoot) // check if the current gun is ready to shoot
-                {
-                    if (dualGuns[currentGunIndex].shotsLeft > 0) // Check if the current gun has ammo
-                    {
-                        dualGuns[currentGunIndex].bulletsShot = dualGuns[currentGunIndex].gunSettings.bulletsPerShot; // Set bullets per shot
-                        //AudioManager.instance.PlayOneShot(dualGuns[currentGunIndex].gunSettings.gunShotSound, dualGuns[currentGunIndex].MuzzleFlashPoint.position); //Play the shot sound
-                        dualGuns[currentGunIndex].Shoot(); // Fire the current gun
-                        currentGunIndex = (currentGunIndex + 1) % 2; // Switch to the next gun
-                    }
-
-                }
-            }
-        }
+        //else
+        //{
+        //    bool allGunsEmpty = true;
+        //    foreach (Gun gun in dualGuns)
+        //    {
+        //        if (gun.shotsLeft > 0)
+        //        {
+        //            allGunsEmpty = false;
+        //            break;
+        //        }
+        //    }
+        //    //Auto reload if both guns are empty && not reloading and not finishing the last shot
+        //    if (allGunsEmpty && !reloading && !isLastShotInProgress)
+        //    {
+        //        Reload();
+        //    }
+        //    if (Inputs.Instance.reload.WasPressedThisFrame() && (dualGuns[0].shotsLeft < (dualGuns[0].gunSettings.magazineSize / dualGuns[0].gunSettings.bulletsPerShot) ||
+        //                                                                dualGuns[1].shotsLeft < (dualGuns[1].gunSettings.magazineSize / dualGuns[1].gunSettings.bulletsPerShot))
+        //                                                                && !reloading) Reload();  // Check if the player is trying to reload
+        //
+        //    if (shooting && !reloading) // Handle shooting logic if the player is trying to shoot and the gun is not reloading
+        //    {
+        //
+        //        if (dualGuns[currentGunIndex].readyToShoot) // check if the current gun is ready to shoot
+        //        {
+        //            if (dualGuns[currentGunIndex].shotsLeft > 0) // Check if the current gun has ammo
+        //            {
+        //                dualGuns[currentGunIndex].bulletsShot = dualGuns[currentGunIndex].gunSettings.bulletsPerShot; // Set bullets per shot
+        //                //AudioManager.instance.PlayOneShot(dualGuns[currentGunIndex].gunSettings.gunShotSound, dualGuns[currentGunIndex].MuzzleFlashPoint.position); //Play the shot sound
+        //                dualGuns[currentGunIndex].Shoot(); // Fire the current gun
+        //                currentGunIndex = (currentGunIndex + 1) % 2; // Switch to the next gun
+        //            }
+        //
+        //        }
+        //    }
+        //}
     }
 
     #endregion
@@ -215,7 +218,7 @@ public class Gun : MonoBehaviour
                 {
                     enemyRigidbody.AddForce(direction * gunSettings.enemyPushbackForce, ForceMode.Impulse);
                 }
-                damageable?.TakeDamage(gunSettings.damagePerBullet + extraDamage); //Damage the enemy
+                damageable?.TakeDamage(gunSettings.damagePerBullet + gunSettings.extraDamage); //Damage the enemy
             }
 
 
@@ -230,7 +233,7 @@ public class Gun : MonoBehaviour
         for (int i = 0; i < gunSettings.bulletsPerShot; i++)
         {
             SingleShot(direction);
-            yield return new WaitForSeconds(gunSettings.timeBetweenBulletsInBursts);
+            yield return new WaitForSeconds(0f);// (gunSettings.timeBetweenBulletsInBursts);
         }
         isLastShotInProgress = false; // reset it here so that the coroutine finishes
     }
@@ -285,17 +288,17 @@ public class Gun : MonoBehaviour
 
     public void ReloadFinished() /// Completes the reload by filling magazine and resetting the reload flag.
     {
-        if (gunSettings.isDualGun) // If its a dual gun, refill all magazines
-        {
-            foreach (Gun gun in dualGuns)
-            {
-                gun.shotsLeft = gun.gunSettings.magazineSize / gun.gunSettings.bulletsPerShot;
-            }
-        }
-        else //If its not, refill one magazine
-        {
+        //if (gunSettings.isDualGun) // If its a dual gun, refill all magazines
+        //{
+        //    foreach (Gun gun in dualGuns)
+        //    {
+        //        gun.shotsLeft = gun.gunSettings.magazineSize / gun.gunSettings.bulletsPerShot;
+        //    }
+        //}
+        //else //If its not, refill one magazine
+        //{
             shotsLeft = gunSettings.magazineSize / gunSettings.bulletsPerShot;
-        }
+        //}
 
         reloadFeedbackText.SetActive(false); // Disable reload text
         reloading = false; // End reload process
@@ -307,21 +310,21 @@ public class Gun : MonoBehaviour
 
     private void UpdateAmmoDisplay()
     {
-        if (!gunSettings.isDualGun) // If its a normal gun
-        {
+        //if (!gunSettings.isDualGun) // If its a normal gun
+        //{
             ammoCounter.SetText($"{shotsLeft}"); ; // Show combined ammo UI
-        }
-        else // If its a dual gun
-        {
-            int totalShotsLeft = 0;
-            int totalMagazineSize = 0;
-            foreach (Gun gun in dualGuns)
-            {
-                totalShotsLeft += gun.shotsLeft;
-                totalMagazineSize += gun.gunSettings.magazineSize / gun.gunSettings.bulletsPerShot;
-            }
-            ammoCounter.SetText($"{totalShotsLeft}"); ; // Show combined ammo UI
-        }
+        //}
+        //else // If its a dual gun
+        //{
+        //    int totalShotsLeft = 0;
+        //    int totalMagazineSize = 0;
+        //    foreach (Gun gun in dualGuns)
+        //    {
+        //        totalShotsLeft += gun.shotsLeft;
+        //        totalMagazineSize += gun.gunSettings.magazineSize / gun.gunSettings.bulletsPerShot;
+        //    }
+        //    ammoCounter.SetText($"{totalShotsLeft}"); ; // Show combined ammo UI
+        //}
     }
 
     #endregion

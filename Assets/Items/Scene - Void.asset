@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Scene - Void
   m_EditorClassIdentifier: 
   sceneName: Void
-  backgroundColor: '#FFFFFF'
-  fogColorHex: '#FFFFFF'
-  fogStartDistance: 0
-  fogEndDistance: 120
+  backgroundColor: '#000000'
+  fogColorHex: '#000000'
+  fogStartDistance: 1
+  fogEndDistance: 40
   lightIntensity: 0
+  hasSkybox: 0

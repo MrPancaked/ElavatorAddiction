@@ -56,6 +56,7 @@ public class CoinsLogic : MonoBehaviour
     public void ResetCoins() /// Reset on death
     {
         playerCoins = initialPlayerCoins;
+        coinDropChance = 0.5f;
         UpdateCoinsDisplay();
     }
 

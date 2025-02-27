@@ -44,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Private stuff")]
     [HideInInspector]
     public float currentSpeed; // Current speed of the player
+    [HideInInspector]
+    public float originalSpeed;
     private float groundedTimer = 0f; // Spacebar press after landing
     private float inAirTimer = 0f; // Spacebar press in air
     private float edgeTimer = 0f; // Falling from an edge timing
@@ -95,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            originalSpeed = runSpeed;
         }
         else
         {
@@ -330,6 +333,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartSliding()
     {
+        PlayerSounds.Instance.PlayDashSound();
         isSliding = true;
         rb.drag = 0;
         rb.AddForce(moveDirection * slideForce, ForceMode.Impulse);

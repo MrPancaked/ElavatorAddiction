@@ -2,18 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 
 public class TransitionManager : MonoBehaviour
 {
     #region Header Variables
 
-    [Header("References")]
-    public TextMeshPro roomText;
-    public List<Gun> guns = new List<Gun>(); // List of guns to reset after death
-
-    // Private variables
-    [HideInInspector] public int RoomIndex = 0;
     [HideInInspector] public string currentSceneName;
     private static TransitionManager instance;
     public static TransitionManager Instance { get { return instance; } }
@@ -33,7 +26,6 @@ public class TransitionManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            UpdateRoomIndex();
             currentSceneName = SceneManager.GetActiveScene().name;
         }
     }
@@ -69,8 +61,8 @@ public class TransitionManager : MonoBehaviour
         }
 
         Debug.Log("Screen shake / Stop sound");
-        RoomIndex++;
-        UpdateRoomIndex();
+
+        DifficultyManager.Instance.AddRoomIndex();
         LevelGenerator.Instance.GenerateLevel();
         EnemySpawner.Instance.SpawnEnemies();
         SoundManager.Instance.PlayElevatorStop();
@@ -89,7 +81,7 @@ public class TransitionManager : MonoBehaviour
 
     public IEnumerator VoidTransition()
     {
-        SceneSettings destination = FogManager.Instance.GetSceneSettings("GrassVoid");
+        SceneSettings destination = FogManager.Instance.GetSceneSettings("Void");
         FogManager.Instance.SetFogAndLightTransition(destination, 1f);
        
         LightFader[] lightFaders = FindObjectsOfType<LightFader>(); // Find and fade out all lights
@@ -99,57 +91,29 @@ public class TransitionManager : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GrassVoid");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void");
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
         yield return new WaitForFixedUpdate();
-        HealthManager.Instance.RepositionPlayer(50f);
+        HealthManager.Instance.player.transform.position = new Vector3(0f, 30f, 5f);
     }
 
 
     public IEnumerator RestartTransition()
     {
         Debug.Log("Restarting");
-        PlayerSounds.Instance.PlayDeathStop();
-        RoomIndex = 0;
-        UpdateRoomIndex();
-        CoinsLogic.Instance.coinDropChance = 0.5f;
-        CoinsLogic.Instance.ResetCoins();
-        PlayerMovement.Instance.runSpeed = 200f;
-        EnemyCounter.Instance.UpdateEnemyCounter();
-        foreach (Gun gunInstance in guns)
-        {
-            gunInstance.gunSettings.fireRate = 1f;
-            gunInstance.extraDamage = 0f;
-        }
-
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GrassVoid");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void");
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
         yield return new WaitForFixedUpdate();
-        HealthManager.Instance.RepositionPlayer(10f);
-
+        HealthManager.Instance.player.transform.position = new Vector3(0f, 1f, 0f);
         HealthManager.Instance.deathScreenAnimator.SetTrigger("Respawn"); // trigger Reset animation
-        Cursor.visible = false; // Hide the cursor
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        foreach (Gun gunInstance in guns)
-        {
-            if (gunInstance != null) // Null check
-            {
-                gunInstance.reloading = false;
-            }
-        }
-    }
-
-    public void UpdateRoomIndex()
-    {
-        roomText.text = (-RoomIndex).ToString();
     }
 
     #endregion

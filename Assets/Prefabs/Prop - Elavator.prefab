@@ -2216,6 +2216,7 @@ GameObject:
   - component: {fileID: 3981269894394266173}
   - component: {fileID: 5250420454176551780}
   - component: {fileID: 8730538352084221293}
+  - component: {fileID: 7898840174261045898}
   m_Layer: 0
   m_Name: neonsignpart1
   m_TagString: Untagged
@@ -2288,6 +2289,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7898840174261045898
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305344483726726599}
+  m_Material: {fileID: 13400000, guid: f80b30d119a907c479877436198b4979, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.220383, y: 83.58194, z: 51.22159}
+  m_Center: {x: 95.53074, y: 199.97673, z: 157.778}
 --- !u!1 &3314745698685527947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,7 +2393,6 @@ MonoBehaviour:
   - Hehe, I've always had a hard time managing money!
   - Lingus bingus - elevator!
   - I don't feel good...
-  - Cyka...
 --- !u!1 &3442166860996864465
 GameObject:
   m_ObjectHideFlags: 0
@@ -5564,6 +5585,7 @@ GameObject:
   - component: {fileID: 7323513878240215759}
   - component: {fileID: 6662056818158717525}
   - component: {fileID: 8127987375824366872}
+  - component: {fileID: 3202299552236066251}
   m_Layer: 0
   m_Name: neonsignpart
   m_TagString: Untagged
@@ -5636,6 +5658,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3202299552236066251
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702116084030205556}
+  m_Material: {fileID: 13400000, guid: f80b30d119a907c479877436198b4979, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 70.950294, y: 70.95029, z: 9.596222}
+  m_Center: {x: -160.93762, y: 178.29724, z: 94.6941}
 --- !u!1 &6830739733253016213
 GameObject:
   m_ObjectHideFlags: 0

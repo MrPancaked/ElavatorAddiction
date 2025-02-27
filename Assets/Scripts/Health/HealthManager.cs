@@ -16,6 +16,7 @@ public class HealthManager : MonoBehaviour
     [Header("References")]
     public GameObject player;      // Reference to the player game object
     public Health health;          // Reference to the Health component.
+    public List<Gun> guns = new List<Gun>(); // List of guns to reset after death
 
     [Header("UI")]
     public Animator deathScreenAnimator; // Reference to the Animator on death screen
@@ -95,14 +96,13 @@ public class HealthManager : MonoBehaviour
     {
         if (!playerIsDead)
         {
-            Debug.Log("Player died");
             Time.timeScale = 0f; // Pause the game
             playerIsDead = true;
             Cursor.visible = true; // Show the cursor
             Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-            deathScreenAnimator.SetTrigger("Die"); // Trigger animation
             PlayerSounds.Instance.PlayDeathStart();
-            foreach (Gun gunInstance in TransitionManager.Instance.guns)
+            deathScreenAnimator.SetTrigger("Die"); // Trigger animation
+            foreach (Gun gunInstance in guns)
             {
                 if (gunInstance != null) // Null check
                 {
@@ -118,19 +118,33 @@ public class HealthManager : MonoBehaviour
 
     public void RestartGame()
     {
+        Time.timeScale = 1f; // Restore time scale
         playerIsDead = false; // Reset death state
+        Cursor.visible = false; // Hide the cursor
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        PlayerSounds.Instance.PlayDeathStop();
+        ResetHealth();
+        CoinsLogic.Instance.ResetCoins();
+        Upgrades.Instance.ResetUpgrades();
+        DifficultyManager.Instance.ResetRoomIndex();
+        EnemyCounter.Instance.UpdateEnemyCounter();
+        TransitionManager.Instance.StartCoroutine(TransitionManager.Instance.RestartTransition());
+        foreach (Gun gunInstance in guns)
+        {
+            if (gunInstance != null) // Null check
+            {
+                gunInstance.reloading = false;
+            }
+        }
+    }
+
+
+    public void ResetHealth()
+    {
         initialHealth = 100f; // Reset health
         health.hp = 100f;
         UpdateHealthUI();
-        Time.timeScale = 1f; // Restore time scale
-        TransitionManager.Instance.StartCoroutine(TransitionManager.Instance.RestartTransition());
     }
-
-    public void RepositionPlayer(float height)
-    {
-        player.transform.position = new Vector3(player.transform.position.x, height, player.transform.position.z);
-    }
-
 
     #endregion
 

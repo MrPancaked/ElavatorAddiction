@@ -16,6 +16,7 @@ public class PlayerSounds : MonoBehaviour
     public EventReference slideSound;
     public EventReference bhopSound;
     public EventReference slamSound;
+    public EventReference dashSound;
 
     // Private stuff
     private EventInstance deathInstance; /// Variable to hold the created event instance
@@ -112,6 +113,10 @@ public class PlayerSounds : MonoBehaviour
         AudioManager.instance.PlayOneShot2D(damageSound);
     }
 
+    public void PlayDashSound()
+    {
+        AudioManager.instance.PlayOneShot2D(dashSound);
+    }
     public void PlayJumpSound()
     {
         AudioManager.instance.PlayOneShot2D(jumpSound);
