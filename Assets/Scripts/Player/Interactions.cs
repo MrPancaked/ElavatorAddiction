@@ -99,9 +99,13 @@ public class Interactions : MonoBehaviour
                 ElevatorController.Instance.StartCoroutine(ElevatorController.Instance.LeverPressed());
             }
 
-            else if (hit.collider.CompareTag("Book"))
+            else if (hit.collider.CompareTag("Readable"))
             {
-                DialogueManager.Instance.StartCoroutine(DialogueManager.Instance.ReadBook());
+                Book book = hit.collider.GetComponent<Book>();
+                if (book != null && !DialogueManager.Instance.isOpen && !DialogueManager.Instance.isRunning)
+                {
+                    book.ReadBook();
+                }
             }
 
             else

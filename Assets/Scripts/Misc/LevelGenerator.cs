@@ -83,9 +83,6 @@ public class LevelGenerator : MonoBehaviour
         spawnedHutPositions.Clear();
         Vector3 churchPosition = SpawnChurch();
         SpawnGraveyard(churchPosition, 0f);
-        SpawnGraveyard(churchPosition, 1f);
-        // Spawn the bonfires.
-        SpawnBonfire();
         SpawnBonfire();
         int numJumpPads = Random.Range(jumpPadsMin, jumpPadsMax + 1);
         for (int i = 0; i < numJumpPads; i++)

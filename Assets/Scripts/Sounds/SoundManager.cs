@@ -42,7 +42,7 @@ public class SoundManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -124,7 +124,7 @@ public class SoundManager : MonoBehaviour
 
         switch (sceneName)
         {
-            case "Menu":
+            case "MainMenuDirty":
                 parameterValue = 0f;
                 break;
             case "Void":

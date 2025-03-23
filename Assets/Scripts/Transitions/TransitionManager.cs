@@ -105,7 +105,7 @@ public class TransitionManager : MonoBehaviour
     public IEnumerator RestartTransition()
     {
         Debug.Log("Restarting");
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Void");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GrassVoid");
         while (!asyncLoad.isDone)
         {
             yield return null;

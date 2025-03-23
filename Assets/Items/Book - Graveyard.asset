@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7cd6154c0d98343807908380d24d7b, type: 3}
+  m_Name: Book - Graveyard
+  m_EditorClassIdentifier: 
+  bookLines:
+  - text: 02.02.1965
+    textSpeed: 0.05
+  - text: The day I lost my parents
+    textSpeed: 0.03

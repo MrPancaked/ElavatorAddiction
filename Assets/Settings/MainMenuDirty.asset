@@ -81,13 +81,13 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1, w: -0.037071366}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.012349485}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.03448249}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.9765143}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.03744892}
+    m_Value: {x: 1, y: 1, z: 1, w: 1}
 --- !u!114 &8849445354694117361
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -145,38 +145,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   scanlinesWeight:
-    m_OverrideState: 1
-    m_Value: 10
+    m_OverrideState: 0
+    m_Value: 0
   noiseWeight:
-    m_OverrideState: 1
-    m_Value: 80
+    m_OverrideState: 0
+    m_Value: 0
   screenBendX:
-    m_OverrideState: 1
-    m_Value: 20
+    m_OverrideState: 0
+    m_Value: 1000
   screenBendY:
-    m_OverrideState: 1
-    m_Value: 50
+    m_OverrideState: 0
+    m_Value: 1000
   vignetteAmount:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   vignetteSize:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   vignetteRounding:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 2
   vignetteSmoothing:
     m_OverrideState: 1
     m_Value: 0
   scanlinesDensity:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 1000
   scanlinesSpeed:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 1000
   noiseAmount:
     m_OverrideState: 1
-    m_Value: 2000
+    m_Value: 1000
   chromaticRed:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0}
@@ -188,28 +188,28 @@ MonoBehaviour:
     m_Value: {x: 0, y: 0}
   grilleOpacity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.5
   grilleCounterOpacity:
     m_OverrideState: 1
     m_Value: 0
   grilleResolution:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1000
   grilleCounterResolution:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1000
   grilleUvRotation:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 90
   grilleBrightness:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 3000
   grilleUvMidPoint:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.5
   grilleShift:
     m_OverrideState: 1
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: 1, y: 1, z: 1}
 --- !u!114 &9058276028602464982
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -225,7 +225,7 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.6620124, y: 0.8532368, z: 1, w: 0.47449598}
+    m_Value: {x: 0.6620124, y: 0.8532368, z: 1, w: 1}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 1, y: 0.989331, z: 0.99260944, w: 0.27283514}

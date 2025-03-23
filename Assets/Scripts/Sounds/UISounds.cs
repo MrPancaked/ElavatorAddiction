@@ -33,7 +33,7 @@ public class UISounds : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // IMPORTANT!
+            //DontDestroyOnLoad(gameObject); // IMPORTANT!
         }
     }
 

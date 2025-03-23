@@ -13,10 +13,11 @@ public class DialogueManager : MonoBehaviour
 
     [HideInInspector]
     public bool isOpen;
-    private int randomPhraseIndex;
+    [HideInInspector]
+    public bool isRunning;
     private bool skipLine;
     private bool lastLine;
-    private bool isRunning;
+
     private static DialogueManager instance;
     public static DialogueManager Instance { get { return instance; } }
 
@@ -58,6 +59,14 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    //void FixedUpdate()
+    //{
+    //    if (skipLine)
+    //    {
+    //        skipLine = false;
+    //    }
+    //}
+    
     #endregion
 
     #region Windows Updating
@@ -89,30 +98,31 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator HandleLine(string line, float textSpeed)
     {
+        skipLine = false; // Reset to ensure proper typing
         isRunning = true;
-        yield return StartCoroutine(TypeLine(line, textSpeed));
+        
+        yield return StartCoroutine(TypeLine(line, textSpeed)); // Type out the line
         isRunning = false;
-
-        yield return StartCoroutine(WaitForInput());
-
-        if (!lastLine)
-        {
-            yield return StartCoroutine(ClearLine(0.005f));
-        }
+        
+        yield return StartCoroutine(WaitForInput()); // Wait for player input before continuing
     }
+
 
     IEnumerator TypeLine(string line, float textSpeed)
     {
-        monologueText.text = "";
+        monologueText.text = ""; // Ensure it's fully cleared before typing
+        skipLine = false; // Reset this to prevent any immediate skips
+
         foreach (char c in line.ToCharArray())
         {
             if (skipLine)
             {
-                monologueText.text = line;
+                monologueText.text = line; // Instantly display full text if skipping
                 skipLine = false;
                 break;
             }
-            monologueText.text += c;
+
+            monologueText.text += c; // Append each letter
             UISounds.Instance.DialogueSound();
             yield return new WaitForSeconds(textSpeed);
         }
@@ -125,22 +135,6 @@ public class DialogueManager : MonoBehaviour
         while (!skipLine)
         {
             yield return null;
-        }
-    }
-
-    IEnumerator ClearLine(float textSpeed)
-    {
-        while (monologueText.text.Length > 0)
-        {
-            if (skipLine)
-            {
-                monologueText.text = "";
-                skipLine = false;
-                yield break;
-            }
-            UISounds.Instance.DialogueSound();
-            monologueText.text = monologueText.text.Substring(0, monologueText.text.Length - 1);
-            yield return new WaitForSeconds(textSpeed);
         }
     }
 
@@ -170,7 +164,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // Modified ElevatorMonologue to take the dialogue list as an argument
     public IEnumerator ElevatorMonologue(string[] dialogues)
     {
         if (isOpen)
@@ -180,30 +173,24 @@ public class DialogueManager : MonoBehaviour
 
         OpenWindow();
 
-        randomPhraseIndex = Random.Range(0, dialogues.Length);
+        int randomPhraseIndex = Random.Range(0, dialogues.Length);
         lastLine = true;
         yield return StartCoroutine(HandleLine(dialogues[randomPhraseIndex], 0.04f));
     }
 
-    public IEnumerator ReadBook()
+    public IEnumerator ReadBook(BookScriptableObject book)
     {
-        if (isOpen)
+        if (isOpen || book == null)
         {
             yield break;
         }
 
         OpenWindow();
 
-        List<(string line, float textSpeed)> dialogue = new List<(string line, float textSpeed)>
+        for (int i = 0; i < book.bookLines.Count; i++)
         {
-            ("02.02.1965", 0.05f),
-            ("The day I lost my parents", 0.03f)
-        };
-
-        for (int i = 0; i < dialogue.Count; i++)
-        {
-            lastLine = (i == dialogue.Count - 1);
-            yield return StartCoroutine(HandleLine(dialogue[i].line, dialogue[i].textSpeed));
+            lastLine = (i == book.bookLines.Count - 1);
+            yield return StartCoroutine(HandleLine(book.bookLines[i].text, book.bookLines[i].textSpeed));
         }
     }
 

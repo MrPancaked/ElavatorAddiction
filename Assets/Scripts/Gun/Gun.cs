@@ -35,7 +35,7 @@ public class Gun : MonoBehaviour
     private int shotsLeft; // Ooverall shots (not bullets) in the magazine
     private int bulletsShot; // Bullets shot in a single shot or burst
     private RaycastHit rayHit; // Info about the raycast
-    private int currentGunIndex = 0; // Track which gun to fire in a dual gun set
+    //private int currentGunIndex = 0; // Track which gun to fire in a dual gun set
     private bool isLastShotInProgress = false; // Flag to prevent auto-reload before the shot is finished
     [HideInInspector]
     public float originalExtraDamage;

@@ -28,8 +28,8 @@ public class PlayerSounds : MonoBehaviour
     private bool isSliding = false; // Check if the sound has been started
     private float lastFootstepTime = 0f;
     private float footstepRate = 0.3f; // Adjust for desired speed
-    private float lastSlideGroundcheckCooldown = 0f;
-    private float SlideGroundcheckCooldownRate = 0.3f;
+    //private float lastSlideGroundcheckCooldown = 0f;
+    //private float SlideGroundcheckCooldownRate = 0.3f;
     private static PlayerSounds instance; 
     public static PlayerSounds Instance { get { return instance; } }
 
@@ -177,6 +177,10 @@ public class PlayerSounds : MonoBehaviour
         }
     }
 
+    #endregion
+    
+    #region Footsteps
+    
     public void PlayFootstepSound()
     {
         if (footstepInstance.isValid())
@@ -189,7 +193,7 @@ public class PlayerSounds : MonoBehaviour
             }
         }
     }
-
+    
     private void GroundSwitch()
     {
         RaycastHit hit;
@@ -211,6 +215,7 @@ public class PlayerSounds : MonoBehaviour
                 }
                 else if (surfaceRenderer.material.name.Contains("Elavator"))
                 {
+                    Debug.Log("ELEVATOR");
                     footstepInstance.setParameterByName("Footsteps", 2);
                     slidingInstance.setParameterByName("Sliding", 2);
                 }
@@ -230,8 +235,9 @@ public class PlayerSounds : MonoBehaviour
                 Material terrainMaterial = terrain.materialTemplate;
                 if (terrainMaterial != null)
                 {
-                    if (terrainMaterial.name.Contains("SnowyGround"))
+                    if (terrainMaterial.name.Contains("Snow"))
                     {
+                        Debug.Log("SNOW BITCH");
                         footstepInstance.setParameterByName("Footsteps", 0);
                         slidingInstance.setParameterByName("Sliding", 0);
                     }

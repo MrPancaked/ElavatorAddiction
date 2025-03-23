@@ -47,8 +47,7 @@ public class CoinsLogic : MonoBehaviour
 
     public void CollectCoin() /// Collects the coin
     {
-        
-        playerCoins += Random.Range(3, 6);
+        playerCoins += Random.Range(2, 8);
         UpdateCoinsDisplay();
         Debug.Log("Collected coins: " + playerCoins); // Log the collected coins
     }

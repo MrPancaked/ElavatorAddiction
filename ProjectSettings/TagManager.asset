@@ -19,6 +19,7 @@ TagManager:
   - RespawnPoint
   - RoomText
   - Grass
+  - Readable
   layers:
   - Default
   - TransparentFX

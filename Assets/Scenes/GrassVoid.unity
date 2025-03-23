@@ -122,7 +122,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!43 &1387992478
+--- !u!43 &838540237
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -583,6 +583,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level - GrassVoid
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178693388407478608, guid: 3c67b730ece6a8245aea2bc095ccab3c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

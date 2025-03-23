@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     private const float normalHeight = 0.8f;
     private const float slideHeight = 0.6f;
     private const float slideSpeedTrashhold = 1f;
-    private const float slideSoundTrashhold = 2f;
+    private const float slideSoundTrashhold = 3f;
     private const float runSpeedTrashhold = 4f;
     private const float fovSpeedLimit = 30f;
     private const float slamDistance = 3f;
@@ -320,7 +320,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Slide()
     {
-        if (slidePressed && currentSpeed > slideSpeedTrashhold && ! isSliding)
+        if (slidePressed && ! isSliding)
         {
             StartSliding();
         }
@@ -333,12 +333,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartSliding()
     {
-        PlayerSounds.Instance.PlayDashSound();
         isSliding = true;
-        rb.drag = 0;
-        rb.AddForce(moveDirection * slideForce, ForceMode.Impulse);
         transform.localScale = new Vector3(transform.localScale.x, slideHeight, transform.localScale.z);
-
+        if (currentSpeed > slideSpeedTrashhold)
+        {
+            rb.drag = 0;
+            rb.AddForce(moveDirection * slideForce, ForceMode.Impulse);
+            PlayerSounds.Instance.PlayDashSound();
+        }
         if (!isGrounded)
         {
             GroundSlam();

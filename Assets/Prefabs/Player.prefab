@@ -108,7 +108,7 @@ MonoBehaviour:
   ReferenceFrame: 0
   RecenterTarget: 0
   PanAxis:
-    Value: 16.894732
+    Value: 16.89473
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 7221377915032189122}
+  attenuationObject: {fileID: 4271819883224841231}
 --- !u!1 &2306222101641947523
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,7 +773,7 @@ MonoBehaviour:
   jumpForce: 15
   bhopForce: 3
   slideForce: 4
-  slamForce: 50
+  slamForce: 80
   airDrag: 1
   airSpeed: 20
   inAirTiming: 0.17
@@ -793,8 +793,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinsCounter: {fileID: 0}
-  initialPlayerCoins: 100
-  coinDropChance: 0.5
+  initialPlayerCoins: 0
+  coinDropChance: 0.4
   spinCost: 10
 --- !u!114 &3553973524824693643
 MonoBehaviour:
@@ -956,6 +956,13 @@ MonoBehaviour:
       Data3: 2009787808
       Data4: -417063211
     Path: event:/Player/Player_Slam
+  dashSound:
+    Guid:
+      Data1: 1942620080
+      Data2: 1340971119
+      Data3: -1220479616
+      Data4: -1762719065
+    Path: event:/Player/Player_Dash
 --- !u!114 &7999755327413551640
 MonoBehaviour:
   m_ObjectHideFlags: 0
